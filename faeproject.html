@@ -3,15 +3,17 @@
 <html lang="en" dir="ltr">
 	<head>
 		<title>FAE Project</title>
-		<link rel="stylesheet" href="theme.css">
 		<link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+		<link rel="stylesheet" href="theme.css">
+		<script type="text/javascript" src="game.js" defer></script>
 	</head>
 	
 	<body>
 		<h1>F.A.E. Project</h1>
 		<br>
-		<p title="It's a secret to everybody">TJ’s Secret Draconia Project
-		<br>
-		Fae Awakening: Elements</p>
+		<p>Fae Energy: </p> <span id = "fe">0</span>
+		<button type="button" onclick="genFE()">Generate 1 Fae Energy</button>
+		<p>Primary Spells: </p> <span id = "fs1">0</span>
+		<button type="button" onclick="castFS1()">Cast Primary Spell</button>
 	</body>
 </html>
