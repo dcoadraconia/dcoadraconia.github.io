@@ -1,17 +1,17 @@
 /* Timothy Ross */
 body {
-	background-color: pink;
+	background-color: #1F0F2D;
 }
 
 h1 {
-	color: DarkGreen;
+	color: white;
 	font-family: "Lucida Console";
 	text-align: center;
 	font-size: 36px;
 }
 
 p {
-	color: black;
+	color: white;
 	font-family: "Lucida Console";
 	font-size: 20px;
 }
