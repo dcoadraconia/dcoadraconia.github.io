@@ -1,6 +1,6 @@
 /* Timothy Ross */
 body {
-	background-color: #1F0F2D;
+	background-color: #1A001A;
 }
 
 h1 {
@@ -14,4 +14,8 @@ p {
 	color: #D4EFD0;
 	font-family: "Lucida Console";
 	font-size: 20px;
+}
+
+co.col1 {
+	color: #CE2890
 }
