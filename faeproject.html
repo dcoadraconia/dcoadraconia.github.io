@@ -9,11 +9,121 @@
 	</head>
 	
 	<body>
-		<h1>F.A.E. Project</h1>
-		<br>
-		<p>Fae Energy: <co class = "col1"><span id = "fe">0</span></co></p>
-		<button type="button" onclick="genFE()">Generate 1 Fae Energy</button>
-		<p>Primary Spells: <co class = "col1"><span id = "fs1">0</span></co></p>
-		<button type="button" onclick="castFS1()">Cast Primary Spell<br>(Costs <span id = "fs1c">0</span> Fae Energy)</button>
+		<div id = "top">
+			<h1>F.A.E. Project</h1>
+		</div>
+		<div id = "disp">
+			<p>The world has <co class = "colE0"><span id = "magic">0</span></co> raw magic energy<br>
+			<font size="3">
+			(<co class = "colE0"><span id = "mps">0</span></co> is being generated per second)</p>
+			</font>
+		</div>		
+		<div id = "tabButtons">
+			<button type="button" class="bTab" onclick='goTab("elements")'>Elements</button>
+			<button type="button" class="bTab" onclick='goTab("options")'>Options</button>
+			<button type="button" class="bTab" onclick='goTab("world")'>World</button>
+		</div>
+		<div id = "elements">
+			<p>Elements<br>
+			<button type="button" class="elem1" id="elemB1" onclick='goETab("fire")'>Fire</button>
+			<button type="button" class="elem2" id="elemB2" onclick='goETab("water")'>Water</button>
+			<button type="button" class="elem3" id="elemB3" onclick='goETab("ice")'>Ice</button>
+			<button type="button" class="elem4" id="elemB4" onclick='goETab("sky")'>Sky</button>
+			<button type="button" class="elem5" id="elemB5" onclick='goETab("nature")'>Nature</button>
+			<button type="button" class="elem6" id="elemB6" onclick='goETab("poison")'>Poison</button>
+			<button type="button" class="elem7" id="elemB7" onclick='goETab("metal")'>Metal</button>
+			<button type="button" class="elem8" id="elemB8" onclick='goETab("earth")'>Earth</button>
+			<button type="button" class="elem9" id="elemB9" onclick='goETab("light")'>Light</button>
+			<button type="button" class="elem10" id="elemB10" onclick='goETab("dark")'>Dark</button>
+			<button type="button" class="elem11" id="elemB11" onclick='goETab("fae")'>Fae</button>
+			<button type="button" class="elem12" id="elemB12" onclick='goETab("anti")'>Anti-Magic</button>
+			</p>
+		</div>
+		<div id = "options">
+			<br>
+			<p>Options</p>
+			<p>
+			<button type="button" class="bSave" onclick='manualSave()'>Save the game</button>
+			<font size="3.5">Save the game manually (note: this game autosaves)</font>
+			</p>
+			<p>
+			<button type="button" class="bEISave" onclick='exportSave()'>Export save</button>
+			<button type="button" class="bEISave" onclick='importSave()'>Import save</button>
+			</p>			
+			<div id='exportString' style='display:none'><p><font size="3">Exported save: </font><input id='exportText' style='width: 480px'></input></div></p>
+			<p>
+			<button type="button" class="bReset" onclick='hardReset()'>Reset everything</button>
+			<co class = "colr">Warning: this button resets the entire game.</co>
+			</p>
+			<p><button type="button" class="bEISave" onclick='setTickInterval()'>Change update rate</button>
+			<font size="3.5">Current update rate: <span id = "tickI">every 50ms</span></font></p>
+			<p><button type="button" class="bEISave" onclick='setAutoInterval()'>Change autosave rate</button>
+			<font size="3.5">Current autosave rate: <span id = "autoI">every 10s</span></font></p>
+		</div>		
+		<div id = "world">
+			<br>
+			<p>World</p>
+			<p>
+			<font size="3">The world holds a total energy potential of <b><co class = "colT"><span id = "total">0</span></co></b>, based on the product of:</font>
+			<br>
+			<font size="3"> <co class = "colE0"><span id = "total0">0</span></co> total raw magic energy</font>
+			<br>
+
+
+			<font size="3"> <co class = "colE11"><span id = "total11">0</span></co> total fae energy</font>
+			<br>
+			</p>
+			<p>
+			<font size="3">The world has existed for <co class = "colE0"><span id = "ptime">0</span></co> seconds</font>
+			</p>
+		</div>
+		<div id = "fire">
+			<p1>-<co class = "colE1">Fire</co>-</p1><br>
+		</div>
+		<div id = "water">
+			<p1>-<co class = "colE2">Water</co>-</p1><br>
+		</div>
+		<div id = "ice">
+			<p1>-<co class = "colE3">Ice</co>-</p1><br>
+		</div>
+		<div id = "sky">
+			<p1>-<co class = "colE4">Sky</co>-</p1><br>
+		</div>
+		<div id = "nature">
+			<p1>-<co class = "colE5">Nature</co>-</p1><br>
+		</div>
+		<div id = "poison">
+			<p1>-<co class = "colE6">Poison</co>-</p1><br>
+		</div>
+		<div id = "metal">
+			<p1>-<co class = "colE7">Metal</co>-</p1><br>
+		</div>
+		<div id = "earth">
+			<p1>-<co class = "colE8">Earth</co>-</p1><br>
+		</div>
+		<div id = "light">
+			<p1>-<co class = "colE9">Light</co>-</p1><br>
+		</div>
+		<div id = "dark">
+			<p1>-<co class = "colE10">Dark</co>-</p1><br>
+		</div>
+		<div id = "fae">
+			<p1>-<co class = "colE11">Fae</co>-</p1><br>
+			<p>Fae Energy: <co class = "colE11"><span id = "fe">0</span></co>
+			<br>
+			<font size="3">
+			(<co class = "colE11"><span id = "e11s">0</span></co> is being generated per second,<br>based on primary spell count raised to a<br>power based on log10 of raw magic energy)</p>
+			</font>
+			</p>
+			<button type="button" class="b1" onclick="genFE()">Generate 1 Fae Energy</button>
+			<p>Primary Spells: <co class = "colE11"><span id = "fs1">0</span></co></p>
+			<button type="button" class="b1" onclick="castFS1()">Cast Primary Spell<br>(Costs <span id = "fs1c">0</span> Fae Energy)</button>
+		</div>
+		<div id = "anti">
+		<p1>-<co class = "colE12">Anti-Magic</co>-</p1><br>
+		</div>
+		<div id = "none">
+		
+		</div>	
 	</body>
 </html>
