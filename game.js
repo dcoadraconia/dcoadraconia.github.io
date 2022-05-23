@@ -341,7 +341,7 @@ function updateUnlockButton() {
 // update game functions
 function update() {
 	var time = new Date().getTime();
-	var timePassed = (time-lastTime)/100;
+	var timePassed = (time-lastTime)/1000;
 	lastTime = time;
 	rMagicGain = getMagicGain();
 	game.magic += rMagicGain*timePassed;
