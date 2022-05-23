@@ -25,6 +25,8 @@
 		</div>
 		<div id = "elements">
 			<p>Elements<br>
+			<button type="button" class="bReqU" onclick="unlockElem()"><span id = "bReq">Unlock element</span></button>
+			<br>
 			<button type="button" class="elem1" id="elemB1" onclick='goETab("fire")'>Fire</button>
 			<button type="button" class="elem2" id="elemB2" onclick='goETab("water")'>Water</button>
 			<button type="button" class="elem3" id="elemB3" onclick='goETab("ice")'>Ice</button>
@@ -74,7 +76,7 @@
 			<br>
 			</p>
 			<p>
-			<font size="3">The world has existed for <co class = "colE0"><span id = "ptime">0</span></co> seconds</font>
+			<font size="3">The world has existed for <b><co class = "colE0"><span id = "ptime">0</span></co></b> seconds</font>
 			</p>
 		</div>
 		<div id = "fire">
@@ -112,12 +114,68 @@
 			<p>Fae Energy: <co class = "colE11"><span id = "fe">0</span></co>
 			<br>
 			<font size="3">
-			(<co class = "colE11"><span id = "e11s">0</span></co> is being generated per second,<br>based on primary spell count raised to a<br>power based on log10 of raw magic energy)</p>
+			(<co class = "colE11"><span id = "e11s">0</span></co> is being generated per second)</p>
 			</font>
 			</p>
-			<button type="button" class="b1" onclick="genFE()">Generate 1 Fae Energy</button>
-			<p>Primary Spells: <co class = "colE11"><span id = "fs1">0</span></co></p>
-			<button type="button" class="b1" onclick="castFS1()">Cast Primary Spell<br>(Costs <span id = "fs1c">0</span> Fae Energy)</button>
+			<button type="button" class="b1" id="f0" onclick="genFE()">Begin generation of Fae Energy</button>
+			
+			<table>
+			<tr>
+			<th>
+			<pt>Primary Spells: <co class = "colE11"><span id = "fs1">0</span></co></pt>
+			</th>
+			<th>
+			<span id = "fs2s">
+			<pt>Secondary Spells: <co class = "colE11"><span id = "fs2">0</span></co></pt>
+			</span>
+			</th>
+			</tr>
+			<tr>
+			<th>
+			<button type="button" class="tb1" onclick="castFS1()">Cast Primary Spell<br>(Costs <span id = "fs1c">0</span> Fae Energy)</button>
+			</th>
+			<th>
+			<span id = "fs2s2">
+			<button type="button" class="tb1" onclick="castFS2()">Cast Secondary Spell<br>(Costs <span id = "fs2c">0</span> Fae Energy)</button>
+			</span>
+			</th>
+			</tr>
+			</table>	
+			
+			<p>
+			Dreams:
+			<button type="button" class="bBD" id="maxF" onclick="maxAllDream()" style="float: right;">Max all spells/dreams</button>
+			<br>
+			<font size="3"> 
+			<span id = "dream1"> 1st dream </span> 
+			<button type="button" class="bBD" id="bD1" onclick="buyDream(1)" style="float: right;">buydream 1</button><span id = "dreamNL1"><br></span>
+			<span id = "dream2"> 2nd dream </span>
+			<button type="button" class="bBD" id="bD2" onclick="buyDream(2)" style="float: right;">buydream 2</button><span id = "dreamNL2"><br></span>
+			<span id = "dream3"> 3rd dream </span> 
+			<button type="button" class="bBD" id="bD3" onclick="buyDream(3)" style="float: right;">buydream 3</button><span id = "dreamNL3"><br></span>
+			<span id = "dream4"> 4th dream </span>
+			<button type="button" class="bBD" id="bD4" onclick="buyDream(4)" style="float: right;">buydream 4</button><span id = "dreamNL4"><br></span>
+			<span id = "dream5"> 5th dream </span>
+			<button type="button" class="bBD" id="bD5" onclick="buyDream(5)" style="float: right;">buydream 5</button><span id = "dreamNL5"><br></span>
+			<span id = "dream6"> 6th dream </span>
+			<button type="button" class="bBD" id="bD6" onclick="buyDream(6)" style="float: right;">buydream 6</button><span id = "dreamNL6"><br></span>
+			<span id = "dream7"> 7th dream </span>
+			<button type="button" class="bBD" id="bD7" onclick="buyDream(7)" style="float: right;">buydream 7</button><span id = "dreamNL7"><br></span>
+			<span id = "dream8"> 8th dream </span>
+			<button type="button" class="bBD" id="bD8" onclick="buyDream(8)" style="float: right;">buydream 8</button><span id = "dreamNL8"><br></span>
+			<span id = "dream9"> 9th dream </span>
+			<button type="button" class="bBD" id="bD9" onclick="buyDream(9)" style="float: right;">buydream 9</button><span id = "dreamNL9"><br></span>
+			<span id = "dream10"> 10th dream </span>
+			<button type="button" class="bBD" id="bD10" onclick="buyDream(10)" style="float: right;">buydream 10</button><span id = "dreamNL10"><br></span>
+			<span id = "dream11"> 11th dream </span>
+			<button type="button" class="bBD" id="bD11" onclick="buyDream(11)" style="float: right;">buydream 11</button><span id = "dreamNL11"><br></span>
+			<span id = "dream12"> 12th dream </span>
+			<button type="button" class="bBD" id="bD12" onclick="buyDream(12)" style="float: right;">buydream 12</button><span id = "dreamNL12"><br></span>
+			</font>
+			<div style="text-align:center;">
+			<button type="button" class="b1" onclick="dreamReset()">Shift into a dream within a dream<br>(Reset Fae resources but enter a deeper dream layer)<br> Requires <span id = "dreamReq">0</span> Dreams</button>
+			</div>
+			</p>
 		</div>
 		<div id = "anti">
 		<p1>-<co class = "colE12">Anti-Magic</co>-</p1><br>
