@@ -42,7 +42,6 @@
 			</p>
 		</div>
 		<div id = "options">
-			<br>
 			<p>Options</p>
 			<p>
 			<button type="button" class="bSave" onclick='manualSave()'>Save the game</button>
@@ -63,14 +62,14 @@
 			<font size="3.5">Current autosave rate: <span id = "autoI">every 10s</span></font></p>
 		</div>		
 		<div id = "world">
-			<br>
 			<p>World</p>
 			<p>
 			<font size="3">The world holds a total energy potential of <b><co class = "colT"><span id = "total">0</span></co></b>, based on the product of:</font>
 			<br>
 			<font size="3"> <co class = "colE0"><span id = "total0">0</span></co> total raw magic energy</font>
 			<br>
-
+			<font size="3"> <co class = "colE5"><span id = "total5">0</span></co> total nature energy</font>
+			<br>
 
 			<font size="3"> <co class = "colE11"><span id = "total11">0</span></co> total fae energy</font>
 			<br>
@@ -79,38 +78,445 @@
 			<font size="3">The world has existed for <b><co class = "colE0"><span id = "ptime">0</span></co></b> seconds</font>
 			</p>
 		</div>
-		<div id = "fire">
+		<div id = "fireTabs">
 			<p1>-<co class = "colE1">Fire</co>-</p1><br>
+			
+		</div>	
+		<div id = "fire">
+			
 		</div>
-		<div id = "water">
+		<div id = "waterTabs">
 			<p1>-<co class = "colE2">Water</co>-</p1><br>
+			
+		</div>	
+		<div id = "water">
+
 		</div>
-		<div id = "ice">
+		<div id = "iceTabs">
 			<p1>-<co class = "colE3">Ice</co>-</p1><br>
+			
+		</div>	
+		<div id = "ice">
+			<p>End of current content</p>
 		</div>
-		<div id = "sky">
+		<div id = "skyTabs">
 			<p1>-<co class = "colE4">Sky</co>-</p1><br>
+			
+		</div>	
+		<div id = "sky">
+
 		</div>
-		<div id = "nature">
+		<div id = "natureTabs">
 			<p1>-<co class = "colE5">Nature</co>-</p1><br>
+			<button type="button" class="elem5" id="natT1" onclick='goETab("nature")'>Nature Garden</button>
+			<button type="button" class="elem5" id="natT2" onclick='goETab("nature2")'>Garden Upgrades</button>
+			<button type="button" class="elem5" id="natTI" onclick='goETab("natureInfo")'>Nature Guide Scroll</button>
+		</div>		
+		<div id = "nature">
+			<p>Nature Energy: <co class = "colE5"><span id = "ne">0</span></co>
+			<br>
+			<font size="3">
+			<span id = "e5s">0</span></p>
+			</font>
+			<table>
+			<tr>
+			<th>
+			<span id = "ns1s">
+			<pt>Primary Spells: <co class = "colE5"><span id = "ns1">0</span></co></pt>
+			</span>
+			</th>
+			<th>
+			<span id = "ns2s">
+			<pt>Secondary Spells: <co class = "colE5"><span id = "ns2">0</span></co></pt>
+			</span>
+			</th>
+			</tr>
+			<tr>
+			<th>
+			<span id = "ns1s2">
+			<button type="button" class="tb1N" onclick="castNS1()">Cast Primary Spell<br>(Costs <span id = "ns1c">0</span> Nat.Energy)</button>
+			</span>
+			</th>
+			<th>
+			<span id = "ns2s2">
+			<button type="button" class="tb1N" onclick="castNS2()">Cast Secondary Spell<br>(Costs <span id = "ns2c">0</span> Nat.Energy)</button>
+			</span>
+			</th>
+			</tr>
+			</table>	
+
+
+			<div style='text-align: center;'>
+			<p>
+			<div id = "gardenTable">
+				<table class="garden">
+				<tr>
+					<pt>Nature Garden</pt>
+				</tr>
+				<tr>
+				<th>
+					<button type="button" class="nPlot" id="plot1" onclick='plotClick(1)'> </button>
+				</th>
+				<th>
+					<button type="button" class="nPlot" id="plot2" onclick='plotClick(2)'> </button>
+				</th>
+				<th>
+					<button type="button" class="nPlot" id="plot3" onclick='plotClick(3)'> </button>
+				</th>
+				<th>
+					<button type="button" class="nPlot" id="plot4" onclick='plotClick(4)'> </button>
+				</th>
+				<th>
+					<button type="button" class="nPlot" id="plot5" onclick='plotClick(5)'> </button>
+				</th>			
+				<th>
+					<button type="button" class="nPlot" id="plot6" onclick='plotClick(6)'> </button>
+				</th>
+				</tr>
+				<tr>
+				<th>
+					<button type="button" class="nPlot" id="plot7" onclick='plotClick(7)'> </button>
+				</th>
+				<th>
+					<button type="button" class="nPlot" id="plot8" onclick='plotClick(8)'> </button>
+				</th>
+				<th>
+					<button type="button" class="nPlot" id="plot9" onclick='plotClick(9)'> </button>
+				</th>
+				<th>
+					<button type="button" class="nPlot" id="plot10" onclick='plotClick(10)'> </button>
+				</th>
+				<th>
+					<button type="button" class="nPlot" id="plot11" onclick='plotClick(11)'> </button>
+				</th>			
+				<th>
+					<button type="button" class="nPlot" id="plot12" onclick='plotClick(12)'> </button>
+				</th>
+				</tr>
+				<tr>
+				<th>
+					<button type="button" class="nPlot" id="plot13" onclick='plotClick(13)'> </button>
+				</th>
+				<th>
+					<button type="button" class="nPlot" id="plot14" onclick='plotClick(14)'> </button>
+				</th>
+				<th>
+					<button type="button" class="nPlot" id="plot15" onclick='plotClick(15)'> </button>
+				</th>
+				<th>
+					<button type="button" class="nPlot" id="plot16" onclick='plotClick(16)'> </button>
+				</th>
+				<th>
+					<button type="button" class="nPlot" id="plot17" onclick='plotClick(17)'> </button>
+				</th>			
+				<th>
+					<button type="button" class="nPlot" id="plot18" onclick='plotClick(18)'> </button>
+				</th>
+				</tr>
+				<tr>
+				<th>
+					<button type="button" class="nPlot" id="plot19" onclick='plotClick(19)'> </button>
+				</th>
+				<th>
+					<button type="button" class="nPlot" id="plot20" onclick='plotClick(20)'> </button>
+				</th>
+				<th>
+					<button type="button" class="nPlot" id="plot21" onclick='plotClick(21)'> </button>
+				</th>
+				<th>
+					<button type="button" class="nPlot" id="plot22" onclick='plotClick(22)'> </button>
+				</th>
+				<th>
+					<button type="button" class="nPlot" id="plot23" onclick='plotClick(23)'> </button>
+				</th>			
+				<th>
+					<button type="button" class="nPlot" id="plot24" onclick='plotClick(24)'> </button>
+				</th>
+				</tr>
+				<tr>
+				<th>
+					<button type="button" class="nPlot" id="plot25" onclick='plotClick(25)'> </button>
+				</th>
+				<th>
+					<button type="button" class="nPlot" id="plot26" onclick='plotClick(26)'> </button>
+				</th>
+				<th>
+					<button type="button" class="nPlot" id="plot27" onclick='plotClick(27)'> </button>
+				</th>
+				<th>
+					<button type="button" class="nPlot" id="plot28" onclick='plotClick(28)'> </button>
+				</th>
+				<th>
+					<button type="button" class="nPlot" id="plot29" onclick='plotClick(29)'> </button>
+				</th>			
+				<th>
+					<button type="button" class="nPlot" id="plot30" onclick='plotClick(30)'> </button>
+				</th>
+				</tr>
+				<tr>
+				<th>
+					<button type="button" class="nPlot" id="plot31" onclick='plotClick(31)'> </button>
+				</th>
+				<th>
+					<button type="button" class="nPlot" id="plot32" onclick='plotClick(32)'> </button>
+				</th>
+				<th>
+					<button type="button" class="nPlot" id="plot33" onclick='plotClick(33)'> </button>
+				</th>
+				<th>
+					<button type="button" class="nPlot" id="plot34" onclick='plotClick(34)'> </button>
+				</th>
+				<th>
+					<button type="button" class="nPlot" id="plot35" onclick='plotClick(35)'> </button>
+				</th>			
+				<th>
+					<button type="button" class="nPlot" id="plot36" onclick='plotClick(36)'> </button>
+				</th>
+				</tr>
+				</table>
+				
+			</div>
+			<br>
+			<button type="button" class="bN1" id="buyPlot" onclick="buyPlot()">Begin the Nature Garden</button>
+			</p>
+			</div>
+			<div id = "seedsText">
+			<p>Seeds<br>
+			<font size="3">
+				Click on a seed button to select it, then click on a plot in the garden to plant the seed.
+				<br>Seed power must be above 0 to plant. (higher number in the input box => more power)
+				<br>The first seed (Basic Seed) costs raw magic energy, all other seeds cost nature energy.
+				<br>When planting, you lose the energy you specified in the input box.
+				<br>Seeds after the second must be unlocked for nature energy.
+			</font>
+			<table style="float:left" id="seed1">
+				<tr>
+					<th>
+						<ptS><font size="3">Basic Seed</font></ptS>
+					</th>
+				</tr>
+				<tr>
+					<th>
+						<button type="button" style="background-color: #AAAAAA;" class="nSeed" id="seed1Btn" onclick='pickSeed(1)'> </button>
+					</th>
+				</tr>
+				<tr>
+					<th>
+						<input size=6 id="seed1Inp"> </input>
+					</th>
+				</tr>
+				<tr>
+					<th>
+						<ptS><font size="3">Seed Power:<br><co class = "colE5"><span id = "sPow1">0</span></co></font></ptS>
+					</th>
+				</tr>
+			</table>
+			
+			<table style="float:left" id="seed2">
+				<tr>
+					<th>
+						<ptS><font size="3">Fairy Seed</font></ptS>
+					</th>
+				</tr>
+				<tr>
+					<th>
+						<button type="button" style="background-color: #CE2890;" class="nSeed" id="seed2Btn" onclick='pickSeed(2)'> </button>
+					</th>
+				</tr>
+				<tr>
+					<th>
+						<input size=6 id="seed2Inp"> </input>
+					</th>
+				</tr>			
+				<tr>
+					<th>
+						<ptS><font size="3">Seed Power:<br><co class = "colE5"><span id = "sPow2">0</span></co></font></ptS>
+					</th>
+				</tr>
+			</table>
+
+			<table style="float:left" id="seed3">
+				<tr>
+					<th>
+						<ptS><font size="3">Energy Seed</font></ptS>
+					</th>
+				</tr>
+				<tr>
+					<th>
+						<button type="button" style="background-color: #44A53D;" class="nSeed" id="seed3Btn" onclick='pickSeed(3)'> </button>
+					</th>
+				</tr>
+				<tr>
+					<th>
+						<input size=6 id="seed3Inp"> </input>
+					</th>
+				</tr>			
+				<tr>
+					<th>
+						<ptS><font size="3">Seed Power:<br><co class = "colE5"><span id = "sPow3">0</span></co></font></ptS>
+					</th>
+				</tr>
+			</table>
+
+			<table style="float:left" id="seed4">
+				<tr>
+					<th>
+						<ptS><font size="3">Somnis Seed</font></ptS>
+					</th>
+				</tr>
+				<tr>
+					<th>
+						<button type="button" style="background-color: #EF99D7;" class="nSeed" id="seed4Btn" onclick='pickSeed(4)'> </button>
+					</th>
+				</tr>
+				<tr>
+					<th>
+						<input size=6 id="seed4Inp"> </input>
+					</th>
+				</tr>			
+				<tr>
+					<th>
+						<ptS><font size="3">Seed Power:<br><co class = "colE5"><span id = "sPow4">0</span></co></font></ptS>
+					</th>
+				</tr>
+			</table>
+			
+			<table style="float:left" id="seed5">
+				<tr>
+					<th>
+						<ptS><font size="3">Chloro Seed</font></ptS>
+					</th>
+				</tr>
+				<tr>
+					<th>
+						<button type="button" style="background-color: #00723F;" class="nSeed" id="seed5Btn" onclick='pickSeed(5)'> </button>
+					</th>
+				</tr>
+				<tr>
+					<th>
+						<input size=6 id="seed5Inp"> </input>
+					</th>
+				</tr>			
+				<tr>
+					<th>
+						<ptS><font size="3">Seed Power:<br><co class = "colE5"><span id = "sPow5">0</span></co></font></ptS>
+					</th>
+				</tr>
+			</table>
+
+			<table style="float:left" id="seedU">
+				<tr>
+					<th>
+						<ptS><font size="3">[Locked]</font></ptS>
+					</th>
+				</tr>
+				<tr>
+					<th>
+						<button type="button" style="background-color: #92D050;" class="nSeed" id="seed2Btn" onclick='unlockNextSeed()'>Unlock next seed</button>
+					</th>
+				</tr>
+				<tr>
+					<th>
+						<ptS><font size="3">Unlock cost:<br><co class = "colE5"><span id = "ulSC">0</span></co><br>Nat. Energy</font></ptS>
+					</th>
+				</tr>			
+			</table>
+			
+			</p>
+			</div>
+			
+			<button type="button" class="pView" id="pViewBtn">test</button>
+			<button type="button" class="pDrain" id="pDrainBtn" onclick='drainSelectedPlant()'>test</button>
+			
+			
 		</div>
-		<div id = "poison">
+		<div id = "nature2">
+			<p>Nature Energy: <co class = "colE5"><span id = "ne2">0</span></co>
+			<table class="upgsTable">
+				<tr>
+					<th>
+					
+					</th>
+					<th>
+					<pt>Garden Upgrades:</pt>
+					</th>
+				</tr>
+				<tr>
+					<th>
+						<button type="button" class="upgBtn" id="gUpg1" onclick='buyGUpgrade(1)'>Boost plant growth speed<br>based on your number of<br>Nature primary spells<br>Currently: <span id = "gUpg1Val">0</span>x<br>Cost: 1e3 NE</button>
+					</th>
+					<th>
+						<button type="button" class="upgBtn" id="gUpg2" onclick='buyGUpgrade(2)'>While selecting a plant,<br>it grows 3x as fast<br>Cost: 500 NE</button>
+					</th>
+					<th>
+						<button type="button" class="upgBtn" id="gUpg3" onclick='buyGUpgrade(3)'>Multiply Basic Plant and<br>Fairy Plant passive effects <br>based on total NE<br>Currently: <span id = "gUpg3Val">0</span>x<br>Cost: 2e3 NE</button>					
+					</th>
+				</tr>
+				<tr>
+					<th>
+						<button type="button" class="upgBtn" id="gUpg4" onclick='buyGUpgrade(4)'>Boost plant growth speed<br>based on Dreamshift amount<br>Currently: <span id = "gUpg4Val">0</span>x<br>Cost: 1e4 NE</button>
+					</th>
+					<th>
+						<button type="button" class="upgBtn" id="gUpg5" onclick='buyGUpgrade(5)'>Boost Nature Energy gain<br>from all sources based on<br>number of seeds unlocked<br>Currently: <span id = "gUpg5Val">0</span>x<br>Cost: 4e6 NE</button>
+					</th>
+					<th>
+						<button type="button" class="upgBtn" id="gUpg6" onclick='buyGUpgrade(6)'>Quadruple passive NE gain<br>and the above upgrade also<br>affects Dream Plant with<br>a weakened effect<br>Currently: <span id = "gUpg6Val">0</span>x<br>Cost: 1e10 NE</button>					
+					</th>
+				</tr>
+			</table>
+			
+			<p>Reach <co class = "colE5">1e66 Nature Energy</co> to unlock more Garden Upgrades!
+			<br>(... Probably. Once I add them.)
+			</p>	
+			
+		</div>
+		<div id = "natureInfo">
+			<p><font size="3">Unfortunately, all the knowledge scrolls were burned by ancient Sprite Dragons.</font>
+			<br>
+			</p>
+		</div>
+		<div id = "poisonTabs">
 			<p1>-<co class = "colE6">Poison</co>-</p1><br>
+			
+		</div>	
+		<div id = "poison">
+
 		</div>
-		<div id = "metal">
+		<div id = "metalTabs">
 			<p1>-<co class = "colE7">Metal</co>-</p1><br>
+			
+		</div>	
+		<div id = "metal">
+
 		</div>
-		<div id = "earth">
+		<div id = "earthTabs">
 			<p1>-<co class = "colE8">Earth</co>-</p1><br>
+			
+		</div>	
+		<div id = "earth">
+
 		</div>
-		<div id = "light">
+		<div id = "lightTabs">
 			<p1>-<co class = "colE9">Light</co>-</p1><br>
+			
+		</div>	
+		<div id = "light">
+
 		</div>
-		<div id = "dark">
+		<div id = "darkTabs">
 			<p1>-<co class = "colE10">Dark</co>-</p1><br>
+			
+		</div>	
+		<div id = "dark">
+
+		</div>
+		<div id = "faeTabs">
+			<p1>-<co class = "colE11">Fae</co>-</p1><br>
+			<button type="button" class="elem11" id="faeT1" onclick='goETab("fae")'>Fae Energy</button>
+			<button type="button" class="elem11" id="faeT2" onclick='goETab("fae2")'>Dream-Magic</button>
+			<button type="button" class="elem11" id="faeTI" onclick='goETab("faeInfo")'>Fae Guide Scroll</button>
 		</div>
 		<div id = "fae">
-			<p1>-<co class = "colE11">Fae</co>-</p1><br>
 			<p>Fae Energy: <co class = "colE11"><span id = "fe">0</span></co>
 			<br>
 			<font size="3">
@@ -118,7 +524,7 @@
 			</font>
 			</p>
 			<button type="button" class="b1" id="f0" onclick="genFE()">Begin generation of Fae Energy</button>
-			
+				
 			<table>
 			<tr>
 			<th>
@@ -171,14 +577,32 @@
 			<button type="button" class="bBD" id="bD11" onclick="buyDream(11)" style="float: right;">buydream 11</button><span id = "dreamNL11"><br></span>
 			<span id = "dream12"> 12th dream </span>
 			<button type="button" class="bBD" id="bD12" onclick="buyDream(12)" style="float: right;">buydream 12</button><span id = "dreamNL12"><br></span>
+			</p>
+			<p>
+			<span id = "dreamshifts">Dreamshifts:</span>
 			</font>
-			<div style="text-align:center;">
-			<button type="button" class="b1" onclick="dreamReset()">Shift into a dream within a dream<br>(Reset Fae resources but enter a deeper dream layer)<br> Requires <span id = "dreamReq">0</span> Dreams</button>
-			</div>
+			<button type="button" class="bDShift" onclick="dreamReset()" style="float: right;">Shift into a dream within a dream<br>(Reset Fae resources but enter a deeper dream layer)</button>
 			</p>
 		</div>
-		<div id = "anti">
+		
+		<div id = "fae2">
+			<p>Reach <co class = "colE11">1e100 Fae Energy</co> to unlock Dream-Magic!
+			<br>
+			</p>	
+		</div>
+
+		<div id = "faeInfo">
+			<p><font size="3">Unfortunately, all the knowledge scrolls were burned by ancient Sprite Dragons.</font>
+			<br>
+			</p>
+		</div>
+		
+		<div id = "antiTabs">
 		<p1>-<co class = "colE12">Anti-Magic</co>-</p1><br>
+			
+		</div>	
+		<div id = "anti">
+
 		</div>
 		<div id = "none">
 		
