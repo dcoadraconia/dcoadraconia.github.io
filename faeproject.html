@@ -8,14 +8,22 @@
 		<script type="text/javascript" src="game.js" defer></script>
 	</head>
 	
+	<audio id="iceTrialMusic">
+	  <source src="antarctic reinforcement.ogg" type="audio/ogg">
+	  <source src="antarctic reinforcement.mp3" type="audio/mpeg">
+	  Your browser does not support the audio element.
+	</audio>
+	
 	<body>
 		<div id = "top">
-			<h1>F.A.E. Project</h1>
+			<h1 id="title" >F.A.E. Project</h1>
 		</div>
+<span id = "hideDuringIceTrial">		
 		<div id = "disp">
-			<p>The world has <co class = "colE0"><span id = "magic">0</span></co> raw magic energy<br>
+			<pt>The world has <co class = "colE0"><span id = "magic">0</span></co> raw magic energy<br>
 			<font size="3">
-			(<co class = "colE0"><span id = "mps">0</span></co> is being generated per second)</p>
+			(<co class = "colE0"><span id = "mps">0</span></co> is being generated per second)</pt><br>
+			<p style="line-height: 1"></p></span>
 			</font>
 		</div>		
 		<div id = "tabButtons">
@@ -60,6 +68,9 @@
 			<font size="3.5">Current update rate: <span id = "tickI">every 50ms</span></font></p>
 			<p><button type="button" class="bEISave" onclick='setAutoInterval()'>Change autosave rate</button>
 			<font size="3.5">Current autosave rate: <span id = "autoI">every 10s</span></font></p>
+			
+			<p><button type="button" class="bEISave" id="ignoreTrialConfBtn" onclick='ignoreTrialConfBtn()'>Skip Trial confirmation</button>
+			<font size="3.5"><span id = "ignoreTC">false</span></font></p>
 		</div>		
 		<div id = "world">
 			<p>World</p>
@@ -68,6 +79,10 @@
 			<br>
 			<font size="3"> <co class = "colE0"><span id = "total0">0</span></co> total raw magic energy</font>
 			<br>
+			
+			<font size="3"> <co class = "colE3"><span id = "total3">0</span></co> total ice energy</font>
+			<br>
+			
 			<font size="3"> <co class = "colE5"><span id = "total5">0</span></co> total nature energy</font>
 			<br>
 
@@ -92,12 +107,176 @@
 		<div id = "water">
 
 		</div>
+</span>
 		<div id = "iceTabs">
 			<p1>-<co class = "colE3">Ice</co>-</p1><br>
+			<button type="button" class="elem3" id="iceT1" onclick='goETab("ice")'>Ice Trial</button>
+			<button type="button" class="elem3" id="iceTI" onclick='goETab("iceInfo")'>Ice Guide Scroll</button>
 			
 		</div>	
 		<div id = "ice">
-			<p>End of current content</p>
+			<p>Ice Energy: <co class = "colE3"><span id = "ie">0</span></co>
+			<br>
+			<font size="3">
+			<span id = "e3s">0</span></p>
+			</font>
+			<table id="iceESpells">
+			<tr>
+			<th>
+			<span id = "is1s">
+			<pt>Primary Spells: <co class = "colE3"><span id = "is1">0</span></co></pt>
+			</span>
+			</th>
+			<th>
+			<span id = "is2s">
+			<pt>Secondary Spells: <co class = "colE3"><span id = "is2">0</span></co></pt>
+			</span>
+			</th>
+			</tr>
+			<tr>
+			<th>
+			<span id = "is1s2">
+			<button type="button" class="tb1I" onclick="castIS1()">Cast Primary Spell<br>(Cost: <span id = "is1c">0</span> Ice Energy)</button>
+			</span>
+			</th>
+			<th>
+			<span id = "is2s2">
+			<button type="button" class="tb1I" onclick="castIS2()">Cast Secondary Spell<br>(Cost: <span id = "is2c">0</span> Ice Energy)</button>
+			</span>
+			</th>
+			</tr>
+			</table>
+
+			<div style="text-align:center;">
+			
+			<div id="startIceTrial"> 
+			<br><br>
+			<button type="button" class="trialEBtn1"  onclick="startIceTrial()">Enter the<br>Trial of Ice</button>
+			<pt><br><span id = "enterTrialFText"> </span></pt>
+			</div>
+
+			<button type="button" class="trialEBtn2" id="stopIceTrial" onclick="stopIceTrial()">Exit the<br>Trial of Ice</button>
+			
+			</div>
+
+
+			<div id = "iceTrialStuff">
+				<pt><span style="font-size:30px;">Trial of Ice</span><br><span style="font-size:16px;">Outlast the trial by surviving in it for a real-time hour<br>to complete it and become a Master of Ice.</span></pt>
+			
+				<p>You have <co class = "colE3"><span id = "iceTrialTimeLeft">some</span></co> trial-seconds remaining before forced exit.<br><font size="3"><span id = "trialTimespeedMult">text here or maybe not</span></font></p>
+				
+				<button type="button" class="elem3" id="freezeTCountdown" onclick="freezeTCountdown()">Freeze the countdown<br>for the next 10 seconds<br>Cost: <span id = "freezeTCost">0</span> Ice Crystals</button>
+				
+				<pt><font size="3"><span id = "freezeTimeLeft">text here or maybe not</span></font></pt>
+				
+				<p> <font size="3">You have spent <co class = "colE3"><span id = "iceTrialTime">some</span></co> real-time seconds in Trial of Ice,<br>translating to a <co class = "colE3"><span id = "timeBasedCMult">0</span></co>x multiplier to Ice Crystal gain.</font></p>
+				
+				<p><font size="3">
+				You have <font size="5"><co class = "colE3"><span id = "iceCrystals">0</span></co></font> Ice Crystals, which multiply trial score gain.<br>(<co class = "colE3"><span id = "iceCrystalsPS">0</span></co>/sec)
+				</font></p>					
+				
+				<p><font size="3">
+				Your trial score is currently <co class = "colE3"><span id = "trialScore">0</span></co>, giving <co class = "colE3"><span id = "ieGainOnExit">0</span></co> Ice Energy upon exit.<br>(<co class = "colE3"><span id = "trialScorePS">0</span></co>/sec)
+				</font></p>
+				
+				<p><font size="3">
+				Best score: <co class = "colE3"><span id = "bestScore">0</span></co> Trial Score
+				</font></p>
+				
+			</div>
+
+			<div id = "iceTrialSpells" style='text-align: center; position: fixed; bottom:0px; left: 50%; margin-left: -309px;'>
+			<table class="trialTable">
+				<tr>
+					<pt>Trial Spells</pt>
+				</tr>
+				<tr>
+				<th>
+					<button type="button" class="trialSpell" id="tSpell1Btn" onclick='castTSpell(2)'>Double Ice Crystal gain<br>Cost: <span id = "iTSpell1C">0</span> Ice Crystals</button>
+				</th>
+				<th>
+					<button type="button" class="trialSpell" id="tSpell2Btn" onclick='castTSpell(3)'>Strengthen time-based multiplier to Ice Crystals<br>Cost: <span id = "iTSpell2C">0</span> Ice Crystals</button>
+				</th>
+				</tr>
+				<tr>
+				<th>
+					<button type="button" class="trialSpell" id="tSpell3Btn" onclick='castTSpell(4)'>Double Trial Score gain<br>Cost: <span id = "iTSpell3C">0</span> Ice Crystals</button>
+				</th>
+				<th>
+					<button type="button" class="trialSpell" id="tSpell4Btn" onclick='castTSpell(5)'>Slow countdown speed<br>by 10%<br>Cost: <span id = "iTSpell4C">0</span> Ice Crystals</button>
+				</th>
+				</tr>
+			</table>	
+			</div>
+			<div id = "notTrialStuff">
+				<!-- <pt> test </pt> -->
+			
+				<pt> <font size="3"> <br> <span id = "iUpgsTableReq">reach a morbillion to unlock kracc bacc mode</span><br></font> </pt>
+				
+			
+				<table class="upgsTable" id="iUpgsTable">
+					<tr>
+						<th>
+						
+						</th>
+						<th colspan="2">
+						<pt><span id = "iUpgsTableTitle">Trial of Ice Upgrades</span></pt>
+						</th>
+					</tr>
+					<tr>
+						<th>
+							<button type="button" class="upgBtn" id="iUpg1" onclick='buyIUpgrade(1)'>Multiply Ice Crystal gain based<br>on Ice primary spells<br>Currently: <span id = "iUpg1Val">0</span>x<br>Cost: <span id = "iUpg1Cost">0</span> IE</button>
+						</th>
+						<th>
+							<button type="button" class="upgBtn" id="iUpg2" onclick='buyIUpgrade(2)'>Best Score boosts Ice and Nature Energy gain<br>Currently: <span id = "iUpg2Val">0</span>x<br>Cost: <span id = "iUpg2Cost">0</span> IE</button>
+						</th>
+						<th>
+							<button type="button" class="upgBtn" id="iUpg3" onclick='buyIUpgrade(3)'>Get extra trial time based on seeds unlocked and Dreamshifts, and start Trial of Ice with<br>10 seconds of time stop<br>Currently: +<span id = "iUpg3Val">0</span> seconds<br>Cost: <span id = "iUpg3Cost">0</span> IE</button>
+						</th>
+						<th>
+							<button type="button" class="upgBtn" id="iUpg4" onclick='buyIUpgrade(4)'>Get a multiplier to all dreams based on Ice Energy<br>Currently: <span id = "iUpg4Val">0</span>x<br>Cost: <span id = "iUpg4Cost">0</span> IE</button>
+						</th>
+					</tr>
+					<tr>
+						<th>
+							<button type="button" class="upgBtn" id="iUpg5" onclick='buyIUpgrade(5)'>Trial Score gain is boosted by raw magic amount<br>Currently: <span id = "iUpg5Val">0</span>x<br>Cost: <span id = "iUpg5Cost">0</span> IE</button>
+						</th>
+						<th>
+							<button type="button" class="upgBtn" id="iUpg6" onclick='buyIUpgrade(6)'>Every other Ice Primary Spell gives a free Nature Primary Spell and free Fae Secondary Spell<br>Currently: +<span id = "iUpg6Val">0</span> to each<br>Cost: <span id = "iUpg6Cost">0</span> IE</button>
+						</th>
+						<th>
+							<button type="button" class="upgBtn" id="iUpg7" onclick='buyIUpgrade(7)'>Boost Ice Crystal gain based on number of 4th-Layer Dreams<br>Currently: <span id = "iUpg7Val">0</span>x<br>Cost: <span id = "iUpg7Cost">0</span> IE</button>
+						</th>
+						<th>
+							<button type="button" class="upgBtn" id="iUpg8" onclick='buyIUpgrade(8)'>Improve the formula for Ice Energy gain upon Trial exit <br>Cost: <span id = "iUpg8Cost">0</span> IE</button>
+						</th>
+					</tr>
+					<tr>
+						<th>
+							<button type="button" class="upgBtn" id="iUpg9" onclick='buyIUpgrade(9)'>All Trial Spells are 10x cheaper<br>Cost: <span id = "iUpg9Cost">0</span> IE</button>
+						</th>
+						<th>
+							<button type="button" class="upgBtn" id="iUpg10" onclick='buyIUpgrade(10)'>Unlock some fresh new Garden Upgrades, ripe for the picking.<br>Cost: <span id = "iUpg10Cost">0</span> IE</button>
+							<!--<button type="button" class="upgBtn" id="iUpg10" onclick='buyIUpgrade(10)'>Plants grow faster the more<br>Trial of Ice Upgrades you have,<br>and plants still grow while<br>you are in a Trial of Ice<br>Currently: <span id = "iUpg10Val">0</span>x<br>Cost: <span id = "iUpg10Cost">0</span> IE</button>-->
+							
+						</th>
+						<th>
+							<button type="button" class="upgBtn" id="iUpg11" onclick='buyIUpgrade(11)'>You start each Trial of Ice with Ice Crystals based on your current Ice Energy<br>Currently: <span id = "iUpg11Val">0</span> Crystals<br>Cost: <span id = "iUpg11Cost">0</span> IE</button>
+						</th>
+						<th>
+							<button type="button" class="upgBtn" id="iUpg12" onclick='buyIUpgrade(12)'>Generate Ice Energy automatically based on your<br>best trial performance<br>Currently: <span id = "iUpg12Val">0</span>/sec<br>Cost: <span id = "iUpg12Cost">0</span> IE</button>
+						</th>
+					</tr>
+					</tr>
+				</table>
+			</div>
+
+
+		</div>
+		<div id = "iceInfo">
+			<p><font size="3">Unfortunately, all the knowledge scrolls were burned by ancient Sprite Dragons.</font>
+			<br>
+			</p>
 		</div>
 		<div id = "skyTabs">
 			<p1>-<co class = "colE4">Sky</co>-</p1><br>
@@ -122,7 +301,7 @@
 			<tr>
 			<th>
 			<span id = "ns1s">
-			<pt>Primary Spells: <co class = "colE5"><span id = "ns1">0</span></co></pt>
+			<pt>Primary Spells: <co class = "colE5"><span id = "ns1">0</span></co><span id = "ns1F"></span></pt>
 			</span>
 			</th>
 			<th>
@@ -134,12 +313,12 @@
 			<tr>
 			<th>
 			<span id = "ns1s2">
-			<button type="button" class="tb1N" onclick="castNS1()">Cast Primary Spell<br>(Costs <span id = "ns1c">0</span> Nat.Energy)</button>
+			<button type="button" class="tb1N" onclick="castNS1()">Cast Primary Spell<br>(Cost: <span id = "ns1c">0</span> Nat. Energy)</button>
 			</span>
 			</th>
 			<th>
 			<span id = "ns2s2">
-			<button type="button" class="tb1N" onclick="castNS2()">Cast Secondary Spell<br>(Costs <span id = "ns2c">0</span> Nat.Energy)</button>
+			<button type="button" class="tb1N" onclick="castNS2()">Cast Secondary Spell<br>(Cost: <span id = "ns2c">0</span> Nat. Energy)</button>
 			</span>
 			</th>
 			</tr>
@@ -151,7 +330,9 @@
 			<div id = "gardenTable">
 				<table class="garden">
 				<tr>
-					<pt>Nature Garden</pt>
+					<pt>Nature Garden<font size="3">
+					<span id = "dPlantBoost"></span><span id = "gUpg11Active"></span
+					</font></pt>
 				</tr>
 				<tr>
 				<th>
@@ -404,6 +585,98 @@
 				</tr>
 			</table>
 
+			<table style="float:left" id="seed6">
+				<tr>
+					<th>
+						<ptS><font size="3">Gemstone Seed</font></ptS>
+					</th>
+				</tr>
+				<tr>
+					<th>
+						<button type="button" style="background-color: #70F5FF;" class="nSeed" id="seed6Btn" onclick='pickSeed(6)'> </button>
+					</th>
+				</tr>
+				<tr>
+					<th>
+						<input size=6 id="seed6Inp"> </input>
+					</th>
+				</tr>			
+				<tr>
+					<th>
+						<ptS><font size="3">Seed Power:<br><co class = "colE5"><span id = "sPow6">0</span></co></font></ptS>
+					</th>
+				</tr>
+			</table>
+
+			<table style="float:left" id="seed7">
+				<tr>
+					<th>
+						<ptS><font size="3">Helper Seed</font></ptS>
+					</th>
+				</tr>
+				<tr>
+					<th>
+						<button type="button" style="background-color: #727057;" class="nSeed" id="seed7Btn" onclick='pickSeed(7)'> </button>
+					</th>
+				</tr>
+				<tr>
+					<th>
+						<input size=6 id="seed7Inp"> </input>
+					</th>
+				</tr>			
+				<tr>
+					<th>
+						<ptS><font size="3">Seed Power:<br><co class = "colE5"><span id = "sPow7">0</span></co></font></ptS>
+					</th>
+				</tr>
+			</table>
+
+			<table style="float:left" id="seed8">
+				<tr>
+					<th>
+						<ptS><font size="3">Focus Seed</font></ptS>
+					</th>
+				</tr>
+				<tr>
+					<th>
+						<button type="button" style="background-color: #991248;" class="nSeed" id="seed8Btn" onclick='pickSeed(8)'> </button>
+					</th>
+				</tr>
+				<tr>
+					<th>
+						<input size=6 id="seed8Inp"> </input>
+					</th>
+				</tr>			
+				<tr>
+					<th>
+						<ptS><font size="3">Seed Power:<br><co class = "colE5"><span id = "sPow8">0</span></co></font></ptS>
+					</th>
+				</tr>
+			</table>
+			
+			<table style="float:left" id="seed9">
+				<tr>
+					<th>
+						<ptS><font size="3">Arctic Seed</font></ptS>
+					</th>
+				</tr>
+				<tr>
+					<th>
+						<button type="button" style="background-color: #BFD9FF;" class="nSeed" id="seed9Btn" onclick='pickSeed(9)'> </button>
+					</th>
+				</tr>
+				<tr>
+					<th>
+						<input size=6 id="seed9Inp"> </input>
+					</th>
+				</tr>			
+				<tr>
+					<th>
+						<ptS><font size="3">Seed Power:<br><co class = "colE5"><span id = "sPow9">0</span></co></font></ptS>
+					</th>
+				</tr>
+			</table>
+
 			<table style="float:left" id="seedU">
 				<tr>
 					<th>
@@ -428,6 +701,10 @@
 			<button type="button" class="pView" id="pViewBtn">test</button>
 			<button type="button" class="pDrain" id="pDrainBtn" onclick='drainSelectedPlant()'>test</button>
 			
+			<button type="button" class="bulkPlantBtn" id="bulkPlantBtn" onclick='bulkPlant()'>Plant current selected seed in all plots</button>	
+			<button type="button" class="bulkPlantBtn" id="bulkDrainBtn" onclick='bulkDrain()'>Drain all fully grown plants<br>in all plots</button>				
+
+
 			
 		</div>
 		<div id = "nature2">
@@ -460,7 +737,29 @@
 						<button type="button" class="upgBtn" id="gUpg5" onclick='buyGUpgrade(5)'>Boost Nature Energy gain<br>from all sources based on<br>number of seeds unlocked<br>Currently: <span id = "gUpg5Val">0</span>x<br>Cost: 4e6 NE</button>
 					</th>
 					<th>
-						<button type="button" class="upgBtn" id="gUpg6" onclick='buyGUpgrade(6)'>Quadruple passive NE gain<br>and the above upgrade also<br>affects Dream Plant with<br>a weakened effect<br>Currently: <span id = "gUpg6Val">0</span>x<br>Cost: 1e10 NE</button>					
+						<button type="button" class="upgBtn" id="gUpg6" onclick='buyGUpgrade(6)'>Quadruple passive NE gain<br>and the above upgrade also<br>affects Somnis Plant with<br>a weakened effect<br>Currently: <span id = "gUpg6Val">0</span>x<br>Cost: 1e10 NE</button>					
+					</th>
+				</tr>			
+				<tr id="gardenUpgs2">
+					<th>
+						<button type="button" class="upgBtn" id="gUpg7" onclick='buyGUpgrade(7)'>Basic Plant effect is<br>always at its best ever<br>Currently: <span id = "gUpg7Val">0</span>x<br>Cost: 1e15 NE</button>
+					</th>
+					<th>
+						<button type="button" class="upgBtn" id="gUpg8" onclick='buyGUpgrade(8)'>Plants grow faster based on<br>Trial of Ice upgrades owned<br>Currently: <span id = "gUpg8Val">0</span>x<br>Cost: 1e20 NE</button>
+					</th>
+					<th>
+						<button type="button" class="upgBtn" id="gUpg9" onclick='buyGUpgrade(9)'>Plants  grow in the Trial of Ice<br>Cost: 1e25 NE</button>					
+					</th>
+				</tr>
+				<tr id="gardenUpgs2b">
+					<th>
+						<button type="button" class="upgBtn" id="gUpg10" onclick='buyGUpgrade(10)'>Gemstone Plant effect is always at its best ever unless you have any Arctic Plants planted<br>Currently: <span id = "gUpg10Val">0</span>x<br>Cost: 1e30 NE</button>
+					</th>
+					<th>
+						<button type="button" class="upgBtn" id="gUpg11" onclick='buyGUpgrade(11)'>Plant passive effects are stronger but they take 60x longer to grow<br>(Click to toggle, will<br>drain all current plants)<br>Currently: <span id = "gUpg11Val">0</span><br>Cost: 1e35 NE</button>
+					</th>
+					<th>
+						<button type="button" class="upgBtn" id="gUpg12" onclick='buyGUpgrade(12)'>Chloro Plant works in Trial<br>of Ice and is stronger<br>based on growth speed<br>Currently: <span id = "gUpg12Val">0</span>x<br>Cost: 1e30 NE</button>					
 					</th>
 				</tr>
 			</table>
@@ -471,8 +770,9 @@
 			
 		</div>
 		<div id = "natureInfo">
-			<p><font size="3">Unfortunately, all the knowledge scrolls were burned by ancient Sprite Dragons.</font>
+			<p><font size="3">Unfortunately, all the knowledge scrolls were burned by ancient Sprite Dragons.
 			<br>
+			<span id = "plantOverview"> </span></font>
 			</p>
 		</div>
 		<div id = "poisonTabs">
@@ -480,7 +780,8 @@
 			
 		</div>	
 		<div id = "poison">
-
+			<p1>-<co class = "colE6">Poison</co>-</p1><br><p>End of current content</p>
+			<p> <font size="3">I kinda want to put a cute picture of a mage dragon here, if you make one i will put it here until the update</font></p>
 		</div>
 		<div id = "metalTabs">
 			<p1>-<co class = "colE7">Metal</co>-</p1><br>
@@ -522,6 +823,9 @@
 			<font size="3">
 			(<co class = "colE11"><span id = "e11s">0</span></co> is being generated per second)</p>
 			</font>
+			<div id = "e120Notice">
+			<p style="color:red; font-size:16px;">Notice: Fae Energy production is weakened after 1e120 Fae Energy/sec due to anti-magic interference.</p>
+			</div>			
 			</p>
 			<button type="button" class="b1" id="f0" onclick="genFE()">Begin generation of Fae Energy</button>
 				
@@ -532,23 +836,23 @@
 			</th>
 			<th>
 			<span id = "fs2s">
-			<pt>Secondary Spells: <co class = "colE11"><span id = "fs2">0</span></co></pt>
+			<pt>Secondary Spells: <co class = "colE11"><span id = "fs2">0</span></co><span id = "fs2F"></span></pt>
 			</span>
 			</th>
 			</tr>
 			<tr>
 			<th>
-			<button type="button" class="tb1" onclick="castFS1()">Cast Primary Spell<br>(Costs <span id = "fs1c">0</span> Fae Energy)</button>
+			<button type="button" class="tb1" onclick="castFS1()">Cast Primary Spell<br>(Cost: <span id = "fs1c">0</span> Fae Energy)</button>
 			</th>
 			<th>
 			<span id = "fs2s2">
-			<button type="button" class="tb1" onclick="castFS2()">Cast Secondary Spell<br>(Costs <span id = "fs2c">0</span> Fae Energy)</button>
+			<button type="button" class="tb1" onclick="castFS2()">Cast Secondary Spell<br>(Cost: <span id = "fs2c">0</span> Fae Energy)</button>
 			</span>
 			</th>
 			</tr>
 			</table>	
 			
-			<p>
+			<p style="line-height: 1.2">
 			Dreams:
 			<button type="button" class="bBD" id="maxF" onclick="maxAllDream()" style="float: right;">Max all spells/dreams</button>
 			<br>
@@ -586,9 +890,182 @@
 		</div>
 		
 		<div id = "fae2">
-			<p>Reach <co class = "colE11">1e100 Fae Energy</co> to unlock Dream-Magic!
-			<br>
-			</p>	
+			<span id = "drMUnlockText"><p>Reach <co class = "colE11">1e100 total Fae Energy</co> to unlock Dream-Magic!<br></p></span>
+			<div id = "dreamMagic">
+				<p>Dream-Magic</p>
+				<div id = "dreamMageU" style="text-align:center;">
+				<button type="button" class="dreamMageUBtn" id="dreamMageUBtn" onclick="becomeDreamMage()" >
+					<font size="5">Become a Dream Mage.</font>
+				</button>
+				<p><font size="3">When you become a Dream Mage, you will <b>lose all Dreamshifts</b>, but you will<br>unlock a <b>fourth layer of dreams</b> once you reach three Dreamshifts again.<br>You will also unlock the ability to attach Dream-Magic spells to your dream layers.<br><br><b>Warning:</b> When you become a Dream Mage, external dream multipliers will<br>temporarily be disabled until you have four Dreamshifts.</font></p>
+				</div>
+				
+				<div id="studyDreamMagicBtn">
+					<p><font size="3">Fae Energy: <co class = "colE11"><span id = "fe2">0</span></co><br>
+						(<co class = "colE11"><span id = "e11s2">0</span></co>/sec)</p>
+						</font>
+					</p>
+					<button type="button" class="tb1" onclick="studyDreamMagic()">Study Dream-Magic to strengthen all Dream-Magic spell multipliers<br><br>Current spellpower: ^<span id = "dmPower">0</span><br>Cost: <span id = "sDMc">0</span> FE</button>
+					
+					<button type="button" class="tb1" onclick="unlockNewDMSpell()">Unlock a new<br>Dream-Magic Spell<br>to choose from<br><br><br>Cost: <span id = "nDMc">0</span> FE</button>
+					
+					<br><br><br><br>
+				</div>
+				
+				<div id="dreamMagicSpells" style='text-align: center;'>
+					<table class="dreamMagicTable">
+						<tr>
+							<pt>Dream-Magic Spells</pt>
+						</tr>
+						<tr>
+							<th style="width:320px">
+								<pt>Dream Layers</pt>
+							</th>
+							<th style="width:160px">
+								
+							</th>
+							<th style="width:320px">
+								<pt>Dream Spells</pt>
+							</th>
+						</tr>
+						<tr>
+							<th>
+								<button type="button" class="dmDreamBtn" id="dmDreamBtn1" onclick="dmSelDream(1)" >dream info</button>
+							</th>
+							<th>
+								<button type="button" class="clearDmsBtn" id="clearDmsBtn" onclick="detachDreamMagics()" >Dispel all Dream-Magic spells</button>
+							</th>
+							<th>
+								<button type="button" class="dmSpellBtn" id="dmSpellBtn1" onclick="dmSelSpell(1)" >spell info</button>								
+							</th>
+						</tr>
+						<tr>
+							<th>
+								<button type="button" class="dmDreamBtn" id="dmDreamBtn2" onclick="dmSelDream(2)" >dream info</button>
+							</th>
+							<th>
+								
+							</th>
+							<th>
+								<button type="button" class="dmSpellBtn" id="dmSpellBtn2" onclick="dmSelSpell(2)" >spell info</button>								
+							</th>
+						</tr>
+							<tr>
+							<th>
+								<button type="button" class="dmDreamBtn" id="dmDreamBtn3" onclick="dmSelDream(3)" >dream info</button>
+							</th>
+							<th>
+								
+							</th>
+							<th>
+								<button type="button" class="dmSpellBtn" id="dmSpellBtn3" onclick="dmSelSpell(3)" >spell info</button>								
+							</th>
+						</tr>
+						<tr>
+							<th>
+								<button type="button" class="dmDreamBtn" id="dmDreamBtn4" onclick="dmSelDream(4)" >dream info</button>
+							</th>
+							<th>
+								
+							</th>
+							<th>
+								<button type="button" class="dmSpellBtn" id="dmSpellBtn4" onclick="dmSelSpell(4)" >spell info</button>								
+							</th>
+						</tr>
+						<tr>
+							<th>
+								<button type="button" class="dmDreamBtn" id="dmDreamBtn5" onclick="dmSelDream(5)" >dream info</button>
+							</th>
+							<th>
+								
+							</th>
+							<th>
+								<button type="button" class="dmSpellBtn" id="dmSpellBtn5" onclick="dmSelSpell(5)" >spell info</button>								
+							</th>
+						</tr>
+						<tr>
+							<th>
+								<button type="button" class="dmDreamBtn" id="dmDreamBtn6" onclick="dmSelDream(6)" >dream info</button>
+							</th>
+							<th>
+								
+							</th>
+							<th>
+								<button type="button" class="dmSpellBtn" id="dmSpellBtn6" onclick="dmSelSpell(6)" >spell info</button>								
+							</th>
+						</tr>
+						<tr>
+							<th>
+								<button type="button" class="dmDreamBtn" id="dmDreamBtn7" onclick="dmSelDream(7)" >dream info</button>
+							</th>
+							<th>
+								
+							</th>
+							<th>
+								<button type="button" class="dmSpellBtn" id="dmSpellBtn7" onclick="dmSelSpell(7)" >spell info</button>								
+							</th>
+						</tr>
+						<tr>
+							<th>
+								<button type="button" class="dmDreamBtn" id="dmDreamBtn8" onclick="dmSelDream(8)" >dream info</button>
+							</th>
+							<th>
+								
+							</th>
+							<th>
+								<button type="button" class="dmSpellBtn" id="dmSpellBtn8" onclick="dmSelSpell(8)" >spell info</button>								
+							</th>
+						</tr>
+							<tr>
+							<th>
+								<button type="button" class="dmDreamBtn" id="dmDreamBtn9" onclick="dmSelDream(9)" >dream info</button>
+							</th>
+							<th>
+								
+							</th>
+							<th>
+								<button type="button" class="dmSpellBtn" id="dmSpellBtn9" onclick="dmSelSpell(9)" >spell info</button>								
+							</th>
+						</tr>
+						<tr>
+							<th>
+								<button type="button" class="dmDreamBtn" id="dmDreamBtn10" onclick="dmSelDream(10)" >dream info</button>
+							</th>
+							<th>
+								
+							</th>
+							<th>
+								<button type="button" class="dmSpellBtn" id="dmSpellBtn10" onclick="dmSelSpell(10)" >spell info</button>								
+							</th>
+						</tr>
+						<tr>
+							<th>
+								<button type="button" class="dmDreamBtn" id="dmDreamBtn11" onclick="dmSelDream(11)" >dream info</button>
+							</th>
+							<th>
+								
+							</th>
+							<th>
+								<button type="button" class="dmSpellBtn" id="dmSpellBtn11" onclick="dmSelSpell(11)" >spell info</button>								
+							</th>
+						</tr>
+						<tr>
+							<th>
+								<button type="button" class="dmDreamBtn" id="dmDreamBtn12" onclick="dmSelDream(12)" >dream info</button>
+							</th>
+							<th>
+								
+							</th>
+							<th>
+								<button type="button" class="dmSpellBtn" id="dmSpellBtn12" onclick="dmSelSpell(12)" >spell info</button>								
+							</th>
+						</tr>						
+					</table>						
+				
+				<p style='text-align: left;'>Dream-Magic Upgrades:<br><font size="3">Coming... eventually... probably... to a Draconia clicker game near you!</font></p>
+				</div>
+			</div>
+			
 		</div>
 
 		<div id = "faeInfo">

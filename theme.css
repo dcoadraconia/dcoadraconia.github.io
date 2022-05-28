@@ -1,7 +1,20 @@
 /* Timothy Ross */
 body {
 	background-color: #1A001A;
+	animation: backdefault;
 }
+
+@keyframes backdefault {
+  from {background-color: #1A001A;}
+  to {background-color: #1A001A;}
+}
+@keyframes backicetrial {
+  0%   {background-color:#001C26;}
+  50%  {background-color:#000223;}
+  100%  {background-color:#001C26;}
+}
+
+
 
 h1 {
 	color: white;
@@ -354,6 +367,24 @@ button.bDShift {
   color: black;
 }
 
+button.dreamMageUBtn { 
+  /* fae button */
+  background-color: #CE2890;
+  border: 4px solid #CE2890;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: auto;
+  cursor: pointer;	
+} .dreamMageUBtn:hover {
+  background-color: #FFFFFF;
+  color: black;
+}
+	
+
 pt {
 	color: #D4EFD0;
 	font-family: "Lucida Console";
@@ -388,7 +419,7 @@ button.nSeed {
 	width: 80px;
 	height: 80px;
 	font-size:12px;
-	margin: 20px;
+	margin: 5px 30px;
 }
 
 
@@ -427,7 +458,7 @@ button.pView {
 }
 
 button.pDrain {
-  /* plant view button */
+  /* plant drain button */
   border: 4px solid black;
   border-radius: 25px;
   background-color: #880000;
@@ -444,6 +475,29 @@ button.pDrain {
   background-color: #FFFFFF;
   color: black;
 }
+
+button.bulkPlantBtn {
+  /* bulk plant button */
+  background-color: #92D050;
+  border: 4px solid black;
+  color: black;
+  padding: 8px 8px;
+  text-align: center;
+  text-decoration: none;
+  display: block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;	
+  position: fixed;
+  width:150px;
+  height:100px;
+  right:0px;
+  top:0px;
+ } .bulkPlantBtn:hover {
+  background-color: #FFFFFF;
+  color: black;
+}
+	
 
 button.tb1N { 
   /* nature button */
@@ -491,4 +545,153 @@ button.upgBtnNOwn {
 	border: 3px solid black;
 	padding: 4px 4px;
 	cursor: auto;
+}
+
+
+
+
+button.tb1I { 
+  /* ice button */
+  background-color: #00B0F0;
+  border: 4px solid #00B0F0;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;	
+  width: 300px;
+} .tb1I:hover {
+  background-color: #FFFFFF;
+  color: black;
+}
+
+button.trialEBtn1 { 
+  /* ice button */
+  background-color: #00B0F0;
+  border: 4px solid #00B0F0;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 30px;
+  font-family: "Optima";
+  font-variant: small-caps;
+  margin: 4px 2px;
+  cursor: pointer;	
+} .trialEBtn1:hover {
+  background-color: #FFFFFF;
+  color: black;
+}
+
+button.trialEBtn2 { 
+  /* ice button */
+  background-color: #00B0F0;
+  border: 4px solid #00B0F0;
+  color: white;
+  padding: 8px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 20px;
+  font-family: "Optima";
+  margin: 4px 2px;
+  cursor: pointer;
+  float: right  
+} .trialEBtn2:hover {
+  background-color: #FFFFFF;
+  color: black;
+}
+
+button.trialSpell {
+	width: 300px;
+	height: 100px;
+	color: white;
+	background-color: #00B0F0;
+	border: 4px solid #00B0F0;
+} .trialSpell:hover {
+  background-color: #FFFFFF;
+  color: black;
+}
+
+table.trialTable {
+  margin-left: auto; 
+  margin-right: auto;
+  border-radius: 5px;
+}
+
+button.upgBtnIOwn {
+	width: 200px;
+	height: 100px;
+	font-family: "Trebuchet MS";
+	font-size: 12px;
+	background-color: #00B0F0;
+	border: 3px solid black;
+	padding: 4px 4px;
+	cursor: auto;
+}
+
+
+table.dreamMagicTable {
+  margin-left: auto; 
+  margin-right: auto;
+  border-radius: 5px;
+}
+
+button.dmDreamBtn { 
+  /* fae button */
+  background-color: #CE2890;
+  border: 0px solid #CE2890;
+  color: white;
+  width: 290px;
+  height: 150px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+} .dmDreamBtn:hover {
+  background-color: #FFFFFF;
+  color: black;
+}
+
+button.dmSpellBtn { 
+  /* fae button */
+  background-color: #CE2890;
+  border: 0px solid #CE2890;
+  color: white;
+  width: 290px;
+  height: 150px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  padding: 8px 8px;
+} .dmSpellBtn:hover {
+  background-color: #FFFFFF;
+  color: black;
+}
+
+button.clearDmsBtn {
+  /* fae button */
+  background-color: #CC285F;
+  border: 0px solid #CC285F;
+  color: white;
+  width: 160px;
+  height: 95px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+} .clearDmsBtn:hover {
+  background-color: #FFFFFF;
+  color: black;
 }
