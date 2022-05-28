@@ -1977,8 +1977,12 @@ function iceProdDisp() {
 	else document.getElementById('e3s').innerHTML = "(<co class = 'colE3'>"+nFormat(iceEGain)+"</co> is being generated per second)";
 }
 
+loadVar = false;
 // update game functions
 function update() {
+	if(loadVar == false) {loadVar = true; setTimeout(() => { document.getElementById('laoding').style.display = "none" }, 1000);}
+	
+	
 	var time = new Date().getTime();
 	var timePassed = devGameSpeed*(time-lastTime)/1000;
 	lastTime = time;
