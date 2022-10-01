@@ -1,2 +1,2 @@
-# dcoadraconia.github.io
-draconia moment
+# D:LotGS
+A new Legend is about to begin...
