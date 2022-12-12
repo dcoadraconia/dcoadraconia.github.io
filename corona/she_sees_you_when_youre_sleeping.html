@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js" integrity="sha512-6+YN/9o9BWrk6wSfGxQGpt3EUK6XeHi6yeHV+TYD2GR0Sj/cggRpXr1BrAQf0as6XslxomMUxXp2vIl+fv0QRA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<html>
+	<title>SHE SEES YOU WHEN YOU'RE SLEEPING</title>
+	<!-- <link rel="icon" type="image/png" href="../assets/images/rock_icon.png"> -->
+
+	<body bgcolor="black">
+		 
+		 <div id="button">
+			<button onclick="button()" style="cursor: pointer; background-color: black; border: 5px solid white; color: white; padding: 12px 12px;text-align: center;display: inline-block;font-size: 24px;cursor: pointer; font-family: 'Courier New'; top: 75%; left: 50%; -ms-transform: translate(-50%, -50%);transform: translate(-50%, -50%);position: absolute; z-index:1;"> <b>[[Click Here To ]] FEEL EMOTIONS!!!</b></button> 
+		 </div>
+		
+		<img id="spamona" src="../assets/images/spamona.jpg" style="display:inline; width:100%;height: 100%; position: fixed; top:0; left:0; z-index:0;">  </img>
+
+		<script>
+			
+			var corona = new Howl({    src: ['../assets/audio/SHE-SEES-YOU.ogg', '../assets/audio/SHE-SEES-YOU.mp3'],    volume: 0.5,    loop: true  })
+			var check = 0;
+	
+			function button(){
+				document.getElementById("button").style.display = "none";
+				if(check == 0){
+					check = 1;
+					corona.play();
+			  }
+			}
+
+	
+		</script>
+	</body>
+</html>

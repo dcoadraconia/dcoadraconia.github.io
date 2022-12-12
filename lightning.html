@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js" integrity="sha512-6+YN/9o9BWrk6wSfGxQGpt3EUK6XeHi6yeHV+TYD2GR0Sj/cggRpXr1BrAQf0as6XslxomMUxXp2vIl+fv0QRA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<html>
+	<title>Chasing the storm</title>
+	<link rel="icon" type="image/png" href="assets/images/sky.png">
+
+	<head>
+		<style>
+			@keyframes flash {
+			  0%  {opacity: 0.0;}
+			  25%  {opacity: 0.24;}
+			  50%  {opacity: 0.0;}
+			  75%  {opacity: 0.24;}
+			  100%  {opacity: 0.0;}
+			}			
+
+			@keyframes textFlash {
+			  0%  {opacity: 0.0;}
+			  12%  {opacity: 0.66;}
+			  24%  {opacity: 0.0;}
+			  36%  {opacity: 0.66;}
+			  66%  {opacity: 0.66;}
+			  100%  {opacity: 0.0;}
+			}
+
+			@keyframes enter {
+			  0%  {opacity: 0.0;}
+			  100%  {opacity: 1.0;}
+			}
+			@keyframes exit {
+			  0%  {opacity: 1.0;}
+			  100%  {opacity: 0.0;}
+			}			
+			
+		</style>
+	</head>	
+
+	<body bgcolor="black">
+		<image id="sound" onclick="clickSound()" src="assets/images/audioOff.png" style="position:absolute; height:66px; width:auto; margin:12px; cursor: pointer; z-index: -5;">
+
+		<img id="rain" src="assets/images/rain.gif" style="display:inline; width:100%;height: 100%; position: fixed; top:0; left:0; z-index:-6; filter: saturate(0.25) brightness(0.4) blur(3px)">  </img>		
+
+		<div id="flash" style="display:none; position: fixed; top: 0;left: 0; width: 100vw; height: 100vh; background-color: #ffff66; opacity: 0.24; z-index: -2;"></div>
+
+		<div id="textB" style="top:0;left:0;right:0;position:absolute;color:#FFFF00; font-size:36px; font-family: 'Palatino'; line-height: 1.0;  text-align:center; z-index: -4;">
+			<p>
+				<span id="text"></span>
+			</p>
+		</div>
+
+		<div id="textB2" style="bottom:0;left:0;right:0;position:absolute;color:#0A0D10; font-size:20px; font-family: 'Georgia'; line-height: 1.0; opacity:1.0; text-align:center; z-index: -3;">
+			<p>
+				D✦ n✦t think y✦u h✦ve <b>esc✦ped</b> me.
+			</p>
+		</div>
+
+		<img id="stars" src="assets/images/stars.png" style="display:none; width:100%;height: 100%; position: fixed; top:0; left:0; filter: blur(4px); z-index: -1;">  </img>		
+
+		<div id="star" onclick="clickStar()" style="display:none; cursor: pointer; height: 3.7%; width: 2.3%; background: transparent; border-radius: 50%; position: absolute; top:39.2%;left:52.4%; transform: translate(-50%, -50%); -moz-user-select: none; -webkit-user-select: none; z-index:-1;"></div>
+		<p id="starText" style="display:none; position: absolute; top:30%;left:52.5%; transform: translate(-50%, -50%); z-index:22; color:#FFFFFF; font-size:22px; font-family: 'Helvetica';"> Felt like something changed elsewhere.</p>
+
+		<div id="void" style='display:none'>
+			<div style='position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); z-index:-1;'>
+				<p style="text-align: center; color:#FFFFFF; font-family: 'Georgia'; font-size:36px; "><i>Can't seem to pull yourself away...</i></p>
+			</div>
+		</div>
+
+
+		<script>
+			playSound = false
+			var rain = new Howl({    src: ['assets/audio/rain.ogg', 'assets/audio/rain.mp3'],    volume: 0.24,    loop: true  })	
+			var thunder = new Howl({    src: ['assets/audio/lightning.ogg', 'assets/audio/lightning.mp3'],    volume: 0.66,    loop: false  })
+			var chime = new Howl({    src: ['assets/audio/chime.ogg', 'assets/audio/chime.mp3'],    volume: 0.5,    loop: true  })
+			
+			var spooky = new Howl({    src: ['assets/audio/SpookyNoise.ogg', 'assets/audio/SpookyNoise.mp3'],    volume: 0.88,    loop: false  })
+
+
+			var count = Math.floor(Math.random() * 144) + 120;
+			var ltId = 0
+			var starPower = 0
+			
+			var lightningI = setInterval(lightning, 66);
+						
+			function clickSound() {
+				playSound = !playSound
+				if(playSound) {
+					rain.play()
+					document.getElementById("sound").src="assets/images/audioOn.png"
+				}
+				else {
+					rain.pause()
+					document.getElementById("sound").src="assets/images/audioOff.png"
+				}				
+			}
+			
+			function lightning() {
+				if(count == 0) {
+					count = Math.floor(Math.random() * 144) + 120;
+					if(playSound) {
+						thunder.play()
+					}
+					document.getElementById("flash").style.display = "block"
+					document.getElementById("flash").style.animation = "0.88s 1 normal flash"
+					setTimeout(() => { document.getElementById("flash").style.display = "none" }, 860);
+					ltId++
+					if(ltId > 12) { ltId = 1 }
+					if(ltId == 1) { document.getElementById("text").innerHTML = "Please, can anyone hear me?<br>I need help..." }
+					if(ltId == 2) { document.getElementById("text").innerHTML = "It's me, Lightchaser...<br>I'm trapped on the summit..." }
+					if(ltId == 3) { document.getElementById("text").innerHTML = "My friends and I were facing off against the Curse...<br>But it was too powerful..." }
+					if(ltId == 4) { document.getElementById("text").innerHTML = "In an instant, it collapsed their bodies...<br>My powers couldn't save us..." }
+					if(ltId == 5) { document.getElementById("text").innerHTML = "They told me to run...<br>That I needed to stay alive so that hope would stay alive..." }
+					if(ltId == 6) { document.getElementById("text").innerHTML = "I ran as fast as I can, using my magic...<br>I felt everything slowing down around me..." }
+					if(ltId == 7) { document.getElementById("text").innerHTML = "Then I woke up here, on the summit...<br>Somehow, the Curse was gone... I don't know how." }
+					if(ltId == 8) { document.getElementById("text").innerHTML = "My wings are damaged and I can't fly...<br>I think they tore under the stress when I was running away..." }
+					if(ltId == 9) { document.getElementById("text").innerHTML = "And my powers aren't working!<br>She's not here with me... I'm alone... I feel so hopeless..." }
+					if(ltId == 10) { document.getElementById("text").innerHTML = "My magic isn't working right either!<br>It's all I can do to send out this spell to call for help..." }
+					if(ltId == 11) { document.getElementById("text").innerHTML = "I don't know what's happening...<br>This storm came out of nowhere, and I'm trapped inside it..." }
+					if(ltId == 12) { document.getElementById("text").innerHTML = "If anyone hears my spell...<br>Please send help..." }
+					document.getElementById("textB").style.animation = "2.4s 1 normal textFlash"
+					setTimeout(() => { document.getElementById("text").innerHTML = "" }, 2200);
+					setTimeout(() => { document.getElementById("textB").style.animation = "none" }, 2200);
+				}
+				else {
+					count = count - 1
+				}
+				
+				if(starPower > 0 || starE) {
+					if(starE) {
+						if(starIn == 0) {document.title = "Chasing the stars";}
+						starPower += 1
+						if(starPower >= 10) {starE = false; starPower = 10}
+					}
+					else {
+						starPower -= 0.2
+					}
+					if(starPower > 9.66) {
+						starIn += 1;
+						if(starIn == 12) {if(playSound) {chime.play()}}
+						if(starIn > 182)
+						{
+							if(starIn == 183) {
+								document.title = "Chasing the void";
+								document.getElementById("void").style.display = "block"
+								document.getElementById("void").style.animation = "20s 1 normal enter"
+							}
+						}
+					} else {starIn = 0; document.title = "Chasing the stars"; document.getElementById("void").style.display = "none"; document.getElementById("void").style.animation = "none"; if(playSound){chime.stop()}}
+					document.getElementById("stars").style.opacity = 0.1*starPower
+					document.getElementById("stars").style.filter = "blur("+(10-starPower)+"px)"
+					rain.volume(0.24*((10-starPower)/10)**2)
+					thunder.volume(0.66*((10-starPower)/10)**2)
+					if(starPower<=0) {document.getElementById("stars").style.display = "none"; document.title = "Chasing the storm"; }
+					else { document.getElementById("stars").style.display = "block" }
+					
+					if(starPower == 10) { document.getElementById("star").style.display = "block" }
+					else { document.getElementById("star").style.display = "none" }
+				}
+			}
+
+			function clickStar() {
+				
+				
+				if(!(localStorage.getItem("star") == "true")) {
+					try {localStorage.setItem("star","true")}catch(error){}
+					setTimeout(() => { spooky.play() }, 120);
+					document.getElementById("starText").style.display="block"
+					document.getElementById("starText").style.animation="2.2s 1 normal enter"
+					chime.fade(0.5,0.2,0.12)
+					setTimeout(() => {
+						chime.fade(0.2,0.5,0.2)
+					}, 2100);
+					setTimeout(() => {
+							document.getElementById("starText").style.animation="2.2s 1 normal exit"
+					}, 2200);
+					setTimeout(() => {
+						document.getElementById("starText").style.display="none";
+					}, 4380);
+				}
+			}
+			
+			var starE = false
+			var starIn = 0
+			
+			document.addEventListener('keydown', (event) => {
+				if (event.key === 'Escape') {
+					const isNotCombinedKey = !(event.ctrlKey || event.altKey || event.shiftKey);
+					if (isNotCombinedKey) {
+						starE = true
+					}
+				}
+			});
+			
+			
+			
+		</script>
+	</body>
+</html>

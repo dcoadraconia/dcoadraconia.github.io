@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js" integrity="sha512-6+YN/9o9BWrk6wSfGxQGpt3EUK6XeHi6yeHV+TYD2GR0Sj/cggRpXr1BrAQf0as6XslxomMUxXp2vIl+fv0QRA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<html>
+	<title>an empire, scorched</title>
+	<link rel="icon" type="image/png" href="assets/images/poison.png">
+	<head>
+		<style>
+			@keyframes fireGlow {
+			  0%   {background:#1E0000; box-shadow: inset 0 0 200px 66px #3F0000;}
+			  50%  {background:#210700; box-shadow: inset 0 0 200px 66px #3F1500;}
+			  100%  {background:#1E0000; box-shadow: inset 0 0 200px 66px #3F0000;}
+			}
+			@keyframes enter {
+			  0%  {opacity: 0.0;}
+			  100%  {opacity: 1.0;}
+			}
+			@keyframes exit {
+			  0%  {opacity: 1.0;}
+			  100%  {opacity: 0.0;}
+			}
+
+		</style>
+	</head>		
+	<body id="main" bgcolor="#1E0000">
+		<div id="background" style="top:0;left:0;  position:absolute; background: #1E0000; height: 100%; width: 100%; box-shadow: inset 0 0 200px 66px #3F0000; z-index:-1; position: fixed; animation: fireGlow 0.66s infinite"> </div>
+		<div id="black" style="display:none; top:0;left:0;  position:absolute; background: #000000; height: 100%; width: 100%; z-index:66; position: fixed;"> </div>
+		
+		<image id="sound" onclick="clickSound()" src="assets/images/audioOff.png" style="position:fixed; height:66px; width:auto; margin:12px; cursor: pointer; z-index:1">
+	
+		<div style="position:absolute; top:0px; left:0px;right:0px; padding-left: 15%; padding-right: 15%; color:#FFFFFF; font-size:24px; font-family: 'Arial'; line-height: 1.0;  text-align:center;">
+			<p id="text1" style="display:block">
+				"Mom? Dad? What's going on?"
+				<br><br>
+				"Listen closely, Magnolia. The Capital is under siege. The Volcano Dragons have taken flight from the Ash Desert, and they are attacking our noble city."
+				<br><br>
+				"Wh-what? How? But they can't come here!"
+				<br><br>
+				"That is what we thought. But somehow, they have flown free from their home, and in their freedom they're killing everything they see. They're mindless savages."
+				<br><br>
+				"Awful savages! Did they get mad because of the dung-leaves and the claw-grasses?"
+				<br><br>
+				"Magnolia, listen to me. I don't know why or how, but they're here now. The strongest guards and soldiers of the Capital are trying to stop them, but I fear all they will manage is to slow them down."
+				<br>
+				"The city is burning. It's not safe to stay here. The upper-hatched have already evacuated the Capital. Your father and I have the duty to follow after them, to the Blade Stronghold."
+				<br><br>
+				"But I don't want to leave! I like the Capital! I like it here!"
+				<br><br>
+				"We have no choice, Magnolia. I did not think something like this could ever happen to our great city, but it is happening as we speak. I don't have time to argue with you! We have to go with them!"
+				<br>
+				"Please listen to me, precious sapling. You must do <i>exactly</i> what I tell you. Father is going to open the door to the basement. I need you to go down there, where Volcano fire cannot reach, and I need you to wait there while we make sure it is safe outside. We will return to get you once we have made sure it is safe."
+				<br><br>
+				"WHAT? Noooooooooooo! Mother, I HATE the basement! It's dark and creepy and DISGUSTING!"
+				<br><br>
+				"I understand that, Magnolia, but it is the only place in our house that is safe. This is not something that we are to discuss. You need to obey what we tell you, and stay there until-"
+				<br><br>
+				"But Mooother, it's full of weird plants and bugs and-"
+				<br><br>
+				"No 'buts', Magnolia. You are going to do what we tell you."
+				<br><br>
+				"That's not fair! This isn't fair! Stupid, stupid Volcano Dragons!"
+				<br><br>
+				"I am sorry, Magnolia. This is the way things are."
+				<br><br>
+				<i>The old wooden basement door slid open.</i>
+				<br><br>
+				"Go in <i>now</i>, Magnolia. Mother and I will be back in a few minutes once we have made sure it is safe outside, and gathered with the rest of our group."
+				<br><br>
+				"FINE! Fine! But I DON'T LIKE IT!!!"
+				<br><br>
+				"Thank you, my dear little sapling. I will be back with Father soon. Do not leave until we return."
+				<br><br>
+				<i>The door was pulled shut. Then, clawsteps, slowly growing quieter until they faded away.</i>
+				<br><br><br><br><br><br><br><br><br><br><br><br>
+			</p>
+			<p id="text2" style="display:none">
+				<i>Now, the young Orange Leaf Dragon stood at the top of the basement steps, looking down into the dark, mildewy basement chamber lit by the dim sunlight shining through the basement window-wells.</i>
+				<br><br>
+				<i>The windows and walls were covered in an overgrowth of twisted green vines. The basement was also coated in a thin layer of moss, which almost seemed to produce a dull green glow.</i>
+				<br><br>
+				<i>Ever since she was small, this young dragon had nightmares about this place. There was something so... unsettling about the walls, the vines, the cramped room...</i>
+				<br><br>
+				<i>It had always been incredibly unsettling, yet at the same time... There was an odd sense of familiarity.<br>Almost like she'd spent a very long time down here in the past.</i>
+				<br><br>
+				<i>But that was COMPLETELY not true. She HATED the basement! She'd never spend any more time here than she ABSOLUTELY had to.</i>
+				<br><br>
+				<i>Standing here now, the nightmares were beginning to flash through her mind...</i>
+				<br>
+				<i>The vines, reaching out toward her...</i>
+				<br>
+				<i>The creepy whispers, telling her that she couldn't escape...</i>
+				<br>
+				<i>The eerie green glow, the constant chill in the air...</i>
+				<br><br>
+				<i>And worst of all of the recurring nightmares, the dark green snake that would slither out from the vines, toward her while she stood paralyzed in the basement, unable to run away...</i>
+				<br>
+				<i>... It would bite into her leg, injecting its poison into her until she collapsed, and then slowly drag her into the vines, to become part of their tangled mass...</i>
+				<br><br>
+				<i>...</i>
+				<br><br>
+				<i>She HATED snakes, she HATED the nightmares, and she ABSOLUTELY HATED the basement.</i>
+				<br><br>
+				<i>The dragon turned around to face the basement door. She wanted to leave... She really wanted to leave, RIGHT NOW.</i>
+				<br><br>
+				<i>But her parents had said to stay there... They had said it was really dangerous to leave...<br>And she was barely strong enough to move the basement door on her own, anyway.</i>
+				<br><br>
+				<i>She was brave enough to stay down here for a little while! It's not like she's a "fraidy-dragon" or anything like that...</i>
+				<br><br>
+				<i>And surely, her mother and father wouldn't keep her waiting for long...</i>
+				<br><br>
+				<i>Right?</i>
+			</p>
+			
+			<image id="door" onclick="door()" src="assets/images/door.png" style="cursor: pointer;">			
+
+
+
+		</div>
+				
+	
+	
+		<script>
+			playSound = false
+			var fire = new Howl({    src: ['assets/audio/fire_intense.ogg', 'assets/audio/fire_intense.mp3'],    volume: 0.5,    loop: true  })	
+			var basement = new Howl({    src: ['assets/audio/ABANDON.ogg', 'assets/audio/ABANDON.mp3'],    volume: 0.3,    loop: true  })	
+			var doorS = new Howl({    src: ['assets/audio/door.ogg', 'assets/audio/door.mp3'],    volume: 0.5,    loop: false  })	
+									
+			function clickSound() {
+				playSound = !playSound
+				if(playSound) {
+					if(document.getElementById('text1').style.display!="none") fire.play(); else basement.play()
+					document.getElementById("sound").src="assets/images/audioOn.png"
+				}
+				else {
+					if(document.getElementById('text1').style.display!="none") fire.pause(); else basement.pause()
+					document.getElementById("sound").src="assets/images/audioOff.png"
+				}				
+			}
+			
+			function door() {
+				setTimeout(() => { 
+					document.getElementById('text1').style.display='none';
+					document.getElementById('text2').style.display='block';
+					document.getElementById('door').style.display='none';
+					document.getElementById('background').style.display='none';
+					document.getElementById('main').style="background-color: #000C00";
+					window.scrollTo(0,0);
+				}, 1500);
+
+				if(playSound) {
+					doorS.play()
+					fire.fade(0.5, 0, 1200);
+				}
+				document.getElementById('black').style.display='block';
+				document.getElementById('black').style.animation='enter 1.5s 1';
+				
+				setTimeout(() => { 
+				document.getElementById('black').style.animation='exit 1.5s 1';
+				if(playSound) basement.play();
+				}, 2250);				
+				setTimeout(() => { 
+					document.getElementById('black').style.display='none';
+				}, 3700);	
+			}
+		</script>
+	</body>
+</html>

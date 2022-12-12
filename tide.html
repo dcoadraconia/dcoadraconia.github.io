@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js" integrity="sha512-6+YN/9o9BWrk6wSfGxQGpt3EUK6XeHi6yeHV+TYD2GR0Sj/cggRpXr1BrAQf0as6XslxomMUxXp2vIl+fv0QRA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<html>
+	<title>Dark side of the sea</title>
+	<link rel="icon" type="image/png" href="assets/images/water.png">
+
+	<head>
+		<style>
+			@keyframes enter {
+			  0%  {opacity: 0.0;}
+			  100%  {opacity: 1.0;}
+			}
+			@keyframes exit {
+			  0%  {opacity: 1.0;}
+			  100%  {opacity: 0.0;}
+			}
+			@keyframes splash {
+			  0%  {opacity: 0.0;}
+			  20%  {opacity: 1.0;}
+			  80%  {opacity: 1.0;}
+			  100%  {opacity: 0.0;}
+			}
+		</style>
+	</head>	
+
+	<body bgcolor="black" style="overflow:hidden">
+		<image id="sound" onclick="clickSound()" src="assets/images/audioOff.png" style="position:fixed; height:66px; width:auto; margin:12px; cursor: pointer; z-index: -5;">
+		
+		<img id="sea" src="assets/images/sea.gif" style="display:block; width:100.5%;height: 100%; position: absolute; top:0; left:0; z-index:-7;">  </img>		
+				
+		<div id="moon" onclick="clickMoon()" style=" cursor: pointer; height: 11%; width: 6%; background: transparent; border-radius: 50%; display: block; position: absolute; top:13%;left:25.05%; transform: translate(-50%, -50%); -moz-user-select: none; -webkit-user-select: none; z-index:-6;"></div>
+		
+		<p id="moonText" style="display:none; position: absolute; top:2%;left:25.5%; transform: translate(-50%, -50%); z-index:22; color:#FFFFFF; font-size:22px; font-family: 'Helvetica';"> Felt like something changed elsewhere.</p>
+		
+		<div id="hint" style="bottom:-12px;left:0;right:0;position:absolute;color:#C0C0C0; font-size:36px; font-family: 'Helvetica'; line-height: 1.2; opacity:0.0; text-align:center; z-index: -3;">
+			<p>
+				<span onmouseover="hintAppear()">
+					Stare into the vast ocean.
+					<br><span style="color:#8484FF">Look more closely,</span> and you may find what lies beneath the tide.
+				</span>
+			</p>
+		</div>		
+
+
+		<img id="splash" src="assets/images/splash.gif" style="display:none; width:100%;height: 100%; position: absolute; top:0; left:0; z-index:1;">  </img>		
+		
+		<div id="undersea" style="display:none; width:100%;height: 1200%; position: absolute; top:0; left:0; z-index:-6; background: linear-gradient(180deg, #00247C 0%, #00030C 90%, #00030C 100%); "> 
+
+		<img id="bubbleB" src="assets/images/bubbleB2.gif" style="display:none; width:100%;height: 100%; position: fixed; top:0; left:0; opacity:0.066; z-index:-66; filter: saturate(0.25) blur(2px)">  </img>
+
+		<div id="seafloor" style="display:none; bottom:12px;left:0;right:0;position:absolute;color:#C0C0C0; font-size:24px; font-family: 'Helvetica'; line-height: 1.5; text-align:center; z-index: -3; padding-left: 15%; padding-right: 15%;">
+			<p>
+				There's... a building down here, at the bottom of the ocean??
+				<br>
+				Muffled voices are coming from inside.
+				<br><br>
+				<span onclick="investigate()" style="border-radius:6px; padding:6px; border: 3px solid #C0C0C0; cursor: pointer; color:#0000FF"><b>Investigate</b></span>
+			</p>
+		</div>	
+
+		<div id="lore" style="display:none; top:0;left:0;right:0;position:absolute;color:#FFFFFF; font-size:24px; font-family: 'Helvetica'; text-align:center; z-index: -3; padding-left: 15%; padding-right: 15%;">
+			<p>
+				<i>Inside of the massive undersea structure, the water suddenly disappears. The interior of the building is like some sort of gigantic air bubble.</i>
+				<br><br>
+				<i>It's pitch-black. There's no way to identify anything in here.</i>
+				<br><br>
+				<i>The only thing that has become more clear is the voices. Two dragons, presumably... having a conversation.</i>
+				<br><br>
+				<span style="font-family: 'Times New Roman'">"Now, Officer Crescent. I presume your surveillance mission went well?"</span>
+				<br><br>
+				"Yes, Your Majesty. I scouted out the lands surrounding the water. There don't seem to be any major settlements around the area. We should have no trouble reclaiming the surface-lands into your domain."
+				<br><br>
+				<span style="font-family: 'Times New Roman'">"Excellent. Then it is as the constellations foretold. Our opportunity to return to the surface is waxing, and we will soon once again lay claim to our rightful territory."</span>
+				<br><br>
+				"I found only one native dragon in my exploration. I had no issue capturing her, and I have brought her here as a prisoner. I suspect you will find this one very helpful for our purposes."
+				<br><br>
+				<span style="font-family: 'Times New Roman'">"Oh? And where is she?"</span>
+				<br><br>
+				"She is here next to me, Your Majesty. I trapped her within a new-shroud so that she wouldn't be able to see or hear anything that we wouldn't want her to. I can remove the shroud from her body, but I'll need to keep her sun covered."
+				<br><br>
+				<span style="font-family: 'Times New Roman'">"Her... sun. So she is a..."</span>
+				<br><br>
+				"Yes, a Sun Dragon. And not just an ordinary commoner. She bears the markings of a Sun Dragon noble. It seems to me complete lunacy that she would wander around alone and unguarded, but I shall not question our good fortune."
+				<br><br>
+				<span style="font-family: 'Times New Roman'">"Or perhaps she simply thinks herself above any danger, from her lofty place as a ruler of the land and the sky. Well, her arrogance has delivered her right into our talons. Release her from the shroud. I would like to see this Sun Dragon for myself."</span>
+				<br><br>
+				"Of course, Your Majesty."
+				<br><br>
+				<i>A deep, low sound echoes through the blackness, no doubt produced by shifting magic.</i>
+				<br><br>
+				<i>...</i>
+				<br><br>
+				"What is going on? Where am I? I can't see anything... I can't see my sun! Where is my sun!"
+				<br><br>
+				<span style="font-family: 'Times New Roman'">"Incredible. A Sun Dragon. They look just like they're described in the legends of old. I can scarcely believe I'm truly seeing one."</span>
+				<br><br>
+				"Who... Who are you? Please explain what in the caverns is happening here!"
+				<br><br>
+				<span style="font-family: 'Times New Roman'">"Now, now, Sun Dragon. Do try to keep your voice down... You're my “guest” here, and I'm not particularly fond of loud, bright guests."</span>
+				<br><br>
+				"“Guests”? What..."
+				<br><br>
+				<span style="font-family: 'Times New Roman'">"Confused, aren't you? No doubt you thought that a noble like you would never have to deal with any <i>outsiders</i> like US again... You thought the world would be yours forever, didn't you?"</span>
+				<br><br>
+				"What are you talking about? Who are you?"
+				<br><br>
+				<span style="font-family: 'Times New Roman'">"Oh, I didn't introduce myself? How rude of me. Allow me to remedy this immediately."<br>"Greetings. I am Queen Eclipse, ruler of the Ocean Moonarchy. You stand in the domain of the Moon Dragons, in the sunken lands that you <i>BANISHED</i> us to, so long ago..."<br>"What do you have to say for yourself, <i>Sun Dragon</i>?"</span>
+				<br><br>
+				"I, uhm... Goodness, “Moon Dragons”? “Banished”? I'm afraid you have the wrong dragon... I... I don't know what you're referring to."
+				<br><br>
+				<span style="font-family: 'Times New Roman'">"You..."<br>"Very amusing, Sun Dragon. This is not the place for your mocking jokes... Now, really."<br>"HOW do you justify what your people DID to us?"</span>
+				<br><br>
+				"I... I don't understand what you mean! You surely have me mistaken for someone else. I am Dawn, the Chief of the White Sun Dragons."
+				<br><br>
+				<span style="font-family: 'Times New Roman'">"... You CLAIM NOT TO KNOW??? You claim to be UNAWARE of what happened to us? Unaware of what you <i>Sun Dragons</i> did to us?"</span>
+				<br><br>
+				"What we did to you? I'm sorry for whatever has happened to you, but I know nothing of this subject! I... I'd heard the stories of Moon Dragons, but I did not know you were truly here!"
+				<br><br>
+				<span style="font-family: 'Times New Roman'">"Oh, <i>I</i> see how it is. “Stories.” That's all we are to you. That's all our PAIN and SUFFERING are to you! After your kind banished us out to the sea, you FORGOT all about us? Reduced us to STORIES and MYTHS? You think you're SO much more important than we are, because of your Light... Because you get to live <i>above</i> us... You really think you're SO much better than the Moon Dragons, DON'T you??"</span>
+				<br><br>
+				"I... No? I don't think any of that? I don't know what other dragons did to you to upset you so much, but I can help you however you need! Please just tell me what has happened that is bothering you, and I will do all in my power to make it better!"
+				<br><br>
+				<span style="font-family: 'Times New Roman'">"Make it BETTER? You want to make it BETTER, NOW??? After EVERYTHING we suffered? After the COUNTLESS YEARS we've spent beneath the waves? WHO do you think you ARE???"</span>
+				<br><br>
+				"I'm sorry, I don't understand! I'd be happy to help you... But I don't know what Sun Dragons have to do with all of this! I think you're confused... If you would please return my sun, I'll do what I can to help!"
+				<br><br>
+				<span style="font-family: 'Times New Roman'">"You've FORGOTTEN all about us? You've really- After casting us into the sea, you Sun Dragons saw fit to FORGET everything that happened? You really think us to be THAT UNIMPORTANT??"</span>
+				<br><br>
+				"No! I don't! I've truly never heard anything about any of this before! Please try to calm down! Sun Dragons are not enemies with anyone! We don't want to fight anyone!"
+				<br><br>
+				<span style="font-family: 'Times New Roman'">"HAH! No one ever wants to start a war... Yet, here we are. Somehow, the fighting always starts anyway."</span>
+				<br><br>
+				"My people have never attacked anyone! We've spent the past years hiding in the caverns, where the Black Hole Dragons couldn't find us! We have an alliance with the Mushroom Dragons, and there are no other Dragons living there! There is no possible way that the Sun Dragons could have done any of these horrible things that you are describing! Sun Dragons aren't going to fight anyone!"
+				<br><br>
+				<span style="font-family: 'Times New Roman'">"I must tell you, “Dawn”... I am getting incredibly tired of your babbling nonsense and lies. Surely it's not possible... Through years upon years, we Moon Dragons have remembered and suffered under the fate that befell us. How can it be that you Sun Dragons do not remember AT ALL?"</span>
+				<br><br>
+				"I... I'm sorry, I just don't know what you're talking about... We would be more than happy to help you now, if you'd just let us..."
+				<br><br>
+				<span style="font-family: 'Times New Roman'">"WE DO NOT WANT YOUR “HELP”!"<br>"You cannot simply erase now everything that has happened to us!! It is far too late for you to make amends now, Sun Dragon. The time for peace and compromise is past us!"<br>"You are right about one thing, though. The Sun Dragons AREN'T going to fight anyone. The Moon Dragons will reclaim what is rightfully ours so quickly that the Sun Dragons will have no time to prepare for war."</span>
+				<br><br>
+				"Please, we don't have to fight! I want to help you! Just-"
+				<br><br>
+				<span style="font-family: 'Times New Roman'">"ENOUGH OF YOUR BLABBERING!"<br>"If I hear you say ONE MORE EMPTY, MEANINGLESS WORD, I think I might just LOSE MY TEMPER! And that wouldn't be very DIGNIFIED of me, WOULD IT?"<br>"Officer Crescent! Restore her new-shroud!"</span>
+				<br><br>
+				"Yes, at once, Your Majesty."
+				<br><br>
+				"Queen Eclipse, wait-"
+				<br><br>
+				<i>Fwooosh... The magical sound of the shroud again echoes throughout the darkness.</i>
+				<br><br>
+				<span style="font-family: 'Times New Roman'">"FINALLY! By all the stars, she was INFURIATING!!!! That smug, insolent little...!"<br>"..."<br>"My apologies. I... almost let my emotions get the best of me. This is... very unbecoming of me."<br>"It is just... After all the years I have waited for this moment... I must admit I feel somewhat tense about this whole situation, and the complete <i>rambling, mocking idiocy</i> of that Sun Dragon REALLY got under my scales."</span>
+				<br><br>
+				"It is understandable, Your Majesty. I felt the same."
+				<br><br>
+				<span style="font-family: 'Times New Roman'">"<i>Of course!!!!!</i> Of course. We... shall interrogate her further, once we have had some... time to... cool off."<br>"I... I think I need a moment."</span>			
+				<br><br>
+				"Yes, Your Majesty."<br>"If you so wish, I can interrogate her myself, while you have some time alone."
+				<br><br>
+				<span style="font-family: 'Times New Roman'">"That, would... That would be wonderful, Crescent. See to that at once!!"<br>"I will be in my quarters."</span>
+				<br><br>				
+				<i>The sound of talons clicking against the stone floor, as the Queen begins to exit.</i>
+				<br><br>
+				"... Your Majesty?"
+				<br><br>
+				<span style="font-family: 'Times New Roman'">"Yes, Officer Crescent?"</span>
+				<br><br>
+				"... It's... going to be alright."
+				<br><br>
+				<span style="font-family: 'Times New Roman'">"..."<br>"Yes, of course. Indeed. Precisely."<br>"Everything is moving along as prophesied by the constellations. For countless moons, we have awaited the sky to align. And now, in just a few short days, our banishment will be over. The blue moon is approaching. The age of Sun Dragon dominion is quickly waning, and the era of Moon Dragons is upon us."<br>"Soon, we will have everything we desire, and those who cast us away and FORGOT about us will be <i>utterly</i> wiped out."<br>"At last... The tides are turning."</span>
+				<br><br>
+			</p>
+		</div>			
+		
+		<script>
+			var playSound = false
+						
+			var waves = new Howl({    src: ['assets/audio/waves.ogg', 'assets/audio/waves.mp3'],    volume: 0.24,    loop: true  })
+			var bubble = new Howl({    src: ['assets/audio/bubble.ogg', 'assets/audio/bubble.mp3'],    volume: 0.0,    loop: true  })
+			var splash = new Howl({    src: ['assets/audio/splash.ogg', 'assets/audio/splash.mp3'],    volume: 0.5,    loop: false  })
+			var spooky = new Howl({    src: ['assets/audio/SpookyNoise.ogg', 'assets/audio/SpookyNoise.mp3'],    volume: 0.88,    loop: false  })
+
+			var zoomL = 0
+			
+			var inWater = false 
+
+			var check
+
+			function clickSound() {
+				playSound = !playSound
+				if(playSound) {
+					waves.play()
+					if(inWater)bubble.play()
+					document.getElementById("sound").src="assets/images/audioOn.png"
+				}
+				else {
+					waves.pause()
+					if(inWater)bubble.pause()
+					document.getElementById("sound").src="assets/images/audioOff.png"
+				}				
+			}
+			
+			function clickMoon() {
+				if(!(localStorage.getItem("moon") == "true")) {
+					try {localStorage.setItem("moon","true")}catch(error){}
+					setTimeout(() => { spooky.play() }, 120);
+					document.getElementById("moonText").style.display="block"
+					document.getElementById("moonText").style.animation="2.2s 1 normal enter"
+					waves.fade(0.24,0.12,0.12)
+					setTimeout(() => {
+						waves.fade(0.12,0.24,0.2)
+					}, 2100);
+					setTimeout(() => {
+							document.getElementById("moonText").style.animation="2.2s 1 normal exit"
+					}, 2200);
+					setTimeout(() => {
+						document.getElementById("moonText").style.display="none";
+					}, 4380);
+				}
+			}
+			
+			function zoom(event) {
+				if(!inWater) {
+					  event.preventDefault();
+
+					  zoomL += event.deltaY * -0.0066;
+					  if(zoomL < 0) zoomL = 0
+					  if(zoomL > 66) {
+						zoomL = 66
+						inWater = true
+						setTimeout(() => { waterTransition() }, 360);
+					  }
+					  
+					  document.getElementById("sea").style.scale=(1+0.1*zoomL)
+					  document.getElementById("sea").style.top=(22.5*zoomL)+"px"
+					  document.getElementById("sea").style.left=(1.2*zoomL)+"px"
+					  waves.volume(0.24+(0.0048*(zoomL**1.5)/(66**0.5)));
+					  document.getElementById("hint").style.bottom=(-12-36*zoomL)+"px"
+					  
+					  if(zoomL == 0) {
+						document.getElementById("moon").style.display="block"
+					  }
+					  else {
+						document.getElementById("moon").style.display="none"
+					  }
+					  
+				}
+			}
+
+			function waterTransition() {
+				if(playSound) {splash.play(); waves.fade(waves.volume(),0.3,0.2)}
+				document.getElementById("splash").style.display="block"
+				document.getElementById("splash").style.animation="1.2s 1 normal splash"
+				setTimeout(() => {
+					document.getElementById("sea").style.display="none"
+					document.getElementById("moon").style.display="none"
+					document.getElementById("hint").style.display="none"
+					document.getElementsByTagName("body")[0].style = "" 
+					document.getElementById("undersea").style.display="block"
+					document.getElementById("bubbleB").style.display="block"
+					document.getElementById("seafloor").style.display="block"
+				}, 660);
+					check = setInterval(checkDepth, 66);
+				setTimeout(() => {
+					document.getElementById("splash").style.display="none"
+				}, 1180);
+				setTimeout(() => {
+					if(playSound) {
+						bubble.play();
+						waves.play();
+					}
+				}, 1200);
+				setTimeout(() => {
+					bubble.fade(0.0,0.1,0.5);
+				}, 1210);				
+			}
+			
+			var hintAppeared = false
+			function hintAppear() {
+				if(!inWater && !hintAppeared) {
+					hintAppeared = true
+					document.getElementById("hint").style.opacity="1.0"
+					document.getElementById("hint").style.animation="6s 1 normal enter"
+				}
+			}
+			
+			function checkDepth() {
+				var h = document.documentElement, 
+					b = document.body,
+					st = 'scrollTop',
+					sh = 'scrollHeight';
+				var p = (h[st]||b[st]) / ((h[sh]||b[sh]) - h.clientHeight);
+				
+				waves.fade(waves.volume(),Math.max(0.3-p,0.0),0.065)
+				bubble.fade(bubble.volume(),Math.min(0.0+p/2,1.0),0.065);
+			}
+
+
+			function investigate() {
+				clearInterval(check)
+				waves.fade(waves.volume(),0.0,0.065)
+				bubble.fade(bubble.volume(),0.25,0.065);
+				document.getElementById("undersea").style.background="#00030C"
+				document.getElementById("seafloor").style.animation="1.2s 1 normal exit"
+				setTimeout(() => {
+					document.getElementById("undersea").style.height="100%";
+					document.getElementById("seafloor").style.display="none"
+					window.scrollTo(0,0);
+				}, 1180);			
+				setTimeout(() => {
+					document.getElementById("lore").style.display="block";
+					document.getElementById("lore").style.animation="1.2s 1 normal enter"
+				}, 1200);	
+			}
+
+			document.getElementById("moon").onwheel = zoom;
+			document.getElementById("sea").onwheel = zoom;
+			
+			setTimeout(() => { hintAppear() }, 66000);
+
+
+		</script>
+	</body>
+</html>

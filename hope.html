@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js" integrity="sha512-6+YN/9o9BWrk6wSfGxQGpt3EUK6XeHi6yeHV+TYD2GR0Sj/cggRpXr1BrAQf0as6XslxomMUxXp2vIl+fv0QRA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<html>
+	<title>A deep place...</title>
+	<link rel="icon" type="image/png" href="assets/images/earth.png">
+	<head>
+		<style>
+			@keyframes fade {
+			  0%  {opacity: 0.0;}
+			  50% {opacity: 0.12;}
+			  100%  {opacity: 0.0;}
+			}
+
+			@keyframes enter {
+			  0%  {opacity: 0.0;}
+			  100%  {opacity: 1.0;}
+			}
+			@keyframes exit {
+			  0%  {opacity: 1.0;}
+			  100%  {opacity: 0.0;}
+			}		
+
+			@keyframes backU {
+			  0%   {background-color:#000000;}
+			  100%  {background-color:#400040;}
+			}		
+			@keyframes backD {
+			  0%  {background-color:#400040;}
+			  100%   {background-color:#000000;}
+			}		
+			
+			@keyframes circleDark {
+			  0%  {filter: brightness(100%)}
+			  100%  {filter: brightness(0%)}
+			}
+			@keyframes circleLight {
+			  0%  {filter: brightness(0%)}
+			  100%  {filter: brightness(100%)}
+			}		
+			
+			@keyframes flash {
+			  0%  {opacity: 0.25;}
+			  50%  {opacity: 1.0;}
+			  100%  {opacity: 0.0;}
+			}	
+			
+			@keyframes hFade {
+			  0%  {opacity: 1.0;}
+			  24%  {opacity: 1.0;}
+			  100%  {opacity: 0.12;}
+			}
+			@keyframes tFade {
+			  0%  {opacity: 0.0;}
+			  24%  {opacity: 0.0;}
+			  100%  {opacity: 1.0;}
+			}				
+
+			@keyframes sunGlow {
+			  0%   {background:#CC0000;}
+			  50%  {background:#AA0000;}
+			  100%  {background:#CC0000;}
+			}			
+			
+		</style>
+	</head>
+	<body bgcolor="black">
+		<image id="sound" onclick="clickSound()" src="assets/images/audioOn.png" style="display:none; position:fixed; height:66px; width:auto; margin:12px; cursor: pointer; z-index:-1">
+
+		<div style='position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);'>
+			<div id="circle">
+					<img onclick="showV()" src="assets/images/magic_circle.png">
+			</div>
+		</div>
+		
+		<div id="vD" style='position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);'>
+				<div id="V" style='opacity:0.0'><p style="color:#FFFFFF; font-family: 'Arial'; font-size:66px;" >V</p></div>
+		</div>
+		
+		
+		<div id="MagicWords" style='display:none'>
+			<div style='position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);'>
+				<p onclick="showTeaser()" style="cursor: pointer; text-align: center; color:#FF00FF; font-family: 'Garamond'; font-size:36px; line-height: 1.2;">OUTSIDE, SUFFERING<br>STAY WHERE IT IS STIFLING<br>HOPE OF THE DRAGONS</p>
+			</div>
+		</div>
+		
+		<div id="flash" style='width:100%; height:100%; position:fixed; left:0; top:0; background-color:#FF00FF; display:none; opacity:1.0; z-index: 12;'>
+
+		</div>		
+
+		<img id="cavewall" src="assets/images/cavewall.jpg" style="display:none; width:100%;height: 100%; position: fixed; top:0; left:0; z-index:-66; ">  </img>
+		
+		<div id="glow" style='width:100%; height:100%; position:fixed; left:0; top:0; background-color:#FF0000; display:none; opacity:0.12; z-index: -12; animation: sunGlow 0.36s infinite'> </div>
+		
+		<img id="harbinger" src="assets/images/Harbinger_of_the_Specters.png" style="display:none; width: auto; height: 100%; position: fixed; top:0; left: 50%; transform: translate(-50%, 0%); z-index:-11; opacity:0.12 ">  </img>
+
+		
+		<div id="chapter12" style='position:absolute; top:0px; left:0px;right:0px; padding-left: 120px; padding-right: 120px; display:none; text-align: center; z-index: -2;'>
+			
+			<p style="color:#FFFFFF; font-size:24px; font-family: 'Arial'; line-height: 1.0;">
+			
+				In a deep cave, miles under the ground, a portal flashes with energy as two dragons and one spirit emerge from it.
+				<br>
+				The humming and pulsing of the portal, the crackling of the white dragon's sun, and the quiet ambience of the deep cavern fill the air.
+				<br><br>
+				<span style="color:#FF0000">
+					"We made it, you guys! We've reached the circle room!"
+				</span>
+				<br><br>
+				<span style="color:#FF66FF">
+					"Indeed, we did... I can't believe that after all that has happened, this room has changed so little... I suppose the spell protecting this room is just that powerful."
+				</span>				
+				<br><br>
+				<span style="color:#7B7379">
+					"Is... is this really going to work?"
+				</span>
+				<br><br>
+				<span style="color:#FF0000">
+					"I don't know for sure, but it's the best chance we have... I need to try. Spei, you know how this magic works, right?"
+				</span>			
+				<br><br>
+				<span style="color:#FF66FF">
+					"Well... I think I understand it well enough. This room has some connection to my magic. I am sure if we combine our abilities, we will be able to find some way to use this room's power."
+				</span>					
+				<br><br>
+				<span style="color:#FF0000">
+					"Great! Let's keep our hopes high, then! We can do this if we work together!"<br>"So, let's see here... This magic is used to create a massive impenetrable magic shield, yeah?"
+				</span>						
+				<br><br>
+				<span style="color:#FF66FF">
+					"Yes."
+				</span>				
+				<br><br>
+				<span style="color:#FF0000">
+					"And then there's these circles, which, that one turns whatever enters it into a magic star, and that other one just erases your memories and makes you a baby, right?"
+				</span>				
+				<br><br>
+				<span style="color:#FF66FF">
+					"Indeed. The Sigil of Atonement, and the Sigil of Absolution."
+				</span>					
+				<br><br>
+				<span style="color:#FF0000">
+					"Woah! They have names? Radium didn't say <i>anything</i> about that!"
+				</span>					
+				<br><br>
+				<span style="color:#FF66FF">
+					"Their names are not known by the Fae alive today. Any records of them are now... gone."
+				</span>					
+				<br><br>
+				<span style="color:#7B7379">
+					"Ummm... Did you guys see this creepy picture?"
+				</span>			
+				<br><br>
+				<span style="color:#FF0000">
+					"Oh, yeah, Hecate. That's umm, the umm... The warning about breaking the sky."
+				</span>				
+				<br><br>
+				<span style="color:#7B7379">
+					"The what?"
+				</span>				
+				<br><br>
+				<span style="color:#FF66FF">
+					"The “Harbinger of the Specters.” An ancient omen of the Curse of Anti-Magic."
+				</span>					
+				<br><br>
+				<span style="color:#FF0000">
+					"Wow, Spei! You have a mysterious-sounding name for everything!"
+				</span>					
+				<br><br>
+				<span style="color:#FF66FF">
+					"Ha ha ha... Well, what can I say? I know this place rather well, after all that has happened here."
+				</span>			
+				<br><br>
+				<span style="color:#FF0000">
+					"Huh?"
+				</span>				
+				<br><br>
+				<span style="color:#FF66FF">
+					"In fact... Hecate, you likely do not remember this, but this is where I first found you."
+				</span>					
+				<br><br>
+				<span style="color:#7B7379">
+					"What? Really?"
+				</span>					
+				<br><br>
+				<span style="color:#FF66FF">
+					"Indeed. I was drawn to the magic in this place, and when I arrived... There you were. You seemed so lost and confused... Thankfully, at that time, there was a tunnel that connected the Sanctum to the surface, so I was able to guide you out of here."
+				</span>				
+				<br><br>
+				<span style="color:#7B7379">
+					"I... Why don't I remember this?"
+				</span>				
+				<br><br>
+				<span style="color:#FF66FF">
+					"You had just newly formed from the magic of the world... In other terms, you were sort of a “hatchling.” Your ability to remember was likely not fully formed."
+				</span>				
+				<br><br>
+				<span style="color:#7B7379">
+					"Oh. I... I formed here?"
+				</span>					
+				<br><br>
+				<span style="color:#FF0000">
+					"Hecate hatched here? Hecate, this is the place where you were hatched! That's so cool!"
+				</span>				
+				<br><br>
+				<span style="color:#7B7379">
+					"Umm, we don't really “hatch...”"
+				</span>					
+				<br><br>
+				<span style="color:#FF66FF">
+					"She and the other Creators were not hatched. They formed from the pure magic that was created as this world took its shape."
+				</span>			
+				<br><br>
+				<span style="color:#FF0000">
+					"Woah, that's... kinda weird... Wait, so none of the Creators had parents?"
+				</span>				
+				<br><br>
+				<span style="color:#7B7379">
+					"It's not that weird!!! If anything, it's weirder to come out of a big, umm- <i>butt rock!!</i>"
+				</span>						
+				<br><br>
+				<span style="color:#FF66FF">
+					"Hecate please."
+				</span>					
+				<br><br>
+				<span style="color:#FF0000">
+					"Wait, but... That doesn't make sense! What about Venena? She's Spei's daughter!"
+				</span>					
+				<br><br>
+				<span style="color:#7B7379">
+					"Oh, Venni? Yeah I <i>guess</i>, but she didn't, like, come out from INSIDE her??? That's a weird creations thing!"
+				</span>				
+				<br><br>
+				<span style="color:#FF66FF">
+					"Hecate, it's a perfectly natural way to be made... It just isn't the case for immortal beings."<br>
+					"And Solar, though she is not what dragons of creation would call my “biological daughter,” the bond that Venena formed with her father and I was very special. It was no different from the familial bonds that any other dragons form with their own parents. This is why I consider her to be my daughter."
+				</span>				
+				<br><br>
+				<span style="color:#FF0000">
+					"Oh, I see. That makes sense. Like how Ba-Bu isn't my MOM-mom, but she still took care of me and raised me."
+				</span>				
+				<br><br>
+				<span style="color:#FF66FF">
+					"Something like that, yes."
+				</span>						
+				<br><br>
+					...
+				<br><br>
+				<span style="color:#7B7379">
+					"Is... S-Spei, is this me?"
+				</span>					
+				<br><br>
+				<span style="color:#FF66FF">
+					"Hm?"
+				</span>					
+				<br><br>
+				<span style="color:#7B7379">
+					"..."<br>"This horrible monster dragon. The one that's breaking the magic and unleashing a ghost army a-and turning the world into a nightmare. That's... that's me, isn't it..."
+				</span>	
+				<br><br>
+				<span style="color:#FF66FF">
+					"Oh, Hecate..."
+				</span>					
+				<br><br>
+				<span style="color:#7B7379">
+					"I'm really just a..."
+				</span>				
+				<br><br>
+					Hecate looks toward the ground and begins to sniffle. Spei rushes over to comfort her.
+				<br><br>
+				<span style="color:#FF0000">
+					"Hecate, no! Don't cry! I don't think it's supposed to be you! It doesn't look like you at all! I'm pretty sure it's supposed to be... me, honestly."
+				</span>					
+				<br><br>
+				<span style="color:#7B7379">
+					"H-how can it be you? Look at it! That's... that w-was me until..."
+				</span>					
+				<br><br>
+				<span style="color:#FF0000">
+					"Well, you don't know the story behind it. The Rune Dragons told me. It's the Ghost Seer, breaking the sky and unleashing the curse."
+				</span>			
+				<br><br>
+				<span style="color:#FF66FF">
+					"Solar... The Rune Dragons do not know the true story either. They saw the Harbinger and ascribed it to their legends of the Ghost Seer. In truth, this engraving <i>was</i> likely an omen of Oblivion."
+				</span>					
+				<br><br>
+					...
+				<br><br>
+				<span style="color:#7B7379">
+					"... i'm sorry... i-i'm so sorry... i..."
+				</span>
+				<br><br>
+					Hecate curls up, shrinking, and starts crying again.
+				<br><br>
+				<span style="color:#FF0000">
+					"Woah! Woah, Hecate, it's okay! Everything's okay! It's all over now, you aren't that monster anymore, and we all forgive you!"
+				</span>					
+				<br><br>
+					Solar runs over to give Hecate a hug as well.
+				<br><br>
+				<span style="color:#7B7379">
+					"b-but everyone's... it's all my fault, a-and..."
+				</span>
+				<br><br>
+				<span style="color:#FF66FF">
+					"Hecate, you do not need to hold onto this guilt. I also made many mistakes in my past, leading this situation to unfold as it has. We are here to set things right, and you will be as much responsible for that as you are for what happened in the past."
+				</span>	
+				<br><br>
+				<span style="color:#7B7379">
+					"..."
+				</span>
+				<br><br>
+					<i>One big group hug later...</i>
+				<br><br>
+				<span style="color:#7B7379">
+					"I still don't understand why you two are so willing to forgive me for what I did... I was so horrible! I h-hurt so many dragons, and-"
+				</span>			
+				<br><br>
+				<span style="color:#FF0000">
+					"Hecate, we all made big mistakes in the past. Spei did, and I know I did. What matters is you know it was wrong, you're trying to make things better, and you won't let anything like it happen again. Okay?"
+				</span>					
+				<br><br>
+				<span style="color:#7B7379">
+					"O-okay..."
+				</span>				
+				<br><br>
+					...
+				<br><br>
+				<span style="color:#FF0000">
+					"So, now that we're all here, let's see if we can figure this out. There's a lot of magic power here, so there should be enough for us to do this, I think!"
+				</span>							
+				<br><br>
+				<span style="color:#FF66FF">
+					"Certainly. The magic imbued in the Sanctum surpasses my own power, and even that of the anti-magic. If we are able to harness this magic and Hecate is able to reshape it, then it is my hope that we should be able to use this power to bring everyone back."
+				</span>				
+				<br><br>
+				<span style="color:#7B7379">
+					"I... I'll try my best, okay! I promise..."
+				</span>					
+				<br><br>
+				<span style="color:#FF66FF">
+					"We believe in you, Hecate."
+				</span>					
+				<br><br>
+				<span style="color:#FF0000">
+					"Okay, let me think about this again before we do anything. This level of magic is definitely something we want to be careful with."<br>"So, we have a circle that turns the living into the dead and drains their power, and we have a circle that resets their minds and bodies but doesn't actually give them any more life. So, um, I think what we need to do is figure out how to make them work in reverse!"
+				</span>				
+				<br><br>
+				<span style="color:#FF66FF">
+					"If any magic has that power, it is the Sigils. It will require a tremendous amount of magic energy to restore their bodies and fuse them with their ghosts, though. The Sigils themselves do not yield magic energy when used. The Sigil of Atonement consumes magic rather than producing it, and the Sigil of Absolution, though it does seem to renew a dragon's life, truly just rewinds it. It reverts their bodies and minds to their original form, but it does not extend their lifespans. The absolved dragon will only live as long as it would have before absolution."
+				</span>				
+				<br><br>
+				<span style="color:#FF0000">
+					"Yeah... Wait, wait! As long as they would have lived... What if someone immortal went in there??"
+				</span>				
+				<br><br>
+				<span style="color:#FF66FF">
+					"That... I do not believe that is possible. I think if something like that were to happen, I would know."
+				</span>					
+				<br><br>
+				<span style="color:#FF0000">
+					"But what if..."
+				</span>				
+				<br><br>
+				<span style="color:#7B7379">
+					"D-don't look at me! Me and Spei aren't going to find out for you!"
+				</span>					
+				<br><br>
+				<span style="color:#FF0000">
+					"No, no, of course not! I was just kinda curious, is all."
+				</span>					
+				<br><br>
+				<span style="color:#FF66FF">
+					"I... I suppose there would likely be no change, since we are immortal. Our bodies never grow old, and our minds are intertwined with our very essence. Still, Hecate is right. We are not going to test that theory."
+				</span>					
+				<br><br>
+				<span style="color:#FF0000">
+					"I know, I know! I'm okay with not getting an answer. Not trying to turn anyone into a baby. Just thought it was an interesting thought."
+				</span>					
+				<br><br>
+				<span style="color:#FF66FF">
+					"Ha ha, of course, Solar."
+				</span>				
+				<br><br>
+				<span style="color:#7B7379">
+					"Shoot, now I'm kinda curious too."
+				</span>				
+				<br><br>
+				<span style="color:#FF0000">
+					"Yeah, Spei's probably right, it's probably just nothing. That's not why we're here, anyway. Back to the, umm, Cirgil thing. So, we need a magic power source, right?"
+				</span>					
+				<br><br>
+				<span style="color:#FF66FF">
+					"Yes. The Sigils will not yield any magic of their own for our spell."
+				</span>				
+				<br><br>
+				<span style="color:#FF0000">
+					"Well, that's not a problem, I think! We can just use the Stars!"
+				</span>				
+				<br><br>
+				<span style="color:#FF66FF">
+					"That... That would suffice."
+				</span>				
+				<br><br>
+				<span style="color:#FF0000">
+					"Yeah, of course! Right now, they're being used to power the shield, which is already a really strong spell. But now that the Curse of Anti-Magic is gone, we don't need the shield to protect the Continent anymore!"
+				</span>					
+				<br><br>
+				<span style="color:#7B7379">
+					"Well, uh, sounds like it's worth a shot..."
+				</span>	
+				<br><br>
+				<span style="color:#FF0000">
+					"That's the spirit! Okay, everyone, I guess that means it's time for me to break the sky!!"<br>"See, Hecate, I TOLD you the drawing was about me!"
+				</span>				
+				<br><br>
+				<span style="color:#7B7379">
+					"..."
+				</span>				
+				<br><br>
+				<span style="color:#FF0000">
+					"No? You don't think? Well, anyway, that's what we're going to do, okay?"
+				</span>					
+				<br><br>
+				<span style="color:#FF66FF">
+					"We can make this happen. Solar, you are the one with the plan here. What do you want Hecate and I to do?"
+				</span>					
+				<br><br>
+				<span style="color:#FF0000">
+					"Okay, hold on... Here's what we're going to do. We'll use our magic to shrink down the shield, and bring all the Stars to us together in one place. I'm pretty sure that's how the shield works."
+				</span>					
+				<br><br>
+				<span style="color:#FF66FF">
+					"More or less, yes."
+				</span>				
+				<br><br>
+				<span style="color:#FF0000">
+					"Hecate, you can take the crystal magic and put it into the circles. Spei, you can reverse the magic of the circles, so that they bring everyone back to life and restore their minds and bodies to how they were before they died. Hecate, once the circles are set up, you can bring out all of the ghosts like you did before, and put them into the circle. Then we'll use our magic to channel the Star power into powering the spell... Hecate will use her Creator powers to create new bodies for the ghosts, and we'll use the ghost-crystal magic from the Stars to, um, stick their ghosts right back into their bodies again."
+				</span>					
+				<br><br>
+				<span style="color:#7B7379">
+					"You think that will all work?"
+				</span>				
+				<br><br>
+				<span style="color:#FF0000">
+					"Well, I hope so, yeah."
+				</span>				
+				<br><br>
+				<span style="color:#FF66FF">
+					"The Star power should give us what we need. It is normally impossible to unite a lost ghost with any physical form, but the magic of the Stars is already doing exactly that. Using this magic, as well as Hecate's dream-magic, it is definitely possible to give the ghosts new bodies."
+				</span>					
+				<br><br>
+				<span style="color:#FF0000">
+					"Awesome! This is going to work, then! Let's get to it!"
+				</span>					
+				<br><br>
+				<span style="color:#FF66FF">
+					"I have just one concern, Solar. How do I “reverse the magic of the circles”?"
+				</span>			
+				<br><br>
+				<span style="color:#FF0000">
+					"Huh? Isn't it your magic? I thought you could alter it."
+				</span>					
+				<br><br>
+				<span style="color:#FF66FF">
+					"Er, no, I didn't create this magic. It's very similar to mine, but it was like this when I found it."
+				</span>				
+				<br><br>	
+				<span style="color:#FF0000">
+					"Wait, then if you didn't make this, then who did? Was it another Ghost Seer?"
+				</span>					
+				<br><br>	
+				<span style="color:#FF66FF">
+					"No, Solar. I was the first Ghost Seer. There were no Ghost Seers before me."<br>"I... I don't think anyone created this spell. It must have formed out of the world's magic on its own, in much the same way as Hecate and the other Creators did."
+				</span>						
+				<br><br>
+				<span style="color:#FF0000">
+					"But... huh? That doesn't make any sense? Wouldn't the magic be alive like the Creators are, then?"
+				</span>					
+				<br><br>	
+				<span style="color:#FF66FF">
+					"Well... clearly not! Goodness, I think we'd have noticed by now if the Sanctum was alive."
+				</span>						
+				<br><br>	
+				<span style="color:#FF0000">
+					"Yeah, but..."
+				</span>						
+				<br><br>	
+				<span style="color:#7B7379">
+					"Umm, Spei, Solar has a point though. Like, I can feel the way that all the magic is structured around us. The Creators have a kinda “structure” to them that's different from any magic spell. Same for creations like Solar. The spells in this room, though... They feel completely different. It's the kind of magic that I can TELL was put here by an intelligent design."
+				</span>						
+				<br><br>	
+				<span style="color:#FF66FF">
+					"But that isn't possible. The Sanctum was always here, like the world. It wasn't created, or cast into existence."
+				</span>					
+				<br><br>	
+				<span style="color:#7B7379">
+					"You're saying that, Spei, but the magic structure doesn't lie. Trust me, Spei. I know magic. Someone created all of this. Magic like this doesn't form randomly."
+				</span>						
+				<br><br>
+				<span style="color:#FF66FF">
+					"No, it does not, and yet..."
+				</span>					
+				<br><br>	
+				<span style="color:#FF0000">
+					"And what about the names? You said the spells here all have different names. Who named them, if not the dragon who cast the spell?"
+				</span>							
+				<br><br>
+				<span style="color:#FF66FF">
+					"I... I named them. I didn't create it, but when I was first drawn to this magic... The names just seemed right, somehow."
+				</span>					
+				<br><br>	
+				<span style="color:#7B7379">
+					"Uh-huh. Sure."
+				</span>					
+				<br><br>	
+				<span style="color:#FF66FF">
+					"Hecate, how else could this be here? I have been around since the beginning, and yet the magic already existed! If there were another being around who could have created this place, I would surely have sensed it!"
+				</span>						
+				<br><br>	
+				<span style="color:#7B7379">
+					"Well, maybe you never met them? I don't know? Maybe they made all this before you were around!"
+				</span>						
+				<br><br>	
+				<span style="color:#FF66FF">
+					"That isn't possible!"
+				</span>					
+				<br><br>	
+				<span style="color:#FF0000">
+					"Well, I mean, Radium told me that the magic here was ten thousand years old! The Curse of Anti-Magic only happened five thousand years ago, maybe this was before your time?"
+				</span>					
+				<br><br>	
+				<span style="color:#FF66FF">
+					"No, that could not have happened! The Rune Dragons' method of determining the age of this room is horribly flawed! The world itself is no older than around six thousand years!"
+				</span>						
+				<br><br>	
+				<span style="color:#7B7379">
+					"How do you know that?"
+				</span>	
+				<br><br>	
+				<span style="color:#FF66FF">
+					"Because- because- I was there from the beginning! I am as old as the universe itself! And it did not take long after the world was formed for me to be drawn to this place! There is no conceivable way that-"
+				</span>						
+				<br><br>	
+				<span style="color:#FF0000">
+					"Spei, calm down! It doesn't really matter how old the world is, or how old this magic is... What's important is what we're going to do with it."
+				</span>					
+				<br><br>	
+				<span style="color:#FF66FF">
+					"It DOES matter! Because if the world could be older than six thousand, then that would mean..."
+				</span>						
+				<br><br>	
+				<span style="color:#7B7379">
+					"Umm, Spei... I think the Rune Dragons have it right. If I had to guess, the magic here does feel about ten thousand years old."
+				</span>					
+				<br><br>	
+				<span style="color:#FF66FF">
+					"What?!? How do you think that?"
+				</span>						
+				<br><br>	
+				<span style="color:#7B7379">
+					"Uh. Same way they do, I imagine. I can sense the magic, remember?"
+				</span>						
+				<br><br>	
+				<span style="color:#FF66FF">
+					"Well- your senses are incorrect! I have been around since the universe's beginning, and my time in this universe has only been around six thousand years!"
+				</span>					
+				<br><br>	
+				<span style="color:#7B7379">
+					"Spei? That's, umm, that's not true. YOUR magic is, umm... I mean, I can't really tell the EXACT amount, but you're probably over TWELVE thousand years old. That's the reading I get from <i>your</i> magic."
+				</span>						
+				<br><br>	
+				<span style="color:#FF66FF">
+					"WHAT?????"
+				</span>		
+				<br><br>	
+				<span style="color:#FF0000">
+					"Ummm... Spei? Are you okay? You're yelling..."
+				</span>	
+				<br><br>	
+				<span style="color:#FF66FF">
+					"I- Solar- Hecate, that doesn't make any sense! My memories of this universe only reach back six thousand years, and I know for a fact that my nature as a Spirit makes me as old as the idea of hope itself!!"
+				</span>						
+				<br><br>
+				<span style="color:#7B7379">
+					"Well, clearly, the “idea of hope itself” is a lot older than six thousand years. Right?"
+				</span>						
+				<br><br>	
+				<span style="color:#FF66FF">
+					"<i>No!! That's NOT right!!</i>"
+				</span>						
+				<br><br>	
+				<span style="color:#FF0000">
+					"Spei, what's going on? You sound really upset... Don't worry! This just means that, umm..."<br>"Well, I don't know what it means, but we can figure it out together as friends!"
+				</span>					
+				<br><br>	
+				<span style="color:#FF66FF">
+					"Solar... Listen to me. My memories of existence extend back six thousand years. If I am somehow older than that, then that would... that would mean..."
+				</span>						
+				<br><br>	
+				<span style="color:#FF0000">
+					"It just means that you don't remember what happened before then. Maybe you're like Hecate, um, like what you said about Hecate earlier. How, umm, you said her memory wasn't fully developed yet."
+				</span>							
+				<br><br>	
+				<span style="color:#FF66FF">
+					"No. No... That isn't possible. As a Spirit, I am eternal, unchanging... My form is constant. I don't "develop"... I don't forget things..."<br>"How could I be..."
+				</span>					
+				<br><br>	
+				<span style="color:#7B7379">
+					"Well what about the circle?"
+				</span>						
+				<br><br>	
+				<span style="color:#FF66FF">
+					"... it can't be..."
+				</span>		
+				<br><br>	
+				<span style="color:#FF0000">
+					"Yeah, the circle! You said it wouldn't affect your body since you're immortal, but... would your mind..."
+				</span>						
+				<br><br>
+				<span style="color:#7B7379">
+					"Spei, did you <i>go in the circle?</i>"
+				</span>		
+				<br><br>
+				<span style="color:#FF66FF">
+					"I... I-I..."
+				</span>	
+				<br><br>
+				<span style="color:#FF0000">
+					"But, if you went in the circle, then that means..."
+				</span>	
+				<br><br>
+				<span style="color:#7B7379">
+					"Uh, Spei? You alright?"
+				</span>	
+				<br><br>
+				<span style="color:#FF66FF">
+					"I..."
+				</span>	
+				<br><br>
+				<span style="color:#FF66FF">
+					"I don't... remember."
+				</span>	
+				<br><br>
+				<span style="color:#FF66FF">
+					"Oh my hopes, I don't remember!"
+				</span>	
+				<br><br>
+				<span style="color:#FF66FF">
+					"But then... I..."
+				</span>	
+				<br><br>
+				<span style="color:#7B7379">
+					"Then WHAT????"
+				</span>	
+				<br><br>
+				<span style="color:#FF0000">
+					"Spei, we can figure this out... Don't worry..."
+				</span>		
+				<br><br>
+				<span style="color:#FF66FF">
+					"Then. That would signify."
+				</span>	
+				<br><br>
+				...
+				<br><br>
+				<span style="color:#FF0000">
+					"Spei?"
+				</span>	
+				<br><br>
+				<span style="color:#FF66FF">
+					"That... that would signify that either I made the decision to erase my memories of something in the past, or some other entity erased them by force."
+				</span>	
+				<br>
+				<span style="color:#FF66FF">
+					"Oh... oh creation..."
+				</span>	
+				<br><br>				
+				<span style="color:#7B7379">
+					"Ah, that's... not good..."
+				</span>	
+				<br><br>
+				<span style="color:#FF0000">
+					"Spei, umm, it's going to be okay..."
+				</span>		
+				<br><br>
+				<span style="color:#FF66FF">
+					"Solar... Hecate..."<br>"This means there is more to this world than..."<br>"There are other forces at work in this world... There is... magic... in this world... that is more powerful than the Creators... more powerful than even the magic of a Ghost Seer."<br><br>"And... I have no idea what, or where, or <i>WHO</i> these forces are."
+				</span>
+			</p>
+		</div>		
+		
+		<script>
+		
+			var trueSight = false
+			var disableV = false
+			
+			var vAnim = false
+			var fadeAnim = false
+
+			var playSound = true
+
+			var circle = new Howl({    src: ['assets/audio/circle.ogg', 'assets/audio/circle.mp3'],    volume: 0.5,    loop: false  })	
+			var portal = new Howl({    src: ['assets/audio/portal.ogg', 'assets/audio/portal.mp3'],    volume: 0.5,    loop: false  })	
+			var sightOn = new Howl({    src: ['assets/audio/LensOn.ogg', 'assets/audio/LensOn.mp3'],    volume: 0.5,    loop: false  })
+			var sightOff = new Howl({    src: ['assets/audio/LensOff.ogg', 'assets/audio/LensOff.mp3'],    volume: 0.5,    loop: false  })
+			var cave = new Howl({    src: ['assets/audio/cave_ambience.ogg', 'assets/audio/cave_ambience.mp3'],    volume: 0.5,    loop: true  })
+			var fireCrackle = new Howl({    src: ['assets/audio/crackling-fire.ogg', 'assets/audio/crackling-fire.mp3'],    volume: 0.12,    loop: true  })
+
+			document.addEventListener("keyup", event => {
+			  if (event.isComposing || event.keyCode !== 86) {
+				return;
+			  }
+			  vPress();
+			});
+
+			function showV() {
+				if(!trueSight && !vAnim) {
+					vAnim = true
+					document.getElementById("V").setAttribute("style", "opacity:0.0;animation-name: fade;animation-duration: 0.66s;animation-iteration-count: 1;");
+					circle.play()
+					setTimeout(() => { document.getElementById("V").setAttribute("style", "opacity:0.0;");}, 660);
+					setTimeout(() => { vAnim = false; }, 670);
+				}
+			}
+			
+			function vPress() {
+				if(!disableV && !fadeAnim) {
+					if(!trueSight) {
+						fadeAnim = true
+						sightOn.play()
+						document.body.style.animation = "backU 1.2s 1"; 
+						document.body.style.backgroundColor = "#400040";
+						document.getElementById("MagicWords").setAttribute("style", "animation-name: enter;animation-duration: 1.2s;animation-iteration-count: 1;");
+						document.getElementById("MagicWords").style.display = "block";
+						document.getElementById("circle").setAttribute("style", "animation-name: circleDark;animation-duration: 1.2s;animation-iteration-count: 1;");
+						document.getElementById("circle").style.filter = "brightness(0%)";
+						trueSight = !trueSight
+						document.title = "Seer's true sight..."; 
+					}
+					else if(trueSight) {
+						fadeAnim = true
+						sightOff.play()
+						document.body.style.animation = "backD 1.2s 1";
+						document.body.style.backgroundColor = "#000000";
+						document.getElementById("MagicWords").setAttribute("style", "animation-name: exit;animation-duration: 1.2s;animation-iteration-count: 1;");
+						setTimeout(() => { document.getElementById("MagicWords").style.display = "none";}, 1180);
+						document.getElementById("circle").setAttribute("style", "animation-name: circleLight;animation-duration: 1.2s;animation-iteration-count: 1;");
+						document.getElementById("circle").style.filter = "brightness(100%)";
+						trueSight = !trueSight
+						document.title = "A deep place..."; 
+					}
+					setTimeout(() => { fadeAnim = false; }, 1212);
+				}
+			}
+			
+			function showTeaser() {
+				disableV = true
+				portal.play();
+				document.getElementById("flash").setAttribute("style", "width:100%; height:100%; position:absolute; left:0; top:0; background-color:#FF00FF; display:none; opacity:0.0; animation-name: flash;animation-duration: 2.2s;animation-iteration-count: 1;");
+				document.getElementById("flash").style.display = "inline-block";
+				document.getElementById("MagicWords").style.display = "none";
+				document.getElementById("circle").style.display = "none";
+				document.body.style.backgroundColor = "#000000";
+				setTimeout(() => { loadCaveStuff();}, 1100);
+				setTimeout(() => { document.getElementById("flash").style.display = "none"; }, 2100);
+				setTimeout(() => { document.getElementById("vD").style.display = "none"; }, 2100);
+			}
+			
+			function loadCaveStuff() {
+				setTimeout(() => { cave.play(); fireCrackle.play(); }, 800);
+				document.title = "Setting things right...";
+				setTimeout(() => {document.getElementById("chapter12").style.display = "block"; }, 1500);
+				document.getElementById("cavewall").style.display = "block";
+				document.getElementById("sound").style.display = "block";
+				document.getElementById("glow").style.display = "block";
+				document.getElementById("harbinger").style.display = "block";
+				document.getElementById("harbinger").style.animation = "hFade 6.6s 1"; 
+				document.getElementById("chapter12").style.animation = "tFade 6.6s 1"; 
+			}
+
+			function clickSound() {
+				playSound = !playSound
+				if(playSound) {
+					cave.play()
+					fireCrackle.play()
+					document.getElementById("sound").src="assets/images/audioOn.png"
+				}
+				else {
+					cave.pause()
+					fireCrackle.pause()
+					document.getElementById("sound").src="assets/images/audioOff.png"
+					}	
+			}
+
+		</script>
+	</body>
+</html>

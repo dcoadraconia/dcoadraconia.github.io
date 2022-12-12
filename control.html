@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js" integrity="sha512-6+YN/9o9BWrk6wSfGxQGpt3EUK6XeHi6yeHV+TYD2GR0Sj/cggRpXr1BrAQf0as6XslxomMUxXp2vIl+fv0QRA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<html>
+	<title>To burn</title>
+	<link rel="icon" type="image/png" href="assets/images/fire.png">
+	
+	<head>
+		<style>
+			@keyframes enter {
+			  0%  {opacity: 0.0;}
+			  100%  {opacity: 1.0;}
+			}
+			@keyframes exit {
+			  0%  {opacity: 1.0;transform:scale(1.0);}
+			  90%  {opacity: 0.0;transform:scale(0.36);}
+			  100%  {opacity: 0.0;transform:scale(0.36);}
+			}
+			@keyframes blackfire {
+			  0%   {background-color:#3C3C4F;}
+			  30%   {background-color:#3939A8;}
+			  45%   {background-color:#3939A8;}
+			  100%  {background-color:#000000;}
+			}			
+		</style>
+	</head>
+	
+	<body id="background" bgcolor="#3C3C4F">
+		<div id="fire" style='text-align: center;position: absolute; left: 50%; top: 55%; transform: translate(-50%, -50%);'>
+				<img id="black_fire" onclick="clickFire()" style="cursor: pointer;" src="assets/images/black_fire.gif">
+				<p id="hintText" style="font-size: 24px; font-family: 'Georgia'; text-align: center; opacity:0.0">Your will is not yet focused enough!<br>You must <b>CONTROL</b> the fire!<br><b>CONTROL</b> IT!</p>
+		</div>
+		
+		<div id="teaser" style='display:none; padding-left: 350px; padding-right: 350px;'>
+			<img src="assets/images/blue_fire.gif" style="position: absolute; top: 66px; right: 66px;">
+			<img src="assets/images/blue_fire.gif" style="position: absolute; top: 66px; left: 66px;">
+			<img src="assets/images/blue_fire.gif" style="position: absolute; top: 866px; right: 66px;">
+			<img src="assets/images/blue_fire.gif" style="position: absolute; top: 866px; left: 66px;">
+			<img src="assets/images/blue_fire.gif" style="position: absolute; top: 1666px; right: 66px;">
+			<img src="assets/images/blue_fire.gif" style="position: absolute; top: 1666px; left: 66px;">
+			<img src="assets/images/blue_fire.gif" style="position: absolute; top: 2466px; right: 66px;">
+			<img src="assets/images/blue_fire.gif" style="position: absolute; top: 2466px; left: 66px;">
+			<img src="assets/images/blue_fire.gif" style="position: absolute; top: 3266px; right: 66px;">
+			<img src="assets/images/blue_fire.gif" style="position: absolute; top: 3266px; left: 66px;">
+			<img src="assets/images/green_fire.gif" style="position: absolute; top: 4066px; right: 66px;">
+			<img src="assets/images/green_fire.gif" style="position: absolute; top: 4066px; left: 66px;">
+
+			<image id="sound" onclick="clickSound()" src="assets/images/audioOn.png" style="position:fixed; left:8px; top:8px; height:66px; width:auto; margin:12px; cursor: pointer;">			
+			
+			<p id="text1" style="color:#FFFFFF; font-size:24px; font-family: 'Arial'; line-height: 1.0; ">
+				<i>
+				It is the end of the "PuppetSeer"/"SolArdere" route. Ten Anti-Magic Dragons have been destroyed, bringing forth the magical apocalypse.
+				<br><br>
+				Ardere is well aware of the fact that this sudden surge of magic is unnatural and is clearly related to the eleventh Anti-Magic Dragon, the Oblivion Dragon.
+				<br><br>
+				Having made his final preparations, he and his remaining allies have set out into the chaotic, swirling mass of magic that has taken over the continent.</i>
+				<br><br>
+				Solar, the Puppet Seer, marches forward into the dreamlike horizon, following the hordes of ghosts floating mindlessly toward their destination.
+				<br><br>
+				Of the allies following behind Solar, few of them are doing so willingly. The rest of them have long since been brought under Ardere's control. By using Solar's body and magic as a conduit, Ardere was able to expand his powers, allowing him to control many more dragons at once.
+				<br><br>
+				This new power also allows him to have partial control over non-Fire-element dragons, though this is much weaker than his power over Fire-element dragons. He can put "suggestions" into their heads, he can make them more likely to do his bidding, but he doesn't have full control over them.
+				<br><br>
+				As Ardere, inhabiting Solar's body, continues to traverse deeper into the magic nightmare that Oblivion has created, many of his allies around him are overwhelmed by the aura of depression and hopelessness that radiates outward over the continent.
+				<br><br>
+				Of course, Ardere's mind is not affected by this aura. His grasp on his own mind is far too strong for such magic to break in. He reminds himself, over and over, of the truths of the situation.
+				<br><br>
+				<i>"There is no reason to lose hope. There is no reason to give up. Everything is under control."</i>
+				<br><br>
+				Though some of Ardere's travelling companions continue to be worn down by the aura of anti-magic, Ardere resists its effects, and pushes forward, searching for the source of all this magical chaos.
+				<br><br>
+				He has to destroy it, before the unnatural magic overwhelms him, before he loses control-
+				<br><br>
+				<i>No. That is outside the realm of possibility. Ardere will never lose control. Not again. He's gotten stronger. The powers of the Ghost Seer... The powers of Spei... These powers are HIS, now. NOTHING can stand in his way anymore. Not even Spei can break free from the mental shackles that Ardere has embedded into Solar's mind. Ardere's control is total. His domination is absolute.
+				<br><br>
+				Everything is
+				<br><br>
+				under
+				<br><br>
+				control.</i>
+				<br><br>
+				As Ardere commands his puppets to march closer, closer to the final battle, he feels a pull on the minds of the dragons that he is controlling.
+				<br><br>
+				<i>Dream-magic. Of course.</i>
+				<br><br>
+				Whatever this Anti-Magic Dragon is, it seems to have power over those who fall asleep. Ardere has seen it with his own eyes... or rather, Solar's eyes. As they fall asleep, their very souls are pulled from their bodies, and they fall in line with the other ghosts, floating slowly toward their mysterious destination.
+				<br><br>
+				In order for Ardere to maintain control over his puppets, he must keep them asleep. Ardere can feel their souls trying to slip from his grasp. But he will not let them. He has studied dream-magic for centuries. With the full power of a Ghost Seer at his disposal, Ardere knows how to counter a simple dream-magic spell. These souls are to be no dragon's tools but HIS OWN.
+				<br><br>
+				Ardere continues to guide his army further, following the ghosts that have already been taken...<br>It does not matter.<br>Those dragons were not useful to him.<br>He couldn't save everyone.<br>Sacrifices had to be made.<br>But it will all be worth it in the end.
+				<br><br>
+				Suddenly, Ardere senses a disturbance. A powerful surge of anti-magic, right in front of him, or rather, in front of Solar. This can only mean one thing... The Oblivion Dragon is close. With newfound determination, Ardere drives his army onward, pushing them to their final destination.
+				<br><br>
+				It is finally time to free the world from anti-magic's curse. Soon, there will be no more ancient evils to stand in Ardere's way. His victory will be complete. And then, he will rebuild this world. He will rebuild this continent into a perfect civilization... One with Ardere in everyone's heads, to ensure that they are all using their abilities to their full potential. It will be perfect. No more pain, no more suffering... No more sacrifices... Only control.
+				<br><br>
+				<i>Wait... What on earth is...</i>
+				<br><br>
+				It's a cave entrance. An opening, leading down a dark tunnel into pitch-black...
+				<br><br>
+				But there's no cave.
+				<br><br>
+				It's just a gateway, an entrance rooted in nothing. Ardere knew that the unnatural magic was going to warp the continent around him, but something like this... It defies even comprehension.
+				<br><br>
+				Ardere examines the cavern entrance. Sure enough, there's nothing behind it but more empty space, and warped plains stretching into the horizon. It is as if the cavern entrance is embedded in the fabric of reality itself.
+				<br><br>
+				As unnatural as it is... Ardere can sense the anti-magic radiating from inside.<br>The Oblivion Dragon is in that cave. It has to be.<br>So there's nowhere to go but... inside.
+				<br><br>
+				Ardere walks Solar into the entrance, with his allies following behind. The tunnel leads onward, downward into the darkness, now illuminated by Solar's sun... But Ardere just looked behind the tunnel entrance, and there was nothing there! How is this possible?
+				<br><br>
+				It doesn't matter.
+				<br><br>
+				Everything is under control.
+				<br><br>
+				Just another of Oblivion's desperate tricks. It won't save Oblivion from its approaching fate. Ardere will call upon the powers of the Ghost Seer, and completely eradicate this Anti-Magic Dragon... Just like he did to every other one before it.
+				<br><br>
+				Wait. Something's wrong.<br>Ardere can sense the minds of his other puppets... pulling away.
+				<br>
+				Ardere turns Solar around, staring back out of the cave entrance and into the fractured landscape of the continent outside. Solar's allies are still following him, moving toward him as Ardere commanded.
+				<br><br>
+				But somehow... They're still moving away from him.
+				<br><br>
+				The cavern tunnel itself is expanding. Lengthening. Increasing the distance between Solar and his army. The slow walking pace that Ardere has commanded the group to maintain is not enough to overcome the growing distance between them and Solar as the cavern tunnel grows longer.
+				<br><br>
+				Quickly, Ardere commands Solar's allies to move faster, to catch up with Solar and regroup. But, before they can do so...
+				<br>
+				The surroundings of the cavern warp and blur, as Ardere feels himself in Solar pulled inward, downward, further into the cavern.
+				<br>
+				Ardere calls again for his allies to hurry, run, as fast as they can to reach Solar's side. They follow his command, making haste toward Solar. The warping and stretching of the cavern ceases.<br>Good. Soon, Ardere's army will reach him, and they can move on from this foolishness.
+				<br><br>
+				Closer, closer...
+				<br><br>
+				CRASH!!!!!!!!!
+				<br><br>
+				<i>
+				What the-</i>
+				<br><br>
+				A massive boulder has fallen from the darkness above, out of seemingly nowhere, and has completely blocked off the path between Solar and the others! What is this? How is this possible? 
+				<br><br>
+				Solar is now stranded and alone, in the domain of Oblivion.<br>Wonderful.
+				<br><br>
+				...
+				<br><br>
+				No matter. This is but a minor inconvenience. <i>The situation is still under control.</i>
+				<br>
+				Ardere will simply instruct them to cut through the boulder. Jet's Hydro Pump attack will make quick work of it.
+				<br><br>
+				<i>Ah, Jet... Truly the most useful tool that Ardere could ask for. Well, other than Solar himself, of course.<br>Jet's weak-willed nature made him an easy pawn, and his ability to boil the blood of nearby dragons is an ideal skill that Ardere has used frequently to get rid of anyone that has tried to stand between Ardere and his ultimate goal.</i>
+				<br><br>
+				Ardere hears the spurting sounds of water as Jet's Hydro Pump begins to carve away at the boulder.<br>Excellent. Now to regroup, and then...
+				
+				<br><br>
+				<span style="color:#39A85E">"Ahh ha ha ha ha ha ha..."</span>
+				<br><br>
+				A sudden laugh from behind Solar catches Ardere's attention. Quickly, he commands Solar to turn around and face down what is likely to be an enemy.<br>Turning around, Ardere sees a mass of anti-magic sludge, in the shape of a dragon, standing in the center of the cavern room before him.<br><br><i>It can only be... Oblivion.</i>
+				<br><br>
+				Ardere calls upon Spei's trapped power, channeling it into Solar's sun. The sun glows a brilliant pink, as the power to destroy anti-magic flows through Solar.<br>He prepares to do battle with this Anti-Magic Dragon as he waits for his allies to make it through the stone blocking the entrance.
+				<br><br>
+				Suddenly, the anti-magic sludge covering the Dragon's mouth separates, and the creature begins to speak.
+				<br><br>
+				<span style="color:#39A85E">"Why, hello... 'Solar.'"</span>
+				<br><br>
+				All at once, the sludge that coats the Dragon's body melts away, dripping from its body onto the ground beneath it.
+				<br><br>
+				And Ardere becomes aware of what it is standing before him.
+				<br><br>
+				A white and silver dragon with deep green wings, grasping a translucent, ghostly sphere in its claw.
+				<br><br>
+				It stares Solar down, an unnatural, terrifyingly wide smile on its face.
+				<br><br>
+				...
+				<br><br>
+				<span style="color:#39A85E">"What... Didn't you miss me?"</span>
+			</p>
+			
+		</div>
+				
+		<script>
+			var fireO = 0.0
+			var soundId = 0
+			
+			var playSound = true
+
+			var extinguish = new Howl({    src: ['assets/audio/extinguish.ogg', 'assets/audio/extinguish.mp3'],    volume: 0.5,    loop: false  })
+			var fireCrackle = new Howl({    src: ['assets/audio/crackling-fire.ogg', 'assets/audio/crackling-fire.mp3'],    volume: 0.5,    loop: true  })
+			var usurper = new Howl({    src: ['assets/audio/usurper.ogg', 'assets/audio/usurper.mp3'],    volume: 0.0,    loop: true  })
+			
+
+			var reduce = setInterval(reduceFireO, 66);
+		
+			function clickFire() {
+				if (window.event.ctrlKey) {
+					clearInterval(reduce)
+					document.getElementById("hintText").style.opacity = "0.0";
+					fireCrackle.fade(0.5,0.0,1500)
+					extinguish.play()
+					document.getElementById("black_fire").setAttribute("style", "animation-name: exit;animation-duration: 1.2s;animation-iteration-count: 1;");
+					soundId = 2
+					setTimeout(() => { document.getElementById("black_fire").style.display = "none";}, 1180);
+					setTimeout(() => { document.getElementById("background").setAttribute("style", "animation-name: blackfire; animation-duration: 4s; animation-iteration-count: 1;"); }, 0);
+					setTimeout(() => { document.getElementById("background").setAttribute("bgcolor", "#000000"); }, 3990);
+					setTimeout(() => { showTeaser() }, 4000);
+					
+				}
+				else {
+					if(soundId == 0) {
+						fireCrackle.play()
+						soundId = 1
+					}
+					fireO += (0.02/((0.01+fireO/6)*100))
+					document.getElementById("hintText").style.opacity = ""+fireO;
+				}
+			}
+			
+			function showTeaser() {
+				document.title = "The puppeteer meets his match"; 
+				fireCrackle.stop()
+				usurper.play()
+				setTimeout(() => { usurper.fade(0.0,0.5,3600); }, 5);
+				document.getElementById("teaser").style.display = "block";
+				document.getElementById("teaser").setAttribute("style", "animation-name: enter; animation-duration: 3.6s; animation-iteration-count: 1; padding-left: 350px; padding-right: 350px;");
+			}
+			
+			function reduceFireO() {
+				if(fireO > 0.00) {
+					fireO -= 0.0012
+					document.getElementById("hintText").style.opacity = ""+fireO;
+					if(fireO < 0) {
+						fireO = 0
+					}
+				}
+			}
+
+			function clickSound() {
+				playSound = !playSound
+				if(playSound) {
+					usurper.play()
+					document.getElementById("sound").src="assets/images/audioOn.png"
+				}
+				else {
+					usurper.pause()
+					document.getElementById("sound").src="assets/images/audioOff.png"
+					}	
+			}
+		</script>
+	</body>
+</html>

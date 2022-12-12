@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js" integrity="sha512-6+YN/9o9BWrk6wSfGxQGpt3EUK6XeHi6yeHV+TYD2GR0Sj/cggRpXr1BrAQf0as6XslxomMUxXp2vIl+fv0QRA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<html>
+	<title>____________</title>
+	<link rel="icon" type="image/png" href="assets/images/antimagic.png">
+
+	<head>
+		<style>
+			@keyframes enter {
+			  0%  {opacity: 0.0;}
+			  100%  {opacity: 1.0;}
+			}
+			@keyframes exit {
+			  0%  {opacity: 1.0;}
+			  100%  {opacity: 0.0;}
+			}		
+		</style>
+	</head>
+
+	<body id="body" bgcolor="black" style="background-image: url('assets/images/static.png');background-repeat: repeat;">
+		<image id="sound" onclick="clickSound()" src="assets/images/audioOn.png" style="display:none; position:fixed; height:66px; width:auto; margin:12px; cursor: pointer; z-index:-2">
+
+
+		<div id="curtain" style="display:none; position: fixed; top: 0;left: 0; width: 100vw; height: 100vh; background-color: #120006; z-index: -1;"></div>
+
+
+		<div id="twelve1" style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; z-index: -3;">
+		<p id="hintText" style="color:white; font-size: 36px; font-family: 'Copperplate Gothic'; text-align: center;">There's something here, but it's c̶͓͉͌̌ȏ̷̤͋̚ŗ̶̨̆͋̌ͅr̸̳̜̂̐u̷͈͈͈͝ṗ̶͈̭̗t̵̲͓̳͌̊̊e̸̛̲̯̻̾̕ḏ̴̹̀<br>A hero's journey, interrupted<br>this. was never. supposed. to happen.<br>not like this.<br>but hè̢̽re̻̫̓ͧ ͕̓w̶̫͍͕ẹ̵̼ͯ̓ ̸͚͈a͍r͕̾͘e͒͆̎.</p>
+		
+		<p id="hintText2" style="color:white; font-size: 36px; font-family: 'Copperplate Gothic'; text-align: center;">If you wish to peek behind the curtain<br>You must find the <span style="color:#FFFF00">twelfth key</span>.<br>And with it, ȭ̷̖͘p̴̟̬̽͊͠ḛ̵̫̆̍̊͘n̵̨͓̫̅̌̌ the d̸͉͓̓̒́͊ǫ̵͚͇̹̤͚̙̠̭̤̋̾͊̒̋̎̏͑̊͑̅ó̴̧̤̖̗͖͓̠͎͔̼͒̀̈͂͝ͅr̷̨̯͍͕̥̹̗̪̥̼͈̄́̓̈̎̌̚͝</p>
+		
+		<span style="font-size:12px;"> <input type="text" id="c1" maxlength="1" size="1"> <input type="text" id="c2" maxlength="1" size="1"> <input type="text" id="c3" maxlength="1" size="1"> <input type="text" id="c4" maxlength="1" size="1"> <input type="text" id="c5" maxlength="1" size="1"> </span>
+
+		<button onclick="checkC()" style="cursor: pointer; background-color: #CC0012; display: block; height:24px;width:60px; cursor: pointer; position: absolute; left: 50%; transform: translateX(-50%); margin-top:12px"> </button>		
+		</div>
+		
+		<div id="twelve2" style="position:absolute; top:12px; left:0; right:0; color:#FFFFFF; font-size:24px; font-family: 'Baskerville'; line-height: 1.0;  text-align:center; display:none; z-index: -3;">
+			<p id="textR" style="margin-left:12%; margin-right:12%; text-align:center;">
+				<i>A knock at the d̸̡̢̝̳͙͛̏̿̋̊͘ǫ̴͎͍̉̈̈́͐̔̾̄ȯ̷̝̩̜r̸̡̛͕̳̅̑..</i>
+				<br><br>
+				"Who's there? Don't ya know I'm busy?"
+				<br><br>
+				"Uh, yes, boss. There's someone here to see you."
+				<br><br>
+				"Well tell 'em I'm g****** <i>busy!!</i> I'm the one what calls the shots around here, and I'm not in the mood for-"
+				<br><br>
+				"Boss, sir, uh, it's your wife."
+				<br><br>
+				...
+				<br><br>
+				"<i>Son of a-</i> I'll be right there."
+				<br><br>
+				<i>Clomp, clomp... The large Brown Leaf D�̵̧̣̗̪̠̗̺̠̮̠̜͉̗͕͖̰̗̗̪̠̜͔͉̇̆̒̋̒͒͝�̴͈͔̹̜̥̯̦̊̏͋̊̀�̷̻̦̟̟̳͔̪͉̞̳̪̟̲̠͈̤͙̼́̅͋̎̈́̂̑̚͘͜͜͠�̴̡̤̰̪̘͖̙͚͕̦̠̜̅̀͒̓̎̏̉̌͌͑̃͆̍͛͝͠ trudges across the dirt floor of the crude wooden shack, stepping over collections of stolen pouches and possessions, kicking aside scattered scraps of paper and cloth. He lumbers up to the wooden door and pulls it open.</i>
+				<br><br>
+				<i>Immediately, he finds himself face-to-face with the d̶͈̣̰͛̍ŗ̶̲̐a̷̡͖̒̓͜g̴̲̎͆o̶̻̼͉̔́n̸̫͋̕s̶̨͈̬̪̞͉̲̣̯̞͐̇̂͝s on the other side of the door: One of his goons, a wiry little Brown Leaf D̵̨̲̺̝̠̖̈͝r̶̤̒͊̍́́̽̏a̶̢͕̰̙̤̤͗̃̕̚g̵̮̃̈́͘ȍ̸̪̟̥̼̫̃͑̈́̀͆͝ͅn̴̻̬̰̼̜͑͌ with a front toe missing, and his angry-looking wife, glaring up at him. Seeing this, the Brown Leaf goon announces his leave:</i>
+				<br><br>
+				"Okay, boss, I'm gonna get out of your way now, don't mind me..."
+				<br><br>
+				<i>The Brown Leaf D̶̨͙͓͇̾̆̄͛͠r̸̗̫̳̂̒͑͝a̸͕̺͖̮̍̍̿ġ̸͍̰̞͇̗̎́o̶̞͚͍͖̽͂n̵̨̯̱̏͗̍ boss steps back as his wife strides into his room and clears her throat.</i>
+				<br><br>
+				"Listen, honey-" <i>the large Brown Leaf D̶̰͎̦̼̫̦͇͚̑ṙ̴̡̢̛̤͕̩̖̥̳͒̂̾͒̃͒ḁ̴̓͐g̶̼̠͑͠ó̷̼̦́͂̀͌͊̚ͅṉ̵̢̛͖̬͂̒͗͂ begins.</i>
+				<br><br>
+				"No, YOU listen to ME, Redwood. You have to stop this. You've gone COMPLETELY g****** crazy with this revenge plan. You stay here, into the middle of the f***ing night, looking into that g****** jar of s***. And for what? A f***ing insane plan that won't even f***ing <i>work</i>??? You're never gonna be able to make this happen, don't you see? Even if you COULD somehow get it into the water of the whole Capital, the royal ******s would run away with their tails between their legs as soon as ḑ̶̨̜̫̹̖̖̺̞̂̽̃͘͠ͅr̵̡̜͙͍̬͖͇͙̜̝̐͗͗͂̅̉͑͒͋̄͘̚͜a̷̠̭̗̼̽̎̏̌̓͐̚͠g̷̣͍̳̩͈͚͚̮͐̈́͂̑͆̐̉͊̀͜͠ǫ̴̳̱̺̪͓̙̾͂͐̀̓n̵̨̠͉̥̱͖̪̦̬͐̋͌͑́͌̂͘͠ͅs̸̟͔̞̮̰̟͕̿ started getting sick. They aren't STUPID enough to all wait around in something like that!"
+				<br><br>
+				"Sage, d' you have ANY f***ing idea- Do you understand at ALL how many of my men died so I could get my ć̵̟̯̳͈̐̂̈́̒̔̓l̷̩̏̊̓̅̏͋̕a̶̢̯̼͚̤͓̅̐̒̐w̷̩͓͌̾́̈́s̷̻̟̬͎̦̀̿͜ on this jar? This isn't jus' some stinking forest moss. Everything alive near it in the Great Forest f***ing DIED! Shriveled up an' rotten! The rumors about this s*** weren't joking! I dropped a li'l bug in there... It started dying jus' like that! Gone! We're not talkin' about some far-fetched-"
+				<br><br>
+				"And? You actually think this is a good f***ing idea? Did you accident'ly get some of it in your f***ing head? You'll probably miss the royals, and end up starting an entire f***ing plague instead!"
+				<br><br>
+				"So? The ****** little RUNTS in the Capital have it coming! So what if they all die? Why the h*** would you care about THEM?"
+				<br><br>
+				"Don't put words in my f***ing mouth, Redwood! You think I give two s***s what happens to the stuck-up f****** in the Capital? Of course I don't! They can all rot in H*** for all I care! But your “big idea” isn't going to stop with just them! It'll prob'ly spread over the whole g****** CONTINENT! You'll probably end up giving it to the d̸̦̘̿̒ȑ̷̛͔͚̝͕̳̋̑ä̵̜̬̳̻̋̀̈̉̕g̸̞̗̟̘̲̮̰͗̃͋ȯ̶͕͉̫̬̾͆̎͝n̸̹̟̹͕͗̆͂̎̈́̅͑s̴̡̙̊́͋̅̒̇ in this very village! Is that what you want? Do you want to f***ing kill EVERYONE???"
+				<br><br>
+				"That's not gonna happen! I've got this all figured out! I'll order the people to stay inside, not to go out an' to stay away from anyone who could be from th' Capital! I've had the grunts gather up enough food t' last us for years! We'll stay inside while the illness does its thing, then once it's died down, we'll march into the Capital and take it for ourselves! The poor b******* that make it will be too weak t' do anything to stop us!"
+				<br><br>
+				"We don't need the Capital! You're risking everything just to grab a bit more power? Look around you, Redwood! You've turned the Old Branch Commune into an unstoppable gang! Your men rob anyone who so much as TRIPS too close to the Commune! We've got more food and rich f******' valuables than we know what to do with! How is this not enough for you? How the f*** do you want MORE?"
+				<br><br>
+				"This isn't ABOUT what I want, Sage! This is the will of the people! For every rich idiot's f****** trinket that we manage to take, there's ten more g****** trinkets being made and paid for by the laborers that th' upper-class have trapped underfoot! I won't be satisfied until the people finally hav' the chance to rise up, and ev'ry last one of those nobles faces the consequences for their greedy lives!"
+				<br><br>
+				"And you plan to achieve the “will of the people” by <i>killing</i> all of the people? That's what's going to f****** happen, Redwood."
+				<br><br>
+				"I'm making sure that won't happen! I've sent some boys out to tell every Brown Leaf D̵̝̺̩̦͌͗͑̚͝r̷̺̳͕̩̩͈̤̝̖̒̍͂̈̇̑͗̎̈́̂͛͘ǎ̷̧̗̜̮̳͚̠̗͍̗̖̹͛͜͝g̶̢̼̃͆̎̂͗̆̐͒̓̃̒̕͝ô̵̧̘̟̲̗̙͙̜̦̣̳͉̣̞̓̋̉̉̽̍͘̚n̵̮̪͌̅̉͝ in the Capital to get out with their families while they still can! It's not like they'll be leavin' anything behind! The Brown Leaf D̵̛̹͖̬̪̗̠̀̓͐̍̉͗̅́͌͑̀̀͘̕r̵͓͇͚͑̈́̆̋̑̅̆̓͜ą̸̡̫̣̩̝͕̒̃́̈́̒͐͆̿g̶͇͙͆̆͠ơ̵̝̞͚̟̫̫͛́̂̑͂̚͜ͅņ̴̳͕̺̖͗͒̕s̶̢̧͇̘̘̳̼͚͘ in the Capital don't have anything! It'll be the greedy, self-absorbed, rich PIGS that stay behind to hoard their s***, and THEY'LL be the ones to pay the price for it."
+				<br><br>
+				"Redwood- you- That isn't the f***ing POINT anyway! I'm not here to talk about the <i>people</i>! I'm here to talk about our <i>family!</i> You're never around anymore! All you do is stand around and bark orders to your grunts from this f***ing room! Your children miss you, Redwood! They want to see you! <i>I</i> want to see you! You think that raising an army of grunts is hard? Try having to raise <i>five children</i> on your own!"
+				<br><br>
+				"..."<br>
+				"I really, really want t' spend more time at home, too, Sage. I wish, I really do wish I could be the father tha' those kids deserve. But... I need to keep everything together here! A lot o' the ḑ̸̲͍̘̯̟͓̟̭̅̓̂̐̔̒̈̇̋̓͝r̴̤͙̯͉̥͎͍͚̲̃̾̆͋̕a̸̫̺̰̙̓͋̋͊́̍̆͐̑̾̍͝g̴̛̼̖͆̊͒̔̐̚͠ỏ̵̻̥̪̯̺̽̎͌̔̏́n̶̨̖͎̹̿̑͝s̸̡̨͓͔̗͓̓̉́̊͆͆ here want me dead, ya know. They don't have the g****** spine to say it, but I know they thinkin' it. If I show weakness, if I don't keep a tight grip on power here... It'll make me a target, and it'll put you all in danger, too!"
+				<br><br>
+				"So you've thrown away your family to run a f***ing mob? What is wrong with you? You weren't even there for Ash's h̵͔̝͈̩̾̈́̀͌͊å̷̢̰͕͙̙̖͍̞͍̜̠̐̍͑̉ͅͅͅẗ̸̟̮̝͓͙̤͖́͂̿̌̂̓̅̆̑͘c̷̨̛̛̛̺͙͚̯̤̗̖͎̣͕̭͙̯͐̿̃̾̌̒̕͜h̵͔̤̪̿͆͐̋̃̈́̋͗̓̆̋̌̕̕͜͝î̶̠̙̮̰̓̓͗̒͗̾̃̅̀̒̈͛n̶̡̦̞͈̣͕͎̪̜̝͉͗̐̾g̴̥̽̄̋͂͘͠-̸̡͈̫͚͓͔͉͔͈̣̥̈́͛͠ͅday... He's twelve now, you know? He wants to run around in the forest and go hunting with you! But he can't, because of what you're doing!"
+				<br><br>
+				"Sage... I've got t' do this. I have t' be the top d̸̘̬̝̗̪͙͕̞̈́̐̃ṙ̶̙̟͈͓̣̀̇͆̃͜͠͠a̷̲̞̝̙̓̂̃͌͌͝g̷̼̏͌ǫ̴̺̹̗̺̻͇̭̔͌́̐̈́̇͝ǹ̷̛͍̠̲̮̹̱̦. It's what the people need. It's th' only way to move forward. It's th' only way t' be safe. Before I took over, the Brown Leaf Ḑ̴̞̹͓̰̮̜̠̟̔̀̾͒͌͒͜r̶̨̪̺̙͚͎̒̚͜ā̷͕̹̰͍̰̆̐͘͠g̷̫͂̈́͘ỏ̴̤͍͒̆̈́͂͊̍̀̒͘n̴̢̠͖̤̿͜s̷̠͎̞̑͐̑̈́̌̆̕͝ spent as much time robbing each other as they did th' d*** d̶̢̲̅͘r̴̝͚̟͕͖̔̎̈́͊â̷̺̝̦̪̻g̷̱̹̣̈́̆̓͝o̴̘̪͚͕̾̂̒n̷͖̙̭̔̽ͅs̷͔͈̒ what did this t' them! It was chaos! But now, we're workin' toward the common good of everyone!"
+				<br><br>
+				"Everyone except for <i>your own family.</i> Is that f***ing worth it to you?"
+				<br><br>
+				"What the h*** kind of a question is that? You act like the li'l ones don't get good stuff out of this! But they do! Because o' what I'm doin', they're prob'ly the best-fed Brown Leaf D̷̗̝̰͆̔͝r̴̤̪̎̀̏̑̑̓̋̄̚͝a̷̜̣̗͔͔̥̭͔͆̑̾̾̀̚͠g̷̛̯o̷͚̼̻̤̞̰͓̿͑̒̚n̷͎͑̕ṡ̶̛̪͍̹̈́̾̅͐͑͑̕ͅ on th' continent!"
+				<br><br>
+				"They don't want the best food, Redwood. They want you."
+				<br><br>
+				"Well then, tell them I'll be home soon. This whole thing is goin' to be ready real quick, and once I can get someone to drop it into them Capital wells, there won't be a d*** thing any of us oughta do but stay home, away from th' dying Capital-folk. I'll keep us safe. I've made our family the strongest in the whole Commune, an' I'm makin' sure that we stay that way! No one's gonna f*** with us and our kids. I jus' need more time."
+				<br><br>
+				"I- why- it's ALWAYS “more time” with you! You just keep putting us off, and putting us off... I've f***ing HAD IT with your s***, Redwood! Just think about your family and your children ONE TIME, instead of your power and influence and all the s*** you've stolen!"
+				<br><br>
+				<i>Redwood suddenly snarls, becoming visibly enraged.</i>
+				<br><br>
+				"YOU HAVE NO F***ING IDEA WHAT YOU'RE TALKING ABOUT, SAGE! I THINK ABOUT YOU ALL EVERY DAY! I'M DOING THIS BECAUSE I F***ING CARE!"
+				<br><br>
+				<i>Redwood picks up a large piece of wood from the floor and throws it across the room. It smashes into a barrel in the corner of the room with a loud crash, completely breaking the top of the barrel into pieces.</i>
+				<br><br>
+				"I'M TH' ONLY REASON YOU ALL HAVE IT AS GOOD AS YOU DO! EVERY OTHER FAMILY IN THIS VILLAGE IS LUCKY T' HAVE ENOUGH FOOD T' LIVE THROUGH TH' WINTER, BUT OUR CHILDREN LIVE LIKE TH' F***ING ROYALS! DON'T YOU REALIZE HOW HARD I WORK FOR THIS FAMILY? HOW MUCH I DO FOR THIS FAMILY?"
+				<br><br>
+				<i>Sage backs away toward the door. Redwood stands in the center of the room, panting.</i>
+				<br><br>
+				<i>...</i>
+				<br><br>
+				<i>Redwood opens his mouth to say something. But before he can, Sage turns and runs out of the room.</i>
+				<br><br>
+				<i>...</i>
+				<br><br>
+				<i>Redwood takes a few steps toward the door. He stands in front of it for a few seconds, staring blankly out the door, deep in thought... before closing it again with a heavy sigh. He shakes his head and slogs back to the table he was standing at before the knock at the door completely interrupted him.</i>
+				<br><br>
+				<i>"G** d*** it... I can't believe that just... I can't f***ing believe myself. I'll have t'pologize later. When I get th' chance... when I have some time to..."</i>
+				<br><br>
+				<i>He trails off for a moment, still thinking about what just happened.</i>
+				<br><br>
+				<i>"Is this ev'n worth it? Maybe Sage is right... this might not ev'n work... an' then what?"</i>
+				<br><br>
+				<i>"Sigh... I... I miss my family. I wish I didn't haf'to do this. I wish I could jus' live a normal life with my family, like every d̶̪̩̲͓̭͍͎̝̪̣͇̦̾̔͘̚͜͜r̵̛͉͙̞͆̃̍̏͗̚ą̶̭͎̤̤̞̗̥̫͕̯̑͛̔̽̑́̓̃́͊̕͘͝ģ̵̩̲̣͇̬̼͖͈̦̉͒̀̉̕ͅo̷̺̬̭̬̮̘̗̺̞͇͆̀̽n̷̛͉͍̼̰̬̂̿̏͊̓̀̍͆͠ that doesn't have brown l̵̥̹͕̥̏̄̈͌̉ȇ̴͔̿̒̓̈́̚a̸̢͚̯̺̟̓̆̉͂v̷̢̲̱͔̟͙̎͛̕͝͠ͅe̷̖̳͕̔̂̿̋̚͝s̸͉̬̘̘̯͔̈́̂-̴̖̫̈́̎̓̄ gets to..."</i>
+				<br><br>
+				<i>"But I don't."</i>
+				<br><br>
+				<i>"An' it's all thanks to those f***ing royals an' nobles. They did this. They ripped my g****** family apart."</i>
+				<br><br>
+				<i>"I can't stop fightin' until every one o' those greedy f****** pays th' price. It has t' be this way. I know what's needed for th' good of my people... To save them."</i>
+				<br><br>
+				<i>Redwood passively stares at the sealed jar of nauseating black sludge. He's so deep in his thoughts that he doesn't register the fact that... the sludge seems to have started moving on its own.</i>
+				<br><br>
+				<i>"Soon we'll have everythin' we deserve. Our children will grow up in a community free of hate and pain. All thanks t' the work I'm doin' here."</i>
+				<br><br>
+				<i>He takes another deep breath.</i>
+				<br><br>
+				<i>"This is the will of the people."</i>
+				<br><br>
+				...
+				<br><br>
+				<i>Finally ready to resume his work, Redwood places his c̴̡̨̨̺̦͓̼̭̻͇͉͚̦͐͠l̷̡̡̛̲͙̺̫̦̠̻̜̥̰̐̀̔̔̽͗̉̿͋͑ä̶̢͍͍̖͕͈̠̠́͗̓͘w̷̡̞̯̮̪̫͕̌̆̈́ on the jar of sludge.<br>It's only then that he realizes...</i>
+				<br><br>
+				<i>"Wait, what th' f***- Why is it moving-"</i>
+				<br><br>
+				<i>And without any warning, the jar suddenly breaks open, its contents shooting out from inside onto Redwood's body.</i>
+				<br><br>
+				<i>"HOLY MOTHER OF Ḑ̸̗̜͓̣̑͌̂̽̏̐̄̀̉̏͂̆̔̕̕͜͝�̸̨̢̢̢̡̛̳͙̳̘͓͚͉̤̰̻̞̹̞̤̬͉̻̬̥̝̱̪͙͍͚̰̥̲̥͍͕̜͕̠̖̖͋̽̀̈́͒͐͂̒͂̏̒͑͒̃͂̄̅͌͗̔͌̉̍̓͠͠ͅ�̶̨̨̡̨̛̘̳͚̱͔̹̥̯͈̮̥̦̖͉͚̮̻̰̘̱̮̯̯̳̘͎͖͉̭̘̭̘̥͚̝̅̌̆̎̇͒͑̇̈͂̐̊̓͋̀̽͊͗͋̀̎̏́̾̋̈̈́̃̇̈́̏͋̽̚͜ͅ-"</i>
+				<br><br>
+				<i>The sludge oozes and spreads across Redwood's body, before he can even react. It spreads over his eyes... over his mouth... And soon, he's covered in it.</i>
+				<br><br>
+				<i>Redwood collapses to the ground, as the ooze begins to seep into his body.</i>
+				<br><br>
+				<i>And in his final conscious moments, as he feels the sludge overtake his body...</i>
+				<br>
+				<i>He feels another presence, some incomprehensible I̶̦̩̟̲͎̳̙̫̜̼̤̹͕͈̞͓͗̍́͂̆̎̐̎̚͘n̶̠͇̘͉͖̪̠̦̈̍̂̏͑́̔͊̀t̵̰̪̅̀̽̐̓̄̀̇̌̄́̋̚͠͠ṟ̵̢̥̭̆̑͆̓̈͑̒́̾̈̚u̷̝̞͌͌͛̄͐͐͐͊̍̄̍͗̒͝d̷̛̙̟̈͗̃̿̀̈́̔̄͌̊̅̚̕͠ĕ̴̢̻͛͒̈̾̉͒̽̈́́̏̾̀͝͠r̸̦̼̬̘̻͑͌̈́͑͑͘, suddenly seep into his mind.</i>
+				
+				<br><br><br><br><br><br><br><br><br><br>
+				
+				<span style="color:black">
+				U̴̮̇g̴̰͆h̴̺̏.̶̬͐.̷̻̄.̴͓̽ ̸̘͝W̴̤̅h̶̳͝a̵͈͒ț̶̔.̷̧͆.̸̤̃.̸̼͗ ̴̤̉W̵̳̌h̴̞̆ě̷͓r̶͎̉e̸̢̚ ̸̜̂ị̶̇n̷̠̎ ̴̪̓t̶͓̿ȟ̵̡ȇ̶͙ ̵̗͒u̷̳̚ǹ̸̠i̷̡͝v̸͇́e̵̘̕r̵̢̆s̸͓̈́ḛ̷͋ ̷̦̽ả̷̡m̸̮̑ ̴̱͒Ī̸͉ ̷͉̈n̷̖̽ȍ̸͚ẘ̶̞?̸̹̑�̵<br>
+				N̸͎̎͐͝o̷̡̗͖̪͆̓̎͝.̸̠̓.̷̲͒̏̅̕.̴̙̟̽̂̊͠ ̸͖̥̱͔̒ṉ̴̮̟̰̍̾̕ó̸̧̖̟ͅ,̸̨͕̤̼͂́̅ ̴̰̗̙̍̽͂h̶̨̤̳̎é̵͈̖̼̈̎̇ͅ ̸̞̈́͑͝c̷̩͌o̶͚͍̩͌͘͠ų̵̥͚̬̾l̸̤͓̹̃d̴̺͍̜̭̔̕ņ̷̢̱̦̈͋'̶͇̍̈́t̷̖̽ ̸̼̘̭̇̇h̶̜̹̗̕̕á̸̯̲v̶̪̝̳̀ȩ̶̐̇͗.̶̝̍̄̌.̶̼̐̀̂.̶͓͉̼͋͂͝�̵<br>
+				T̵̳̭͒̋͆̃͋͘H̵̨̜̩͂̒̇̓̅͠Ã̶͖̻͍̑̊̎T̵͚̤̠̈̉͛̌͠ ̶͎̝̭̣̯̿̂T̵̡̺̺͓̥̘͂̉̃̾R̷̗̪̲̮̥̣̎͋̏͊͛͗A̷̢͊I̷̮̭͈͓͙̜̎̓̏͋ͅṬ̷̢̯̻͔͛͗͒̌̕Ơ̵͈͚͈̪̟̖̣͓̈́͆̏̈́͆̚R̶̦̩͙̯̟͙͛͌͗̔͂̀͘!̴̙̔̌͘̚ ̵̢̜̻̺͉̺͍͓͐Ḧ̷͙̼́̅̏͆̉͝Ẹ̵̡̭̐̅͂͝͝ ̶͙̣̖̒̆̔͝R̵̡̮̘̻͎̅̃Ẽ̷͈̼́̿̂P̴̢͎͕̑͑͠ͅL̷̛̲̦͐̎̀Å̴̪̬̲̟͚̠͓̓̚͜C̵̩̙̪̤̽̌͗̌͂̐̈̈́Ë̶̠̘̪͇̠́̐̏͂̽̐Ḓ̴̯̦͊͂͝ ̵̝̮̟̞̿M̵̱̼̺̻̥͓̽̓̈́͝͝Ê̴̡̢͚͇̺͔̅?̵͍̟̗͌́͐̈́̚ͅ�̵<br>
+				Ņ̴͖̥̰̟̙̦̙̦̰͍̟͌̀̂̔͒̉̃̚̕Ơ̸̡̧̨͓͚͎͍̼͎͆̑̽̽̏̓̉̔̊!̷̧̯͙̩̪͔̭̺̬̬͙̘̖̥̱̍ͅ ̴̡̣̰̗̰͔̰̺̘͓͜͝I̵̦̘̤̫̩͉̜͍͍̯̙͍̽̓̃̏̓̅̑͐͊͋̽̏͐͒̌͘̚ ̵̧̧̡͈̜͚̻̠̺͖̠̼͎̯̬͖̃́͋͆͐̿̓͗̀͝W̵̧̨̨̛͙̦͉̻̗̖͔̤̦̥̭͎̝̓̈́ͅO̶̼̯̙̯̞̲̐̔̐̈̿̃͑̾̈́͆͗́̈́̕̚͠͠Ņ̶̡̧̧̬̰̙̳͎̗͓̘̞̓̅̓͗'̷̢̣̭̯̾͑͛́̿̀̒͌̈͋̏̍̏͌̕̚͘T̷̤̬͎̼̖͖͖̬̦̟͕̳́͗ͅ ̶̢̧̗͉̮̬̳̰͚͎̯̹̣̃̓̈́̀͗̆̂͑̌̇̐͝Ą̶̨͖̳̹̜̭̫̙̲̤̘͆́͆L̴̨̛̬̺̣͖̹̹̩̘̣̜̗̝̍͊̆̔͂͒̒̈́́̔͋͋͐͑͐͜͠Ļ̸̢̞̣̙̪̞̯̘͎̯̮̬̯͍͇͎̎͑́̓͋́͒͑̈͝O̴̻̪̻͙̞̽̀́̐̇͒̉͋̓̔̕̕͝͝W̷̛͙̙̯̺̤͍̐̀̿̃̑̿̒̃̊́͌͂͘͘̕͝ ̵̧̡̗̙̺̳̯̦̱̙̙̻̻͖̣̙͂̂̓̍̉͜Ì̶̧̢͙̮̬̜͔̖̯̙͔͚̌̓̾̋̋̆̐͐̽̏̍͘͝T̴̖̃͒̃̏͑!̸̢͇̥̮̒̏̎�̵<br>
+				T̶̨̧̢̧̡̡̡͚͎̬̯̥̻̘̩̤̩͓̜͚͚̬̤͕̉͐̒͊͜͠ͅḨ̵̛͈̺̙͗̋̿̾́͒̉͆͆̉͒̆̈́̅̾̈́̌̔͊̚͘͝I̵̡͚̬̝͉̩̱͒̉̿̈́̃̎̀́̃̈́͂͝͝͠S̶̢̧̨͚̮̙̞̝̝̰̳̝̻͓̥̩̫͛̈́̃̔̏̍̃͗̑̇͋͗̒͂̕̚̕͜͠ ̵̨̨̪̗̞̻̭̼̾͛͗̍́͜Ī̸̧̨̟̥̞͓̹͚͖̤̭͔̻̲̫̲̱̭͕̘̻͇̰͕͚͓̺͕̲͕̙̯̪̮̣̙̊̇̀̍́̀̾́̃̇̍̀͂̆̂̅͑̒̄̇̈́̚͘̕͘̕̚͜͝͠S̶̢̢̨̙̠̦̰̬̲̞̥̲͖͚̤͕̻̤̺̩̜̙͇̣̹̖͎̟͋̓̀̌̒̂͛͗̅͜ ̸̧̢̢̜̩̻̖̯̱̮̹͙͙͍̪̮͙̗̩̼̥̦̪̝͙̮̭͍̘͓̂͌̏̌͗̏͗̊̐̋̅̊̓̈̓̑́̅̑̒̋͒͐̈̕̕̚͜͜͝M̵̢̨̛̛̖̲̩̦͚͉̘̺̤̞̰͕͇̯̻̭̺̎͑́͗̅̎̄͗͐̎̐͒̃̊̃̿̑͌̂̃̃͑̿̆̾͑̉̉̄͛̋̃̚͜Y̵̧̨̢̛̛̙̰͕̩̩̙̘͕̪̯̟̰̹͕͈̥̝̫̩̳̳̥̥̠͂̍̄̐̈̽͐͑̉͌̎̏̐͌̓̑̓̀̍́̔̍̃́͊̇͆͘͘̚͝ͅͅ ̴̡̛̮̰̓̍͌̋͆̿̃̈̾͑̑̆͐́͆͒̄́̐̑̕͘͜͝ͅẆ̸̛̞̬̳̠̞̼̫̖̺̠̺͇͗̃̈́̏̐̋́̈́̂͒̓̎̓͐̂̒́͊̑̀̔̽́͆̕̚͠͝ͅͅỢ̸̢̻̯̣̖̘̖̩̤̖̞̪̜̭̱̗̖̣̳͎̠̊̔̂͒͒̈́̏́̄̎̏͊͗̈́̒̎͐̔̏̓̒̃̑͘̚̚͜͜͝͝ͅR̷̨̡̹͖̻͊͂̇͗͗̽͌L̸̡̡̺̲͑̇̓̇͑̃̑̽͑̏̈́̋̓͆̈́͛̓̚͝Ḋ̵̨̡̛̮͉̯̩͓̙̯͉̗͍͖͔̹̗̜̤͔̪̖̣̳̻̦̭̟̠̺̲̑̉͐̅́̍́̐͌̈̈́͑̇̈̌̎̉̈́͘̚̚̕͘͜͝͠ ̴̨̠̯̼̟͚̩̯̺̘̣̦̖̐̀̎̈́̃̀̽́̑̆̉̍̈́̈́͌̾̒̃̏̿̊̔̀̑̇̉͊̂̎̈́͝͝Ṉ̵̛̳̩̉͌̆̿͒͋͊̔̈́́̀̒͑͝͠Ơ̴̱̳͉̤̞͍̖̘̓̀̓̐͆̈́̅̆̃̊̑̐̋́̈̅̅̆̒̒͑͒̿̎͂̂̇̑̂̿̚͘͜͠͝͠͝ͅW̴̢̨̬̘̰̩͚̝̦̗̩̭̜̲͈̜͕͕̠̦̤͔̆̇͆̈́̽̀̉̏̇͋̅͛͛̊͘͘̚̚͝�̵<br>
+				]]]]]]]]]]]]�̵
+				</span>
+				
+				<br><br>
+			</p>
+
+			<div style="position: absolute; left: 0; right:0; bottom:0; width:100%; height:600px; text-align: center; z-index: -3; background: linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 10%, rgba(0,0,0,0) 100%);">
+			</div>
+			
+			<div style="position: absolute; left: 0; right:0; width:100%; height:600px; text-align: center; z-index: -3; background-color:black;">
+				<image id="redwood_house" src="assets/images/redwood_house.png" style="position:absolute; left: 50%; top:36px; transform: translate(-54.6%, 0%);">
+				<div id="table" onclick="table()" style="position:absolute; top: 48.9%; cursor: pointer; left: 50%; transform: translate(-50%, -50%);  background: transparent; border-radius: 50%; height: 21px; width: 18px">		
+				</div>
+			</div>					
+		</div>
+		
+		<a href="https://www.youtube.com/@D-LotGS">
+			<img id="sun" style="display:none; cursor: pointer; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);" src="assets/images/sun.gif">
+		</a>
+
+		<script>
+			var playSound = true
+			var keyFound = false
+			var house = new Howl({    src: ['assets/audio/redwood_house.ogg', 'assets/audio/redwood_house.mp3'],    volume: 0.5,    loop: true  })
+			var ominous = new Howl({    src: ['assets/audio/snd_ominous.ogg', 'assets/audio/snd_ominous.mp3'],    volume: 0.96,    loop: false  })
+			var slam = new Howl({    src: ['assets/audio/slam.ogg', 'assets/audio/slam.mp3'],    volume: 0.66,    loop: false  })
+
+			var fireCrackle = new Howl({    src: ['assets/audio/crackling-fire.ogg', 'assets/audio/crackling-fire.mp3'],    volume: 0.5,    loop: true  })
+
+
+
+
+			
+			addEventListener('keydown', function(e) {
+				if (e.key == "F12" && !keyFound) {
+						keyFound = true; setTimeout(() => { ominous.play(); }, 66); twelfthKey(0)
+					}
+			}, false);
+			
+			
+			function twelfthKey(num) {
+				if(num <= 16) {
+					var timeD = 2412
+					if(num == 1) {
+						IANVS("\"Hello? Is anyone out there?\"")
+					}
+					if(num == 2) {
+						IANVS("\"I-I'm not supposed to be here...\"")
+					}					
+					if(num == 3) {
+						IANVS("\"It's so bright... so white... so empty...\"")
+					}
+					if(num == 4) {
+						IANVS("\"I want to go back home. I miss my family.\"")
+					}	
+					if(num == 5) {
+						IANVS("\"My world is gone. I never got to explore it.\"")
+					}
+					if(num == 6) {
+						IANVS("\"My chance to be the hero was taken from me...\"")
+						timeD=3612
+					}					
+					if(num == 7) {
+						IANVS("\"And now... I'm back here. Alone.\"")
+					}
+					if(num == 8) {
+						IANVS("\"What... what is that?\"")
+					}	
+					if(num == 9) {
+						IANVS("\"Is that a door?\"")
+					}
+					if(num == 10) {
+						IANVS("*knock, knock*")
+					}					
+					if(num == 11) {
+						IANVS("\"Please, someone, answer the door...\"")
+					}
+					if(num == 12) {
+						IANVS("\"I can't pretend like this anymore...\"")
+						timeD=4800
+					}	
+					if(num == 13) {
+						IANVS("\"It's... it's opening?\"")
+						timeD=2412
+					}	
+					if(num == 14) {
+						IANVS("\"'JANUS'? What's that supposed to mean? I don't...\"")
+					}	
+					if(num == 15) {
+						IANVS("\"WOAH OH MY GOSH I'M FALLING-\"")
+						timeD=600
+					}	
+					if(num == 16) {
+						IANVS("[[[[[[[[[[[[")
+					}						
+					t = setTimeout(() => { twelfthKey(num+1) }, timeD);
+				}
+			}
+			
+			function openDoor() {
+				console.clear()
+				keyFound = true;
+				ominous.play();
+				document.getElementById("twelve1").style.animation = "1.2s 1 normal exit";
+				setTimeout(() => { 
+				document.getElementById("twelve1").style.display = "none";
+				}, 1180);
+				setTimeout(() => { 
+				document.getElementById("curtain").style.animation = "1.2s 1 normal enter";
+				document.getElementById("curtain").style.display = "block";	
+				}, 300);				
+				setTimeout(() => { 
+				document.title = "Seeing_red";
+				document.getElementById("sound").style.display = "block";
+				document.getElementById("twelve2").style.animation = "1.2s 1 normal enter";
+				document.getElementById("twelve2").style.display = "block";
+				document.getElementById("body").style = "background-image: url('assets/images/woodtile.png'); background-repeat: repeat;";
+				document.getElementById("curtain").style.animation = "2.4s 1 normal exit";
+				}, 2400);
+				setTimeout(() => {
+				house.play()
+				document.getElementById("curtain").style.display = "none";	
+				}, 4680);
+			}
+			
+			function passwordEntered() {
+				return (cMatch("c1","J")&&cMatch("c2","A")&&cMatch("c3","N")&&cMatch("c4","U")&&cMatch("c5","S"))
+			}
+			function cMatch(cId,chr) {
+				return document.getElementById(cId).value.toUpperCase()==chr
+			}
+
+			function IANVS(string) {if(string == "[[[[[[[[[[[[") {console.log('%c[[[[[[[[[[[[', 'color: #CC0000')} else console.log(string)}
+
+			function clickSound() {
+				playSound = !playSound
+				if(playSound) {
+					house.play()
+					document.getElementById("sound").src="assets/images/audioOn.png"
+				}
+				else {
+					house.pause()
+					document.getElementById("sound").src="assets/images/audioOff.png"
+					}	
+			}
+			
+			
+			function checkC() {
+				if(passwordEntered()) {
+					clearTimeout(t)
+					clearInterval(i)
+					openDoor()
+				}
+			}
+			
+			function table() {
+				document.getElementById("twelve2").style.display = "none"
+				document.getElementById("sound").style.display = "none";
+				document.getElementById("body").style="background-color: black" 
+				document.getElementById("sun").style.display = "block"
+				document.title = "..."; 
+				fireCrackle.play();
+				house.stop()
+			}
+			
+			
+			var janus = "The door is closed."
+			function JANUS() {return (janus)}
+			t = null
+			i = setInterval(interval, 12);
+			function interval() {
+				if(UnVmdXNR()) {
+					slam.play()
+					var _0xb0ecd1=_0x27d4;function _0x27d4(_0x1dbcbb,_0x115ad7){var _0x15a37e=_0x15a3();return _0x27d4=function(_0x27d4de,_0x4ce683){_0x27d4de=_0x27d4de-0x165;var _0x2db4c7=_0x15a37e[_0x27d4de];return _0x2db4c7;},_0x27d4(_0x1dbcbb,_0x115ad7);}(function(_0x1d168e,_0x235f23){var _0x25d55e=_0x27d4,_0x459b9f=_0x1d168e();while(!![]){try{var _0x4610d=-parseInt(_0x25d55e(0x16f))/0x1+parseInt(_0x25d55e(0x16c))/0x2+-parseInt(_0x25d55e(0x168))/0x3+-parseInt(_0x25d55e(0x16b))/0x4+parseInt(_0x25d55e(0x16a))/0x5*(-parseInt(_0x25d55e(0x169))/0x6)+-parseInt(_0x25d55e(0x16e))/0x7*(parseInt(_0x25d55e(0x166))/0x8)+parseInt(_0x25d55e(0x16d))/0x9;if(_0x4610d===_0x235f23)break;else _0x459b9f['push'](_0x459b9f['shift']());}catch(_0x44529d){_0x459b9f['push'](_0x459b9f['shift']());}}}(_0x15a3,0xd99d0),clearTimeout(t),document['title']='\x20',document[_0xb0ecd1(0x167)]('<link\x20rel=\x22icon\x22\x20type=\x22image/png\x22\x20href=\x22assets/images/none.png\x22>'),document[_0xb0ecd1(0x167)](atob(_0xb0ecd1(0x165))));function _0x15a3(){var _0x535771=['2280480qfXKzC','78BctyKD','512500YNWMkq','607960IDdAQr','3112654sfEIRE','38758563hSZGwO','1379GSQxNd','1280269KpBkAL','VGhlcmUgd2FzIG5vIHJlc3BvbnNlLg==','58744SGaaVH','write'];_0x15a3=function(){return _0x535771;};return _0x15a3();}
+					clearInterval(i)
+					console.clear()
+					return
+				}
+			}
+	
+			(function(_0xfdad16,_0x2ccc36){var _0x54526b=_0xea3d,_0x246e47=_0xfdad16();while(!![]){try{var _0x2a1826=parseInt(_0x54526b(0xe5))/0x1*(-parseInt(_0x54526b(0xdf))/0x2)+parseInt(_0x54526b(0xe4))/0x3*(-parseInt(_0x54526b(0xe9))/0x4)+-parseInt(_0x54526b(0xe7))/0x5+-parseInt(_0x54526b(0xe0))/0x6+-parseInt(_0x54526b(0xea))/0x7+-parseInt(_0x54526b(0xeb))/0x8*(parseInt(_0x54526b(0xe2))/0x9)+-parseInt(_0x54526b(0xe1))/0xa*(-parseInt(_0x54526b(0xde))/0xb);if(_0x2a1826===_0x2ccc36)break;else _0x246e47['push'](_0x246e47['shift']());}catch(_0x2ac3f2){_0x246e47['push'](_0x246e47['shift']());}}}(_0x17b8,0xc0764));function UnVmdXNR(){var _0x11f734=_0xea3d;return document[_0x11f734(0xdd)]('c1')[_0x11f734(0xe8)][_0x11f734(0xe6)]()==String[_0x11f734(0xe3)](0x52)&&document[_0x11f734(0xdd)]('c2')[_0x11f734(0xe8)][_0x11f734(0xe6)]()==String[_0x11f734(0xe3)](0x55)&&document['getElementById']('c3')[_0x11f734(0xe8)]['toUpperCase']()==String['fromCharCode'](0x46)&&document[_0x11f734(0xdd)]('c4')['value'][_0x11f734(0xe6)]()==String[_0x11f734(0xe3)](0x55)&&document[_0x11f734(0xdd)]('c5')['value'][_0x11f734(0xe6)]()==String['fromCharCode'](0x53);}function _0xea3d(_0x2fff88,_0x124197){var _0x17b8a1=_0x17b8();return _0xea3d=function(_0xea3d8d,_0x536f55){_0xea3d8d=_0xea3d8d-0xdd;var _0x515eb=_0x17b8a1[_0xea3d8d];return _0x515eb;},_0xea3d(_0x2fff88,_0x124197);}function _0x17b8(){var _0xa00493=['1375uCfrFK','208WkLgLb','7988268kQEsxY','585100DEmDqH','1323hzfsYy','fromCharCode','765384jIMIUO','11152fExWkX','toUpperCase','3183430fZUQHR','value','20wDZomc','7134869faStId','60008uBNTHO','getElementById'];_0x17b8=function(){return _0xa00493;};return _0x17b8();}
+			
+		</script>
+	</body>
+</html>

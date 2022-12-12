@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js" integrity="sha512-6+YN/9o9BWrk6wSfGxQGpt3EUK6XeHi6yeHV+TYD2GR0Sj/cggRpXr1BrAQf0as6XslxomMUxXp2vIl+fv0QRA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<html>
+	<title>CONFIDENTIAL</title>
+	<link rel="icon" type="image/png" href="assets/images/metal.png">
+	<head>
+		<style>
+			@keyframes background {
+			  0%   {background-color:#7F7F7F;}
+			  100%  {background-color:#3F3F3F;}
+			}
+			
+			table {
+			 border-collapse: collapse;
+			 width: 60%;
+			}
+
+			th, td {
+			  text-align: left;
+			  vertical-align: top;
+			  padding: 0;
+			  padding-bottom: 24px; 
+			  margin: 0;
+			  font-weight:normal;
+			  line-height: 1.12;
+			}
+			
+			th {
+				padding-right: 7px; 
+			}
+
+			
+		</style>
+	</head>
+	<body bgcolor="#7F7F7F">
+		<div id="warning" style='position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); text-align: center'>
+			<img style="" src="assets/images/mira_logo.png">
+			<p style="font-size:24px; font-family: 'Lucida Console';">
+				The enclosed material is strictly confidential and is to be viewed by authorized members of the <b>Magic Investigation and Research Agency</b> only.
+				<br><br>
+				 <input type="checkbox" style="width:20px; height:20px; " id="checkB" name="checkB"> By checking this box, I testify under penalty of Blade Dragon law that I have clearance to view the enclosed information.
+			</p>
+			<button onclick="proceed()" style="cursor: pointer; background-color: blue; color: white; padding: 12px 12px;text-align: center;display: inline-block;font-size: 24px;cursor: pointer; font-family: 'Lucida Console'; bottom:50%;"> <b>Proceed</b></button> <span id = "btnMessage" style="font-family: 'Lucida Console'; font-size: 18px; line-height: 2.0; color: red"></span>
+		</div>
+
+		<image id="sound" onclick="clickSound()" src="assets/images/audioOn.png" style="display:none; position:fixed; height:66px; width:auto; margin:12px; cursor: pointer; z-index:12">
+
+		<div id="mission" style="display:none; position:absolute; top:0px; left:0px;right:0px; padding-left: 15%; padding-right: 15%; color:#FFFFFF; font-size:24px; font-family: 'Lucida Console'; line-height: 1.0;  text-align:center;">
+			<p style="color:#FFFFFF; font-size:24px; font-family: 'Lucida Console'; line-height: 1.0;">
+			
+				M.I.R.A. Operation Report ████-████████
+				<br>
+				 <hr style="height:3px; background:#FFFFFF">
+				 <i>Transcript of a discussion between personnel of M.I.R.A. agent team Ζ6</i>
+			</p>
+			<p style="color:#FFFFFF; font-size:24px; font-family: 'Lucida Console'; line-height: 1.0; text-align:left; padding-left: 20%; padding-right: 20%;">
+				<table style="text-align:left;   margin-left: auto; margin-right: auto;">
+				<tr><th>
+					77355:</th><td>"Sorry to keep you waiting, milady."
+				</td></tr>
+				<tr><th>				
+					79438:</th><td>"Good, you're here. I was beginning to think I would need to break in on my own."
+				</td></tr>
+				<tr><th>				
+					77355:</th><td>"Of-of course not, my dear lady. I'm only, er, fashionably late. Whatever is in there, we're going to find out together."
+				</td></tr>
+				<tr><th>				
+					79438:</th><td>"Very well then. Let's discuss our mission strategy on how we're going to- Wait. Where is Siege."
+				</td></tr>
+				<tr><th>				
+					77355:</th><td>"I, well, I don't think he's coming."
+				</td></tr>
+				<tr><th>				
+					79438:</th><td>"Not coming... I was worried about this."
+				</td></tr>
+				<tr><th>				
+					77355:</th><td>"Yes, with the whole... well, his feelings about restricted laboratories, I'm not really surprised... I tried to convince him to come with me, but he didn't really..."
+				</td></tr>
+				<tr><th>				
+					79438:</th><td>"... I can't say I'm surprised, either. I suppose I cannot really blame him, but still... I thought he would understand how important this is."
+				</td></tr>
+				<tr><th>				
+					77355:</th><td>"He... I'm sure he understands. He's just... scared."<br>"We can make do with this. We'll find some way to break in, just the two of us."
+				</td></tr>
+				<tr><th>				
+					79438:</th><td>"Well, it seems we have no choice... just <i>wonderful</i>. Well then. Let us discuss how we're going to do this."
+				</td></tr>
+				<tr><th>				
+					77355:</th><td>"I am ready when you are, milady."
+				</td></tr>
+				<tr><th>				
+					79438:</th><td>"Great. Listen. I've been scouting out this area for the last several days, and we're not going to be able to get in through the main entrance. It's heavily guarded, and on top of that it's locked, and the only ones who have the keys are the guards."<br>"I was <i>planning</i> for Siege to cut into the laboratory through one of the walls, but seeing as he isn't here, I suppose we're going to figure something else out."
+				</td></tr>
+				<tr><th>				
+					77355:</th><td>"I have an idea. I could probably use my wind magic to swipe the key from one of the guards."
+				</td></tr>
+				<tr><th>				
+					79438:</th><td>"Even if you could, the area is still heavily guarded. There are a few emergency exit locations I've seen that don't have guards, but they're definitely going to be wired to alert the entire laboratory if we enter that way. We can't let anyone know we're here."
+				</td></tr>
+				<tr><th>				
+					77355:</th><td>"Hmmm. I might be able to knock something over with my magic then, get the guards' attention... They'll all run over to investigate, and then we can go in there."
+				</td></tr>
+				<tr><th>				
+					79438:</th><td>"That might work. I feel it's unlikely that ALL of the guards would run over to investigate some random crate falling over, but I'll keep that in mind."
+				</td></tr>
+				<tr><th>				
+					77355:</th><td>"I'm pretty sure that my magic has us covered, milady. There's no one else who can use wind magic like me."
+				</td></tr>
+				<tr><th>				
+					79438:</th><td>"That may be so... but I'm telling you, do NOT underestimate the guards here. I've never seen so much security anywhere else in the Stronghold. I don't even think M.I.R.A. has this much security. What in the name of science are they <i>HIDING</i> in there?"
+				</td></tr>
+				<tr><th>				
+					77355:</th><td>"Well, my dear, if <i>I</i> had access to technology that created the most beautiful and amazing dragon on the whole continent, I would probably invest into a lot of security too."
+				</td></tr>
+				<tr><th>				
+					79438:</th><td>"I- Larix, stop. This is serious business. We don't have time for your nonsense."
+				</td></tr>
+				<tr><th>				
+					77355:</th><td>"Oh... Sorry, Razor..."
+				</td></tr>
+				<tr><th>				
+					79438:</th><td>"What we're doing here is of utmost importance... And a severe violation that will get us both imprisoned or worse if anyone finds out. <i>Please</i> just take this seriously."
+				</td></tr>
+				<tr><th>				
+					77355:</th><td>"I am taking this seriously! This is my serious face."
+				</td></tr>
+				<tr><th>				
+					79438:</th><td>"Okay, good. Anyway, as I was saying..."<br>"Whatever they're keeping secret in there... Whatever technology they used... however it is they made ME, they don't want anyone to know anything about this. Not even M.I.R.A., considering the state of my file."<br>"We have to think this through. We have to find out."
+				</td></tr>
+				<tr><th>				
+					77355:</th><td>"Yes, of course. Don't worry. We're more than qualified for this. We're the top agents at M.I.R.A.! No amount of security is going to stop us from finding answers."
+				</td></tr>
+				<tr><th>				
+					79438:</th><td>"So, once we manage to get past the guards... I haven't been inside in a long time. They've probably had all sorts of renovations by now... Security improvements. I remember everything was already pretty... well-protected when I was here, and it looks like things have only gotten more complicated. The guards are only the first layer. That's why I was hoping we wouldn't just walk into the main entrance."
+				</td></tr>
+				<tr><th>				
+					77355:</th><td>"Well, milady, we may not have a choice. Without Siege here, we're at a bit of a disadvantage. Though, in a way, that might be for the best? He's bigger, a lot harder to hide, and we're going to need to stay hidden in there."
+				</td></tr>
+				<tr><th style="padding-bottom: 24px">				
+					79438:</th><td style="padding-bottom: 24px">"Then, we're certainly going to need to take a more secretive approach. Okay. Let's rethink this, then."
+				</td></tr>
+				</table>
+				<div style="padding-left: 18%; padding-right: 18%"><hr style="height:1px; background:#FFFFFF;">	</div>
+				<div style="padding-left: 18%; padding-right: 18%"><hr style="height:1px; background:#FFFFFF;">	</div>	
+				<table style="text-align:left;   margin-left: auto; margin-right: auto;">
+				<tr><th style="padding-top: 24px">				
+					77355:</th><td style="padding-top: 24px">"So, finally, that should take us inside."
+				</td></tr>
+				<tr><th>				
+					79438:</th><td>"Sounds like a plan. Let's get in position."
+				</td></tr>
+				<tr><td colspan="2">				
+					[Agents 79438 and 77355 maneuvered covertly into their discussed locations.]
+				</td></tr>
+				<tr><td colspan="2">				
+					[Agent 77355 shot a gust of wind across the entrance area, causing a metal object across from them to come loose and fall to the ground with a clatter. At the sound, two of the four laboratory guards moved away from the door to investigate, stomping over to look around the area where the metal had fell. The two other guards remained in place.]
+				</td></tr>
+				<tr><th>				
+					77355:</th><td>"<i>Now.</i>"
+				</td></tr>
+				<tr><td colspan="2">				
+					[Boosted by the magical effects of Agent 77355's Mystic Gale spell, Agent 79438 suddenly darted from behind one metal obstruction to another, in clear view of the remaining guards. One guard pointed at the space where Agent 79438 was a moment ago, demanding whoever he saw to identify themself. Both guards began to walk toward this location.]
+				</td></tr>
+				<tr><td colspan="2">				
+					[As the guards passed by Agent 77355's hiding location, Agent 77355 cast a wind spell on the key held by one of the guards, lifting it up and off of the guard's key holder loop. The wind carried the key quickly and quietly backward to Agent 77355, and safely into his open claw.]
+				</td></tr>
+				<tr><td colspan="2">				
+					[Meanwhile, Agent 79438 ducked into an alcove she had scouted out earlier, and slashed her saber through the open air, shooting out a cleaving gust of wind toward a nearby pile of scrap metal that the agents had stacked up for their plan. The wind projectile, created as a result of Agent 79438's Windcleaver technique, smashed into the metal pile, causing it all to fall over and produce a thunderous commotion of metal noises. This drew the attention of all four guards, who passed by Agent 79438's hidden presence as well, looking to investigate the noise.]
+				</td></tr>
+				<tr><td colspan="2">				
+					[With all four guards distracted, Agent 77355 snuck over to the now-unguarded laboratory door, and inserted the key that he had stolen into the lock. As he unlocked the door, Agent 79438 used her remaining burst of Mystic Gale energy to quickly dash out from the alcove she was hiding in, and again out of view of the guards. Agent 79438 made her way to the now-unlocked lab door, regrouping with Agent 77355.]
+				</td></tr>
+				<tr><td colspan="2">				
+					[Agent 77355 quietly opened the door, and both agents prepared to enter. At this time, though, a fifth guard suddenly appeared, walking into view from behind the side of the laboratory. This guard was on a patrol route around the perimeter of the laboratory, and was a complication that the agents had not foreseen.]
+				</td></tr>
+				<tr><th>				
+					GUARD:</th><td>"What the sc- You rats! How the [expletive] did you get a key?"
+				</td></tr>
+				<tr><th>				
+					77355:</th><td>"Oh [expletive]"
+				</td></tr>
+				<tr><td colspan="2">				
+					[The guard prepared to raise the alarm, but before she was successful, Agent 77355 shot out a blast of wind from his staff, launching the alarm device out of the guard's claw and into the distance. The guard was momentarily stunned by this, and before she could finish processing it, Agent 79438 slashed out with her saber, cutting into the guard's voice mechanism and disabling her ability to speak or call the other guards over.]
+				</td></tr>
+				<tr><td colspan="2">				
+					[Coming to her senses, the guard let out a grating metal growl and slammed her body into the two agents, knocking them to the ground. She slashed and struck at the agents with her claws, injuring them. After lashing out with her tail and sweeping them aside, she then turned and started moving as quickly as she could toward the other guards.]
+				</td></tr>
+				<tr><td colspan="2">				
+					[Agents 79438 and 77355 struggled to their feet and tried to stop the guard. Agent 79438's sustained damage was only to her plating, so she quickly recovered, jumped up at the guard and started slashing at her. However, the guard was a Rammer model and thus had a lot of durability, so she wasn't able to slow her down.]
+				</td></tr>
+				<tr><td colspan="2">				
+					[Meanwhile, Agent 77355's injuries were more serious, as he was not armored. He attempted to use a Dizzying Twister spell on the guard, but he was unsuccessful due to difficulty focusing because of the injury, and due to the mass of the guard. The guard pulled herself out of the cyclone and kept going.]
+				</td></tr>
+				<tr><td colspan="2">				
+					[The agents tried to pursue the guard, but it appeared that they were not going to be able to stop her from reaching the other guards. She was too tough for them to take down quickly enough.]
+				</td></tr>
+				<tr><td colspan="2">				
+					[Before the guard could get far, though, she was interrupted as another Rammer model came flying through the air out of nowhere, crashing straight into her and rendering her unconscious. For a moment, Agents 79438 and 77355 were worried that this was another guard, but they quickly noticed the metal plates of armor covering the Rammer's body and arms. This Rammer was not a guard, but rather Agent 25625 “Siege”, the lead agent of team Ζ6.]
+				</td></tr>
+				<tr><th>				
+					25625:</th><td>"No one injures my associates!"
+				</td></tr>
+				<tr><th>				
+					77355:</th><td>"Siege! Knew I could count on you!"
+				</td></tr>
+				<tr><th>				
+					25625:</th><td>"I... I apologize, I didn't want to leave you two to do this unaccompanied, it was just... I..."
+				</td></tr>
+				<tr><th>				
+					79438:</th><td>"We understand. Now, quiet. Not a sound. There's four more guards over there."
+				</td></tr>
+				<tr><td colspan="2">				
+					[Agent 77355, anticipating that the other guards may look over and see the group, used his Obscuring Fog spell and hid the area around the laboratory door from the view of the guards. Agent 79438 beckoned for the two other agents to come in through the door. Agent 77355 immediately did so, and Agent 25625 followed after picking up the unconscious body of the guard and carrying it in with them, so the other guards wouldn't find it.]
+				</td></tr>
+				<tr><td colspan="2">				
+					[With everyone in, Agent 77355 closed the door behind them and locked it, so that when the guards returned to their post, they wouldn't notice anything out of the ordinary. The three agents were now securely inside of the private laboratory.]
+				</td></tr>
+				<tr><th>				
+					77355:</th><td>"Good work, team. We made it in. Now for the hard part."
+				</td></tr>
+				<tr><th>				
+					79438:</th><td>"Time to get some answers."
+				</td></tr>
+				</table>
+
+
+			</p>
+		</div>			
+
+		
+		<script>
+			var grodan = new Howl({    src: ['assets/audio/grodan.ogg', 'assets/audio/grodan.mp3'],    volume: 0.3,    loop: true  })
+
+			var playSound = true
+		
+			function proceed() {
+				if(checkB.checked) {
+					document.getElementById("warning").style.display = "none";
+					grodan.play()
+					document.title = "MIRA Operation Report";
+					document.body.style.animation = "background 1.2s 1"; 
+					document.body.style.backgroundColor = "#3F3F3F";
+					document.getElementById("mission").style.display = "block";
+					document.getElementById("sound").style.display = "block";
+				}
+				else {
+					document.getElementById('btnMessage').innerHTML = "<br><b>Checkbox must be checked to continue</b>"
+				}
+			}
+
+
+			function clickSound() {
+				playSound = !playSound
+				if(playSound) {
+					grodan.play()
+					document.getElementById("sound").src="assets/images/audioOn.png"
+				}
+				else {
+					grodan.pause()
+					document.getElementById("sound").src="assets/images/audioOff.png"
+					}	
+			}
+
+		</script>
+		
+	</body>
+</html>

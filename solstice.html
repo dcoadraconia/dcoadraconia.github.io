@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js" integrity="sha512-6+YN/9o9BWrk6wSfGxQGpt3EUK6XeHi6yeHV+TYD2GR0Sj/cggRpXr1BrAQf0as6XslxomMUxXp2vIl+fv0QRA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<html>
+	<title>Solstice's solace</title>
+	<link rel="icon" type="image/png" href="assets/images/ice.png">
+
+	<head>
+		<style>
+			@keyframes enter {
+			  0%  {opacity: 0.0;}
+			  100%  {opacity: 1.0;}
+			}
+			@keyframes enter2 {
+			  0%  {opacity: 0.0;}
+			  100%  {opacity: 0.36;}
+			}
+			@keyframes exit {
+			  0%  {opacity: 1.0;}
+			  100%  {opacity: 0.0;}
+			}
+			
+			@keyframes rotate {
+			  0%  {transform: rotate(0);}
+			  50%  {transform: rotate(66deg);}
+			  100%  {transform: rotate(0);}
+			}
+			
+			@keyframes open {
+			  0%  {transform: translate(0%, 0%)}
+			  100%  {transform: translate(0%, -66%)}
+			}
+			
+			@keyframes gift {
+			  0%  {width:auto; height:1%; left: 88%; bottom: 24%;}
+			  100%  {width:auto; height:66%; left: 50%; bottom: 38%;}
+			}
+			
+			@keyframes leavereturn {
+			  0%  {transform: translate(0%, 0%);}
+			  50%  {transform: translate(330%, 0%);}
+			  100%  {transform: translate(0%, 0%);}
+			}
+		</style>
+	</head>	
+
+	<body bgcolor="white" style="overflow: hidden;">
+		<image id="sound" onclick="clickSound()" src="assets/images/audioOff.png" style="position:fixed; height:66px; width:auto; margin:12px; cursor: pointer; z-index:-2">
+		
+		<img id="fallingsnow" src="assets/images/snow-transparent.gif" style="display:block; width:100%;height: 100%; position: fixed; top:0; left:0; z-index:-19;">  </img>
+		
+		<img id="snow" src="assets/images/snow.jpg" style="display:block; width:100%;height: 100%; position: fixed; top:0; left:0; z-index:-21;">  </img>
+
+		<div id="sun" onclick="clickSun()" style="cursor: pointer; height: 6%; width: 4%; background: transparent; border-radius: 50%; display: block; position: absolute; top:36.4%;left:70.2%; transform: translate(-50%, -50%); -moz-user-select: none; -webkit-user-select: none; z-index:-6;"></div>
+		
+		<p id="sunText" style="display:none; position: absolute; top:27%;left:70.3%; transform: translate(-50%, -50%); z-index:22; color:#000000; font-size:22px; font-family: 'Helvetica';"> Felt like something changed elsewhere.</p>
+
+		<div id="textHolder" style="position:absolute; background:rgba(191, 255, 255, 0.66); padding:1rem; margin-top:90px; border:6px solid #1F1F3F; border-radius: 12px; width:52%; height:75%;overflow-y:scroll; z-index: -2;">
+			<p style="font-family: 'Georgia'; font-size:21px;">
+				'Twas the day of the Solstice, and all through the snow
+				<br><br>
+				All the dragons were bustling, moving to and fro
+				<br><br>
+				This morning, as always, they worked with great care
+				<br><br>
+				To grow the new village, a mission they share
+				<br><br>
+				Now in this crowd of dragons that were walking about
+				<br><br>
+				In the thick of the crowd was a lovable lout
+				<br><br>
+				Solar, the Ghost Seer, was hurrying along
+				<br><br>
+				He was running around, as though something was wrong.
+				<br><br>
+				The others did watch as he ran through the town
+				<br><br>
+				What was he up to? Would he ever slow down?
+				<br><br>
+				After running a while, Solar reached a small tent
+				<br><br>
+				He knocked at the door, some time waiting he spent
+				<br><br>
+				'Til at last a steel face did peek through the tarp
+				<br><br>
+				For this tent was the home of Solar's friend Sharp!
+				<br><br>
+				She looked into his eyes, and she wondered, quite curious
+				<br><br>
+				"What brings you here, Solar? ...Is it something serious?"
+				<br><br>
+				He replied "Sharp, oh goodness, I'm so glad you're here...
+				<br><br>
+				I completely forgot about Solstice this year!"
+				<br><br>
+				"Oh, yes, Solar, you're right! An intriguing event!"
+				<br><br>
+				And before he could reply, to her back room Sharp went
+				<br><br>
+				She returned a bit later with notebook and pen
+				<br><br>
+				"The Solstice is fascinating! Where to even begin?
+				<br><br>
+				Today is the day the world's axial tilt
+				<br><br>
+				Reaches the highest, up to which it has built!
+				<br><br>
+				Today is the day we're farthest from the sun,
+				<br><br>
+				So it's the shortest day! Isn't science so fun?"
+				<br><br>
+				Solar stood there a moment, mouth open in shock
+				<br><br>
+				Sharp was hurting his brain with her smart person talk!
+				<br><br>
+				"That's, um, that's nice Sharp, I am sure that's all true
+				<br><br>
+				But I came to get help! I have so much to do!"
+				<br><br>
+				"Oh! If you need my help, then I'll be sure to act!
+				<br><br>
+				What do you need help with? Is it more science facts?"
+				<br><br>
+				"NO!! I mean, umm, I could use your help shopping...
+				<br><br>
+				There's so much to consider! I have no time for stopping!"
+				<br><br>
+				"Shopping? Solar, why'd you need my help with THAT?
+				<br><br>
+				Are you not paid enough, is what you're getting at?"
+				<br><br>
+				"Um, no, I got all these cool strings from the Council!
+				<br><br>
+				They're worth what I need, so I'm not really doubtful.
+				<br><br>
+				It's more that I don't really know what to buy-
+				<br><br>
+				But you know a lot! So I thought I would try."
+				<br><br>
+				"Oh! Well, I guess we can go to the store...
+				<br><br>
+				Umm... What exactly were you in the market for?"
+				<br><br>
+				"Well, Sharp, it's the Solstice, so I need to get
+				<br><br>
+				New gifts for my friends! I'm trying not to fret
+				<br><br>
+				But I've so many friends now, of so many kinds
+				<br><br>
+				And they're all just so different! I'm falling behind!
+				<br><br>
+				In Home Cave it was easy to make Solstice plans
+				<br><br>
+				I got everyone cool rocks, or mosses, or sand
+				<br><br>
+				But here in the camp, there's just so much around!
+				<br><br>
+				And so many options! How to narrow it down?!"
+				<br><br>
+				"Wait, um, hold on there, Solar! I'm kinda confused.
+				<br><br>
+				Is there something I'm missing?" the Blade Dragon mused.
+				<br><br>
+				"Why're you buying gifts for everyone at once?
+				<br><br>
+				That sounds exhausting, if I may be blunt."
+				<br><br>
+				"Well yes, Sharp, it is, but it's Solstice, you see?
+				<br><br>
+				It's the season of gift-giving, it's how it must be!
+				<br><br>
+				So let's go," he said, and he started to turn-
+				<br><br>
+				But Sharp, on the other claw, wanted to learn.
+				<br><br>
+				She pulled out her pencil, she pulled out her notes
+				<br><br>
+				In her study on Sun Dragons, a new section she wrote.
+				<br><br>
+				"Oh, I get it! I realize the point of this mission!
+				<br><br>
+				Is gift-giving on the Solstice a Sun Dragon tradition?"
+				<br><br>
+				"Why, yes, of course, Sharp!" Solar said, turning back.
+				<br><br>
+				"I guess it's a custom that Blade Dragons lack?"
+				<br><br>
+				"Indeed," Sharp responded, her eyes twinkling like lights.
+				<br><br>
+				"Every dragon tribe has their own special rites.
+				<br><br>
+				The Leaf Dragons feast and they gather with cheer
+				<br><br>
+				When the start of the winter comes 'round every year.
+				<br><br>
+				The Bloom Dragons hold a dance after the first frost
+				<br><br>
+				Snowstorm Dragons clear a path for the ones they have lost.
+				<br><br>
+				Lilypads watch the moon, well into the night...
+				<br><br>
+				And Orca Dragons - Well, I'm not sure. They probably just fight.
+				<br><br>
+				Glass Dragons, each year when the winter begins...
+				<br><br>
+				They hold a sacred ceremony, for forgiveness of sins.
+				<br><br>
+				The point is that, Solar, across every tribe
+				<br><br>
+				Are unique winter customs to which dragons subscribe."
+				<br><br>
+				"Wow!" Solar replied. "That sounds really great!
+				<br><br>
+				I guess different traditions are a draconic trait!
+				<br><br>
+				And what about you? What about the Blade Dragons?
+				<br><br>
+				What winter festival are you gonna be having?"
+				<br><br>
+				"Well..." Sharp began, turning the pen in her clutch,
+				<br><br>
+				"Honestly, Solar, we don't really do much.
+				<br><br>
+				Blade Dragons don't celebrate anything specific...
+				<br><br>
+				We find winter festivities unscientific."
+				<br><br>
+				Hearing this, Solar's wings and his sun too did droop
+				<br><br>
+				And his whole body lowered in a sort of sad stoop.
+				<br><br>
+				"No parties? No Solstice? But Sharp, that's so sad!
+				<br><br>
+				Missing out on the festivals must feel so bad!"
+				<br><br>
+				"Well, a little," said Sharp, "It does kinda stink."
+				<br><br>
+				And as Solar heard this, he began to think.
+				<br><br>
+				He thought and he thought, as he let out a "Hrrrmmm..."
+				<br><br>
+				And he thought some more thoughts, the silly little wyrm.
+				<br><br>
+				Then, he got an idea! His sun lit up bright
+				<br><br>
+				And he knew what to do so he could make things right.
+				<br><br>
+				"Sharp, since you don't have a tradition of your own...
+				<br><br>
+				You can celebrate Solstice so you won't be alone!
+				<br><br>
+				You can be like a Sun Dragon, Sharp, don't you see?
+				<br><br>
+				And you'll get to celebrate with my friends, and with me!"
+				<br><br>
+				"Oh, that would be great!" Sharp replied with a shout,
+				<br><br>
+				"But, I don't know what Solstice is even about!"
+				<br><br>
+				"Well..." Solar said, as he started to smile,
+				<br><br>
+				"I can teach you about it, but it'll take a while."
+				<br><br>
+				"Really? You would?" Sharp asked, beaming with glee.
+				<br><br>
+				"Of course!" Solar responded. "Now, umm, let's see..."
+				<br><br>
+				"This is so exciting! A Sun Dragon holiday?
+				<br><br>
+				It sounds so fascinating! What a discovery! Yay!"
+				<br><br>
+				"It is! You'll love it! There's no need to worry..."
+				<br><br>
+				"So let me begin telling the Solstice Story."
+				<br><br>
+				"Long, long ago, as I have always heard..."
+				<br><br>
+				Solar began, as Sharp recorded each word.
+				<br><br>
+				"In the sky, way up high, where the Great Dragons are...
+				<br><br>
+				Way back then, after dark, the night sky had no stars!"
+				<br><br>
+				"Huh?" Sharp interrupted. "That doesn't make sense!"
+				<br><br>
+				"The stars were always there! They're formed out of dense-"
+				<br><br>
+				"Sharp, please don't interrupt in the Solstice Story...
+				<br><br>
+				It's very important." ... "Oh, um, my bad, hehe, sorry."
+				<br><br>
+				"So, as I was saying, long ago, during night...
+				<br><br>
+				There weren't any stars! There wasn't any light!
+				<br><br>
+				In the sky, in the dark, there was only the Moon."
+				<br><br>
+				"Umm, Solar, why not?" ... "Shhh, I'll get to that soon."
+				<br><br>
+				"In the sky were two Great Dragons, of the Moon and the Sun...
+				<br><br>
+				Each crossed the sky each day when the other was done.
+				<br><br>
+				The Sun was brought by the Great Sun Dragon Sol.
+				<br><br>
+				He was a lot like us, as I've always been told.
+				<br><br>
+				At night, the sky was the Great Moon Dragon's home.
+				<br><br>
+				Her name was Luna, and the night sky she roamed.
+				<br><br>
+				This continued each day, throughout all the years...
+				<br><br>
+				When one Great Dragon was far, the other was near.
+				<br><br>
+				Now Sol was very happy! He brought the Sun every day...
+				<br><br>
+				And in his Sun's light, all the dragons would play!
+				<br><br>
+				He loved watching over Earth's dragons, the big and the small
+				<br><br>
+				Seeing them smile was his favorite of all.
+				<br><br>
+				At the horizon each evening, when the two dragons met,
+				<br><br>
+				Sol would talk to his friend Luna during sunset.
+				<br><br>
+				He'd tell Luna about all the things he had seen
+				<br><br>
+				About the Earth's dragons living under his sun's gleam.
+				<br><br>
+				He'd wish her good luck on her crossing of the sky
+				<br><br>
+				And then he'd say farewell, and away he would fly.
+				<br><br>
+				Now Sol didn't know, and he never had...
+				<br><br>
+				But the truth was that Luna was really quite sad.
+				<br><br>
+				For as Sol left the sky and flew off of the edge,
+				<br><br>
+				All the dragons he'd watched made their way to their beds.
+				<br><br>
+				And as Luna crossed the sky, with no light that shone...
+				<br><br>
+				Earth's dragons went to sleep, leaving Luna all alone.
+				<br><br>
+				Luna knew all about day from what Sol had told...
+				<br><br>
+				But what she saw each night was only dark and cold.
+				<br><br>
+				As the Earth's dragons slept, it was just Luna only.
+				<br><br>
+				She had no one to watch over... She got very lonely.
+				<br><br>
+				The next morning each day, the two would met again...
+				<br><br>
+				Sol would ask what she'd seen, if she'd made any friends.
+				<br><br>
+				Luna'd say it was fine, so that he wouldn't worry...
+				<br><br>
+				She'd dodge all his questions, and leave in a hurry.
+				<br><br>
+				So Sol never realized that something was wrong...
+				<br><br>
+				He just thought she was tired, as her flight had been long.
+				<br><br>
+				Now this all continued for a very long time...
+				<br><br>
+				Sol not knowing the truth, Luna saying it was fine...
+				<br><br>
+				Until one evening, the night of Luna's hatching-day,
+				<br><br>
+				She could bear it no longer. There was simply no way.
+				<br><br>
+				Her hatching-day had the longest night of the year.
+				<br><br>
+				And she would be alone that whole time... It was clear.
+				<br><br>
+				She watched as Sol reached the edge of the sky...
+				<br><br>
+				This was all too much for her. Luna began to cry.
+				<br><br>
+				Sol saw his friend crying, as he flew along...
+				<br><br>
+				He landed next to Luna and asked her what was wrong.
+				<br><br>
+				Luna, still crying, collapsed to the ground...
+				<br><br>
+				She told him how each night no one was around.
+				<br><br>
+				She told Sol that she was so sad and alone...
+				<br><br>
+				And Sol was just shocked! He never had known!
+				<br><br>
+				Sol sat down beside her, hugging her with his wing...
+				<br><br>
+				And finally, Luna told Sol everything.
+				<br><br>
+				As Sol heard all this, he didn't know what to say!
+				<br><br>
+				He hugged his dear friend, said it would be okay.
+				<br><br>
+				Luna then told Sol that she planned to leave.
+				<br><br>
+				No one needed the Moon... Just the Sun, she believed.
+				<br><br>
+				Sol was the one who the earth's Dragons loved...
+				<br><br>
+				His presence they celebrated, as he flew above.
+				<br><br>
+				But the Moon was forever ignored, on and on...
+				<br><br>
+				No one would even notice if Luna was gone.
+				<br><br>
+				Sol told her to stay, but his words were in vain...
+				<br><br>
+				She could not bear the night. It brought her too much pain.
+				<br><br>
+				Sol looked at his friend... He looked at his Sun...
+				<br><br>
+				And he knew, in that moment, what had to be done.
+				<br><br>
+				He held out his claw, and, as Sun Dragons tell...
+				<br><br>
+				Sol then cast upon his Sun a powerful spell.
+				<br><br>
+				It shimmered with light, and from it there came
+				<br><br>
+				Hundreds and thousands of twinkling flames.
+				<br><br>
+				They rose into the sky, all of the tiny sparks
+				<br><br>
+				And throughout the night sky, they banished the dark.
+				<br><br>
+				Sol told Luna that now, she wasn't alone.
+				<br><br>
+				She'd now be surrounded by little suns that shone.
+				<br><br>
+				Luna was amazed! She stared into the sky...
+				<br><br>
+				Looking to the stars she'd now find her way by.
+				<br><br>
+				As stars filled the night sky, dragons rose from their beds...
+				<br><br>
+				And out of their homes, they poked their little heads.
+				<br><br>
+				Earth's dragons all looked to the sky in such awe...
+				<br><br>
+				As stars were something none of them ever saw.
+				<br><br>
+				His spell now complete, Sol rose and he stood...
+				<br><br>
+				He told Luna he hoped her hatching-day would be good.
+				<br><br>
+				Though Luna kept crying, a sight that Sol feared...
+				<br><br>
+				Luna smiled and hugged Sol... These were joyful tears!
+				<br><br>
+				With the sky full of lights, watched by dragons below...
+				<br><br>
+				This night would not be one of sadness and woe.
+				<br><br>
+				Luna let go of Sol, preparing to lift
+				<br><br>
+				And thanked him, so grateful she was for Sol's gift.
+				<br><br>
+				She was so very thankful, from the bottom of her heart...
+				<br><br>
+				But it was well past evening now, and night had to start.
+				<br><br>
+				She looked to the earth, wiped the tears from her eyes,
+				<br><br>
+				She rose into the air, and she told Sol goodbye.
+				<br><br>
+				Sol waved goodbye back, as the Moon now she carried,
+				<br><br>
+				He knew Luna's emotions would no longer be buried.
+				<br><br>
+				And Sol called out to Luna as she flew out of sight
+				<br><br>
+				Wishing her a Starry Solstice, and a wonderful night."
+				<br><br>
+				And with that, Solar's story of Solstice was over.
+				<br><br>
+				He grinned at Sharp, taking a breath to recover.
+				<br><br>
+				"So, Sharp, tell me what do you think of all that?
+				<br><br>
+				Do you understand now what I was getting at?
+				<br><br>
+				Solstice is a time, as I've always been taught,
+				<br><br>
+				To show that I care to those I love a lot."
+				<br><br>
+				Sharp stopped scribbling notes hearing what Solar spoke...
+				<br><br>
+				She looked at him, her journal letting off wisps of smoke.
+				<br><br>
+				"Wait, Solar, that's IT??? I made the connection,
+				<br><br>
+				The story was sweet, but I've so many QUESTIONS!!!!
+				<br><br>
+				How is it a dragon can carry the moon?
+				<br><br>
+				What does Luna do after dawn, in morning or noon?
+				<br><br>
+				Why aren't the stars visible during the day?
+				<br><br>
+				When Sol comes in the morning, does he take them away?
+				<br><br>
+				Or what about eclipses? How are moon phases done?
+				<br><br>
+				Can all Sun Dragons do that spell with their suns?"
+				<br><br>
+				"Umm, honestly Sharp, I have no idea.
+				<br><br>
+				You'd have to ask Ba-Bu, or Nova, or Tia."
+				<br><br>
+				"Oh, Solar, you silly, I'm just messing with you!
+				<br><br>
+				It's just a cute story, it's not even true!"
+				<br><br>
+				"It IS true! I bet they were both friends with Spei!
+				<br><br>
+				Sometime I'll ask her, and then you will see!"
+				<br><br>
+				"Sure, Solar," Sharp laughed, while up she was hopping.
+				<br><br>
+				"But first, let's go deal with all that Solstice shopping."
+				<br><br>
+				"OH NO!" Solar exclaimed. "You're right! We have to go!"
+				<br><br>	
+				And he ran out the door and dashed into the snow.
+				<br><br>
+				So out to the village Sharp ran with her friend...
+				<br><br>
+				To this Solstice dragon-tale bringing: The End.
+				<br><br>				
+			</p>
+		</div>
+
+
+		<img id="present" onclick="if(!anim){openPresent()}" src="assets/images/present.png" style="cursor: pointer; display:block; position:absolute; right:1%; bottom:0px; z-index:-12; height:auto; width:21%;">  </img>
+		
+		<img id="present_top" src="assets/images/present_top.png" style="display:none; position:absolute; right:1%; bottom:0px; z-index:-10; height:auto; width:21%;">  </img>
+		
+		<img id="present_bottom" src="assets/images/present_bottom.png" style="display:none; position:absolute; right:1%; bottom:0px; z-index:-11; height:auto; width:21%;">  </img>
+		
+		<img id="glow" src="assets/images/glow.png" style="display:block; position:absolute; right: -5.5%; bottom: -7%; z-index:-21; height:auto; width:33%; animation: 12s linear infinite normal rotate">  </img>
+		
+		<img id="present_gift" src="assets/images/rock.png" style="display:none; position: absolute; left: 50%; bottom: 38%; transform: translate(-50%, 50%); width:auto; height:66%;">  </img>
+		
+		<div id="giftText" style="position:absolute; background: #EEEEEE; padding:2rem; border:6px solid #00FFFF; border-radius: 12px; left: 50%; top: 14.5%; bottom: 66%; transform: translate(-50%, -50%); font-family: 'Ink Free','Georgia' ; font-size: 25px; text-align:center; line-height: 1.66;display: none;justify-content: center;align-items: center;flex-wrap: wrap;">
+			<div>
+			You got:<br>
+			<b><span id=giftName>Common Rock!!!!!!!!!!!!</span></b>
+			</div>
+		</div>
+		
+		<img id="close" onclick="if(!anim){closePresent()}" style="display:none; position: fixed; top: -1px;left: -1px; width: 101%; height: 101%; background-color: black; opacity:0.36; z-index: -1;">  </img>
+		
+		<script>
+			var playSound = false
+			var solstice = new Howl({    src: ['assets/audio/solstice.ogg', 'assets/audio/solstice.mp3'],    volume: 0.5,    loop: true  })
+			var open = new Howl({    src: ['assets/audio/chest_open.ogg', 'assets/audio/chest_open.mp3'],    volume: 0.88,    loop: false  })
+			var close = new Howl({    src: ['assets/audio/chest_close.ogg', 'assets/audio/chest_close.mp3'],    volume: 0.88,    loop: false  })
+			var spooky = new Howl({    src: ['assets/audio/SpookyNoise.ogg', 'assets/audio/SpookyNoise.mp3'],    volume: 0.88,    loop: false  })
+			
+			var itemget = new Howl({    src: ['assets/audio/itemget.ogg', 'assets/audio/itemget.mp3'],    volume: 0.5,    loop: false  })
+			var fanfare = new Howl({    src: ['assets/audio/fanfare.ogg', 'assets/audio/fanfare.mp3'],    volume: 0.3,    loop: false  })
+			var moment = new Howl({    src: ['assets/audio/moment.ogg', 'assets/audio/moment.mp3'],    volume: 0.9,    loop: false  })
+			
+			var count=0
+			var nums = []
+			for (let i = 2; i <= 12; i++) {
+				nums.push(i)
+			}
+			for (var i = nums.length - 1; i > 0; i--) {
+				var j = Math.floor(Math.random() * (i + 1));
+				var temp = nums[i];
+				nums[i] = nums[j];
+				nums[j] = temp;
+			}
+			nums.push(1)
+			
+			
+			function clickSound() {
+				playSound = !playSound
+				if(playSound) {
+					solstice.play()
+					document.getElementById("sound").src="assets/images/audioOn.png"
+				}
+				else {
+					solstice.pause()
+					document.getElementById("sound").src="assets/images/audioOff.png"
+					}	
+			}
+
+			function clickSun() {
+				if(!(localStorage.getItem("sun") == "true")) {
+					try {localStorage.setItem("sun","true")}catch(error){}
+					setTimeout(() => { spooky.play() }, 120);
+					document.getElementById("sunText").style.display="block"
+					document.getElementById("sunText").style.animation="2.2s 1 normal enter"
+					solstice.fade(0.5,0.12,0.12)
+					setTimeout(() => {
+						solstice.fade(0.12,0.5,0.2)
+					}, 2100);
+					setTimeout(() => {
+						document.getElementById("sunText").style.animation="2.2s 1 normal exit"
+					}, 2200);
+					setTimeout(() => {
+						document.getElementById("sunText").style.display="none";
+					}, 4380);
+				}
+			}
+			
+			function randomColor() {
+				var sat = Math.random()
+				if(Math.random() > 0.5) sat=1.0
+				var presentColor = "hue-rotate("+Math.random()*360+"deg) saturate("+sat+")"
+				document.getElementById("present").style.filter=presentColor
+				document.getElementById("present_top").style.filter=presentColor
+				document.getElementById("present_bottom").style.filter=presentColor
+			}
+			randomColor()
+			
+			function openPresent() {
+				document.getElementById("present_top").style.display="block"
+				document.getElementById("present_bottom").style.display="block"
+				setTimeout(() => { document.getElementById("present").style.display="none" }, 12);
+				setTimeout(() => { open.play() }, 66);
+				document.getElementById("present_top").style.animation="0.88s ease 1 normal open"
+				document.getElementById("present_top").style.transform="translate(0%, -66%)"
+				setTimeout(() => { giftAnim() }, 120);
+			}
+			
+			var anim=false
+			function giftAnim() {
+				anim=true
+				var num=Math.random()
+				if(num < 0.8) num = 1
+				else if(num < 0.96) num = 2
+				else num = 3
+				
+				var time = 0
+				
+				if(playSound) {
+					solstice.pause()
+					if(num==1) {
+						itemget.play()
+						time = 5.6
+					}
+					
+					if(num==2) {
+						fanfare.play()
+						time = 10
+					}
+					
+					if(num==3) {
+						moment.play()
+						time = 31
+					}
+				}
+				else time = 5
+					
+				var name = ""
+				num = nums[count % 12]-1
+				count++
+				
+				if(num<1) {
+					document.getElementById("present_gift").src="assets/images/gifts/dwayne.png"
+					name='Dwayne "Hits you with a Rock" Johnson'
+				}
+				else if(num<2) {
+					document.getElementById("present_gift").src="assets/images/gifts/da_burrow.png"
+					name='Da Burrow Dragon'					
+				}
+				else if(num<3) {
+					document.getElementById("present_gift").src="assets/images/gifts/bronz.jpg"
+					name='bronz my beloved'					
+				}	
+				else if(num<4) {
+					document.getElementById("present_gift").src="assets/images/gifts/girl.png"
+					name='the 🤍 ⭐ 🐑  ❄️  𝑔𝒾𝓇𝓁  ❄️  🐑 ⭐ 🤍'					
+				}				
+				else if(num<5) {
+					document.getElementById("present_gift").src="assets/images/gifts/bean.png"
+					name='warm bean'					
+				}					
+				else if(num<6) {
+					document.getElementById("present_gift").src="assets/images/gifts/corona1.png"
+					name='Empress Bulblagon'					
+				}
+				else if(num<7) {
+					document.getElementById("present_gift").src="assets/images/gifts/this_is_a.png"
+					name='This is a Emerald'					
+				}
+				else if(num<8) {
+					document.getElementById("present_gift").src="assets/images/gifts/mud.png"
+					name='MudWonk I mean Mud Derg'					
+				}				
+				else if(num<9) {
+					document.getElementById("present_gift").src="assets/images/gifts/fang.png"
+					name='Danger Noodle EX'					
+				}						
+				else if(num<10) {
+					document.getElementById("present_gift").src="assets/images/gifts/chad.png"
+					name='Husband Material'					
+				}
+				else if(num<11) {
+					document.getElementById("present_gift").src="assets/images/gifts/seer.png"
+					name='IDK who this is'					
+				}			
+				else {
+					document.getElementById("present_gift").src="assets/images/gifts/orchid.png"
+					name='Plant Waifu'					
+				}
+				
+				if((Math.random() < 0.000244140625) || (typeof forceShiny !== 'undefined' && forceShiny==true)) {
+					document.getElementById("present_gift").src="assets/images/gifts/hecate.png"
+					name='OH GOD KILL IT WITH FIRE'
+					count--
+				}
+				
+				document.getElementById("present_gift").style.animation=(time+"s ease-in-out 1 normal gift")
+				document.getElementById("present_gift").style.display="block"
+				document.getElementById("close").style.display="block"
+				document.getElementById("close").style.animation="1.2s 1 normal enter2"
+								
+				setTimeout(() => {
+					document.getElementById("close").style.animation=""
+					document.getElementById("present_top").style.animation=""
+					setTimeout(() => { anim=false; }, ((time==5.6) ? 3300 : 1200) );
+					document.getElementById("giftName").innerHTML = name
+					setTimeout(() => { 
+						document.getElementById("giftText").style.display="flex"; 
+						document.getElementById("giftText").style.animation = "1.2s 1 normal enter" 
+						if(name=='Plant Waifu') {
+							document.getElementById("present_gift").src="assets/images/gifts/orchid.gif"
+						}
+					}, ((time==5.6) ? 500 : 66) );
+					
+				}, time*1000);
+				
+			}
+			
+			function closePresent() {
+				anim = true;
+				document.getElementById("close").style.display="none"
+				document.getElementById("present_gift").style.display="none"
+				document.getElementById("giftText").style.display="none"
+				if(playSound) solstice.play()
+
+				setTimeout(() => { close.play() }, 850);
+				
+				document.getElementById("present_top").style.animation="0.88s ease-out 1 reverse open"
+				document.getElementById("present_top").style.transform="translate(0%, 0%)"
+
+				setTimeout(() => { document.getElementById("present").style.display="block" }, 890);
+				setTimeout(() => { document.getElementById("present_top").style.display="none" }, 890);
+				setTimeout(() => { document.getElementById("present_bottom").style.display="none" }, 890);
+				
+				setTimeout(() => { document.getElementById("present").style.animation="2.1s ease-in-out 1 normal leavereturn" }, 1200);
+				setTimeout(() => { document.getElementById("glow").style.animation="0.66s 1 normal exit, 12s linear infinite normal rotate" }, 1200);
+				setTimeout(() => { document.getElementById("glow").style.display="none" }, 1840);
+				setTimeout(() => { randomColor(); }, 2400);
+				setTimeout(() => { anim = false; }, 3300);
+				setTimeout(() => { document.getElementById("glow").style.animation="0.66s 1 normal enter, 12s linear infinite normal rotate" }, 3000);
+				setTimeout(() => { document.getElementById("glow").style.display="block" }, 3000);
+			}
+		</script>
+	</body>
+</html>

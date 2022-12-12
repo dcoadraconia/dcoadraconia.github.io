@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js" integrity="sha512-6+YN/9o9BWrk6wSfGxQGpt3EUK6XeHi6yeHV+TYD2GR0Sj/cggRpXr1BrAQf0as6XslxomMUxXp2vIl+fv0QRA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<html>
+	<title>Stories and spirits</title>
+	<link rel="icon" type="image/png" href="assets/images/dark.png">
+	<head>
+		<style>
+			button.genBtn {
+				background-color: #000000;
+				transition-duration: 0.25s;
+			} .genBtn:hover {
+				background-color: #444444;
+				transition-duration: 0.25s;
+			}			
+	
+			@keyframes enter {
+			  0%  {opacity: 0.0;}
+			  100%  {opacity: 1.0;}
+			}
+		</style>
+	</head>	
+	<body id="body" bgcolor="black">
+		<image id="sound" onclick="clickSound()" src="assets/images/audioOff.png" style="position:absolute; height:66px; width:auto; margin:12px; cursor: pointer; z-index:1">
+
+		<div id="display" style="position:absolute; top:0px; left:0px;right:0px; padding-left: 120px; padding-right: 120px; color:#FFFFFF; font-size:24px; font-family: 'Arial'; line-height: 1.0;  text-align:center;">
+			<h1 id="text" style="color:#888888; font-size:36px; font-family: 'Tahoma'; line-height: 1.0; text-align:center; ">
+				A library of a thousand stories
+			</h1>		
+			<p style="color:#666666; font-size:24px; font-family: 'Tahoma'; line-height: 1.5; text-align:center; ">
+				 Hundreds of tales never meant to connect, now brought together by the Hand of God.<br>Each world so wildly different from the next, its magic and its laws entirely unique...<br>Only through the careful balance and guidance of some greater, controlling force is this reality capable of remaining stable.<br>In this world, a world filled with the inhabitants of hundreds and hundreds of stories, a new story is told.<br>One unlike any of the others before it.
+				 <br><br>
+				 <span style="color:#FFFF00"> <b>The development of the "Stories & Spirits" Project, formerly "Operation S.U.S.", has been resumed.</b> </span>
+			</p>
+			<br>
+			<button id="genBtn" class="genBtn" onclick="{if(!generating) generateMap()}" style="cursor: pointer; color: white; border: 5px solid white; padding: 12px 12px;text-align: center;display: inline-block;font-size: 24px; font-family: 'Tahoma'; z-index:12; border-radius:10px"> <b>Generate Map</b></button> 				
+			<span id="secretText" style="color:white; font-size:12px; font-family: 'Tahoma'; line-height: 1.0;"> </span>
+		</div>
+			
+		<script>
+			playSound = false
+			var darkR = new Howl({    src: ['assets/audio/dark_realm.ogg', 'assets/audio/dark_realm.mp3'],    volume: 0.5,    loop: true  })	
+			
+			class Tile {
+				constructor(x, y, id, dir) {
+					this.x = x;
+					this.y = y;
+					this.id = id;
+					this.dir = dir;
+					this.elem = null;
+				}
+				get image() {
+					return "assets/images/tiles/t"+this.id+".png"
+				}
+				get style() {
+					var ret = "position: absolute; left: "+getDispXPos(this.x,0)+"; top: "+getDispYPos(this.y,0)+";"
+					if(this.id == 0) {
+						ret += "transform: translate(0px, -206px);"
+					}
+					return ret
+				}
+				get rotate() {
+					return (this.dir*90)+"deg"
+				}	
+			}
+			
+			class Edge {
+				constructor(x, y, side) {
+					this.x = x;
+					this.y = y;
+					this.side = side
+				}				
+			}
+			
+			var tilesList = []
+			var generating = false
+			
+			function generateMap() {
+				generating = true
+				document.getElementById("secretText").innerHTML=""
+				initGenMap()
+				var tileIds = []
+				for (let i = 1; i <= 40; i++) {
+					tileIds.push(i)
+				}
+				for (var i = tileIds.length - 1; i > 0; i--) {
+					var j = Math.floor(Math.random() * (i + 1));
+					var temp = tileIds[i];
+					tileIds[i] = tileIds[j];
+					tileIds[j] = temp;
+				}
+				genNext(1,tileIds)
+			}
+			function genNext(i,tileIds) {
+				if(i > 40 || i < 1) {
+					setTimeout(() => { updBtn() }, 500);
+					return
+				}
+				var uEdge = pickRandomUEdge()
+				if(uEdge == undefined) {
+					console.log("Error: No available unexplored edges")
+					setTimeout(() => { updBtn() }, 500);
+					return
+				}
+				var xy = moveFromXYInDir(uEdge.x,uEdge.y,uEdge.side)
+				var currId = tileIds.shift()
+				var newTile = new Tile(xy[0],xy[1],currId,(uEdge.side+2)%4)
+				tilesList.push(newTile)
+				createTileImg(newTile)
+				updDisplay()
+				setTimeout(() => { genNext(i+1,tileIds) }, 40);
+			}
+			function updBtn() {
+				document.getElementById("genBtn").innerHTML="<b>Regenerate Map</b>"
+				generating = false
+			}
+			function updDisplay() {
+				for (let i = 0; i < tilesList.length; i++) {
+					tilesList[i].elem.style.left = getDispXPos(tilesList[i].x,(-getMinX())*205)
+					tilesList[i].elem.style.top = getDispYPos(tilesList[i].y,getMaxY()*204)
+				}
+			}
+			function initGenMap() {
+				for (let i = 0; i < tilesList.length; i++) {
+					tilesList[i].elem.remove()
+				}
+				tilesList = []
+				var startDir = 0					
+				var newTile = new Tile(0,0,0,startDir)
+				tilesList.push(newTile)					
+				createTileImg(newTile)
+				var xy = moveFromXYInDir(0,0,(startDir+2)%4)
+				newTile = new Tile(xy[0],xy[1],-1,startDir)
+				tilesList.push(newTile)	
+				createTileImg(newTile)
+				updDisplay()
+			}
+			
+			function createTileImg(aTile) {
+				var newImg = document.createElement("img")
+				newImg.src = aTile.image
+				newImg.style = aTile.style
+				newImg.style.rotate = aTile.rotate
+				newImg.onclick = function() {clickTile(aTile.id)}
+				document.getElementById('body').appendChild(newImg);
+				tilesList[tilesList.length-1].elem = newImg
+				if([2,4,5,6,11,12,17,18,19,31].includes(aTile.id)) newImg.style.cursor = "pointer"
+			}
+			function getDispXPos(x,extraOffset) {
+				if(205*getLengthX() < window.innerWidth) {
+					return ((window.innerWidth/2 - 102.5*getXOffset()) + 205*x-12)+"px"
+				}
+				return (12+205*x+extraOffset)+"px"
+			}
+			function getDispYPos(y,extraOffset) {
+				return (120+document.getElementById('display').clientHeight-204*y+extraOffset)+"px"
+			}
+			
+			function getMinX() {
+				var minX = 0
+				for (let i = 0; i < tilesList.length; i++) {
+					if(tilesList[i].x < minX) {
+						minX = tilesList[i].x
+					}
+				}
+				return minX		
+			}
+			function getLengthX() {
+				var pLength = 0
+				var nLength = 0
+				for (let i = 0; i < tilesList.length; i++) {
+					if(tilesList[i].x < nLength) {
+						nLength = tilesList[i].x
+					}
+				}
+				for (let i = 0; i < tilesList.length; i++) {
+					if(tilesList[i].x > pLength) {
+						pLength = tilesList[i].x
+					}
+				}
+				return pLength+1+(-nLength)					
+			}
+			function getXOffset() {
+				var pLength = 0
+				var nLength = 0
+				for (let i = 0; i < tilesList.length; i++) {
+					if(tilesList[i].x < nLength) {
+						nLength = tilesList[i].x
+					}
+				}
+				for (let i = 0; i < tilesList.length; i++) {
+					if(tilesList[i].x > pLength) {
+						pLength = tilesList[i].x
+					}
+				}
+				return pLength+nLength+1
+			}
+			function getMaxY() {
+				var maxY = 0
+				for (let i = 0; i < tilesList.length; i++) {
+					if(tilesList[i].y > maxY) {
+						maxY = tilesList[i].y
+					}
+				}
+				return maxY					
+			}
+			
+			function getTileAt(x, y) {
+				for (let i = 0; i < tilesList.length; i++) {
+					if(tilesList[i].x == x && tilesList[i].y == y) {
+						return tilesList[i]
+					}
+				}
+				return null					
+			}
+			function moveFromXYInDir(x, y, dir) {
+				if(dir==0) y--
+				if(dir==1) x--
+				if(dir==2) y++
+				if(dir==3) x++
+				return [x,y]
+			}
+			
+			function pickRandomUEdge() {
+				var uEdgesList = []
+				
+				for (let i = 0; i < tilesList.length; i++) {
+					for (let j = 0; j < 4; j++) {
+						if(hasUEdgeAt(tilesList[i],j))
+						{
+							var uEdge = new Edge(tilesList[i].x,tilesList[i].y,j)
+							uEdgesList.push(uEdge)
+						}
+					}
+				}						
+				return uEdgesList[Math.floor(Math.random() * uEdgesList.length)]
+			}
+			function hasUEdgeAt(tile, direction) {
+				var xy = moveFromXYInDir(tile.x, tile.y, direction)
+				if(getTileAt(xy[0],xy[1]) == null) {
+					if(tIdHasEdgeAt(tile.id,(4+direction-tile.dir)%4)) return true
+				}
+				return false
+			}
+			function tIdHasEdgeAt(id, direction) {
+				var fttt = [0]
+				var tfff = [35]
+				var tfft = [6,7,26,30]
+				var tftf = [3,8,15,16,23,27,34,38]
+				var tftt = [1,5,21,24,31,37]
+				var ttff = [18,20,33,40]
+				var ttft = [4,11,12,13,29]
+				var tttf = [2,17,19,28,32,39]
+				var tttt = [-1,9,10,14,22,25,36]
+				if(fttt.includes(id)) {
+					if(direction == 1) return true
+					if(direction == 2) return true
+					if(direction == 3) return true	
+				}
+				if(tfff.includes(id)) {
+					if(direction == 0) return true
+				}
+				if(tfft.includes(id)) {
+					if(direction == 0) return true
+					if(direction == 3) return true	
+				}
+				if(tftf.includes(id)) {
+					if(direction == 0) return true
+					if(direction == 2) return true
+				}
+				if(tftt.includes(id)) {
+					if(direction == 0) return true
+					if(direction == 2) return true
+					if(direction == 3) return true	
+				}
+				if(ttff.includes(id)) {
+					if(direction == 0) return true
+					if(direction == 1) return true
+				}
+				if(ttft.includes(id)) {
+					if(direction == 0) return true
+					if(direction == 1) return true
+					if(direction == 3) return true	
+				}
+				if(tttf.includes(id)) {
+					if(direction == 0) return true
+					if(direction == 1) return true
+					if(direction == 2) return true
+				}
+				if(tttt.includes(id)) {
+					return true
+				}					
+				return false
+			}
+			
+			function clickTile(id) {
+				if(!generating) {
+					if(id == 2) document.getElementById("secretText").innerHTML="<br>Will you sacrifice yourself and become a Star?<br>"
+					else if(id == 4) document.getElementById("secretText").innerHTML="<br>A wolf without a pack is wandering the forest.<br>"
+					else if(id == 5) document.getElementById("secretText").innerHTML="<br>He is his own worst invention.<br>"
+					else if(id == 6) document.getElementById("secretText").innerHTML="<br>In the heart of the rot is the source of its power.<br>"
+					else if(id == 11) document.getElementById("secretText").innerHTML="<br>A people ruled by Science live by no moral code.<br>"
+					else if(id == 12) document.getElementById("secretText").innerHTML="<br>The Master of the Dungeon awaits the hero of Legend.<br>"
+					else if(id == 17) document.getElementById("secretText").innerHTML="<br>The essence of creativity permeates the loneliness.<br>"
+					else if(id == 18) document.getElementById("secretText").innerHTML='<br>Each step will only take you deeper into the unrevealed.<br>'
+					else if(id == 19) document.getElementById("secretText").innerHTML="<br>The being of Dark has seen the true reflection of the world.<br>"
+					else if(id == 31) document.getElementById("secretText").innerHTML="<br>Take control of your own Legend, or light the way for those around you.<br>"
+					else document.getElementById("secretText").innerHTML=""
+				}
+			}
+
+			function clickSound() {
+				playSound = !playSound
+				if(playSound) {
+					darkR.play()
+					document.getElementById("sound").src="assets/images/audioOn.png"
+				}
+				else {
+					darkR.pause()
+					document.getElementById("sound").src="assets/images/audioOff.png"
+				}		
+			}
+			
+			initGenMap()
+			var dispLoop = setInterval(displayI, 10);
+			var lastW = 0
+			
+			function displayI() {
+				if(!generating) {
+					if(lastW != window.innerWidth) {
+						lastW = window.innerWidth
+						updDisplay()
+					}
+				}
+			}
+			
+		</script>
+	</body>
+</html>
