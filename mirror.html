@@ -68,30 +68,7 @@
 			@keyframes shrinkExit {
 			  0%  {opacity: 1.0; width:50%; height:80%}
 			  100%  {opacity: 0.0; width:5%; height:8%}
-			}
-			
-
-			@keyframes flicker {
-			  0%   { opacity: 0.22; }
-			  70%   { opacity: 0.22; }
-			  72%   { opacity: 0.66; }
-			  74%   { opacity: 0.22; }
-			  76%   { opacity: 0.66; }
-			  78%   { opacity: 0.22; }
-			  100%   { opacity: 0.22; }
-			}		
-			@keyframes faint {
-			  0%   { opacity: 0.66; }
-			  50%   { opacity: 1.0; }
-			  100%   { opacity: 0.66; }
-			}		
-			@keyframes wobble {
-			  0%   { left:50%; }
-			  25%   { left:49.95%; }
-			  50%   { left:50%; }
-			  75%   { left:50.05%; }
-			  100%   { left:50%; }
-			}					
+			}				
 			
 			button.mBtn {
 				color: black;
@@ -235,9 +212,7 @@
 			<div id="world5" onmouseout="world=0" onmouseover="world=5; hoverWorld(5);" onclick="clickWorld(5)" style=" cursor: pointer; height: 66px; width: 66px; background: radial-gradient(#FFFF00, #FF3200); border-radius: 50%; display: block; position: absolute; top:40%;left:45%; transform: translate(-50%, -50%);"></div>
 			<div id="world6" onmouseout="world=0" onmouseover="world=6; hoverWorld(6);" onclick="clickWorld(6)" style=" cursor: pointer; height: 66px; width: 66px; background: radial-gradient(#FF00FF, #5E005E); border-radius: 50%; display: block; position: absolute; top:60%;left:45%; transform: translate(-50%, -50%);"></div>
 			<div id="world7" onmouseout="world=0" onmouseover="world=7; hoverWorld(7);" onclick="clickWorld(7)" style="height: 60px; width: 60px; border: 6px solid #FFFFFF; border-radius: 50%; display: block; position: absolute; top:60%;left:55%; transform: translate(-50%, -50%); opacity:0.22"></div>
-			<!--
-			<div id="world7" onmouseout="world=0" onmouseover="world=7; hoverWorld(7);" onclick="clickWorld(7)" style=" cursor: pointer; height: 66px; width: 66px; background: radial-gradient(#AA2200, #AA7D71, #FFEFFF); border-radius: 50%; display: block; position: absolute; top:60%;left:55%; transform: translate(-50%, -50%); animation: 3.6s infinite normal flicker"></div>
-			-->
+			
 
 		</div>
 
@@ -453,7 +428,6 @@
 					if(seenAllWorlds()) {
 						document.getElementById("worldInfo").style.color = "#AA2200"
 						document.getElementById("worldInfo").innerHTML = "WORLD-D06-L12<br>A-NEW-LEGEND-IS-ABOUT-TO-BEGIN"
-						document.getElementById("worldInfo").style.animation = "0.66s infinite normal faint, 0.22s infinite normal wobble" 
 					}
 					else {
 						document.getElementById("worldInfo").style.color = "#C8C8C8"
@@ -465,6 +439,24 @@
 				}
 			}
 			
+			function flicker1() {
+				document.getElementById("world7").style.opacity = (Math.random()*0.44+0.22)
+				setTimeout(() => {  flicker1() }, (480*Math.random()**2))
+			}
+			function flicker2() {
+				if(document.getElementById("worldInfo").innerHTML == "WORLD-D06-L12<br>A-NEW-LEGEND-IS-ABOUT-TO-BEGIN") {
+					document.getElementById("worldInfo").style.opacity = (Math.random()*0.34+0.66)
+				}
+				setTimeout(() => {  flicker2() }, (480*Math.random()**2))
+			}
+
+			function flicker3() {
+				if(document.getElementById("worldInfo").innerHTML == "WORLD-D06-L12<br>A-NEW-LEGEND-IS-ABOUT-TO-BEGIN") {
+					document.getElementById("worldInfo").style.transform = "translate("+(-51+Math.random()*2)+"%,0)" 
+				}
+				setTimeout(() => {  flicker3() }, (330*Math.random()**2))
+			}
+			
 			function clickWorld(num) {
 				if(num >= 1 && num <= 6) {
 					document.getElementById("worldIBox").style.display = "block"
@@ -474,7 +466,8 @@
 						inIBox = true			
 						seenWorlds[num-1] = true
 						if(seenAllWorlds()) {
-							document.getElementById("world7").style = "cursor: pointer; height: 66px; width: 66px; background: radial-gradient(#AA2200, #AA7D71, #FFEFFF); border-radius: 50%; display: block; position: absolute; top:60%;left:55%; transform: translate(-50%, -50%); animation: 3.6s infinite normal flicker"
+							document.getElementById("world7").style = "cursor: pointer; height: 66px; width: 66px; background: radial-gradient(#AA2200, #AA7D71, #FFEFFF); border-radius: 50%; display: block; position: absolute; top:60%;left:55%; transform: translate(-50%, -50%); opacity:0.66"
+							setTimeout(() => {  flicker1(); flicker2(); flicker3(); }, 480);
 						}
 					}, 480);
 				
