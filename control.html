@@ -35,16 +35,16 @@
 		<div id="teaser" style='display:none; padding-left: 350px; padding-right: 350px;'>
 			<img src="assets/images/blue_fire.gif" style="position: absolute; top: 66px; right: 66px;">
 			<img src="assets/images/blue_fire.gif" style="position: absolute; top: 66px; left: 66px;">
-			<img src="assets/images/blue_fire.gif" style="position: absolute; top: 866px; right: 66px;">
-			<img src="assets/images/blue_fire.gif" style="position: absolute; top: 866px; left: 66px;">
-			<img src="assets/images/blue_fire.gif" style="position: absolute; top: 1666px; right: 66px;">
-			<img src="assets/images/blue_fire.gif" style="position: absolute; top: 1666px; left: 66px;">
-			<img src="assets/images/blue_fire.gif" style="position: absolute; top: 2466px; right: 66px;">
-			<img src="assets/images/blue_fire.gif" style="position: absolute; top: 2466px; left: 66px;">
-			<img src="assets/images/blue_fire.gif" style="position: absolute; top: 3266px; right: 66px;">
-			<img src="assets/images/blue_fire.gif" style="position: absolute; top: 3266px; left: 66px;">
-			<img src="assets/images/green_fire.gif" style="position: absolute; top: 4066px; right: 66px;">
-			<img src="assets/images/green_fire.gif" style="position: absolute; top: 4066px; left: 66px;">
+			<img src="assets/images/blue_fire.gif" style="position: absolute; top: 966px; right: 66px;">
+			<img src="assets/images/blue_fire.gif" style="position: absolute; top: 966px; left: 66px;">
+			<img src="assets/images/blue_fire.gif" style="position: absolute; top: 1866px; right: 66px;">
+			<img src="assets/images/blue_fire.gif" style="position: absolute; top: 1866px; left: 66px;">
+			<img src="assets/images/blue_fire.gif" style="position: absolute; top: 2766px; right: 66px;">
+			<img src="assets/images/blue_fire.gif" style="position: absolute; top: 2766px; left: 66px;">
+			<img src="assets/images/blue_fire.gif" style="position: absolute; top: 3666px; right: 66px;">
+			<img src="assets/images/blue_fire.gif" style="position: absolute; top: 3666px; left: 66px;">
+			<img id="vF1" onmouseover="cursorUpdate()" onclick="copyFlame()" src="assets/images/green_fire.gif" style="cursor: pointer; position: absolute; top: 4566px; right: 66px;">
+			<img id="vF2" onmouseover="cursorUpdate()" onclick="copyFlame()" src="assets/images/green_fire.gif" style="cursor: pointer; position: absolute; top: 4566px; left: 66px;">
 
 			<image id="sound" onclick="clickSound()" src="assets/images/audioOn.png" style="position:fixed; left:8px; top:8px; height:66px; width:auto; margin:12px; cursor: pointer;">			
 			
@@ -216,7 +216,7 @@
 				document.title = "The puppeteer meets his match"; 
 				fireCrackle.stop()
 				usurper.play()
-				setTimeout(() => { usurper.fade(0.0,0.5,3600); }, 5);
+				setTimeout(() => { usurper.fade(0.0,0.5,3600); }, 1200);
 				document.getElementById("teaser").style.display = "block";
 				document.getElementById("teaser").setAttribute("style", "animation-name: enter; animation-duration: 3.6s; animation-iteration-count: 1; padding-left: 350px; padding-right: 350px;");
 			}
@@ -242,6 +242,26 @@
 					document.getElementById("sound").src="assets/images/audioOff.png"
 					}	
 			}
+			
+			var flame = new Howl({    src: ['assets/audio/flame.ogg', 'assets/audio/flame.mp3'],    volume: 0.33,    loop: false  })
+			function copyFlame() {
+				if(localStorage.getItem("VerdantFlame") != "true") {
+					try {localStorage.setItem("VerdantFlame","true")}catch(error){}
+					flame.play()
+					cursorUpdate()
+				}
+			}
+			function cursorUpdate() {
+				if(localStorage.getItem("VerdantFlame") == "true") {
+					document.getElementById("vF1").style.cursor = "url(assets/images/firehold.png) 6 6, grab";
+					document.getElementById("vF2").style.cursor = "url(assets/images/firehold.png) 6 6, grab";
+				}
+				else {
+					document.getElementById("vF1").style.cursor = "pointer";
+					document.getElementById("vF2").style.cursor = "pointer";
+				}
+			}
+			cursorUpdate()
 		</script>
 	</body>
 </html>

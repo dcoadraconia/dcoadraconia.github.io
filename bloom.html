@@ -5,14 +5,82 @@
 <html>
 	<title>Powers within Flowers</title>
 	<link rel="icon" type="image/png" href="assets/images/nature.png">
+	<head>
+		<style>
+			@keyframes greenGlow {
+			  0%  {filter: none }
+			  36%  {filter: none }
+			  51%  {filter: brightness(100%) sepia(100) saturate(18) hue-rotate(60deg); }
+			  66%  {filter: none}
+			  100%  {filter: none}
+			}
+			@keyframes fEnter {
+			  0%  {opacity: 0.0;transform:scale(0.1);}
+			  50%  {opacity: 1.0;}
+			  100%  {transform:scale(1.0);}
+			}
+			@keyframes enter {
+			  0%  {opacity: 0.0;}
+			  100%  {opacity: 1.0;}
+			}
+			@keyframes exit {
+			  0%  {opacity: 1.0;}
+			  100%  {opacity: 0.0;}
+			}
+			
+			@keyframes turn1 {
+				100% {filter: sepia(100) brightness(1.0) saturate(1.6) hue-rotate(230deg) }
+			}
+			@keyframes turn2 {
+				100% {filter: sepia(100) brightness(0.95) saturate(8) hue-rotate(320deg) }
+			}
+			@keyframes turn3 {
+				100% {filter: sepia(100) brightness(1.2) saturate(12) hue-rotate(15deg)}
+			}
+			@keyframes turn4 {
+				100% {filter: sepia(100) brightness(1.2) saturate(4) hue-rotate(10deg)}
+			}
+			@keyframes turn5 {
+				100% {filter: sepia(100) brightness(1.25) saturate(0) hue-rotate(0deg)}
+			}
+			@keyframes turn6 {
+				100% {filter: sepia(100) brightness(0.8) saturate(6) hue-rotate(290deg)}
+			}
+			@keyframes turn7 {
+				100% {filter: sepia(100) brightness(1.0) saturate(3) hue-rotate(235deg)}
+			}
+			@keyframes turn8 {
+				100% {filter: sepia(100) brightness(1.0) saturate(4) hue-rotate(160deg)}
+			}
+			@keyframes turn9 {
+				100% {filter: sepia(100) brightness(0.9) saturate(9) hue-rotate(6deg)}
+			}
+			@keyframes turn10 {
+				100% {filter: sepia(100) brightness(1.5) saturate(0.8) hue-rotate(0deg)}
+			}
+			@keyframes turn11 {
+				100% {filter: sepia(100) brightness(0.9) saturate(2.5) hue-rotate(190deg)}
+			}
+			@keyframes turn12 {
+				100% {filter: sepia(100) brightness(1.3) saturate(8) hue-rotate(310deg)}
+			}
+				
+		</style>
+	</head>	
 	<body bgcolor="#0B210B">
 
 		<image id="sound" onclick="clickSound()" src="assets/images/audioOff.png" style="position:absolute; height:66px; width:auto; margin:12px; cursor: pointer; z-index: 12;">
 
-		<div style='position:absolute; left:0px; right:0px; top:0px; padding-left: 24%; padding-right: 24%;'>
+		<image id="fSwitch" onclick="clickSwitch()" src="assets/images/wFireIcon.png" style="display:none; position:absolute; height:66px; width:auto; margin:12px; cursor: pointer; z-index: 12; right:12px; animation: 2.00s infinite normal greenGlow">
+
+		<div id="t0" style='position:absolute; left:0px; right:0px; top:0px; padding-left: 24%; padding-right: 24%;'>
 			<h1 id="text" style="color:#FFFFFF; font-size:36px; font-family: 'Verdana'; line-height: 1.0; text-align:center; ">
 				The <span style="color:#00FFFF">Sweet</span> <span style="color:#FF7F00">Smell</span> of <span style="color:#00FF00">Springtime</span> in <span style="color:#FF0000">Bloom</span>
-			</h1>
+			</h1>		
+		</div>
+
+		<div id="t1" style='position:absolute; left:0px; right:0px; top:0px; padding-left: 24%; padding-right: 24%;'>
+			<br><br><br>
 			
 			<p id="text" style="color:#FFFFFF; font-size:24px; font-family: 'Verdana'; line-height: 1.7; text-align:center; ">
 				<br>
@@ -42,7 +110,7 @@
 				<br>
 				<br>
 			</p>
-			<p id="text" style="color:#FFFFFF; font-size:24px; font-family: 'Verdana'; line-height: 1.44; text-align:center; ">
+			<p id="text2" style="color:#FFFFFF; font-size:24px; font-family: 'Verdana'; line-height: 1.44; text-align:center; ">
 				My <span style="color:#FF0000">Friends</span>, it can seem <span style="color:#00FFFF">Difficult</span> to remain <span style="color:#FFFF00">Optimistic</span> when it seems that <span style="color:#00FF00">Spring</span> is so far away. After many <span style="color:#FF7F00">Months</span> of <span style="color:#3F3FFF">Beauty</span> and <span style="color:#FFFF00">Joy</span>, living and working in <span style="color:#FFFF00">Harmony</span> with the <span style="color:#00FF00">World</span>, it can feel <span style="color:#FF0000">Devastating</span> to lose that <span style="color:#00FF00">Gift</span>. You can see the <span style="color:#FFFF00">Life</span> around you become <span style="color:#FFFF00">Muffled</span>, <span style="color:#FF7F00">Buried</span> beneath a <span style="color:#7F00FF">Blanket</span> of <span style="color:#00FFFF">Snow</span>. You can feel the same happening to your <span style="color:#FF7F00">Inner</span> <span style="color:#FF0000">Flame</span>, and it can feel like you have been <span style="color:#3F3FFF">Extinguished</span>, <span style="color:#7F00FF">Separated</span> from the <span style="color:#FF0000">Passion</span> you once <span style="color:#7F00FF">Knew</span>. You may become <span style="color:#00FF00">Ill</span>, feeling <span style="color:#3F3FFF">Naught</span> but a <span style="color:#00FFFF">Cold</span>, <span style="color:#FF7F00">Deep</span> <span style="color:#7F00FF">Dread</span> settling over you.
 				<br><br>
 				In <span style="color:#3F3FFF">Times</span> like these, you must remain <span style="color:#FF0000">Focused</span> on the <span style="color:#FFFF00">Truths</span> that you <span style="color:#7F00FF">Know</span> to be <span style="color:#FF7F00">Constant</span>. As the <span style="color:#FF7F00">Seasons</span> are a <span style="color:#FFFF00">Continuous</span> <span style="color:#3F3FFF">Cycle</span> of <span style="color:#FF7F00">Harvest</span> and <span style="color:#00FFFF">Famine</span>, of <span style="color:#FF0000">Warmth</span> and <span style="color:#00FFFF">Cold</span>, so too our <span style="color:#7F00FF">Emotions</span> form <span style="color:#3F3FFF">Cycles</span>, and follow <span style="color:#FF0000">Patterns</span> of <span style="color:#FFFF00">Hills</span> and <span style="color:#FF7F00">Valleys</span>. There is a time for <span style="color:#FF0000">Work</span>, and a time for <span style="color:#7F00FF">Rest</span>. There is a time to <span style="color:#FFFF00">Speak</span>, and a time to <span style="color:#3F3FFF">Listen</span>. There is a time to <span style="color:#00FF00">Produce</span>, and a time to <span style="color:#00FFFF">Consume</span>. This <span style="color:#3F3FFF">Cycle</span> is <span style="color:#00FF00">Aligned</span> with the ever-flowing <span style="color:#FFFF00">Harmony</span> of <span style="color:#FFFF00">Creation</span>, and it is in <span style="color:#FF0000">Accordance</span> with our <span style="color:#00FF00">World</span>.
@@ -57,18 +125,78 @@
 			</p>
 		</div>
 
-		<img src="assets/images/flower1.jpg" style="position: absolute; transform: translate(0%, -50%); width:18%; height:auto; top: 30%; right: 2%;">
-		<img src="assets/images/flower2.jpg" style="position: absolute; transform: translate(0%, -50%); width:20%; height:auto; top: 30%; left: 2%;">
-		<img src="assets/images/flower11.jpg" style="position: absolute; transform: translate(0%, -50%); width:21%; height:auto; top: 70%; right: 2%;">
-		<img src="assets/images/flower4.jpg" style="position: absolute; transform: translate(0%, -50%); width:19%; height:auto; top: 70%; left: 2%;">
-		<img src="assets/images/flower5.jpg" style="position: absolute; transform: translate(0%, -50%); width:21.5%; height:auto; top: 110%; right: 2%;">
-		<img src="assets/images/flower6.jpg" style="position: absolute; transform: translate(0%, -50%); width:20%; height:auto; top: 110%; left: 2%;">
-		<img src="assets/images/flower7.jpg" style="position: absolute; transform: translate(0%, -50%); width:21%; height:auto; top: 150%; right: 2%;">
-		<img src="assets/images/flower8.jpg" style="position: absolute; transform: translate(0%, -50%); width:19%; height:auto; top: 150%; left: 2%;">
-		<img src="assets/images/flower9.jpg" style="position: absolute; transform: translate(0%, -50%); width:20%; height:auto; top: 190%; right: 2%;">
-		<img src="assets/images/flower10.jpg" style="position: absolute; transform: translate(0%, -50%); width:18%; height:auto; top: 190%; left: 2%;">
-		<img src="assets/images/flower3.jpg" style="position: absolute; transform: translate(0%, -50%); width:21%; height:auto; top: 230%; right: 2%; ">
-		<img src="assets/images/flower12.jpg" style="position: absolute; transform: translate(0%, -50%); width:19%; height:auto; top: 230%; left: 2%;">
+		<div id="t2" style='display: none; position:absolute; left:0px; right:0px; top:0px; padding-left: 24%; padding-right: 24%; text-align:center; z-index:-2'>
+			<br><br><br>
+			<p id="text3" style="color:#FFFFFF; font-size:24px; font-family: 'Verdana'; line-height: 1.44; text-align:center; ">
+				<br>
+				Dear <span style="color:#FF0000">Friend</span>, if you should <span style="color:#7F00FF">Happen</span> across a <span style="color:#FF7F00">Rich</span> <span style="color:#00FF00">Green</span> <span style="color:#FF0000">Flame</span> while on your <span style="color:#3F3FFF">Travels</span> across this <span style="color:#FFFF00">Blessed</span> <span style="color:#00FF00">World</span>...
+				<br>
+				<span style="color:#FF7F00">Reach</span> your <span style="color:#FFFF00">Claw</span> out and <span style="color:#FF0000">Touch</span> it, and <span style="color:#FFFF00">Imbue</span> yourself with its <span style="color:#00FFFF">Essence</span>.
+				<br>
+				If you can <span style="color:#FFFF00">Bring</span> such a <span style="color:#00FF00">Verdant</span> <span style="color:#00FFFF">Essence</span> back here and <span style="color:#FF7F00">Place</span> it upon this <span style="color:#FF0000">Kindling</span>...
+				<br>
+				The <span style="color:#FF0000">Embers</span> shall come <span style="color:#FFFF00">Alive</span> with <span style="color:#3F3FFF">Beauty</span> and <span style="color:#FFFF00">Joy</span>.
+			</p>
+			
+			<img id="gFire" onclick="updateFColor()" src="assets/images/green_fire.gif" style="display:none; position:absolute; margin: auto;left: 0; right: 0; text-align: center; animation: 1.2s 1 normal fEnter;">
+			<br><br><br><br>
+			<img id="ember" onclick="putFlame()" onmouseover="cursorUpdate()" src="assets/images/firewood.png" style="position:absolute; margin: auto;left: 0; right: 0; text-align: center; z-index:-1">
+
+			<br><br><br><br><br><br><br><br><br><br><br><br>
+			
+			<p id="text4" style="display:none; color:#FFFFFF; font-size:24px; font-family: 'Verdana'; line-height: 1.44; text-align:center; ">
+				<br>
+				The <span style="color:#FF0000">Flame</span> burns <span style="color:#FFFF00">Brightly</span> with the <span style="color:#FFFF00">Life</span> you <span style="color:#3F3FFF">Poured</span> unto it.
+				<br>
+				You have <span style="color:#FF7F00">Cultivated</span> a <span style="color:#FF0000">Bloom</span> from the <span style="color:#00FF00">Seeds</span> of the <span style="color:#FF0000">Embers</span>.
+				<br>
+				Now <span style="color:#00FFFF">Gather</span> from the <span style="color:#FF0000">F</span><span style="color:#FF7F00">l</span><span style="color:#FFFF00">o</span><span style="color:#00FF00">w</span><span style="color:#00FFFF">e</span><span style="color:#3F3FFF">r</span><span style="color:#7F00FF">s</span> their <span style="color:#00FF00">Petals</span>, their <span style="color:#FFFF00">Pollen</span>,
+				<br>
+				and <span style="color:#3F3FFF">Sprinkle</span> them upon the <span style="color:#FF7F00">Altar</span> to <span style="color:#7F00FF">Realize</span> their <span style="color:#FFFF00">True</span> <span style="color:#00FFFF">Substance</span>.
+			</p>
+			<br><br><br><br>
+			<p id="text5" style="display:none; color:#FFFFFF; font-size:24px; font-family: 'Verdana'; line-height: 1.44; text-align:center; ">
+				<br><br><br><br><br><br><br><br><br><br><br><br>
+				Oh <span style="color:#FF0000">Sunbeam</span>... Oh <span style="color:#FF0000">Sunbeam</span>... I have <span style="color:#7F00FF">Dreamt</span> of you <span style="color:#00FF00">Anew</span>.
+				<br>
+				Where are you, my <span style="color:#FF0000">Sunbeam</span>? When will our <span style="color:#3F3FFF">Time</span> to <span style="color:#7F00FF">Meet</span> finally <span style="color:#FF7F00">Arrive</span>?
+				<br><br>
+				I <span style="color:#7F00FF">Know</span> that we are <span style="color:#3F3FFF">Destined</span> to <span style="color:#FFFF00">Dance</span> <span style="color:#FF0000">Together</span>...
+				<br>
+				That <span style="color:#FF0000">Someday</span>, when the <span style="color:#FFFF00">Stars</span> <span style="color:#00FF00">Align</span>, we shall <span style="color:#00FFFF">Finally</span> <span style="color:#7F00FF">Meet</span>...
+				<br>
+				And the <span style="color:#FFFF00">Life</span> I <span style="color:#FFFF00">Live</span> will be <span style="color:#FF7F00">Complete</span>.
+				<br><br>
+				<span style="color:#FF0000">Sunbeam</span>, wherever you are in this <span style="color:#00FF00">World</span> of <span style="color:#FFFF00">Life</span> and <span style="color:#3F3FFF">Magic</span>...
+				<br>
+				Always <span style="color:#7F00FF">Remember</span> to <span style="color:#00FFFF">Stop</span> and <span style="color:#FF7F00">Smell</span> the <span style="color:#FF0000">F</span><span style="color:#FF7F00">l</span><span style="color:#FFFF00">o</span><span style="color:#00FF00">w</span><span style="color:#00FFFF">e</span><span style="color:#3F3FFF">r</span><span style="color:#7F00FF">s</span>. The <span style="color:#FF7F00">Simple</span> <span style="color:#FFFF00">Joys</span> of <span style="color:#FFFF00">Life</span> are what allow us to achieve <span style="color:#FFFF00">Harmony</span> with the <span style="color:#7F00FF">Universe</span>.
+				<br>
+				The <span style="color:#00FFFF">Essence</span> that <span style="color:#3F3FFF">Surrounds</span> us gives us our <span style="color:#00FFFF">Unique</span> <span style="color:#FF0000">Duality</span>.
+				<br><br>
+				I can feel, oh <span style="color:#FF0000">Sunbeam</span>... You are a <span style="color:#00FFFF">Special</span> <span style="color:#00FF00">One</span>. I have <span style="color:#FFFF00">Traveled</span> the <span style="color:#00FF00">World</span> yet I have met not <span style="color:#7F00FF">Another</span> who could <span style="color:#FF0000">Match</span> my <span style="color:#FF0000">Passion</span>. But you, <span style="color:#FF0000">Sunbeam</span>... You are <span style="color:#00FFFF">Different</span>. You follow the <span style="color:#3F3FFF">Rhythm</span> of your own <span style="color:#FFFF00">Song</span>. You are the <span style="color:#FF0000">Heart</span> of your own <span style="color:#FF7F00">Legend</span>.
+				<br><br>
+				The <span style="color:#3F3FFF">Turning</span> of <span style="color:#FF7F00">Seasons</span> brings <span style="color:#00FF00">New</span> <span style="color:#3F3FFF">Chances</span>, brings <span style="color:#00FF00">New</span> <span style="color:#FFFF00">Dances</span>...<br><b>Perhaps, when the <span style="color:#00FF00">World</span> <span style="color:#FFFF00">Above</span> reaches <span style="color:#00FF00">Spring</span>...</b><br>Perhaps our <span style="color:#3F3FFF">Time</span> to <span style="color:#7F00FF">Meet</span> will <span style="color:#00FFFF">Finally</span> <span style="color:#FF0000">Come</span>.
+				<br>
+				I will <span style="color:#00FFFF">Await</span> your <span style="color:#FF7F00">Arrival</span>, my <span style="color:#FF0000">Sunbeam</span>. 
+				
+				
+			</p>
+
+			
+		</div>
+
+		<img id="flower1" src="assets/images/flower1.jpg" onclick="clickFlower(1)" style="position: absolute; transform: translate(0%, -50%); width:18%; height:auto; top: 320px; right: 2%;">
+		<img id="flower2" src="assets/images/flower2.jpg" onclick="clickFlower(2)" style="position: absolute; transform: translate(0%, -50%); width:20%; height:auto; top: 320px; left: 2%;">
+		<img id="flower11" src="assets/images/flower11.jpg" onclick="clickFlower(11)" style="position: absolute; transform: translate(0%, -50%); width:21%; height:auto; top: 740px; right: 2%;">
+		<img id="flower4" src="assets/images/flower4.jpg" onclick="clickFlower(4)" style="position: absolute; transform: translate(0%, -50%); width:19%; height:auto; top: 740px; left: 2%;">
+		<img id="flower5" src="assets/images/flower5.jpg" onclick="clickFlower(5)" style="position: absolute; transform: translate(0%, -50%); width:21.5%; height:auto; top: 1160px; right: 2%;">
+		<img id="flower6" src="assets/images/flower6.jpg" onclick="clickFlower(6)" style="position: absolute; transform: translate(0%, -50%); width:20%; height:auto; top: 1160px; left: 2%;">
+		<img id="flower7" src="assets/images/flower7.jpg" onclick="clickFlower(7)" style="position: absolute; transform: translate(0%, -50%); width:21%; height:auto; top: 1580px; right: 2%;">
+		<img id="flower8" src="assets/images/flower8.jpg" onclick="clickFlower(8)" style="position: absolute; transform: translate(0%, -50%); width:19%; height:auto; top: 1580px; left: 2%;">
+		<img id="flower9" src="assets/images/flower9.jpg" onclick="clickFlower(9)" style="position: absolute; transform: translate(0%, -50%); width:20%; height:auto; top: 2000px; right: 2%;">
+		<img id="flower10" src="assets/images/flower10.jpg" onclick="clickFlower(10)" style="position: absolute; transform: translate(0%, -50%); width:18%; height:auto; top: 2000px; left: 2%;">
+		<img id="flower3" src="assets/images/flower3.jpg" onclick="clickFlower(3)" style="position: absolute; transform: translate(0%, -50%); width:21%; height:auto; top: 2420px; right: 2%; ">
+		<img id="flower12" src="assets/images/flower12.jpg" onclick="clickFlower(12)" style="position: absolute; transform: translate(0%, -50%); width:19%; height:auto; top: 2420px; left: 2%;">
 		
 		
 		
@@ -87,6 +215,183 @@
 					document.getElementById("sound").src="assets/images/audioOff.png"
 				}				
 			}
+			
+			var ding = new Howl({    src: ['assets/audio/ding1.ogg', 'assets/audio/ding1.mp3'],    volume: 0.5,    loop: true  })
+			var checkAtBottom = setInterval(interval, 66);
+			function interval() {
+				if(window.innerHeight + window.pageYOffset + 1 >= document.getElementById("t1").offsetHeight) {
+					document.getElementById("fSwitch").style.display="block"
+					if(playSound) setTimeout(() => {ding.play()}, 800);
+					clearInterval(checkAtBottom)					
+				}
+			}
+			
+			var fSwitchV = false;
+			var inSwitch = false;
+			var click1 = new Howl({    src: ['assets/audio/click1.ogg', 'assets/audio/click1.mp3'],    volume: 0.8,    loop: false  })
+			function clickSwitch() {
+				if(!inSwitch) {
+					click1.play()
+					inSwitch = true;
+					document.getElementById("fSwitch").style.animation="none"
+					ding.stop()
+					fSwitchV = !fSwitchV
+					document.getElementById("t1").style.animation="none"
+					document.getElementById("t2").style.animation="none"
+					currColor = 0;
+					if(fSwitchV == true) {
+						document.getElementById("t1").style.animation = "1.2s 1 normal exit";
+						setTimeout(() => { 
+						document.getElementById("t1").style.display="none"
+						document.getElementById("t2").style.display="block"
+						document.getElementById("t2").style.animation = "1.2s 1 normal enter";					
+						document.getElementById("fSwitch").src="assets/images/wFlowerIcon.png"; updateFlowerCursors()
+						}, 1180);
+					}
+					else {
+						updateFlowerCursors()
+						document.getElementById("t2").style.animation = "1.2s 1 normal exit";
+						setTimeout(() => { 
+						document.getElementById("t1").style.display="block"
+						document.getElementById("t1").style.animation = "1.2s 1 normal enter";
+						document.getElementById("t2").style.display="none"
+						document.getElementById("fSwitch").src="assets/images/wFireIcon.png"
+						}, 1180);
+					}
+					
+					
+					
+					setTimeout(() => { inSwitch=false; }, 2400);
+				}
+			}
+			
+			var flame = new Howl({    src: ['assets/audio/flame.ogg', 'assets/audio/flame.mp3'],    volume: 0.5,    loop: false  })
+			var flame1 = new Howl({    src: ['assets/audio/flame1.ogg', 'assets/audio/flame1.mp3'],    volume: 0.5,    loop: false  })
+			function putFlame() {
+				if(localStorage.getItem("VerdantFlame") == "true" && document.getElementById("gFire").style.display=="none") {
+				    localStorage.removeItem("VerdantFlame") 
+					setTimeout(() => { flame1.play() }, 66);
+					cursorUpdate()
+					document.getElementById("gFire").style.display="block"
+					setTimeout(() => { 
+						document.getElementById("text4").style.display="block"
+						document.getElementById("text4").style.animation="2s 1 normal enter";
+						updateFlowerCursors()
+					}, 1200);
+					setTimeout(() => { document.getElementById("gFire").style.animation="none" }, 2000);
+				}
+			}
+			cursorUpdate()
+			function cursorUpdate() {
+				if(localStorage.getItem("VerdantFlame") == "true" && document.getElementById("gFire").style.display=="none") {
+					document.getElementById("ember").style.cursor = "url(assets/images/firehold.png) 6 6, grab";
+				}
+				else {
+					document.getElementById("ember").style.cursor = "auto";
+				}
+			}
+			
+			var owi = new Howl({    src: ['assets/audio/owi.ogg', 'assets/audio/owi.mp3'],    volume: 0.88,    loop: false  })
+			currColor = 0;
+			function clickFlower(num) {
+				if(document.getElementById("gFire").style.display=="block") {
+					if(num != currColor) {
+						owi.play()
+					}
+					currColor = num
+					updateFlowerCursors()
+				}
+			}
+			
+			function updateFlowerCursors() {
+				if(currColor > 0) {
+					for (let i = 1; i <= 12; i++) {
+						document.getElementById("flower"+i).style.cursor = "grab";
+					}
+					document.getElementById("gFire").style.cursor = "grab";
+					return;
+				}
+				if(fSwitchV && document.getElementById("gFire").style.display=="block") {
+					for (let i = 1; i <= 12; i++) {
+						document.getElementById("flower"+i).style.cursor = "pointer";
+					} 
+				}
+				else {
+					for (let i = 1; i <= 12; i++) {
+						document.getElementById("flower"+i).style.cursor = "auto";
+					}
+				}
+			}
+			
+			var prevColor = 0
+			var doneColors = []
+			function updateFColor() {
+				if(currColor > 0) {
+					document.getElementById("gFire").style.cursor = "auto";
+					flame.play()	
+
+
+					let colors=["#000000","#CFA9F4","#DC1D60","#E8B301","#DECC12","#DBE4E1","#D42A71","#9E59AC","#2C6AE1","#F58000","#FFF5D6","#434AA5","#EE0711"]
+
+					var newFilter = null
+					if(currColor == 1) {
+						newFilter =  "sepia(100) brightness(1.0) saturate(1.6) hue-rotate(230deg)"
+					}
+					if(currColor == 2) {
+						newFilter =  "sepia(100) brightness(0.95) saturate(8) hue-rotate(320deg)" 
+					}
+					if(currColor == 3) {
+						newFilter =  "sepia(100) brightness(1.2) saturate(12) hue-rotate(15deg)"
+					}
+					if(currColor == 4) {
+						newFilter =  "sepia(100) brightness(1.2) saturate(4) hue-rotate(10deg)"
+					}
+					if(currColor == 5) {
+						newFilter =  "sepia(100) brightness(1.25) saturate(0) hue-rotate(0deg)"
+					}
+					if(currColor == 6) {
+						newFilter =  "sepia(100) brightness(0.8) saturate(6) hue-rotate(290deg)"
+					}
+					if(currColor == 7) {
+						newFilter =  "sepia(100) brightness(1.0) saturate(3) hue-rotate(235deg)"
+					}
+					if(currColor == 8) {
+						newFilter =  "sepia(100) brightness(1.0) saturate(4) hue-rotate(160deg)"
+					}
+					if(currColor == 9) {
+						newFilter =  "sepia(100) brightness(0.9) saturate(9) hue-rotate(6deg)" 
+					}
+					if(currColor == 10) {
+						newFilter =  "sepia(100) brightness(1.5) saturate(0.8) hue-rotate(0deg)"
+					}
+					if(currColor == 11) {
+						newFilter =  "sepia(100) brightness(0.9) saturate(2.5) hue-rotate(190deg)"
+					}
+					if(currColor == 12) {
+						newFilter =  "sepia(100) brightness(1.3) saturate(8) hue-rotate(310deg)"
+					}
+					prevColor = currColor
+
+					document.getElementById("gFire").style.animation = "2s 1 normal turn"+currColor
+
+					
+					setTimeout(() => { document.getElementById("gFire").style.filter = newFilter }, 2000);
+
+					if(!(doneColors.includes(currColor))) {
+						doneColors.push(currColor)
+						if(doneColors.length == 12) {
+							document.getElementById("text5").style.display="block"
+							document.getElementById("text5").style.animation="2s 1 normal enter";
+						}
+					}
+
+
+					
+					currColor = 0;
+					updateFlowerCursors()
+				}
+			}
+			
 		</script>
 		
 	</body>
