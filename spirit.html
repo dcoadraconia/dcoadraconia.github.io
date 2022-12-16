@@ -29,13 +29,15 @@
 				A library of a thousand stories
 			</h1>		
 			<p style="color:#666666; font-size:24px; font-family: 'Tahoma'; line-height: 1.5; text-align:center; ">
-				 Hundreds of tales never meant to connect, now brought together by the Hand of God.<br>Each world so wildly different from the next, its magic and its laws entirely unique...<br>Only through the careful balance and guidance of some greater, controlling force is this reality capable of remaining stable.<br>In this world, a world filled with the inhabitants of hundreds and hundreds of stories, a new story is told.<br>One unlike any of the others before it.
+				 Hundreds of tales never meant to connect, now brought together by the Hand of God.<br>Each world so wildly different from the next, its magic and its laws entirely unique...<br>Only through the careful balance and guidance of some greater unseen force is this reality capable of remaining stable.<br>In this world, a world filled with the inhabitants of hundreds and hundreds of stories, a new story is told.<br>One unlike any of the others before it.
 				 <br><br>
 				 <span style="color:#FFFF00"> <b>The development of the "Stories & Spirits" Project, formerly "Operation S.U.S.", has been resumed.</b> </span>
 			</p>
 			<br>
-			<button id="genBtn" class="genBtn" onclick="{if(!generating) generateMap()}" style="cursor: pointer; color: white; border: 5px solid white; padding: 12px 12px;text-align: center;display: inline-block;font-size: 24px; font-family: 'Tahoma'; z-index:12; border-radius:10px"> <b>Generate Map</b></button> 				
+			<button id="genBtn" class="genBtn" onclick="{if(!generating) generateMap()}" style="cursor: pointer; color: white; border: 5px solid white; padding: 12px 12px;text-align: center;display: inline-block;font-size: 24px; font-family: 'Tahoma'; z-index:12; border-radius:10px"> <b>Generate Map</b></button>
+			<div style="line-height:0.12;">
 			<span id="secretText" style="color:white; font-size:12px; font-family: 'Tahoma'; line-height: 1.0;"> </span>
+			</div>
 		</div>
 			
 		<script>
@@ -119,6 +121,13 @@
 				for (let i = 0; i < tilesList.length; i++) {
 					tilesList[i].elem.style.left = getDispXPos(tilesList[i].x,(-getMinX())*205)
 					tilesList[i].elem.style.top = getDispYPos(tilesList[i].y,getMaxY()*204)
+					if([7,20,26,40].includes(tilesList[i].id)) {
+						var s = tilesList[i].elem.style.left
+						tilesList[i].elem.style.left = (parseInt(s.substring(0, s.length-2))-134)+"px"
+						var t = tilesList[i].elem.style.top
+						tilesList[i].elem.style.top = (parseInt(t.substring(0, t.length-2))-531)+"px"
+
+					}
 				}
 			}
 			function initGenMap() {
@@ -145,7 +154,10 @@
 				newImg.onclick = function() {clickTile(aTile.id)}
 				document.getElementById('body').appendChild(newImg);
 				tilesList[tilesList.length-1].elem = newImg
-				if([2,4,5,6,11,12,17,18,19,31].includes(aTile.id)) newImg.style.cursor = "pointer"
+				if([2,4,5,6,7,11,12,15,17,18,19,20,26,31,40].includes(aTile.id)) newImg.style.cursor = "pointer"
+				if([7,20,26,40].includes(aTile.id)) {
+					newImg.style.clipPath =  "polygon(26.8% 40.8%, 26.8% 59.2%, 73% 59.2%, 73% 40.8%)"
+				}
 			}
 			function getDispXPos(x,extraOffset) {
 				if(205*getLengthX() < window.innerWidth) {
@@ -302,10 +314,12 @@
 					else if(id == 6) document.getElementById("secretText").innerHTML="<br>In the heart of the rot is the source of its power.<br>"
 					else if(id == 11) document.getElementById("secretText").innerHTML="<br>A people ruled by Science live by no moral code.<br>"
 					else if(id == 12) document.getElementById("secretText").innerHTML="<br>The Master of the Dungeon awaits the hero of Legend.<br>"
+					else if(id == 15) document.getElementById("secretText").innerHTML="<br>The Red King's leaves entomb his true nobility.<br>"
 					else if(id == 17) document.getElementById("secretText").innerHTML="<br>The essence of creativity permeates the loneliness.<br>"
 					else if(id == 18) document.getElementById("secretText").innerHTML='<br>Each step will only take you deeper into the unrevealed.<br>'
-					else if(id == 19) document.getElementById("secretText").innerHTML="<br>The being of Dark has seen the true reflection of the world.<br>"
+					else if(id == 19) document.getElementById("secretText").innerHTML="<br>The lost follower of Dark has seen the true reflection of the world.<br>"
 					else if(id == 31) document.getElementById("secretText").innerHTML="<br>Take control of your own Legend, or light the way for those around you.<br>"
+					else if(id == 7 || id == 20 || id == 26 || id == 40) document.getElementById("secretText").innerHTML="<br><span style='line-height:1.5; color:#230023; font-size:13px; font-family:"+'"Bookman Old Style","Times New Roman"'+"'>THE “SPIRIT” HAS LEFT FOR HER A MESSAGE IN THE CORNERS OF THE CRYPT.<br>FIND IT.</span><br>"
 					else document.getElementById("secretText").innerHTML=""
 				}
 			}
