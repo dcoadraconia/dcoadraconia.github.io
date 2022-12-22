@@ -83,7 +83,8 @@
 	
 	<body bgcolor="black">
 		<div id="inMirror" style="display:none; position: relative; z-index:10;">
-			<p style="color:#666666; font-size:22px; font-family: 'Georgia'; line-height: 1.66; text-align: center;"> 
+			<image id="sound" onclick="clickSound()" src="assets/images/audioOn.png" style="display:none; position:fixed; height:66px; width:auto; margin-left:12px; margin-top:-2px; cursor: pointer; z-index:2">
+			<p onclick="anyClick()" style="color:#666666; font-size:22px; font-family: 'Georgia'; line-height: 1.66; text-align: center;"> 
 			
 			<span id="text1" style="display:none">WELCOME<br></span>
 			<span id="text2" style="display:none">IF-YOU-ARE-READING-THIS<br></span>
@@ -262,9 +263,7 @@
 			var world = 0
 			var seenWorlds = [false,false,false,false,false,false]
 			var inIBox = false
-			
-			addEventListener('click', (event) => {anyClick()});
-		
+					
 			function mirrorClick() {
 				if(foundSun && foundStar && foundMoon) {
 					shine.play()
@@ -309,7 +308,9 @@
 			}
 			
 			function showInMirror() {
-				document.getElementById("inMirror").style.display = "block"
+				document.getElementById("inMirror").style.display = "block";
+				setTimeout(() => { mirrorMusic.play(); }, 2200);
+				setTimeout(() => {  document.getElementById("sound").style.display = "block"; document.getElementById("sound").style.animation = "2.2s 1 normal enter"}, 4400);
 				setTimeout(() => { dispText(1) }, 2200);
 			}
 			
@@ -350,12 +351,14 @@
 			}
 			
 			function mirrorBtn1() {
+				mirrorMusic.stop()
 				mBtn.play()
 				document.getElementById("mirrorBtn1").style.animation = "1.2s 1 normal exitF"
 				document.getElementById("fastFwd").style.animation = "0.66s 1 normal exitF"
+				document.getElementById("sound").style.animation = "0.66s 1 normal exitF"
 				fwdSpd=1
 				
-				setTimeout(() => { document.getElementById("fastFwd").style.display = "none"}, 640);
+				setTimeout(() => { document.getElementById("fastFwd").style.display = "none"; document.getElementById("sound").style.display = "none"; mirrorMusic.stop()}, 640);
 				
 				setTimeout(() => { 
 					document.getElementById("mirrorBtn1").style.display = "none" 
@@ -560,6 +563,22 @@
 			}
 			else {
 				document.getElementById("mirrorImg").style.filter = "brightness(0.66)"
+			}
+			
+			
+
+			var mirrorMusic = new Howl({    src: ['assets/audio/mirror_loop.ogg', 'assets/audio/mirror_loop.mp3'],    volume: 0.5,    loop: true  })
+			var playSound = true			
+			function clickSound() {
+				playSound = !playSound
+				if(playSound) {
+					mirrorMusic.play()
+					document.getElementById("sound").src="assets/images/audioOn.png"
+				}
+				else {
+					mirrorMusic.pause()
+					document.getElementById("sound").src="assets/images/audioOff.png"
+					}	
 			}
 			
 		</script>
