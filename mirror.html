@@ -94,7 +94,8 @@
 
 		
 		<script>
-							
+			var gaze = new Howl({    src: ['assets/audio/gaze.ogg', 'assets/audio/gaze.mp3'],    volume: 0.5,    loop: false  })	
+			
 			var world = 0
 			var inIBox = false
 					
@@ -110,6 +111,7 @@
 
 			
 			function gazeIntoMirror() {
+				setTimeout(() => { gaze.play(); }, 66);
 				document.getElementById("worldView").style.display = "block"
 				document.getElementById("worldView").style.animation = "0.66s 1 normal enter" 				
 				document.getElementById("mBcImg").style.display = "block"
@@ -117,8 +119,8 @@
 				document.getElementById("sound").style.display = "block"
 				document.getElementById("sound").style.animation = "0.66s 1 normal enter"
 				setTimeout(() => {  flicker1(); flicker2(); flicker3(); }, 120);
-				mirrorMusic.play();
-				setTimeout(() => { mirrorMusic.fade(0.0, 0.5, 2.2); }, 1);
+				setTimeout(() => { mirrorMusic.play(); setTimeout(() => { mirrorMusic.fade(0.0, 0.5, 2200); }, 1); }, 1200);
+				
 			}
 			
 			function hoverWorld(num) {
