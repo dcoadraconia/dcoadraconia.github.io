@@ -3,7 +3,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js" integrity="sha512-6+YN/9o9BWrk6wSfGxQGpt3EUK6XeHi6yeHV+TYD2GR0Sj/cggRpXr1BrAQf0as6XslxomMUxXp2vIl+fv0QRA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 <html>
-	<title>ALL-WORLDS-ARE-LINKED</title>
+	<title>THE-UNIVERSAL-MIRROR</title>
 	<link rel="icon" type="image/png" href="assets/images/light2.png">
 	<head>
 		<style>
@@ -16,193 +16,47 @@
 			  100%  {opacity: 0.0;}
 			}
 
-
-			@keyframes fadeWhite {
-			  0%   {background-color:#000000;}
-			  100%  {background-color:#FFFFFF;}
-			}
-
-			@keyframes flashPink {
-			  0%   {filter: invert(0%) sepia(0%) hue-rotate(0deg) saturate(0)}
-			  50%  {filter: invert(28%) sepia(100%) hue-rotate(-120deg) saturate(3)}
-			  100%   {filter: invert(0%) sepia(0%) hue-rotate(0deg) saturate(0)}
-			}	
-
-			@keyframes flashWhite {
-			  0%   {filter: brightness(0.66);}
-			  3%   {filter: brightness(0.66);}
-			  55%   {filter: brightness(0.88);}
-			  100%   {filter: brightness(0.66);}
-			}	
-
-			@keyframes shineOut {
-			  0%   {width: auto; height: 66%; transform: translate(-50%, 0%); opacity: 1.0; filter: invert(21%) sepia(75%) hue-rotate(-90deg) saturate(2.25)}
-			  100%  {height: 84%; transform: translate(-50%, 12.66%); opacity: 0.0;}
-			}	
-
-			@keyframes grow {
-			  0%   {width: 18%; height: 66%; transform: translate(-50%, 0%);}
-			  25%	{filter: brightness(1.0);}
-			  100%   {width: 175%; height: 126%; transform: translate(-50%, 15.4%); filter: brightness(0.66);}
-			}
-			
-			@keyframes backGlow {
-			  0%   {filter: brightness(0.66);}
-			  52.5%   {filter: brightness(1.00);}
-			  55%   {filter: brightness(1.00);}
-			  85%   {filter: brightness(0.12); }
-			  100%   {filter: brightness(0.12); }
-			}			
-
-			@keyframes backFade {
-			  0%   {filter: brightness(0.12);}
-			  50%   {filter: brightness(0.22);}
-			  100%   {filter: brightness(0.66);}
-			}	
-
-
 			@keyframes growEnter {
 			  0%  {opacity: 0.0; width:5%; height:8%}
-			  100%  {opacity: 1.0; width:50%; height:80%}
+			  100%  {opacity: 1.0; width:66%; height:80%}
 			}
 			@keyframes shrinkExit {
-			  0%  {opacity: 1.0; width:50%; height:80%}
+			  0%  {opacity: 1.0; width:66%; height:80%}
 			  100%  {opacity: 0.0; width:5%; height:8%}
 			}				
-			
-			button.mBtn {
-				color: black;
-				transition-duration: 0.66s;
-			} .mBtn:hover {
-				color: #A200A2;
-				transition-duration: 0.66s;
-			}			
+	
 	  
 		</style>
 	</head>	
 	
 	<body bgcolor="black">
-		<div id="inMirror" style="display:none; position: relative; z-index:10;">
-			<image id="sound" onclick="clickSound()" src="assets/images/audioOn.png" style="display:none; position:fixed; height:66px; width:auto; margin-left:12px; margin-top:-2px; cursor: pointer; z-index:2">
-			<p onclick="anyClick()" style="color:#666666; font-size:22px; font-family: 'Georgia'; line-height: 1.66; text-align: center;"> 
-			
-			<span id="text1" style="display:none">WELCOME<br></span>
-			<span id="text2" style="display:none">IF-YOU-ARE-READING-THIS<br></span>
-			<span id="text3" style="display:none">EVIDENTLY-YOU-ARE-THIS-WORLD'S-SEER<br></span>
-			<span id="text4" style="display:none">YOU-HAVE-DONE-WELL-TO-FIND-THIS-PLACE<br></span>
-			<span id="text5" style="display:none">THE-MIRROR-CAN-BE-ACTIVATED-ONLY-BY-A-SEER’S-POWER<br></span>
-			<span id="text6" style="display:none">I-AM-TITANIUM<br></span>
-			<span id="text7" style="display:none">LIKE-YOU-I-AM-A-SEER<br></span>
-			<span id="text8" style="display:none">BUT-I-AM-NOT-THE-SEER-OF-THE-WORLD-YOU-KNOW<br></span>
-			<span id="text9" style="display:none">MY-WORLD-IS-MUCH-LIKE-YOUR-OWN<br></span>
-			<span id="text10" style="display:none">LONG-AGO-I-FREED-IT-FROM-ANTI-MAGIC<br></span>
-			<span id="text11" style="display:none">AFTER-MY-DUTY-WAS-FULFILLED-I-IMMERSED-MYSELF-IN-MY-RESEARCH<br></span>
-			<span id="text12" style="display:none">I-STUDIED-THE-MAGIC-AND-SCIENCE-OF-REFLECTIONS<br></span>
-			<span id="text13" style="display:none">WHAT-I-DISCOVERED-WAS-ENLIGHTENING<br></span>
-			<span id="text14" style="display:none">I-LEARNED-THAT-MY-WORLD-WAS-NOT-THE-ONLY-ONE-OF-ITS-KIND<br></span>
-			<span id="text15" style="display:none">IN-REFLECTIONS-LIE-AN-INFINITY-OF-PARALLEL-WORLDS<br></span>
-			<span id="text16" style="display:none">EACH-WITH-ITS-OWN-SEER<br></span>
-			<span id="text17" style="display:none">EACH-BEARING-ITS-OWN-CURSE-OF-ANTI-MAGIC<br></span>
-			<span id="text18" style="display:none">I-REALIZED-MY-DUTY-WAS-NOT-COMPLETE<br></span>
-			<span id="text19" style="display:none">ANTI-MAGIC-WAS-PURGED-FROM-MY-WORLD-BUT-OTHER-WORLDS-STILL-BORE-ITS-AFFLICTION<br></span>
-			<span id="text20" style="display:none">AS-I-REALIZED-THIS-I-KNEW-THEN-WHAT-MY-PURPOSE-WAS<br></span>
-			<span id="text21" style="display:none">I-HAD-TO-MAKE-A-DIFFERENCE<br></span>
-			<span id="text22" style="display:none">I-HAD-TO-TAKE-MY-GIFT<br></span>
-			<span id="text23" style="display:none">MY-“HOPE”<br></span>
-			<span id="text24" style="display:none">I-HAD-TO-SPREAD-IT-TO-ALL-WORLDS<br></span>
-			<span id="text25" style="display:none">WITH-MY-GOAL-CLEAR-I-BEGAN-MY-WORK<br></span>
-			<span id="text26" style="display:none">POURING-MY-LIFE-FORCE-INTO-THE-CREATION-OF-AN-ARTIFACT<br></span>
-			<span id="text27" style="display:none">I-SET-OUT-TO-CONNECT-ALL-WORLDS<br></span>
-			<span id="text28" style="display:none">USING-MY-GIFTS-AS-A-SEER-AND-WORKING-ALONGSIDE-MY-PEOPLE<br></span>
-			<span id="text29" style="display:none">WE-DESIGNED-THE-UNIVERSAL-MIRROR<br></span>
-			<span id="text30" style="display:none">ITS-ENCHANTMENT-ALLOWS-TRAVEL-BETWEEN-VERSIONS-OF-ITSELF<br></span>
-			<span id="text31" style="display:none">THEN-USING-THE-INCANTATION-OF-REFLECTIONS<br></span>
-			<span id="text32" style="display:none">MY-INVENTION-WAS-SPREAD-ACROSS-ALL-WORLDS<br></span>
-			<span id="text33" style="display:none">GUIDING-THE-MAGIC<br></span>
-			<span id="text34" style="display:none">MIRRORING-THE-MIRROR<br></span>
-			<span id="text35" style="display:none">THROUGH-OUR-LABOR-ALL-WORLDS-WERE-CONNECTED<br></span>
-			<span id="text36" style="display:none">EVERY-INSTANCE-OF-REALITY-WAS-GRANTED-A-UNIVERSAL-MIRROR<br></span>
-			<span id="text37" style="display:none">YOU-SEER-HAVE-FOUND-YOUR-INSTANCE’S-OWN-MIRROR<br></span>
-			<span id="text38" style="display:none">CONNECTING-YOU-TO-THE-INFINITE-REFLECTIONS<br></span>
-			<span id="text39" style="display:none">CONNECTING-YOUR-WORLD-TO-THOSE-AROUND-IT<br></span>
-			<span id="text40" style="display:none">WITH-ALL-OF-THAT-SAID<br></span>
-			<span id="text41" style="display:none">I-ONLY-WISH-I-COULD-MEET-YOU-IN-PERSON-FELLOW-SEER<br></span>
-			<span id="text42" style="display:none">BUT-MORE-THAN-LIKELY-WHEN-YOU-FIND-THIS-PLACE<br></span>
-			<span id="text43" style="display:none">I-WILL-HAVE-BEEN-GONE-FOR-A-LONG-TIME<br></span>
-			<span id="text44" style="display:none">EVEN-NOW-I-FEEL-MY-LIGHT-BEGINNING-TO-DIM<br></span>
-			<span id="text45" style="display:none">IT-IS-TIME-FOR-ME-TO-RETIRE<br></span>
-			<span id="text46" style="display:none">SEER-THAT-HAS-FOUND-THE-MIRROR<br></span>
-			<span id="text47" style="display:none">PLEASE-CARRY-ON-MY-LEGACY<br></span>
-			<span id="text48" style="display:none">REACH-OUT-TO-OTHER-WORLDS<br></span>
-			<span id="text49" style="display:none">HELP-THEM<br></span>
-			<span id="text50" style="display:none">BRING-THEM-HOPE<br></span>
-			<span id="text51" style="display:none">GUIDE-THEM-TO-A-BRIGHTER-FUTURE<br></span>
-			<span id="text52" style="display:none">THANK-YOU<br></span>
-			<span id="text53" style="display:none">...<br></span>
-			<span id="text54" style="display:none">HOW-UNFORTUNATE<br></span>
-			<span id="text55" style="display:none">IT-APPEARS-THE-ANTI-MAGIC-OF-YOUR-WORLD-HAS-NOT-YET-BEEN-ERADICATED<br></span>
-			<span id="text56" style="display:none">MEANING-THERE-IS-NOT-ENOUGH-FREE-MAGIC-IN-THIS-WORLD-TO-POWER-THE-UNIVERSAL-MIRROR<br></span>
-			<span id="text57" style="display:none">AS-SUCH<br></span>
-			<span id="text58" style="display:none">THE-UNIVERSAL-MIRROR'S-POTENTIAL-IS-GREATLY-DIMINISHED<br></span>
-			<span id="text59" style="display:none">YOU-CANNOT-YET-USE-ITS-ABILITIES-TO-TRAVEL-BETWEEN-WORLDS<br></span>
-			<span id="text60" style="display:none">HOWEVER-IT-MAY-YET-AID-YOU-IN-YOUR-CHOSEN-DUTY<br></span>
-			<span id="text61" style="display:none">THOUGH-YOU-CANNOT-INTERACT-WITH-OTHER-WORLDS-YOU-MAY-STILL-GAZE-INTO-THEM<br></span>
-			<span id="text62" style="display:none">FOCUS-YOUR-SEER-MAGIC-AND-STARE-INTO-THE-UNIVERSAL-MIRROR<br></span>
-			<span id="text63" style="display:none">YOU-MAY-PERHAPS-SEE-INTO-A-WORLD-THAT-WILL-HELP-YOU-IN-YOUR-TASK<br></span>
-			<span id="text64" style="display:none">EITHER-WAY-ONCE-YOU-ARE-DONE-HERE<br></span>
-			<span id="text65" style="display:none">RESUME-YOUR-MISSION-AND-VANQUISH-THE-ANTI-MAGIC<br></span>
-			<span id="text66" style="display:none">AND-RETURN-HERE-WHEN-YOU-HAVE-DONE-SO<br></span>
-			
-			</p>
-					
-		</div>
-			
-		<div id="fastFwd" style="display:none">
-			<button onmouseout="fwdSpd=1" onmousedown="fwdSpd=10" onclick="fwdSpd=1" style="position:absolute; bottom:0; right:0; margin:12px; cursor: pointer; background-color: #5C5C5C; color: white; padding: 12px 12px; border: 3px solid #C2C2C2; text-align: center;font-size: 24px;cursor: pointer; font-family: 'Arial'; z-index:12;">Click and hold to fast forward</button>
-		</div>	
+
+		<image id="sound" onclick="clickSound()" src="assets/images/audioOn.png" style="display:none; position:fixed; height:66px; width:auto; margin-left:12px; margin-top:-2px; cursor: pointer; z-index:2">
+
 		
-		 <div id="mirrorBtn1" style="display:none">
-			<button class="mBtn" onclick="mirrorBtn1()" style="cursor: pointer; background-color: #CCCCCC; border: 5px solid #7C7C7C; padding: 12px 12px;text-align: center;display: inline-block;font-size: 66px;cursor: pointer; font-family: 'Garamond'; bottom: 1%; left: 50%; transform: translate(-50%, 0%);position: absolute; z-index:1;"> <b>Step through the<br>Universal Mirror</b></button> 
-		 </div>		
-		 <div id="mirrorBtn2" style="display:none">
-			<button class="mBtn" onclick="mirrorBtn2()" style="cursor: pointer; background-color: #CCCCCC; border: 5px solid #7C7C7C; padding: 12px 12px;text-align: center;display: inline-block;font-size: 66px;cursor: pointer; font-family: 'Garamond'; bottom: 1%; left: 50%; transform: translate(-50%, 0%);position: absolute; z-index:1;"> <b>Look through the<br>Universal Mirror</b></button> 
-		 </div>	
-
-
-		<div id="symbols">
-			<img id="s_sun" src="assets/images/icon-sun.png" style='display:block; position: absolute; top:12%; left:37.5%; transform: translate(-50%, -33%); height: 12%; width:auto; '>
-			<img id="s_star" src="assets/images/icon-star.png" style='display:block; position: absolute; top:10%; left:50%; transform: translate(-50%, -50%); height: 12%; width:auto; '>
-			<img id="s_moon" src="assets/images/icon-moon.png" style='display:block; position: absolute; top:12%; left:62.5%; transform: translate(-50%, -33%); height: 12%; width:auto; '>
-
-			<p id="syText" style="display:none; position: absolute; top:22%; left:50%; transform: translate(-50%, -50%); color:#CCCCCC; font-size:22px; font-family: 'Arial'; line-height: 1.22; text-align: center; "> 
-				<i>What could these symbols mean?<br>Perhaps you've seen something like this before, elsewhere...</i>
+			<p id="wipText" style="color:#C8C8C8; font-size:22px; font-family: 'Georgia'; line-height: 1.22; text-align: center; "> 
+				DO-NOT-MIND-THE-MESS<br>WITH-THE-FIFTH-BEARER-TO-FALL<br>THE-VISIBLE-IS-BEGINNING-TO-HEAL
 			</p>
-		</div>
-		
 
 
 		<div id="mirror">
 			<img id="mirrorImg" onclick="mirrorClick()" src="assets/images/mirror.png" style='cursor: pointer; display:inline; width:auto; height: 66%; position: fixed; bottom:0; left:50%; transform: translate(-50%, 0%);'>
 		</div>
-		<div id="mirrorD" style="display:none">
-			<img id="mirror1" src="assets/images/mirror1.png" style='display:inline; width:auto; height: 66%; position: fixed; bottom:0; left:50%; transform: translate(-50%, 0%);'>
-		</div>
-		<div id="mirrorD2" style="display:none">
-			<img id="mirror2" src="assets/images/mirror1.png" style='display:inline; width:auto; height: 66%; position: fixed; bottom:0; left:50%; transform: translate(-50%, 0%);'>
-		</div>			
-		<div id="mirrorBack" style="display:none">
-			<img id="mBcImg" src="assets/images/mirror1.png" style="width: 175%; height: 126%; transform: translate(-50%, 15.4%); filter: brightness(0.66); position: fixed; bottom:0; left:50%; z-index:-1;">  </img>
-		</div>
+
+		<img id="mBcImg" src="assets/images/mirror1.png" style="display:none; width: 175%; height: 126%; transform: translate(-50%, 15.4%); filter: brightness(0.66); position: fixed; bottom:0; left:50%; z-index:-1;">  </img>
+
+
 		
-		
-		<div id="worldView" onmouseover="hoverWorld(0)" onclick="showShroudText()" style="display:none; position: absolute; top:50%;left:50%; width:88%; height:88%; background: radial-gradient(#666666, #666666, #666666, #000000, #000000, #000000, #000000, #000000, #000000, #000000); border-radius:66px; border: 22px solid #888888; z-index:12; transform: translate(-50%, -50%);">
+		<div id="worldView" onmouseover="hoverWorld(0)" onclick="showShroudText()" style="display:none; position: absolute; top:50%;left:50%; width:88%; height:88%; background: radial-gradient(#666666, #666666, #666666, #000000, #000000, #000000, #000000, #000000, #000000); border-radius:66px; border: 22px solid #888888; z-index:12; transform: translate(-50%, -50%);">
+
+
 			<p style="color:#C8C8C8; font-size:22px; font-family: 'Georgia'; line-height: 1.22; text-align: center; "> 
 				GAZE-UPON-THE-WORLD-YOU-WISH-TO-LOOK-INTO<br><br>
 				<span id="worldInfo" style="position:absolute; transform: translate(-50%, 0%);" ></span>
 			</p>
 			
 			<span id="shroudText" style="display:none">
-				<p style="color:#C8C8C8; position:absolute; bottom:0%;left:50%; font-size:22px; font-family: 'Georgia'; line-height: 1.22; text-align: center; transform: translate(-50%, 0%);">THE-MIRROR’S-DISPLAY-IS-CLOUDED-BY-THE-ANTI-MAGIC<br>MORE-WORLDS-MAY-BE-REVEALED-TO-YOU-AS-YOU-WEAKEN-THE-CURSE
+				<p style="color:#C8C8C8; position:absolute; bottom:0%;left:50%; font-size:22px; font-family: 'Georgia'; line-height: 1.22; text-align: center; transform: translate(-50%, 0%);">THE-MIRROR’S-DISPLAY-IS-CLOUDED-BY-THE-ANTI-MAGIC<br>MORE-WORLDS-WILL-BEGIN-TO-APPEAR-WHEN-THE-SIXTH-BEARER-FALLS
 				</p>
 			</span>
 			
@@ -212,12 +66,12 @@
 			<div id="world4" onmouseout="world=0" onmouseover="world=4; hoverWorld(4);" onclick="clickWorld(4)" style=" cursor: pointer; height: 66px; width: 66px; background: radial-gradient(#E0E0FF, #7070A8); border-radius: 50%; display: block; position: absolute; top:40%;left:55%; transform: translate(-50%, -50%);"></div>
 			<div id="world5" onmouseout="world=0" onmouseover="world=5; hoverWorld(5);" onclick="clickWorld(5)" style=" cursor: pointer; height: 66px; width: 66px; background: radial-gradient(#FFFF00, #FF3200); border-radius: 50%; display: block; position: absolute; top:40%;left:45%; transform: translate(-50%, -50%);"></div>
 			<div id="world6" onmouseout="world=0" onmouseover="world=6; hoverWorld(6);" onclick="clickWorld(6)" style=" cursor: pointer; height: 66px; width: 66px; background: radial-gradient(#FF00FF, #5E005E); border-radius: 50%; display: block; position: absolute; top:60%;left:45%; transform: translate(-50%, -50%);"></div>
-			<div id="world7" onmouseout="world=0" onmouseover="world=7; hoverWorld(7);" onclick="clickWorld(7)" style="height: 60px; width: 60px; border: 6px solid #FFFFFF; border-radius: 50%; display: block; position: absolute; top:60%;left:55%; transform: translate(-50%, -50%); opacity:0.22"></div>
+			<div id="world7" onmouseout="world=0" onmouseover="world=7; hoverWorld(7);" onclick="clickWorld(7)" style="cursor: pointer; height: 66px; width: 66px; background: radial-gradient(#AA2200, #AA7D71, #FFEFFF); border-radius: 50%; display: block; position: absolute; top:60%;left:55%; transform: translate(-50%, -50%); "></div>
 			
 
 		</div>
 
-		<div id="worldIBox" style="display:none; position: absolute; top:50%;left:50%; width:50%; height:80%; background: linear-gradient(66deg, #A6A7A8 0%, #E3E4E5 50%, #A6A7A8 100%); border: 22px solid #888888; z-index:22; transform: translate(-50%, -50%); overflow: hidden;"> 
+		<div id="worldIBox" style="display:none; position: absolute; top:50%;left:50%; width:66%; height:80%; background: linear-gradient(66deg, #A6A7A8 0%, #E3E4E5 50%, #A6A7A8 100%); border: 22px solid #888888; z-index:22; transform: translate(-50%, -50%); overflow: hidden;"> 
 			
 			<img id="closeBtn" onclick="if(inIBox){closeIBox()}" style="cursor: pointer; position: absolute; right: 2.2%; top: 2.2%; height:66px; width:auto;" src="assets/images/mirror_x.png" onMouseOver="this.src='assets/images/mirror_x2.png'" onMouseOut="this.src='assets/images/mirror_x.png'">
 			
@@ -239,163 +93,32 @@
 		</div>
 
 		
-		<a href="https://www.youtube.com/@D-LotGS">
-			<img id="sun" style="display:none; cursor: pointer; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);" src="assets/images/sun.gif">
-		</a>
-		
 		<script>
-			var gaze = new Howl({    src: ['assets/audio/gaze.ogg', 'assets/audio/gaze.mp3'],    volume: 0.5,    loop: false  })	
-			
-			var sheen = new Howl({    src: ['assets/audio/sheen.ogg', 'assets/audio/sheen.mp3'],    volume: 0.5,    loop: false  })	
-			var sweep = new Howl({    src: ['assets/audio/windsweep.ogg', 'assets/audio/windsweep.mp3'],    volume: 0.3,    loop: false  })	
-			var shine = new Howl({    src: ['assets/audio/great_shine.ogg', 'assets/audio/great_shine.mp3'],    volume: 0.5,    loop: false  })	
-			var fTransform = new Howl({    src: ['assets/audio/mirror_failed_transform.ogg', 'assets/audio/mirror_failed_transform.mp3'],    volume: 0.66,    loop: false  })
-			var mBtn = new Howl({    src: ['assets/audio/mirror_btn.ogg', 'assets/audio/mirror_btn.mp3'],    volume: 0.9,    loop: false  })	
-			
-			var fireCrackle = new Howl({    src: ['assets/audio/crackling-fire.ogg', 'assets/audio/crackling-fire.mp3'],    volume: 0.5,    loop: true  })
-		
-			var mirrorProgId = 0
-			var fwdSpd = 1
-			
-			var view = false
-			var cl1 = false
-			
+							
 			var world = 0
-			var seenWorlds = [false,false,false,false,false,false]
 			var inIBox = false
 					
 			function mirrorClick() {
-				if(foundSun && foundStar && foundMoon) {
-					shine.play()
-					document.getElementById("symbols").style.animation = "1.2s 1 normal exitF"
-					document.getElementById("symbols").style.opacity = "0.0"
-					document.getElementById("mirrorD").style.display = "block"
-					document.getElementById("mirror1").style.animation = "0.66s 1 normal flashPink"
-					setTimeout(() => { 
-						document.getElementById("mirrorD2").style.display = "block";
-						document.getElementById("mirror2").style.animation = "1.2s 1 normal shineOut"
-						setTimeout(() => { document.getElementById("mirrorD2").style.display = "none"; }, 1200);
-					}, 330);
-					setTimeout(() => { sweep.play() }, 1860);
-					setTimeout(() => { 
-						document.body.style.animation = "fadeWhite 6s 1";
-						document.getElementById("mirror1").style.animation = "6s 1 normal grow"
-					}, 2400);
-					setTimeout(() => {
-						document.getElementById("mirrorBack").style.display = "block"
-						document.getElementById("mirror").style.display = "none"
-						document.getElementById("symbols").style.display = "none"
-						document.getElementById("mirrorD").style.display = "none"
-						if(!view) {
-							showInMirror()
-						}
-						else {
-							setTimeout(() => { gazeIntoMirror() }, 1200);
-						}
-					}, 8390);
-				}
-				else {
-					if(!cl1) {
-					cl1=true
-					document.getElementById("syText").style.display = "block"
-					document.getElementById("syText").style.animation = "4.8s 1 normal enter"
-					setTimeout(() => { sheen.play() }, 180);
-					document.getElementById("mirrorD").style.display = "block"
-					document.getElementById("mirror1").style.filter = "brightness(0.66)"
-					document.getElementById("mirror1").style.animation = "3.6s 1 normal flashWhite"
-					}
-				}
-			}
-			
-			function showInMirror() {
-				document.getElementById("inMirror").style.display = "block";
-				setTimeout(() => { mirrorMusic.play(); }, 2200);
-				setTimeout(() => {  document.getElementById("sound").style.display = "block"; document.getElementById("sound").style.animation = "2.2s 1 normal enter"}, 4400);
-				setTimeout(() => { dispText(1) }, 2200);
-			}
-			
-			function dispText(id) {
-				if(id == 53) {
-					setTimeout(() => { 
-						document.getElementById("mirrorBtn1").style.display = "block"
-						document.getElementById("mirrorBtn1").style.animation = "2.2s 1 normal enter" 
-					}, 660);
-				}
-				else if (id == 67) {
-					document.getElementById("fastFwd").style.animation = "0.66s 1 normal exitF"
-					fwdSpd=1
-					setTimeout(() => { document.getElementById("fastFwd").style.display = "none"}, 640);
+				document.getElementById("wipText").style.animation = "0.3s 1 normal exitF"
+				document.getElementById("wipText").style.opacity = "0.0"
+				document.getElementById("mirror").style.animation = "0.3s 1 normal exitF"
+				document.getElementById("mirror").style.opacity = "0.0"
 				
-					setTimeout(() => { 
-						document.getElementById("mirrorBtn2").style.display = "block"
-						document.getElementById("mirrorBtn2").style.animation = "1.2s 1 normal enter" 
-					}, 1200);
-				}
-				else {
-					if(id == -12) {id = 53}
-					if(id == 2) {mirrorProgId = 2}
-					if(id > 12) {document.getElementById("text"+(id-12)).style.display = "none"}
-					document.getElementById("text"+id).style.display = "block"
-					document.getElementById("text"+id).style.animation = (2/fwdSpd)+"s 1 normal enter"
-					
-					setTimeout(() => { dispText(id+1) }, (3000/fwdSpd));
-				}
+				setTimeout(() => { gazeIntoMirror(); }, 120);
 			}
 			
-			function anyClick() {
-				if(mirrorProgId == 2) {
-					document.getElementById("fastFwd").style.display = "block"
-					document.getElementById("fastFwd").style.animation = "2s 1 normal enter"
-					mirrorProgId = 3
-				}
-			}
-			
-			function mirrorBtn1() {
-				mirrorMusic.stop()
-				mBtn.play()
-				document.getElementById("mirrorBtn1").style.animation = "1.2s 1 normal exitF"
-				document.getElementById("fastFwd").style.animation = "0.66s 1 normal exitF"
-				document.getElementById("sound").style.animation = "0.66s 1 normal exitF"
-				fwdSpd=1
-				
-				setTimeout(() => { document.getElementById("fastFwd").style.display = "none"; document.getElementById("sound").style.display = "none"; mirrorMusic.stop()}, 640);
-				
-				setTimeout(() => { 
-					document.getElementById("mirrorBtn1").style.display = "none" 
-					fTransform.play()
-					document.getElementById("mBcImg").style.animation = "12s 1 normal backGlow"
-					setTimeout(() => { document.getElementById("mBcImg").style.filter = "brightness(0.12)"}, 11980);
-				}, 1180);
-				
-				setTimeout(() => { 
-					if(mirrorProgId == 3) {
-						document.getElementById("fastFwd").style.display = "block"
-						document.getElementById("fastFwd").style.animation = "2s 1 normal enter" 
-					}
-					dispText(-12) 
-				}, 13300);
-			}
-			
-			function mirrorBtn2() {
-				mBtn.play()
-				document.getElementById("mirrorBtn2").style.animation = "1.2s 1 normal exitF"
-				setTimeout(() => { document.getElementById("mirrorBtn2").style.display = "none"}, 1180);
 
-				setTimeout(() => { 
-					document.getElementById("inMirror").style.animation = "1.2s 1 normal exitF"
-					setTimeout(() => { document.getElementById("inMirror").style.display = "none"}, 1180);
-					document.getElementById("mBcImg").style.animation = "5s 1 normal backFade"
-					setTimeout(() => { document.getElementById("mBcImg").style.filter = "brightness(0.66)"}, 4980);
-				}, 2200);
-				
-				setTimeout(() => { gazeIntoMirror() }, 8800);
-				
-			}
 			
 			function gazeIntoMirror() {
-				gaze.play()
 				document.getElementById("worldView").style.display = "block"
 				document.getElementById("worldView").style.animation = "0.66s 1 normal enter" 				
+				document.getElementById("mBcImg").style.display = "block"
+				document.getElementById("mBcImg").style.animation = "0.66s 1 normal enter" 	
+				document.getElementById("sound").style.display = "block"
+				document.getElementById("sound").style.animation = "0.66s 1 normal enter"
+				setTimeout(() => {  flicker1(); flicker2(); flicker3(); }, 120);
+				mirrorMusic.play();
+				setTimeout(() => { mirrorMusic.fade(0.0, 0.5, 2.2); }, 1);
 			}
 			
 			function hoverWorld(num) {
@@ -428,20 +151,74 @@
 					document.getElementById("worldInfo").innerHTML = "WORLD-FA3-PR0<br>MAGIC-FORMED-BY-TIME"
 				}
 				if(num == 7) {
-					if(seenAllWorlds()) {
 						document.getElementById("worldInfo").style.color = "#AA2200"
 						document.getElementById("worldInfo").innerHTML = "WORLD-D06-L12<br>A-NEW-LEGEND-IS-ABOUT-TO-BEGIN"
-					}
-					else {
-						document.getElementById("worldInfo").style.color = "#C8C8C8"
-						document.getElementById("worldInfo").innerHTML = "WORLD-???-???<br>THIS-WORLD'S-IMAGE-IS-DISTORTED<br>REFLECT-YOUR-LIGHT-ON-THE-OTHER-VISIBLE-WORLDS<br>TO-ILLUMINATE-THIS-WORLD'S-IDENTITY"
-					}
 				}
+				// A-WORLD-OF-INFINITE-CHOICES
 				else if (world == 0) {
 					document.getElementById("worldInfo").style.animation = "none" 
 				}
 			}
 			
+			function clickWorld(num) {
+				if(num >= 1 && num <= 7) {
+					document.getElementById("worldIBox").style.display = "block"
+					document.getElementById("worldIBox").style.animation = "0.48s 1 normal growEnter"
+				
+					setTimeout(() => { 
+						inIBox = true
+					}, 480);
+				
+					if(num == 1) {
+						document.getElementById("boxName").innerHTML = "WORLD-S0L-441"
+						document.getElementById("boxDesc").innerHTML = "YOUR-OWN-WORLD<br>THE-WORLD'S-INERTIA-HOLDS-IT-BACK-FROM-THE-REFINEMENTS-COMMON-TO-THE-OTHER-WORLDS<br>IT-MAY-REMAIN-FOREVER-TRAPPED-IN-THIS-STATE<br><br><b>WORLD-AGE</b>: 6<br><br><b>CURRENT-OBJECTIVE:</b> FREE-THE-DARK<br><br><b>SEER</b>: SOLAR<br><b>SEER-KIND</b>: SUN-DRAGON<br><i>FIRE/LIGHT</i><br><br>MORE-KNOWLEDGE-SHALL-BECOME-AVAILABLE-AS-THE-ANTI-MAGIC-WEAKENS"
+					}
+					if(num == 2) {
+						document.getElementById("boxName").innerHTML = "WORLD-C0R-D5W"
+						document.getElementById("boxDesc").innerHTML = "THIS-WORLD-IS-MUCH-LIKE-YOUR-OWN<br>THE-FACES-ARE-FAMILIAR<br>BUT-THEIR-PLACES-ARE-ALTERED<br><br><b>WORLD-AGE</b>: 6<br><br><b>CURRENT-OBJECTIVE:</b> SOOTHE-THE-SEA<br><br><b>SEER</b>: CORONA<br><b>SEER-KIND</b>: SUN-DRAGON<br><i>LIGHT/FIRE</i><br><br>MORE-KNOWLEDGE-SHALL-BECOME-AVAILABLE-AS-THE-ANTI-MAGIC-WEAKENS"
+					}
+					if(num == 3) {
+						document.getElementById("boxName").innerHTML = "WORLD-M1R-R04"
+						document.getElementById("boxDesc").innerHTML = "A-WORLD-OF-NEW-DRAGONS<br>FOR-EACH-ELEMENT-PAIR-A-REFLECTED-COMBINATION<br><br><b>WORLD-AGE</b>: 4<br><br><b>CURRENT-OBJECTIVE:</b> MEND-THE-SKY<br><br><b>SEER</b>: LIGHTCHASER<br><b>SEER-KIND</b>: LIGHTNING-DRAGON<br><i>SKY/LIGHT</i><br><br>MORE-KNOWLEDGE-SHALL-BECOME-AVAILABLE-AS-THE-ANTI-MAGIC-WEAKENS"
+					}
+					if(num == 4) {
+						document.getElementById("boxName").innerHTML = "WORLD-T47-10R"
+						document.getElementById("boxDesc").innerHTML = "THE-FIRST-WORLD-TO-RISE<br>NOW-FALLEN-INTO-OBLIVION<br>ITS-SAVIORS-HAIL-FROM-A-FAR-OFF-LAND<br>PERHAPS-THE-NAME-AMTORIA-COMES-TO-MIND<br><br><b>WORLD-AGE</b>: 2<br><br><b>CURRENT-OBJECTIVE:</b> FORM-THE-METAL<br><br><b>SEER</b>: JUBILEE<br><b>SEER-KIND</b>: MOON-ARSTRY<br><i>MOON/LIGHT</i><br><br>MORE-KNOWLEDGE-SHALL-BECOME-AVAILABLE-AS-THE-ANTI-MAGIC-WEAKENS"
+					}				
+					if(num == 5) {
+						document.getElementById("boxName").innerHTML = "WORLD-C51-1M3"
+						document.getElementById("boxDesc").innerHTML = "THIS-WORLD-IS-YET-YOUNG<br>BUT-THE-SUN-RISES-ON-IT-QUICKLY<br><br><b>WORLD-AGE</b>: 1<br><br><b>CURRENT-OBJECTIVE:</b> DISCOVER-THE-PURPOSE<br><br><b>SEER</b>: COMET<br><b>SEER-KIND</b>: SUN-DRAGON<br><i>FIRE/LIGHT</i><br><br>MORE-KNOWLEDGE-SHALL-BECOME-AVAILABLE-AS-THE-ANTI-MAGIC-WEAKENS"
+					}	
+					if(num == 6) {
+						document.getElementById("boxName").innerHTML = "WORLD-FA3-PR0"
+						document.getElementById("boxDesc").innerHTML = "THIS-WORLD-LACKS-FORM<br>MAGIC-ENERGY-FLOWS-UNRESTRICTED<br>ITS-MASTER-MUST-HARNESS-IT-TO-CREATE<br><br><b>WORLD-AGE</b>: 4<br><br><b>CURRENT-OBJECTIVE:</b> PRODUCE-THE-POISON<br><br><b>SEER</b>: UNKNOWN<br><b>SEER-KIND</b>: UNKNOWN<br><i>FAE/LIGHT</i><br><br>MORE-KNOWLEDGE-SHALL-BECOME-AVAILABLE-AS-THE-ANTI-MAGIC-WEAKENS<br><br><a href= 'https://dcoadraconia.github.io/faeproject'>TAKE-THE-ROLE-OF-SEER</a>"
+					} 					
+					if(num == 7) {
+						document.getElementById("boxName").innerHTML = "WORLD-D06-L12"
+						let daysL = Math.ceil((new Date("Apr 1, 2023 12:00:00").getTime() - new Date().getTime()) / (1000 * 3600 * 24));
+						let textCommon = "ANOTHER-LEGEND-OF-THE-GHOST-SEER<br><br><b>WORLD-AGE</b>: 0<br><br><b>CURRENT-OBJECTIVE:</b> BEGIN.<br><br><b>SEER</b>: SOLAR<br><b>SEER-KIND</b>: SUN-R̵̢̡͙͚̝͇̪̜̣̙͋̈́̈̎̌̿́̋͝ͅ�̸̧͈̦̦͕̮͉͕̾̑̆̆̉̐�̴̢̱͙̖̮̜̦̬̝̼̈́́͒̌�̶̨̛͈̭͈͓͔̙̅̔̒̆̎͗̏́̊̚͜ͅ�̸̡̧̮̝̘̮͖̉̀̇͌͂̀͝͠͝�̸̡̦̱̻͍̙͎͕̩̠̬̱̿́̐͐͗́̂̑̈́̏ͅ�̷̢̞͓̰̙̙͉̜̒͗̽͊̑̄̃͌̐̕ͅ�̸̧̨̛͕̲̱̩̬̟̱̼̘͑̂͌͋͛͆͜͜ͅͅ�̷̢̹̬̼̙̱̬̦̝̄͋͒͑̕<br><i>FIRE/LIGHT</i>"
+						if(daysL > 0) document.getElementById("boxDesc").innerHTML = textCommon+"<br><br>"+numT(daysL)
+						else document.getElementById("boxDesc").innerHTML = textCommon+"<br><br><a href= 'https://www.youtube.com/@D-LotGS'>THIS-WORLD-IS-NOW-UNFOLDING</a>"
+					} 	
+				}
+			}
+
+			function numT(num) {
+				if(num==1) return "ONE-DAY-REMAINS"
+				if(num==2) return "TWO-DAYS-REMAIN"
+				if(num==3) return "THREE-DAYS-REMAIN"
+				if(num==4) return "FOUR-DAYS-REMAIN"
+				if(num==5) return "FIVE-DAYS-REMAIN"
+				if(num==6) return "SIX-DAYS-REMAIN"
+				if(num==7) return "SEVEN-DAYS-REMAIN"
+				if(num==8) return "EIGHT-DAYS-REMAIN"
+				if(num==9) return "NINE-DAYS-REMAIN"
+				if(num==10) return "TEN-DAYS-REMAIN"
+				if(num==11) return "ELEVEN-DAYS-REMAIN"
+				if(num==12) return "TWELVE-DAYS-REMAIN"
+				return num+"-DAYS-REMAIN"
+			}
+
 			function flicker1() {
 				document.getElementById("world7").style.opacity = (Math.random()*0.44+0.22)
 				setTimeout(() => {  flicker1() }, (480*Math.random()**2))
@@ -458,56 +235,6 @@
 					document.getElementById("worldInfo").style.transform = "translate("+(-51+Math.random()*2)+"%,0)" 
 				}
 				setTimeout(() => {  flicker3() }, (330*Math.random()**2))
-			}
-			
-			function clickWorld(num) {
-				if(num >= 1 && num <= 6) {
-					document.getElementById("worldIBox").style.display = "block"
-					document.getElementById("worldIBox").style.animation = "0.48s 1 normal growEnter"
-				
-					setTimeout(() => { 
-						inIBox = true			
-						seenWorlds[num-1] = true
-						if(seenAllWorlds()) {
-							document.getElementById("world7").style = "cursor: pointer; height: 66px; width: 66px; background: radial-gradient(#AA2200, #AA7D71, #FFEFFF); border-radius: 50%; display: block; position: absolute; top:60%;left:55%; transform: translate(-50%, -50%); opacity:0.66"
-							setTimeout(() => {  flicker1(); flicker2(); flicker3(); }, 480);
-						}
-					}, 480);
-				
-					if(num == 1) {
-						document.getElementById("boxName").innerHTML = "WORLD-S0L-441"
-						document.getElementById("boxDesc").innerHTML = "YOUR-OWN-WORLD<br><br>ITS-REFLECTION-IS-SHROUDED-BY-THE-ANTI-MAGIC<br><br>RETURN-HERE-WHEN-MORE-OF-ITS-BEARERS-HAVE-FALLEN"
-					}
-					if(num == 2) {
-						document.getElementById("boxName").innerHTML = "WORLD-C0R-D5W"
-						document.getElementById("boxDesc").innerHTML = "THE-POWER-OF-ANTI-MAGIC-REMAINS-TOO-STRONG-FOR-YOU-TO-SEE-INTO-THIS-WORLD<br><br>RETURN-HERE-WHEN-MORE-OF-ITS-BEARERS-HAVE-FALLEN"
-					}
-					if(num == 3) {
-						document.getElementById("boxName").innerHTML = "WORLD-M1R-R04"
-						document.getElementById("boxDesc").innerHTML = "THE-POWER-OF-ANTI-MAGIC-REMAINS-TOO-STRONG-FOR-YOU-TO-SEE-INTO-THIS-WORLD<br><br>RETURN-HERE-WHEN-MORE-OF-ITS-BEARERS-HAVE-FALLEN"
-					}
-					if(num == 4) {
-						document.getElementById("boxName").innerHTML = "WORLD-T47-10R"
-						document.getElementById("boxDesc").innerHTML = "THE-POWER-OF-ANTI-MAGIC-REMAINS-TOO-STRONG-FOR-YOU-TO-SEE-INTO-THIS-WORLD<br><br>RETURN-HERE-WHEN-MORE-OF-ITS-BEARERS-HAVE-FALLEN"
-					}				
-					if(num == 5) {
-						document.getElementById("boxName").innerHTML = "WORLD-C51-1M3"
-						document.getElementById("boxDesc").innerHTML = "THE-POWER-OF-ANTI-MAGIC-REMAINS-TOO-STRONG-FOR-YOU-TO-SEE-INTO-THIS-WORLD<br><br>RETURN-HERE-WHEN-MORE-OF-ITS-BEARERS-HAVE-FALLEN"
-					}	
-					if(num == 6) {
-						document.getElementById("boxName").innerHTML = "WORLD-FA3-PR0"
-						document.getElementById("boxDesc").innerHTML = "THE-POWER-OF-ANTI-MAGIC-REMAINS-TOO-STRONG-FOR-YOU-TO-SEE-INTO-THIS-WORLD<br><br>RETURN-HERE-WHEN-MORE-OF-ITS-BEARERS-HAVE-FALLEN"
-					} 					
-				}				
-				if(num == 7) {
-					if(seenAllWorlds()) {
-						document.getElementById("mirrorBack").style.display = "none"
-						document.getElementById("worldView").style.display = "none"
-						document.getElementById("sun").style.display = "block"
-						document.title = "..."; 
-						fireCrackle.play()
-					}
-				}
 			}
 
 
@@ -535,37 +262,8 @@
 				}
 			});
 
-			function seenAllWorlds() {
-				if(seenWorlds[0] == true && seenWorlds[1] == true && seenWorlds[2] == true && seenWorlds[3] == true && seenWorlds[4] == true && seenWorlds[5] == true) {
-					return true
-				}
-				return false				
-			}
 			
-			
-			var foundSun = (localStorage.getItem("sun") == "true")
-			var foundStar = (localStorage.getItem("star") == "true")
-			var foundMoon = (localStorage.getItem("moon") == "true")			
-			if(foundSun) {
-				document.getElementById("s_sun").src = "assets/images/icon-sun-lit.png"
-			}
-			else {
-				document.getElementById("mirrorImg").style.filter = "brightness(0.66)"
-			}
-			if(foundStar) {
-				document.getElementById("s_star").src = "assets/images/icon-star-lit.png"
-			}
-			else {
-				document.getElementById("mirrorImg").style.filter = "brightness(0.66)"
-			}
-			if(foundMoon) {
-				document.getElementById("s_moon").src = "assets/images/icon-moon-lit.png"
-			}
-			else {
-				document.getElementById("mirrorImg").style.filter = "brightness(0.66)"
-			}
-			
-			
+					
 
 			var mirrorMusic = new Howl({    src: ['assets/audio/mirror_loop.ogg', 'assets/audio/mirror_loop.mp3'],    volume: 0.5,    loop: true  })
 			var playSound = true			

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js" integrity="sha512-6+YN/9o9BWrk6wSfGxQGpt3EUK6XeHi6yeHV+TYD2GR0Sj/cggRpXr1BrAQf0as6XslxomMUxXp2vIl+fv0QRA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<html>
+	<title>covered in black</title>
+	<body bgcolor="black">
+		<div style="margin:auto; position:absolute; left: 50%; top: 12%; width:234px;height:66px; transform: translate(-50%, -50%);">
+			<p style="text-align:left; font-family:'Helvetica'; font-size:24px; color:white;"><i><span id="text"></span></i></p>
+		</div>
+		<div style='position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);'>
+				<img onclick="text(0)" src="assets/images/blackhole.png">
+		</div>
+		<script>
+			var str = "\"No.+ I can't...+ not yet.\"="
+			var check = true
+
+
+			var textS = new Howl({    src: ['assets/audio/text1.ogg', 'assets/audio/text1.mp3'],    volume: 0.8,    loop: false  })
+			var fire = new Howl({    src: ['assets/audio/fire_dark.ogg', 'assets/audio/fire_dark.mp3'],    volume: 0.5,    loop: true  })
+			var black_fire = new Howl({    src: ['assets/audio/blackfire.ogg', 'assets/audio/blackfire.mp3'],    volume: 0.33,    loop: true  })
+			
+			
+			function text(num) {
+				if(num == 0 && !check) {window.location.href = "https://dcoadraconia.github.io/"; return;}
+				check = false;
+				if(num == 0) fire.play(); black_fire.play();
+				nextChar = str.charAt(num)
+				if(nextChar == "=") return;
+				if(nextChar == "+") setTimeout(() => { text(num+1); }, (250))
+				else setTimeout(() => { document.getElementById("text").innerHTML += nextChar; textS.play(); text(num+1); }, (33))
+			}
+			
+			
+
+			
+		</script>
+	</body>
+</html>
