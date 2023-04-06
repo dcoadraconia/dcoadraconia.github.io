@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js" integrity="sha512-6+YN/9o9BWrk6wSfGxQGpt3EUK6XeHi6yeHV+TYD2GR0Sj/cggRpXr1BrAQf0as6XslxomMUxXp2vIl+fv0QRA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<html>
+	<title>69 morbs until Pikmin 4</title>
+	<link rel="icon" type="image/png" href="assets/images/favicon.png">
+	<head>
+		<style>
+			@font-face { 
+				font-family: Pikmin;
+				src: url('assets/fonts/Pikmin.ttf');
+			}
+		
+			:root {
+			  --color1: #E00E00;
+			  --color2: #A83614;
+			  --color3: #F2D130;
+			  --color4: #6BB223;
+			  --color5: #32BAFF;
+			  --color6: #2D5BE5;
+			  --color7: #841E99;
+			  --color8: #342E3D;
+			  --color9: #A6A6A6;
+			  --color10: #F9FFBF;
+			  --color11: #E516A0;
+			  --color12: #7F1F3F;
+			}
+		
+			@keyframes transition1 {0%  {color: var(--color12);} 100%  {color: var(--color1);}}
+			@keyframes transition2 {0%  {color: var(--color1);} 100%  {color: var(--color2);}}
+			@keyframes transition3 {0%  {color: var(--color2);} 100%  {color: var(--color3);}}
+			@keyframes transition4 {0%  {color: var(--color3);} 100%  {color: var(--color4);}}
+			@keyframes transition5 {0%  {color: var(--color4);} 100%  {color: var(--color5);}}
+			@keyframes transition6 {0%  {color: var(--color5);} 100%  {color: var(--color6);}}
+			@keyframes transition7 {0%  {color: var(--color6);} 100%  {color: var(--color7);}}
+			@keyframes transition8 {0%  {color: var(--color7);} 100%  {color: var(--color8);}}
+			@keyframes transition9 {0%  {color: var(--color8);} 100%  {color: var(--color9);}}
+			@keyframes transition10 {0%  {color: var(--color9);} 100%  {color: var(--color10);}}
+			@keyframes transition11 {0%  {color: var(--color10);} 100%  {color: var(--color11);}}
+			@keyframes transition12 {0%  {color: var(--color11);} 100%  {color: var(--color12);}}
+
+		</style>
+	</head>	
+	<body bgcolor="black" style="background-image: url('assets/images/pikminBackground.jpg'); background-size: cover; background-repeat: repeat; overflow: hidden;">
+		<a href='https://www.youtube.com/watch?v=KFORUm0EPn4' target="_blank">
+			<image id="sound" src="assets/images/audioOn.png" style="position:absolute; height:66px; width:auto; margin:12px; cursor: pointer; z-index: 44;">
+		</a>
+		
+		
+		<div style="text-align:center; position:absolute; left:0px; right:0px; top:0px; bottom:0px; padding-left: 4%; padding-right: 4%;">
+		
+		<p style="position: absolute; left:0%; right:0%; margin-left:auto; margin-right:auto; z-index:12; font-size:36px; color: white; font-family: 'Pikmin', 'Arial'"><b><span style="font-family: 'Pikmin', 'Arial', 'fantasy'"><span id="PikminText"><span style="color: #00AC00">Pikmin</span> <span style="color: #FFD14B">4</span> will be real in</b></span><br><span id="d"></span><span id="h"></span><span id="m"></span><span id="s"></span></p>
+		
+		<p style="z-index:12; font-size:33px; font-family: 'Pikmin', 'Arial', 'fantasy'; position: absolute; bottom: 0px; left:0%; right:0%; margin-left:auto; margin-right:auto;"><span id="url"><a href='https://www.nintendo.com/store/products/pikmin-4-switch/'>https://www.nintendo.com/store/products/pikmin-4-switch/</a></span></p>
+		</div>
+				
+		<div style='z-index:4; position: absolute; left: 50%; top: 50%; '>
+				<img id="pikmin4" onclick="playPik()" src="assets/images/pikmin4boxart.png" style="width:100%; height:auto; transform: translate(-50%, -50%); cursor: pointer;">
+		</div>
+		
+	</body>
+</html>
+
+
+
+<script>
+
+let elemColors = [getCssVar("--color1"),getCssVar("--color2"),getCssVar("--color3"),getCssVar("--color4"),getCssVar("--color5"),getCssVar("--color6"),getCssVar("--color7"),getCssVar("--color8"),getCssVar("--color9"),getCssVar("--color10"),getCssVar("--color11"),getCssVar("--color12")]
+
+playSound = false
+
+var pik = new Howl({    src: ['assets/audio/pikmin.ogg', 'assets/audio/pikmin.mp3'],    volume: 0.66,    loop: false  })
+function playPik() {
+	pik.play()
+}
+		
+// code modified from: https://www.w3schools.com/howto/howto_js_countdown.asp
+// Set the date we're counting down to
+var countDownDate = new Date("Jul 21, 2023").getTime();
+
+var checkS = -1
+var checkM = -1
+var checkH = -1
+var checkD = -1
+var animUpdate = -1
+var cl = -1
+var upd = -1
+
+updateInterval()
+var interval = setInterval(updateInterval, 66);
+
+function updateInterval() {
+  // Get today's date and time
+  var now = new Date().getTime();
+
+  // Find the distance between now and the count down date
+  var distance = countDownDate - now;
+
+  // Time calculations for days, hours, minutes and seconds
+  var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+  // Display the result in the time elements  
+  if(days != checkD) { // no update if it hasn't changed
+	checkD = days
+	document.getElementById("d").innerHTML = applyCAnim(days, 11-(days % 12))+":";
+	if(days == 0) document.getElementById("d").innerHTML = ""
+  }
+  if(hours != checkH) { // no update if it hasn't changed
+	checkH = hours
+	document.getElementById("h").innerHTML = applyCAnim(appendZero(hours), 11-(hours % 12))+":";
+	if(days == 0) document.getElementById("h").innerHTML = applyCAnim(hours, 11-(hours % 12))+":"
+  }
+  if(minutes != checkM) { // no update if it hasn't changed
+	checkM = minutes
+	document.getElementById("m").innerHTML = applyCAnim(appendZero(minutes), 11-(minutes % 12))+":";
+  }
+  if(seconds != checkS) { // no update if it hasn't changed
+	checkS = seconds
+	document.getElementById("s").innerHTML = applyCAnim(appendZero(seconds), 11-(seconds % 12));
+	var disp = appendZero(minutes)+":"+appendZero(seconds)
+	if(hours>0) { disp = hours+":"+disp }
+	if(days>0) { disp = days+"d "+disp }
+	document.title = disp+" until Pikmin 4"
+  }
+
+  // If the count down is finished
+  if (distance < 0) {
+    clearInterval(interval);
+	document.getElementById("d").innerHTML = "";
+	document.getElementById("h").innerHTML = "";
+	document.getElementById("m").innerHTML = "";
+	document.getElementById("s").innerHTML = "";
+    document.getElementById("PikminText").innerHTML = '<b>HOLY PIK!!!!<br><span style="color: #00AC00">PIKMIN</span> <span style="color: #FFD14B">4</span> IS REAL!!!!<br>PLAY IT NOW!!!!</b>';
+	document.title = "PIKMIN 4 IS OUT!!!!"
+  }
+}
+
+function appendZero(num) {
+	return num.toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping: false})
+}
+
+document.head = document.head || document.getElementsByTagName('head')[0];
+function changeFavicon(src) {
+ var link = document.createElement('link'),
+     oldLink = document.getElementById('dynamic-favicon');
+ link.id = 'dynamic-favicon';
+ link.rel = 'shortcut icon';
+ link.href = src;
+ if (oldLink) {
+  document.head.removeChild(oldLink);
+ }
+ document.head.appendChild(link);
+}
+
+function applyCAnim(text, num) {
+	return "<span style='animation-name: transition"+(num+1)+";animation-duration: 0.88s;animation-iteration-count: 1; color:"+elemColors[(num+0+0) % 12]+"'>"+text+"</span>"
+}
+
+function getCssVar(name) {
+	return getComputedStyle(document.querySelector(':root')).getPropertyValue(name) 
+}
+
+function randomizeFavicon() {
+	let array = ["assets/images/fire.png","assets/images/earth.png","assets/images/sky.png","assets/images/nature.png","assets/images/ice.png","assets/images/water.png","assets/images/poison.png","assets/images/dark.png","assets/images/metal.png","assets/images/light.png","assets/images/fae.png","assets/images/antimagic.png"]
+	let rand = array[Math.floor(Math.random() * array.length)];
+	changeFavicon(rand);
+}
+randomizeFavicon();
+
+</script>

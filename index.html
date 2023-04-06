@@ -3,76 +3,27 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js" integrity="sha512-6+YN/9o9BWrk6wSfGxQGpt3EUK6XeHi6yeHV+TYD2GR0Sj/cggRpXr1BrAQf0as6XslxomMUxXp2vIl+fv0QRA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 <html>
-	<title>Draconia</title>
-	<link rel="icon" type="image/png" href="assets/images/favicon.png">
-	<head>
-		<style>
-			:root {
-			  --color1: #E00E00;
-			  --color2: #A83614;
-			  --color3: #F2D130;
-			  --color4: #6BB223;
-			  --color5: #32BAFF;
-			  --color6: #2D5BE5;
-			  --color7: #841E99;
-			  --color8: #342E3D;
-			  --color9: #A6A6A6;
-			  --color10: #F9FFBF;
-			  --color11: #E516A0;
-			  --color12: #7F1F3F;
-			}
-		
-			@keyframes greenAnim {
-			  0%   {color: white;}
-			  50%  {color: var(--color4);}
-			  100%  {color: white;}
-			}
-			@keyframes hueRotate {
-			  0%   {filter: hue-rotate(360deg);}
-			  100%  {filter: hue-rotate(0deg);}
-			}
-			@keyframes transition1 {0%  {color: var(--color12);} 100%  {color: var(--color1);}}
-			@keyframes transition2 {0%  {color: var(--color1);} 100%  {color: var(--color2);}}
-			@keyframes transition3 {0%  {color: var(--color2);} 100%  {color: var(--color3);}}
-			@keyframes transition4 {0%  {color: var(--color3);} 100%  {color: var(--color4);}}
-			@keyframes transition5 {0%  {color: var(--color4);} 100%  {color: var(--color5);}}
-			@keyframes transition6 {0%  {color: var(--color5);} 100%  {color: var(--color6);}}
-			@keyframes transition7 {0%  {color: var(--color6);} 100%  {color: var(--color7);}}
-			@keyframes transition8 {0%  {color: var(--color7);} 100%  {color: var(--color8);}}
-			@keyframes transition9 {0%  {color: var(--color8);} 100%  {color: var(--color9);}}
-			@keyframes transition10 {0%  {color: var(--color9);} 100%  {color: var(--color10);}}
-			@keyframes transition11 {0%  {color: var(--color10);} 100%  {color: var(--color11);}}
-			@keyframes transition12 {0%  {color: var(--color11);} 100%  {color: var(--color12);}}
-
-		</style>
-		<!-- so apparently hue-rotate sucks eggs -->
-	</head>	
+	<title>D°€gøn¡a</title>
+	<link rel="icon" type="image/png" href="assets/images/nature.png">
 	<body bgcolor="black">
-		<image id="sound" onclick="clickSound()" src="assets/images/audioOff.png" style="position:absolute; height:66px; width:auto; margin:12px; cursor: pointer; z-index: 12;">
 		<div style="text-align:center; position:absolute; left:0px; right:0px; top:0px; bottom:0px; padding-left: 24%; padding-right: 24%;">
-		<p style="font-size:36px; color: white; font-family: 'Verdana'"><span id="legend" style="animation-name: greenAnim;animation-duration: 6.6s;animation-iteration-count: infinite; animation-delay: 2s;"><b>A new Legend is about to begin...</b></span><br><span id="d"></span><span id="h"></span><span id="m"></span><span id="s"></span></p>
-		<p style="font-size:33px; color: #010001; font-family: 'Arial', 'fantasy'; position: absolute; bottom: 0px; left: 50%; transform: translate(-50%, 0%)"><span id="url">https://www.youtube.com/@D-LotGS</span></p>
+		<p style="font-size:36px; color: #6BB223; font-family: 'Verdana'"><b>A new Legend has begun.</b>
+		<p style="font-size:33px; color: white; font-family: 'Arial', 'fantasy'; position: absolute; bottom: 0px; left: 50%; transform: translate(-50%, 0%)"><span id="url"><a href='https://www.youtube.com/@D-LotGS'>https://www.youtube.com/@D-LotGS</a></span></p>
 		</div>
 				
-		<div style='z-index:-12; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); animation-name: hueRotate;animation-duration: 12s;animation-iteration-count: infinite;'>
+		<div style='z-index:-12; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); display:none;'>
 				<img id="spei" src="assets/images/spei.png">
 		</div>
 		
 		<a href="https://www.youtube.com/@D-LotGS">
-			<img id="sun" style="display:none; cursor: pointer; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);" src="assets/images/sun.gif">
+			<img id="sun" style="display:block; cursor: pointer; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);" src="assets/images/sun.gif">
 		</a>
 		
 	</body>
 </html>
 
-
-
 <script>
 
-let elemColors = [getCssVar("--color1"),getCssVar("--color2"),getCssVar("--color3"),getCssVar("--color4"),getCssVar("--color5"),getCssVar("--color6"),getCssVar("--color7"),getCssVar("--color8"),getCssVar("--color9"),getCssVar("--color10"),getCssVar("--color11"),getCssVar("--color12")]
-
-playSound = false
-var music = new Howl({    src: ['assets/audio/countdown.ogg', 'assets/audio/countdown.mp3'],    volume: 0.36,    loop: true  })
 var fireCrackle = new Howl({    src: ['assets/audio/crackling-fire.ogg', 'assets/audio/crackling-fire.mp3'],    volume: 0.5,    loop: true  })
 
 playing=false
@@ -83,132 +34,6 @@ function playCrackle() {
 		playing = true;
 	}
 }
-
-function clickSound() {
-	playSound = !playSound
-	if(playSound) {
-		music.play()
-		document.getElementById("sound").src="assets/images/audioOn.png"
-	}
-	else {
-		music.pause()
-		document.getElementById("sound").src="assets/images/audioOff.png"
-	}				
-}
-
-// code modified from: https://www.w3schools.com/howto/howto_js_countdown.asp
-// Set the date we're counting down to
-var countDownDate = new Date("Apr 1, 2023 12:00:00").getTime();
-
-var checkS = -1
-var checkM = -1
-var checkH = -1
-var checkD = -1
-var animUpdate = -1
-var cl = -1
-var upd = -1
-
-updateInterval()
-var interval = setInterval(updateInterval, 66);
-upd = setTimeout(() => { updateAnims(); animUpdate = setInterval(updateAnims, 6600); }, 4400)
-
-function updateInterval() {
-  // Get today's date and time
-  var now = new Date().getTime();
-
-  // Find the distance between now and the count down date
-  var distance = countDownDate - now;
-
-  // Time calculations for days, hours, minutes and seconds
-  var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-  // Display the result in the time elements  
-  if(days != checkD) { // no update if it hasn't changed
-	checkD = days
-	document.getElementById("d").innerHTML = applyCAnim(days, 11-(days % 12))+":";
-	if(days == 0) document.getElementById("d").innerHTML = ""
-  }
-  if(hours != checkH) { // no update if it hasn't changed
-	checkH = hours
-	document.getElementById("h").innerHTML = applyCAnim(appendZero(hours), 11-(hours % 12))+":";
-	if(days == 0) document.getElementById("h").innerHTML = applyCAnim(hours, 11-(hours % 12))+":"
-  }
-  if(minutes != checkM) { // no update if it hasn't changed
-	checkM = minutes
-	document.getElementById("m").innerHTML = applyCAnim(appendZero(minutes), 11-(minutes % 12))+":";
-  }
-  if(seconds != checkS) { // no update if it hasn't changed
-	checkS = seconds
-	document.getElementById("s").innerHTML = applyCAnim(appendZero(seconds), 11-(seconds % 12));
-  }
-
-  // If the count down is finished
-  if (distance < 0) {
-    clearInterval(interval);
-    document.getElementById("legend").innerHTML = "<b>A new Legend has just begun.</b>";
-	document.getElementById("legend").style = "color: var(--color4);";
-	document.getElementById("d").innerHTML = "";
-	document.getElementById("h").innerHTML = "";
-	document.getElementById("m").innerHTML = "";
-	document.getElementById("s").innerHTML = "";
-	document.getElementById("url").style = "color: white;";	
-	document.getElementById("url").innerHTML = "<a href='https://www.youtube.com/@D-LotGS'>https://www.youtube.com/@D-LotGS</a>"
-	clearInterval(animUpdate);
-	clearTimeout(upd);
-	clearTimeout(cl);
-	changeFavicon("assets/images/nature.png");
-	document.title = "D°€gøn¡a"
-	document.getElementById("sound").style="display:none"
-	document.getElementById("spei").style="display:none"
-	document.getElementById("sun").style.display = "block"
-	music.fade(0.36, 0, 660);
-	fireCrackle.play();
-	document.addEventListener("click", playCrackle)
-	if(distance > -1200) setTimeout(() => { fireCrackle.fade(0.0, 0.5, 1200);}, 1)
-  }
-}
-
-function appendZero(num) {
-	return num.toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping: false})
-}
-
-function colorN(num) {
-	color = elemColors[11-((parseInt(num)) % 12)]
-	return "<span style='color:"+color+"'>"+num+"</span>"
-}
-
-document.head = document.head || document.getElementsByTagName('head')[0];
-function changeFavicon(src) {
- var link = document.createElement('link'),
-     oldLink = document.getElementById('dynamic-favicon');
- link.id = 'dynamic-favicon';
- link.rel = 'shortcut icon';
- link.href = src;
- if (oldLink) {
-  document.head.removeChild(oldLink);
- }
- document.head.appendChild(link);
-}
-
-function updateAnims() {
-    changeFavicon("assets/images/nature.png");
-	document.title = "D°€‰ŠŒ¡a"
-	cl = setTimeout(() => { 
-		changeFavicon("assets/images/favicon.png");
-		document.title = "Draconia"
-	}, Math.min(Math.max((6600-((checkH/24)+checkD)*540),66),6534) )
-
-}
-
-function applyCAnim(text, num) {
-	return "<span style='animation-name: transition"+(num+1)+";animation-duration: 0.88s;animation-iteration-count: 1; color:"+elemColors[(num+0+0) % 12]+"'>"+text+"</span>"
-}
-
-function getCssVar(name) {
-	return getComputedStyle(document.querySelector(':root')).getPropertyValue(name) 
-}
+document.addEventListener("click", playCrackle)
 
 </script>
