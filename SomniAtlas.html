@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<style>
+			.tilebtn{
+				
+			}
+			.tilebtn:hover {
+				filter: brightness(75%);
+			}
+			.selbtn{
+				width: 80%;
+				aspect-ratio:1/1; 
+				padding:0px;
+				border:6px solid white;
+				display:inline-block;
+				margin-bottom:6px;
+			}
+		</style>
+	</head>
+	<body bgcolor = "black" onmouseover="">
+		<div style="margin-left: 20px; font-size:20px; color: white; font-family: 'Lucida Console';">
+			<strong><span style="font-size:40px">SomniAtlas v0.0</span></strong>
+			<br>
+			<span style="font-size:20px">DreamMagic Engine Map Creator Tool</span>
+			<br>
+		</div>
+		<div style="margin:auto; text-align: center; width:50%; font-size:20px; color: white; font-family: 'Lucida Console';">
+			Map name: <input type="text" id="name" name="name" value="My Map" maxlength="20" size="20">
+			<button onclick="saveMap()" type="button">Save Map</button>
+			<button onclick="loadMap()" type="button">Load Map</button>
+			<button onclick="resize()" type="button">Resize Map</button>
+		</div>
+		<br>
+		<div>
+			<table style="color: white; margin:auto; text-align: center; border-spacing: 0px; table-layout: fixed">
+			
+			</table>
+		</div>
+		<div id="xy" style="color:#C8C8C8; position:fixed; bottom:12px;left:12px; font-size:24px;"></div>	
+		<div id="sidebar" style="background-color:#666666; position:fixed; top:1%; right:1%; width:10%;height:96%; padding-top:1%; text-align:center; overflow-y: auto; overflow-x: hidden">
+			<button id="_" class="selbtn" onclick="setSelType('_')" 
+			style="background:url('assets/images/tiles/tile_outline.png'),url(assets/images/tiles/flat.png); background-size: cover;"></button>
+			<button id="X" class="selbtn" onclick="setSelType('X')"
+			style="background:url('assets/images/tiles/tile_outline.png'),url(assets/images/tiles/wall.png); background-size: cover;"></button>
+			<button id="u" class="selbtn" onclick="setSelType('u')"
+			style="background:url('assets/images/tiles/tile_outline.png'),url(assets/images/tiles/chasm.png); background-size: cover;"></button>
+			<button id="r" class="selbtn" onclick="setSelType('r')"
+			style="background:url('assets/images/tiles/tile_outline.png'),url(assets/images/tiles/rough.png); background-size: cover;"></button>
+			<button id="=" class="selbtn" onclick="setSelType('=')"
+			style="background:url('assets/images/tiles/tile_outline.png'),url(assets/images/tiles/shallow_water.png); background-size: cover;"></button>
+			<button id="~" class="selbtn" onclick="setSelType('~')"
+			style="background:url('assets/images/tiles/tile_outline.png'),url(assets/images/tiles/deep_water.png); background-size: cover;"></button>
+		
+		</div>
+		<input type="file" id="fileInput" style="display:none;" />
+	</body>
+</html>
+
+
+<script>
+	let width = 20
+	let height = 20
+	let tilesize = 64
+	let maxsize = 100 // max w/h of table
+	let map = new Array(height).fill("_").map(x => Array(width).fill("_"))
+	
+	var selType = "_"
+	var currX = 0
+	var currY = 0
+	
+	// Amprat wuz here
+	function resize() {
+		let sizeStr = prompt("Enter the dimensions you would like your map to be, separated by a comma.\nExample: \"20,20\"")
+		if(sizeStr == null) return
+		let splitStr = sizeStr.split(",")
+		if(splitStr.length != 2) return // must be 1 comma
+		let newW = parseInt(splitStr[0])
+		let newH = parseInt(splitStr[1])
+		if(!(Number.isInteger(newW) && Number.isInteger(newH))) return // both l and w must be int
+		
+		if(newH < 1 || newW < 1) return // must be positive h,w
+		
+		if(newH > maxsize) newH = maxsize
+		if(newW > maxsize) newW = maxsize
+
+		let oldW = width
+		let oldH = height
+		let oldMap = map
+
+		width = newW
+		height = newH
+		
+		var newMap = new Array(height).fill("_").map(x => Array(width).fill("_"))
+		let h = Math.min(oldH,newH)
+		let w = Math.min(oldW,newW)
+		for (let i = 0; i < h; i++) {
+			for (let j = 0; j < w; j++) {
+				newMap[i][j] = oldMap[i][j]
+			}			
+		}
+		
+		map = newMap
+		genTable() 
+	}
+	
+	function genTable() {
+		let w = width
+		let h = height
+		
+		let table = document.querySelector("table")
+		table.innerHTML = "" // erase table
+		
+		for (let i = 0; i < h; i++) {
+			let row = table.insertRow()
+			for (let j = 0; j < w; j++) {
+				let cell = row.insertCell()
+				var btn = document.createElement("button");
+				btn.id = i+","+j
+				cell.style="padding:0px;margin:0px;line-height:0px"
+				btn.style = "width:"+tilesize+"px; height:"+tilesize+"px;padding:0px;border:none;display:inline-block;background:"+getTImg(i,j)+";background-size: cover;"
+				btn.classList.add("tilebtn")
+				btn.onmouseover = function() {setCXY(i,j)}
+				btn.onmouseleave = function() {setCXY(-1,-1)}
+				btn.onmouseenter = function() {if(mouseDown){updTile(i,j)}}
+				btn.onmousedown = function(event) {if (event.button === 0) updTile(i,j)}
+				cell.appendChild(btn)
+			}			
+		}
+	}
+	
+	
+	function saveMap() {
+		tableText = ""
+		for (let i = 0; i < height; i++) {
+			for (let j = 0; j < width; j++) {
+				tableText += map[i][j]
+			}
+			if(i < height-1) tableText += "\n"
+		}
+		
+		const link = document.createElement("a");
+		const file = new Blob([tableText], { type: 'text/plain' });
+		link.href = URL.createObjectURL(file);
+		name = document.getElementById('name').value
+		link.download = name+".txt";
+		link.click();
+		URL.revokeObjectURL(link.href);
+	}
+	
+	function loadMap() {
+		document.getElementById('fileInput').click();
+	}	
+	function loadFile() {
+		const file = this.files[0]
+		file.text().then(function(result) {
+			splitStr = result.split("\n")
+			newH = splitStr.length
+			newW = splitStr[0].length
+
+			if(newH > maxsize || newW > maxsize) return // too big
+						
+			width = newW
+			height = newH
+
+			map = new Array(height).fill("_").map(x => Array(width).fill("_"))
+			for (let i = 0; i < height; i++) {
+				for (let j = 0; j < width; j++) {
+					cChar = splitStr[i].charAt(j)
+					map[i][j] = cChar
+				}			
+			}
+			
+			genTable()
+			name = file.name.split(".")[0]
+			document.getElementById('name').value = name
+
+		});
+	}
+
+	
+	function setCXY(x,y) {
+		currX = x
+		currY = y
+		xyDisplay(x,y)
+	}
+	
+	function updTile(x,y) {
+		// update the tile to what user selected
+		map[x][y] = selType
+		tile = document.getElementById(x+','+y)
+		tile.style.background = getTImg(x,y)
+	}
+	
+	function getTImg(x,y) {
+		return "url('assets/images/tiles/tile_outline.png'),url("+getSymbolTile(map[x][y])+")"
+	}
+	
+	function xyDisplay(x,y) {
+		if(currX == currY && currY == -1) document.getElementById("xy").innerHTML = ""
+		else document.getElementById("xy").innerHTML = "("+currX+", "+currY+")"	
+	}
+	
+	function getSymbolTile(symbol) {
+		if(symbol == "_") return "assets/images/tiles/flat.png"
+		if(symbol == "X") return "assets/images/tiles/wall.png"
+		if(symbol == "u") return "assets/images/tiles/chasm.png"
+		if(symbol == "r") return "assets/images/tiles/rough.png"
+		if(symbol == "=") return "assets/images/tiles/shallow_water.png"
+		if(symbol == "~") return "assets/images/tiles/deep_water.png"
+		return "assets/images/tiles/missing.png"
+	}
+	
+	function setSelType(symbol) {
+		selType = symbol
+		clearBorders()
+		document.getElementById(symbol).style.borderColor = "yellow"
+	}
+	function clearBorders() {
+		document.getElementById("_").style.borderColor = "white"
+		document.getElementById("X").style.borderColor = "white"
+		document.getElementById("u").style.borderColor = "white"
+		document.getElementById("r").style.borderColor = "white"
+		document.getElementById("=").style.borderColor = "white"
+		document.getElementById("~").style.borderColor = "white"
+	}
+	
+	genTable() // initial display table
+	setCXY(-1,-1)
+	setSelType("_")
+	document.getElementById("fileInput").addEventListener("change", loadFile, false);
+
+	var mouseDown = 0;
+	document.body.onmousedown = function(event) { 
+		if (event.button === 0) mouseDown = 1;
+	}
+	document.body.onmouseup = function(event) {
+		if (event.button === 0) mouseDown = 0;
+	}
+	
+	document.onkeydown = function(e) {
+		key = e.key.toLowerCase()
+		if((["1","_","-","f"]).includes(key)) setSelType("_")
+		if((["2","x","w"]).includes(key)) setSelType("X")
+		if((["3","u","c"]).includes(key)) setSelType("u")
+		if((["4","r","#"]).includes(key)) setSelType("r")
+		if((["5","=","s"]).includes(key)) setSelType("=")
+		if((["6","~","d"]).includes(key)) setSelType("~")
+	}
+
+</script>
