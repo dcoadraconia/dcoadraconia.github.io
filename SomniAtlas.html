@@ -19,27 +19,29 @@
 			}
 		</style>
 	</head>
-	<body bgcolor = "black" onmouseover="">
-		<div style="margin-left: 20px; font-size:20px; color: white; font-family: 'Lucida Console';">
-			<strong><span style="font-size:40px">SomniAtlas v0.0</span></strong>
-			<br>
-			<span style="font-size:20px">DreamMagic Engine Map Creator Tool</span>
-			<br>
+	<body bgcolor = "black">
+       <div id="mainbox" style="top:0;left:0;width:88.5%; overflow:auto">
+            <div style="margin-left: 20px; font-size:20px; color: white; font-family: 'Lucida Console';">
+                <strong><span style="font-size:40px">SomniAtlas v0.0.1</span></strong>
+                <br>
+                <span style="font-size:20px">DreamMagic Engine Map Creator Tool</span>
+                <br>
+            </div>
+            <div style="margin:auto; text-align: center; width:50%; font-size:20px; color: white; font-family: 'Lucida Console';">
+                Map name: <input type="text" id="name" name="name" value="My Map" maxlength="20" size="20">
+                <button onclick="saveMap()" type="button">Save Map</button>
+                <button onclick="loadMap()" type="button">Load Map</button>
+                <button onclick="resize()" type="button">Resize Map</button>
+            </div>
+            <br>
+            <div>
+                <table style="color: white; margin:auto; text-align: center; border-spacing: 0px; table-layout: fixed">
+                
+                </table>
+            </div>
+            <div id="xy" style="color:#C8C8C8; position:fixed; bottom:12px;left:12px; font-size:24px;"></div>	
 		</div>
-		<div style="margin:auto; text-align: center; width:50%; font-size:20px; color: white; font-family: 'Lucida Console';">
-			Map name: <input type="text" id="name" name="name" value="My Map" maxlength="20" size="20">
-			<button onclick="saveMap()" type="button">Save Map</button>
-			<button onclick="loadMap()" type="button">Load Map</button>
-			<button onclick="resize()" type="button">Resize Map</button>
-		</div>
-		<br>
-		<div>
-			<table style="color: white; margin:auto; text-align: center; border-spacing: 0px; table-layout: fixed">
-			
-			</table>
-		</div>
-		<div id="xy" style="color:#C8C8C8; position:fixed; bottom:12px;left:12px; font-size:24px;"></div>	
-		<div id="sidebar" style="background-color:#666666; position:fixed; top:1%; right:1%; width:10%;height:96%; padding-top:1%; text-align:center; overflow-y: auto; overflow-x: hidden">
+       <div id="sidebar" style="background-color:#666666; position:fixed; top:1%; right:1%; width:10%;height:96%; padding-top:1%; text-align:center; overflow-y: auto; overflow-x: hidden">
 			<button id="_" class="selbtn" onclick="setSelType('_')" 
 			style="background:url('assets/images/tiles/tile_outline.png'),url(assets/images/tiles/flat.png); background-size: cover;"></button>
 			<button id="X" class="selbtn" onclick="setSelType('X')"
@@ -155,7 +157,8 @@
 	function loadFile() {
 		const file = this.files[0]
 		file.text().then(function(result) {
-			splitStr = result.split("\n")
+			fText = result.replace("\r\n","\n")
+            splitStr = fText.split("\n")
 			newH = splitStr.length
 			newW = splitStr[0].length
 
