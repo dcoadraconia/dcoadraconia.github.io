@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 
 <html>
+	<title>SomniAtlas v0.1.0</title>
+	<link rel="icon" type="image/png" href="assets/images/earth.png">
 	<head>
 		<style>
 			.tilebtn{
@@ -20,20 +22,20 @@
 		</style>
 	</head>
 	<body bgcolor = "black">
-       <div id="mainbox" style="top:0;left:0;width:88.5%; overflow:auto">
-            <div style="margin-left: 20px; font-size:20px; color: white; font-family: 'Lucida Console';">
-                <strong><span style="font-size:40px">SomniAtlas v0.0.1</span></strong>
-                <br>
-                <span style="font-size:20px">DreamMagic Engine Map Creator Tool</span>
-                <br>
-            </div>
-            <div style="margin:auto; text-align: center; width:50%; font-size:20px; color: white; font-family: 'Lucida Console';">
-                Map name: <input type="text" id="name" name="name" value="My Map" maxlength="20" size="20">
-                <button onclick="saveMap()" type="button">Save Map</button>
-                <button onclick="loadMap()" type="button">Load Map</button>
-                <button onclick="resize()" type="button">Resize Map</button>
-            </div>
+        <div style="margin-left: 20px; font-size:20px; color: white; font-family: 'Lucida Console';">
+            <strong><span style="font-size:40px">SomniAtlas v0.1.0</span></strong>
             <br>
+            <span style="font-size:20px">DreamMagic Engine Map Creator Tool</span>
+        </div>
+        <br>
+        <div style="margin:auto; text-align: center; width:50%; font-size:20px; color: white; font-family: 'Lucida Console';">
+            Map name: <input type="text" id="name" name="name" value="My Map" maxlength="20" size="20">
+            <button onclick="saveMap()" type="button">Save Map</button>
+            <button onclick="loadMap()" type="button">Load Map</button>
+            <button onclick="resize()" type="button">Resize Map</button>
+        </div>
+        <br>
+       <div id="mainbox" style="top:0;left:0;width:88.5%; overflow:auto">
             <div>
                 <table style="color: white; margin:auto; text-align: center; border-spacing: 0px; table-layout: fixed">
                 
@@ -69,12 +71,13 @@
 	let map = new Array(height).fill("_").map(x => Array(width).fill("_"))
 	
 	var selType = "_"
+    var fill = false
 	var currX = 0
 	var currY = 0
 	
 	// Amprat wuz here
 	function resize() {
-		let sizeStr = prompt("Enter the dimensions you would like your map to be, separated by a comma.\nExample: \"20,20\"")
+		let sizeStr = prompt("Enter the dimensions you would like your map to be, separated by a comma, in order \"width,height\"\nExample: \"20,20\"")
 		if(sizeStr == null) return
 		let splitStr = sizeStr.split(",")
 		if(splitStr.length != 2) return // must be 1 comma
@@ -125,8 +128,8 @@
 				btn.classList.add("tilebtn")
 				btn.onmouseover = function() {setCXY(i,j)}
 				btn.onmouseleave = function() {setCXY(-1,-1)}
-				btn.onmouseenter = function() {if(mouseDown){updTile(i,j)}}
-				btn.onmousedown = function(event) {if (event.button === 0) updTile(i,j)}
+				btn.onmouseenter = function() {if(mouseDown && fill == false){updTile(i,j)}}
+				btn.onmousedown = function(event) {if (event.button === 0) {if(event.ctrlKey) {fill=true; fillTile(i,j)} else {fill=false; updTile(i,j)}}}
 				cell.appendChild(btn)
 			}			
 		}
@@ -157,8 +160,8 @@
 	function loadFile() {
 		const file = this.files[0]
 		file.text().then(function(result) {
-			fText = result.replace("\r\n","\n")
-            splitStr = fText.split("\n")
+			fText = result.replace("\r\n","\n").trim()
+			splitStr = fText.split("\n")
 			newH = splitStr.length
 			newW = splitStr[0].length
 
@@ -195,6 +198,43 @@
 		tile = document.getElementById(x+','+y)
 		tile.style.background = getTImg(x,y)
 	}
+    function fillTile(x,y) {
+        fillTiles = []
+        fillMap = new Array(height).fill(0).map(x => Array(width).fill(0))
+        loop = true
+        fillMap[x][y] = 1
+        selSymbol = map[x][y] // symbol to fill
+        while(loop == true) {
+            loop = false
+			for (let i = 0; i < height; i++) {
+				for (let j = 0; j < width; j++) {
+					if (fillMap[i][j] == 0 && map[i][j] != selSymbol) fillMap[i][j] = -1
+                    else if (fillMap[i][j] == 0){
+                        nTiles = getNeighboringTiles(i,j,fillMap)
+                        if (nTiles.includes(1)) {
+                            fillMap[i][j] = 1
+                            loop = true
+                        }                        
+                    }
+				}			
+			}
+        }
+        for (let i = 0; i < height; i++) {
+            for (let j = 0; j < width; j++) {
+                if (fillMap[i][j] == 1 ) {
+                    updTile(i,j)
+                }
+            }			
+        }
+    }
+    function getNeighboringTiles(x,y,fillMap) {
+        ret = []
+        if (x > 0) ret.push(fillMap[x-1][y])
+        if (y > 0) ret.push(fillMap[x][y-1])
+        if (x < width-1) ret.push(fillMap[x+1][y])
+        if (y < height-1) ret.push(fillMap[x][y+1])
+        return ret
+    }
 	
 	function getTImg(x,y) {
 		return "url('assets/images/tiles/tile_outline.png'),url("+getSymbolTile(map[x][y])+")"
