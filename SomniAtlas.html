@@ -126,7 +126,7 @@
 				cell.style="padding:0px;margin:0px;line-height:0px"
 				btn.style = "width:"+tilesize+"px; height:"+tilesize+"px;padding:0px;border:none;display:inline-block;background:"+getTImg(i,j)+";background-size: cover;"
 				btn.classList.add("tilebtn")
-				btn.onmouseover = function() {setCXY(i,j)}
+				btn.onmouseover = function() {setCXY(j,i)}
 				btn.onmouseleave = function() {setCXY(-1,-1)}
 				btn.onmouseenter = function() {if(mouseDown && fill == false){updTile(i,j)}}
 				btn.onmousedown = function(event) {if (event.button === 0) {if(event.ctrlKey) {fill=true; fillTile(i,j)} else {fill=false; updTile(i,j)}}}
