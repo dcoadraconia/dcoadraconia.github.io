@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+
+<html>
+	<title>LucidConfig v0.0.0</title>
+	<link rel="icon" type="image/png" href="assets/images/light.png">
+	<head>
+		<style>
+			.tooltip {
+			  position: relative;
+			  display: inline-block;
+			  border-bottom: 1px dotted white;
+			}
+
+			.tooltip .tooltiptext {
+			  visibility: hidden;
+			  width: 160px;
+			  background-color: #222222;
+			  color: #fff;
+			  text-align: center;
+			  border-radius: 6px;
+			  padding: 5px;
+			  position: absolute;
+			  z-index: 1;
+			  bottom: 150%;
+			  left: 50%;
+			  margin-left: -85px;
+			  opacity: 0;
+			  transition: opacity 0.24s;
+			  font-size: 16px;
+			  line-height: 1.2;
+			}
+
+			.tooltip .tooltiptext::after {
+			  content: "";
+			  position: absolute;
+			  top: 100%;
+			  left: 50%;
+			  margin-left: -5px;
+			  border-width: 5px;
+			  border-style: solid;
+			  border-color: #222222 transparent transparent transparent;
+			}
+
+			.tooltip:hover .tooltiptext:not(:hover) {
+			  visibility: visible;
+			  opacity: 1;
+			}
+			
+			.head {
+			   line-height: 1.2;
+			   font-size: 24px;
+			}
+			.line {
+			   font-size:16px;
+			   border-spacing: 12px;
+			   margin-bottom: -12px
+			}
+           .lineM {
+			   font-size:16px;
+			   border-spacing: 12px;
+			   margin-bottom: -12px;
+			   margin-left: 20px
+			}
+			
+			.circle{
+				border: 1px solid #aaa;
+				width: 20px;
+				height: 20px;
+				border-radius: 100%;
+				position: relative;
+				margin: 0px 4px;
+				display: inline-block;
+				vertical-align: middle;
+			}
+			.circle:hover{
+				background: radial-gradient(#999, #aaa);
+			}
+			.circle:active{
+				background: radial-gradient(#aaa, #fff);
+			}
+			.circle:before,
+			.circle:after{
+				content:'';position:absolute;top:0;left:0;right:0;bottom:0;
+			}
+			/* PLUS */
+			.circle.plus:before,
+			.circle.plus:after {
+				background:green;
+			}
+			.circle.plus:before{
+				width: 2px;
+				margin: 3px auto;
+			}
+			.circle.plus:after{
+				margin: auto 3px;
+				height: 2px;
+				box-shadow: none;
+			}
+			/* MINUS */
+			.circle.minus:before{
+				background: #cc0000;
+				margin: auto 3px;
+				height: 2px;
+			}
+			/* CROSS */
+			.circle.cross:after,
+			.circle.cross:before{
+				background: #000;
+				margin: auto 4px;
+				height: 2px;
+				transform:rotateZ(45deg);
+			}
+			.circle.cross:after{
+				transform:rotateZ(-45deg);
+			}
+			
+		</style>
+	</head>	
+	<body bgcolor = "black">
+		<div style="margin-left: 20px; font-size:20px; color: white; font-family: 'Lucida Console';">
+            <strong><span style="font-size:40px">LucidConfig v0.0.0</span></strong>
+            <br>
+            <span style="font-size:20px">DreamMagic Engine CFG File Editor</span>
+        </div>
+        <br>
+		<div style="margin-left: 10px; font-size:20px; color: white; font-family: 'Helvetica';">
+		File type to create:
+		<div class="tooltip">(?)<span class="tooltiptext" style="bottom: 120%;">Currently only unit files supported</span></div>
+		<br>
+		<button type="button" id="unitBtn" onclick="setCreate('unit')">Unit</button>
+		<button type="button" id="fieldBtn" onclick="setCreate('field')">Battlefield</button>
+		<br><br>
+		<div id = "unitConfig" style="display:none;">
+			<form onsubmit="saveConfig(); return false">
+				<span class="head"> Unit Config File Creator </span>
+				<br>
+				<table class="line">
+				<tr>				
+					<td>Unit ID:</td><td><input type="text" id="id" name="id" maxlength=36 size=12 required></td>
+					<td><div class="tooltip">(?)<span class="tooltiptext" style="width:300px;margin-left:-155px"> Name of the unit to refer to it internally. Make sure you don't have more than one different unit with the same id.</span></div></td>
+				</tr>
+				<tr>
+					<td>Name:</td>
+					<td><input type="text" id="name" name="name" maxlength=36 size=12 required></td>
+					<td><div class="tooltip">(?)<span class="tooltiptext">Displayed name of the unit.</span></div></td>
+				</tr>
+				<tr>
+					<td>Type Name:</td>
+					<td><input type="text" id="unitName" name="unitName" maxlength=36 size=12></td>
+					<td><div class="tooltip">(?)<span class="tooltiptext" style="width:220px;margin-left:-115px">Family/type name of the unit<br>(such as "Sun dragon")</span></div></td>
+				</tr>
+				</table>
+				<table class="line" id="imgLine" style="margin-bottom: 0px">
+				<tr class="hRow">
+					<td>Image:</td>
+					<td><input type="text" id="image" name="image" maxlength=66 size=18></td>
+					<td><div class="tooltip">(?)<span class="tooltiptext">Path to the displayed image of this unit.<br>If blank, will default to "units/&lt;unit id&gt;.png"</span></div></td>
+				</tr>
+				</table>
+				<table class="line">
+				<tr>
+					<td>Gender:</td>
+					<td><select name="gender" id="gender" onchange="checkOther('gender')"><option value="female">Female</option> <option value="male">Male</option> <option value="none">None</option> <option value="other" selected>Custom</option></select></td><td id="genderCell"><input type="text" id="genderInput" name="genderInput" maxlength=36 size=8></td></span>
+					<td><div class="tooltip">(?)<span class="tooltiptext">Determines what pronouns are used to refer to the unit</span></div></td>
+				</tr>
+				</table>
+				<table class="line">
+				<tr>
+					<td>Hp:</td>
+					<td><input type="number" id="hp" name="hp" size=6 min=0 max=999999 step=1 required></td>
+					<td><div class="tooltip">(?)<span class="tooltiptext">Hp measures how much damage the unit can take before being defeated.</span></div></td>
+				</tr>
+				<tr>
+					<td colspan="2"><select name="hasPhp" id="hasPhp" onchange="checkPhpRow()"><option value="True" selected>Has P.Hp</option> <option value="False">No P.Hp</option></select></td>
+					<td><div class="tooltip">(?)<span class="tooltiptext" style="width:250px;margin-left:-130px">A unit's Hp can't go above its P.Hp.<br>Some units, typically those of elements Metal or Anti-Magic, have no P.Hp value.</span></div></td>
+				</tr>
+				<tr class="hRow" id="phpRow">
+					<td>P.Hp:</td>
+					<td><input type="number" id="php" name="php" size=6 min=0 max=999999 step=1></td>
+					<td><div class="tooltip">(?)<span class="tooltiptext">If this is more than Hp, the unit will not have full Hp when entering battle.</span></div></td>
+				</tr>				
+				<tr class="hRow">
+					<td>M.Hp:</td>
+					<td><input type="number" id="mhp" name="mhp" size=6 min=0 max=99 step=1></td>
+					<td><div class="tooltip">(?)<span class="tooltiptext" id="mhpText"></span></div></td>
+				</tr>				
+				<tr>
+					<td>Def:</td>
+					<td><input type="number" id="bdef" name="bdef" size=4 min=0 max=99 step=1></td>
+					<td><div class="tooltip">(?)<span class="tooltiptext">A higher Def reduces damage this unit takes from attacks.</span></div></td>
+				</tr>				
+				<tr>
+					<td>Sp:</td>
+					<td><input type="number" id="bspd" name="bspd" size=4 min=0 max=99 step=1></td>
+					<td><div class="tooltip">(?)<span class="tooltiptext">A higher Sp allows this unit to travel farther each turn.</span></div></td>
+				</tr>
+				</table>
+				<table class="line">
+				<tr id="elems">
+					<td>Elements:</td>
+					<td><button type="button" class="circle plus" onclick="addElem()"></button><button type="button" class="circle minus" onclick="remElem()"></button></td>
+					<td><div class="tooltip">(?)<span class="tooltiptext">What types of magic this unit is innately connected to.</span></div></td>
+				</tr>				
+				</table>
+				<table class="line" style="min-height:48px">
+				<tr>
+					<td>Moves:</td>
+					<td><button type="button" class="circle plus" onclick="addMove()"></button><button type="button" class="circle minus" onclick="remMove()"></button></td>
+					<td><div class="tooltip">(?)<span class="tooltiptext">Techniques used by the unit in battle</span></div></td>
+				</tr>
+				</table>
+              
+              <div id="moveBlocks"> </div>
+                
+				<table class="line" id="abilT" style="min-height:48px">
+				<tr id="abils">
+					<td>Abilities:</td>
+					<td><button type="button" class="circle plus" onclick="addAbil()"></button><button type="button" class="circle minus" onclick="remAbil()"></button></td>
+					<td><div class="tooltip">(?)<span class="tooltiptext">Passive properties of this unit</span></div></td>
+				</tr>				
+				</table>
+				<table class="line">
+				<tr id="equipInfos">
+					<td>Equipment Info:</td>
+					<td><select name="equipInfo" id="equipInfo" onchange="checkOther('equipInfo')">
+					<option value="None" title="Can't equip anything">None</option>
+					<option value="{EQUIP_DEFAULT}"title="The default equipment slots for a unit are 1 Accessory and 1 Fae Helper">Default</option>
+					<option value="other" title="Customize equip slots">Custom</option></select></td>
+					<span id="equipInfoInput"><td id="ei0">Equip Slots:</td><td id="equipInfoCell"><button type="button" class="circle plus" onclick="addEI()"></button><button type="button" class="circle minus" onclick="remEI()"></button></td></span>
+					<td><div class="tooltip">(?)<span class="tooltiptext">What types of equipment this unit can have equipped</span></div></td>
+				</tr>				
+				</table>
+				<table class="line">
+				<tr class="hRow">
+					<td>Summoned:</td>
+					<td><select name="summoned" id="summoned"><option value="True">True</option> <option value="False" selected>False</option></select></td>
+					<td><div class="tooltip">(?)<span class="tooltiptext">This unit was created through magic, and has special properties such as leaving no corpse upon death.</span></div></td>
+				</tr>
+				<tr class="hRow">
+					<td>Has "The":</td>
+					<td><select name="hasThe" id="hasThe"><option value="True">True</option> <option value="False" selected>False</option></select></td>
+					<td><div class="tooltip">(?)<span class="tooltiptext">In battle log text, this unit will have a "The" before its name.</span></div></td>
+				</tr>		
+				</table>
+				
+				<br>
+				<button id="showH" onclick="toggleHidden()" type="button"></button>
+				<div class="tooltip" style="font-size:16px; margin-bottom:12px">(?)<span class="tooltiptext">Options that are not used by most units</span></div>
+				<br>
+				
+				<input type="submit" value="Export Unit Config File" onclick="showAllMoves()">
+			</form>
+            <br>
+		</div>
+		
+		<div id = "fieldConfig" style="display:none">
+			Battlefield config file creator not yet implemented.
+			<br><br>
+		</div>
+		
+		<button onclick="loadConfig()" type="button">Load Config File</button>
+		
+		
+		</div>		
+		<input type="file" id="fileInput" style="display:none;"/>
+	</body>
+		
+	
+</html>
+
+
+<script>
+	var toCreate = ""
+	function setCreate(type) {
+		toCreate = type
+		document.getElementById("unitConfig").style.display = "none"
+		document.getElementById("fieldConfig").style.display = "none"
+		document.getElementById(type+"Config").style.display = "block"
+		document.getElementById("unitBtn").style.color = "gray"
+		document.getElementById("fieldBtn").style.color = "gray"
+		document.getElementById(type+"Btn").style.color = "black"
+	}
+	
+	var showHidden = true
+	function toggleHidden() {
+		showHidden = !showHidden
+		document.getElementById("showH").innerHTML = showHidden ? "Hide Hidden Options" : "View Hidden Options"
+		Array.from(document.getElementsByClassName("hRow")).forEach(row => {row.style.display = showHidden ? "" : "none"});
+		document.getElementById("imgLine").style.marginBottom = showHidden ? "-12px" : "0px"
+		checkPhpRow()
+	}
+	toggleHidden()
+	
+	let elemArray = ["None","Fire","Earth","Sky","Nature","Ice","Water","Poison","Dark","Metal","Light","Fae","Anti"]
+	var elems = 2
+	var elemCap = 2 // limit of how many elements you can have
+	function addElem() {
+		if (elems < elemCap) { // can't go above cap
+			elems++
+			updateElemsDisplay(elems)
+		}
+	}	
+	function remElem() {
+		if (elems > 1) {
+			elems--
+			updateElemsDisplay(-elems)
+		}
+	}
+	function updateElemsDisplay(num) {
+		if (num > 0) {
+			// add cell
+			let elemRow = document.getElementById("elems")
+			let cell = elemRow.insertCell(num)
+			let selectList = document.createElement("select")
+			selectList.id = "elem"+num
+			for (var i = 0; i < elemArray.length; i++) {
+				let option = new Option(elemArray[i],elemArray[i])
+				selectList.appendChild(option)
+			}
+			cell.appendChild(selectList)
+		}		
+		if (num < 0) {
+			// remove cell
+			let elemRow = document.getElementById("elems")
+			elemRow.deleteCell(-num+1)
+		}
+	}
+	updateElemsDisplay(1)
+	updateElemsDisplay(2)
+
+	var moves = 0
+    function addMove() {
+        if (moves < 99) {
+			moves++
+			updateMovesDisplay(moves)
+		}
+    }
+    function remMove() {
+        if (moves > 0) {
+			conf = confirm("Are you sure you want to remove a move?\nIts info will be lost.");
+			if(conf) {
+				moves--
+				updateMovesDisplay(-moves)
+			}
+		}
+    }
+    function updateMovesDisplay(num) {
+		if (num > 0) {
+			// add move
+			showMoves.push(true)
+			flags.push(0)
+			effects.push(0)
+            var move = document.createElement('div')
+            move.id = "move"+num
+            move.style.marginBottom="-12px"
+            document.getElementById("moveBlocks").appendChild(move)
+            move.innerHTML = `
+            
+            
+            ${(num==1)?"<hr>":""}
+
+           <table class="line" style="margin-top:-16px">
+            
+            <tr><td class="head">Move</td> <td> <button type="button" id="showM_${num}" onclick="toggleShowMove(${num})">(hide)</button> </td> </tr> 
+            
+			</table>
+           
+		   <span id="moveShow_${num}">
+		   
+           <table class="lineM" style="margin-bottom:-12px; margin-top: -16px">			
+           <tr>
+                <td>Name:</td>
+                <td><input type="text" id="m_name_${num}" name="m_name_${num}" maxlength=36 size=12 required></td>
+                <td><div class="tooltip">(?)<span class="tooltiptext">Name of the move</span></div></td>
+           </tr>
+           </table>
+		   
+           <table class="lineM" style="margin-bottom:-22px">
+           <tr>
+                <td>Description:</td>
+                <td><div class="tooltip">(?)<span class="tooltiptext">Description of move shown in info card</span></div></td>
+           </tr>
+           </table>
+           <table class="lineM">
+           <tr>
+                <td><textarea style="resize:none" id="m_desc_${num}" name="m_desc_${num}" cols=36 rows=4></textarea></td>
+           </tr>
+           </table>
+           
+           <table class="lineM hRow" style="${showHidden ? '' : 'display: none'}">
+           <tr>
+                <td>Image:</td>
+                <td><input type="text" id="m_image_${num}" name="m_image_${num}" maxlength=66 size=18></td>
+                <td><div class="tooltip">(?)<span class="tooltiptext">Path to the displayed image of this move.<br>If blank, will default to "moves/&lt;name&gt;.png"</span></div></td>
+           </tr>
+           </table>
+           
+           <table class="lineM">           
+           <tr>
+                <td>To hit:</td>
+                <td><input type="number" id="m_toHit_${num}" name="m_toHit_${num}" size=4 min=0 max=20 step=1></td>
+                <td><div class="tooltip">(?)<span class="tooltiptext">When using the move, the move roll must be this number or higher for it to succeed.</span></div></td>
+           </tr>	
+           <tr>
+                <td>Dice:</td>
+                <td><input type="text" id="m_dice_${num}" name="m_dice_${num}" maxlength=12 size=4></td>
+                <td><div class="tooltip">(?)<span class="tooltiptext">String in dice notation representing what dice are to be rolled</span></div></td>
+           </tr>
+           </table>
+
+           <table class="lineM">           
+           <tr>
+                <td>Range:</td>
+                <td><input type="number" id="m_rangeMin_${num}" name="m_rangeMin_${num}" size=4 min=0 max=99 step=1>&nbsp–&nbsp<input type="number" id="m_rangeMax_${num}" name="m_rangeMax_${num}" size=4 min=0 max=99 step=1></td>
+                <td><div class="tooltip">(?)<span class="tooltiptext">Tile distance the move can go from the user</span></div></td>
+           </tr>
+           </table>
+           
+           <table class="lineM hRow" style="${showHidden ? '' : 'display: none'}">
+           <tr>
+                <td>Cooldown:</td>
+                <td><input type="number" id="m_cooldown_${num}" name="m_cooldown_${num}" size=3 min=0 max=9 step=1>, start: <input type="number" id="m_cooldownStart_${num}" name="m_cooldownStart_${num}" size=3 min=0 max=9 step=1></td>
+                <td><div class="tooltip">(?)<span class="tooltiptext">Turns that must pass after move is used before it is used again</span></div></td>
+           </tr>
+           </table>
+           
+           <table class="lineM">           
+           <tr>
+                <td>Tp:</td>
+                <td><select name="m_tp_${num}" id="m_tp_${num}" onchange="checkTpNone(${num})"> <option value="0">None</option> <option value="1">Fire</option> <option value="2">Earth</option> <option value="3">Sky</option> <option value="4">Nature</option> <option value="5">Ice</option> <option value="6">Water</option> <option value="7">Poison</option> <option value="8">Dark</option> <option value="9">Metal</option> <option value="10">Light</option> <option value="11">Fae</option> <option value="12">Anti</option> </select></td>
+                <td><div class="tooltip">(?)<span class="tooltiptext">The move's elemental type</span></div></td>
+           </tr>	
+           <tr id="mpRow_${num}" style="display:none">
+                <td>Mp:</td>
+                <td><select name="m_mp_${num}" id="m_mp_${num}"> <option value="0">None</option> <option value="1">Very Low</option> <option value="2">Low</option> <option value="3">Medium</option> <option value="4">High</option> <option value="5">Very High</option> </select></td>
+                <td><div class="tooltip">(?)<span class="tooltiptext">Magic purity of the move</span></div></td>
+           </tr>
+           </table>
+		   
+		   
+		   
+		   
+		   
+           <table class="lineM">           
+           <tr>
+                <td>Target:</td>
+                <td><select name="m_target_${num}" id="m_target_${num}"><option value="none">None</option><option value="enemy" selected>Enemy</option><option value="self/ally">Self/Ally</option><option value="self/ally/unc">Self/Ally/Unc. Ally</option><option value="ally">Ally</option><option value="unc">Unconscious ally</option><option value="self">Self</option><option value="any">Any</option><option value="any but self">Any but self</option><option value="all enemies">All enemies</option><option value="self/all allies">Self and all allies</option><option value="all allies">All allies</option><option value="all unc allies">All unc. allies</option><option value="all">All units</option></select></td>
+                <td><div class="tooltip">(?)<span class="tooltiptext">What kind of unit this unit uses the move on</span></div></td>
+			</tr>
+			<tr class="hRow" style="${showHidden ? '' : 'display: none'}">
+				<td>Range Type:</td>
+                <td><select name="m_rangeType_${num}" id="m_rangeType_${num}"><option value="point">Point</option><option value="line" selected>Line</option><option value="piercing line">Piercing line</option><option value="cone">Cone</option><option value="piercing cone">Piercing cone</option></select></td>
+                <td><div class="tooltip">(?)<span class="tooltiptext">The area of effect of this move<br>(currently non-functional)</span></div></td>
+			</tr>
+           </table>
+		   
+		   
+		   
+		   
+			<table class="lineM">
+			<tr id="flags_${num}" style="height:24px">
+				<td>Flags:</td>
+				<td><button type="button" class="circle plus" onclick="addFlag(${num})"></button><button type="button" class="circle minus" onclick="remFlag(${num})"></button>&nbsp&nbsp&nbsp<div class="tooltip">(?)<span class="tooltiptext">Special properties of this move</span></div></td>
+			</tr>				
+			<tr id="effects_${num}" style="height:24px">
+				<td>Effects:</td>
+				<td><button type="button" class="circle plus" onclick="addEff(${num})"></button><button type="button" class="circle minus" onclick="remEff(${num})"></button>&nbsp&nbsp&nbsp<div class="tooltip">(?)<span class="tooltiptext">Special stuff this move does when it is used</span></div></td>
+			</tr>	
+			</table>		   
+		   
+		   
+			</span>
+		   
+		   
+           
+           <hr>
+            
+            
+            ` //<script> temp
+		}		
+		if (num <= 0) {
+			// remove move
+			var table = document.getElementById("move"+(-num+1))
+            table.remove()
+			showMoves.pop()
+			flags.pop()
+			effects.pop()
+		}
+        if (num == 0) document.getElementById("abilT").style.marginTop = ""
+        else document.getElementById("abilT").style.marginTop = "12px"
+    }
+    
+	
+	var abils = 0
+	function addAbil() {
+		if (abils < 99) {
+			abils++
+			updateAbilDisplay(abils)
+		}
+	}	
+	function remAbil() {
+		if (abils > 0) {
+			abils--
+			updateAbilDisplay(-abils)
+		}
+	}
+	function updateAbilDisplay(num) {
+		if (num > 0) {
+			// add cell
+			let abilRow = document.getElementById("abils")
+			let cell = abilRow.insertCell(num)
+			let abilF = document.createElement("input")
+            abilF.name = "abil"+num
+            abilF.id = "abil"+num
+            abilF.size = 12
+            abilF.maxLength = 36
+			cell.appendChild(abilF)
+		}		
+		if (num <= 0) {
+			// remove cell
+			let abilRow = document.getElementById("abils")
+			abilRow.deleteCell(-num+1)
+		}
+	}    
+	
+	
+	let eiArray = ["N/A","Artifact","Weapon","Armor","Accessory","Fae Helper"]
+	var equipInfos = 1
+	function addEI() {
+		if (equipInfos < 99) {
+			equipInfos++
+			updateEIDisplay(equipInfos)
+		}
+	}	
+	function remEI() {
+		if (equipInfos > 0) {
+			equipInfos--
+			updateEIDisplay(-equipInfos)
+		}
+	}
+	function updateEIDisplay(num) {
+		if (num > 0) {
+			// add cell
+			let equipRow = document.getElementById("equipInfos")
+			let cell = equipRow.insertCell(num+2)
+			let selectList = document.createElement("select")
+			cell.id = "ei"+num
+			for (var i = 0; i < eiArray.length; i++) {
+				let option = new Option(eiArray[i],eiArray[i])
+				selectList.appendChild(option)
+			}
+			cell.appendChild(selectList)
+		}		
+		if (num <= 0) {
+			// remove cell
+			let equipRow = document.getElementById("equipInfos")
+			equipRow.deleteCell(-num+3)
+		}
+	}
+	updateEIDisplay(1)	
+	
+	
+	
+	var showMoves = []
+	function toggleShowMove(num) {
+		showMoves[num-1] = !showMoves[num-1]
+		document.getElementById("showM_"+num).innerHTML = showMoves[num-1] ? "(hide)" : "(show)"
+		document.getElementById("moveShow_"+num).style.display = showMoves[num-1] ? "" : "none"
+	}	
+	function showAllMoves() {
+		for (var i = 0; i <= showMoves.length; i++) {
+			if(!showMoves[i]) toggleShowMove(i+1)
+		}		
+	}
+	
+	var flags = []
+	function addFlag(num) {
+		index = num-1
+		if (flags[index] < 99) {
+			flags[index]++
+			updateFlagDisplay(flags[index],index)
+		}
+	}	
+	function remFlag(num) {
+		index = num-1
+		if (flags[index] > 0) {
+			flags[index]--
+			updateFlagDisplay(-flags[index],index)
+		}
+	}
+	function updateFlagDisplay(num,fIndex) {
+		if (num > 0) {
+			// add cell
+			let flagRow = document.getElementById("flags_"+(fIndex+1))
+			let cell = flagRow.insertCell(num)
+			let flagF = document.createElement("input")
+            flagF.name = "flag"+num+"_"+(fIndex+1)
+            flagF.id = "flag"+num+"_"+(fIndex+1)
+            flagF.size = 12
+            flagF.maxLength = 36
+			cell.appendChild(flagF)
+		}		
+		if (num <= 0) {
+			// remove cell
+			let flagRow = document.getElementById("flags_"+(fIndex+1))
+			flagRow.deleteCell(-num+1)
+		}
+	}   	
+	
+	var effects = []
+	function addEff(num) {
+		index = num-1
+		if (effects[index] < 99) {
+			effects[index]++
+			updateEffDisplay(effects[index],index)
+		}
+	}	
+	function remEff(num) {
+		index = num-1
+		if (effects[index] > 0) {
+			effects[index]--
+			updateEffDisplay(-effects[index],index)
+		}
+	}
+	function updateEffDisplay(num,eIndex) {
+		if (num > 0) {
+			// add cell
+			let effRow = document.getElementById("effects_"+(eIndex+1))
+			let cell = effRow.insertCell(num)
+			let effF = document.createElement("input")
+            effF.name = "effect"+num+"_"+(eIndex+1)
+            effF.id = "effect"+num+"_"+(eIndex+1)
+            effF.size = 12
+            effF.maxLength = 36
+			cell.appendChild(effF)
+		}		
+		if (num <= 0) {
+			// remove cell
+			let effRow = document.getElementById("effects_"+(eIndex+1))
+			effRow.deleteCell(-num+1)
+		}
+	}
+
+
+	function checkOther(id) {
+		data = document.getElementById(id)
+		var element = document.getElementById(id+"Input")
+		var cell = document.getElementById(id+"Cell")
+		if(data.value == "other") {
+			element.style.display = "block"
+			cell.style.display = "block"
+		}
+		else {
+			element.style.display = "none"
+			cell.style.display = "none"
+		}
+		if(id == "equipInfo") {
+			for (var i = 0; i <= equipInfos; i++) {
+				document.getElementById("ei"+i).style.display = (data.value == "other") ? "" : "none"
+			}			
+		}
+	}
+	checkOther("gender")
+	checkOther("equipInfo")
+	
+	function checkPhpRow() {
+		value = document.getElementById("hasPhp").value
+		document.getElementById("phpRow").style.display = (value == "True" && showHidden) ? "" : "none"
+		document.getElementById("mhpText").innerHTML = (value == "True") ? "If this is more than P.Hp, the unit will have missing P.Hp by default." : "If this is more than Hp, the unit will have missing Hp by default."
+	}
+
+
+	function checkTpNone(num) {
+		mpData = document.getElementById("mpRow_"+num)
+		val = parseInt(document.getElementById("m_tp_"+num).value)
+		console.log(val)
+		mpData.style.display = (val==0) ? "none" : ""
+	}
+
+
+
+
+	function saveConfig() {
+		console.log(1)
+	}
+	function loadConfig() {
+		document.getElementById('fileInput').click();
+	}
+	function loadFile() {
+		const file = this.files[0]
+		file.text().then(function(result) {
+			fText = result.replace("\r\n","\n").trim()
+			console.log(fText)
+		});
+	}
+
+
+
+
+
+	document.getElementById("unitBtn").style.color = "gray"
+	document.getElementById("fieldBtn").style.color = "gray"
+	document.getElementById("fileInput").addEventListener("change", loadFile, false);
+</script>

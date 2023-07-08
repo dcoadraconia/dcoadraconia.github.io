@@ -62,6 +62,8 @@
 				
 		<div style='z-index:4; position: absolute; left: 50%; top: 50%; '>
 				<img id="pikmin4" onclick="playPik()" src="assets/images/pikmin4boxart.png" style="width:100%; height:auto; transform: translate(-50%, -50%); cursor: pointer;">
+				<br>
+				<p id="c" style="position:absolute; z-index:5; top:50%; transform: translate(-50%, -66%); font-size:24px; display:none; color: red; font-family: 'Pikmin', 'Arial';">You've clicked-min <span id="clickmin">0</span><span id="times"> times</span><span id="ex"></span></p>
 		</div>
 		
 	</body>
@@ -75,10 +77,23 @@ let elemColors = [getCssVar("--color1"),getCssVar("--color2"),getCssVar("--color
 
 playSound = false
 
+var pikClicks = 0
+if (localStorage.getItem("pikClicks") != null) pikClicks = parseInt(localStorage.getItem("pikClicks"))
 var pik = new Howl({    src: ['assets/audio/pikmin.ogg', 'assets/audio/pikmin.mp3'],    volume: 0.66,    loop: false  })
 function playPik() {
 	pik.play()
+	pikClicks++
+	localStorage.setItem("pikClicks",pikClicks)
+	updatePik()	
 }
+function updatePik() {
+	document.getElementById("clickmin").innerHTML = pikClicks
+	document.getElementById("c").style.display = pikClicks >= 100 ? "" : "none"
+	document.getElementById("times").innerHTML = pikClicks >= 1000 ? " TIMES" : " times"
+	document.getElementById("ex").innerHTML = "!".repeat(Math.ceil((1+pikClicks)/100))
+	document.getElementById("c").style.filter = "hue-rotate("+(pikClicks-100)+"deg) saturate(1.5)"
+}
+updatePik()
 		
 // code modified from: https://www.w3schools.com/howto/howto_js_countdown.asp
 // Set the date we're counting down to
