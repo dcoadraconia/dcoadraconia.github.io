@@ -435,12 +435,12 @@
            <table class="lineM">           
            <tr>
                 <td style="width:29px">Tp:</td>
-                <td style="width:87px"><select name="m_tp_${num}" id="m_tp_${num}" onchange="checkTpNone(${num})"> <option value="None">None</option> <option value="Pierce">Pierce</option> <option value="Blade">Blade</option> <option value="Impact">Impact</option> <option value="Fire">Fire</option> <option value="Earth">Earth</option> <option value="Sky">Sky</option> <option value="Nature">Nature</option> <option value="Ice">Ice</option> <option value="Water">Water</option> <option value="Poison">Poison</option> <option value="Dark">Dark</option> <option value="Metal">Metal</option> <option value="Light">Light</option> <option value="Fae">Fae</option> <option value="Anti">Anti</option> </select></td>
+                <td style="width:87px"><select name="m_tp_${num}" id="m_tp_${num}" onchange="checkTpNone(${num})"> <option value="none">None</option> <option value="pierce">Pierce</option> <option value="blade">Blade</option> <option value="impact">Impact</option> <option value="fire">Fire</option> <option value="earth">Earth</option> <option value="sky">Sky</option> <option value="nature">Nature</option> <option value="ice">Ice</option> <option value="water">Water</option> <option value="poison">Poison</option> <option value="dark">Dark</option> <option value="metal">Metal</option> <option value="light">Light</option> <option value="fae">Fae</option> <option value="anti">Anti</option> </select></td>
                 <td><div class="tooltip">(?)<span class="tooltiptext">The move's elemental type</span></div></td>
            </tr>	
            <tr id="mpRow_${num}" style="display:none">
                 <td>Mp:</td>
-                <td><select name="m_mp_${num}" id="m_mp_${num}"> <option value="None">None</option> <option value="Very Low">Very Low</option> <option value="Low">Low</option> <option value="Medium">Medium</option> <option value="High">High</option> <option value="Very High">Very High</option> </select></td>
+                <td><select name="m_mp_${num}" id="m_mp_${num}"> <option value="none">None</option> <option value="very low">Very Low</option> <option value="low">Low</option> <option value="medium">Medium</option> <option value="high">High</option> <option value="very high">Very High</option> </select></td>
                 <td><div class="tooltip">(?)<span class="tooltiptext">Magic purity of the move</span></div></td>
            </tr>
            </table>
@@ -681,8 +681,7 @@
 	function checkTpNone(num) {
 		var mpData = document.getElementById("mpRow_"+num)
 		let val = document.getElementById("m_tp_"+num).value
-        let noneTypes = ["None","Pierce","Blade","Impact"]
-        //console.log(val)
+        let noneTypes = ["none","pierce","blade","impact"]
 		mpData.style.display = (noneTypes.includes(val)) ? "none" : ""
 	}
     
@@ -761,10 +760,10 @@
                 if (cooldown == "NaN") cooldown = ""
                 if (cooldown == "0") cooldown = ""
                 var tp = fetchValue("m_tp_"+i)
-                if(tp == "None") tp = ""
+                if(tp == "none") tp = ""
                 tp = tp.toLowerCase()
                 var mp = fetchValue("m_mp_"+i)
-                if(mp == "None") mp = ""
+                if(mp == "none") mp = ""
                 mp = mp.toLowerCase()
                 var target = fetchValue("m_target_"+i)
                 if(target == "enemy") target = ""
@@ -795,7 +794,6 @@
                     flags: flags,
                     effects: effects
                 }
-                //console.log(move)  
                 moves.push(move)
             }             
 
@@ -811,7 +809,6 @@
             else if (fetchValue("equipInfo") == "other") {
                 for (var i = 0; i < equipInfos; i++) {
                     v = fetchValue("ei"+(i+1))
-                    //console.log(v)
                     if(v != "-1") equipInfo.push(v)
                 }  
             }            
@@ -948,15 +945,14 @@
                 }
                 else {
                     alert("File \""+fName+"\" could not be read (improper file format)")
-                    //if(file.size < 10000) console.log(fText)
                 }
             }
 		});
 	}
     function readUnitData(unitData) {
-        //console.log(unitData)
         initialSetUnit()
         unitData = unitData.split("\n")
+        var moveNum = 0
         for (var i = 0; i < unitData.length; i++) {
             let line = unitData[i].split("=")
             if (line.length == 2) {
@@ -967,16 +963,18 @@
             if (line.length == 1 && line[0] == "[move]") {
                 let endInd = unitData.slice(i,-1).indexOf("[/move]")
                 if (endInd > 0) {
+                    let moveData = unitData.slice(i+1,i+endInd)
+                    moveNum++
+                    addMove()
+                    readMoveData(moveData,moveNum)                    
                     i += endInd
-                    //console.log(i)
                 }
-                else break // no [/move] tag, just give up
+                else {
+                    console.error("no [/move] tag")
+                    break // no [/move] tag, just give up
+                }
             }
-            
         }
-    
-    
-    
     }
     function prepToRead(text) {
         var ret = text
@@ -991,11 +989,19 @@
         
         return ret
     }
-    function updKV(key, value, inMove = false) {
+    function updKV(key, value, moveNum = 0) {
         if (key == "defense" || key == "def" || key == "df") key="bdef"
         if (key == "speed" || key == "spd" || key == "sp") key = "bspd"
         if (key == "elements" || key == "element" || key == "elem") key = "elems"
         if (key == "abil" || key == "abils" || key == "ability") key = "abilities"
+        if (key == "m_description_"+moveNum) key = "m_desc_"+moveNum
+        if (key == "m_to_hit_"+moveNum) key = "m_toHit_"+moveNum
+        if (key == "m_type_"+moveNum || key == "m_elem_"+moveNum || key == "m_element_"+moveNum) key = "m_tp_"+moveNum
+        if (key == "m_purity_"+moveNum || key == "m_magic purity_"+moveNum) key = "m_mp_"+moveNum
+        if (key == "m_rt_"+moveNum) key = "m_rangeType_"+moveNum
+        if (key == "m_target_"+moveNum) value = value.toLowerCase()
+        if (key == "m_rangeType_"+moveNum) value = value.toLowerCase()
+        if (key == "summoned" || key == "hasThe") value = properCase(value)
         
         if (key == "image") {
             value = unquote(value)
@@ -1009,7 +1015,7 @@
                 setIdValue("gender","other")
                 setIdValue("genderInput",value)
             }
-            else setIdValue("gender",value)
+            else setIdValue("gender",value.toLowerCase())
             checkOther('gender')
         }
         else if (key == "php") {
@@ -1030,12 +1036,59 @@
                 addElem()
             }
             for (var i = 0; i < elemsAmt; i++) {
-                elemValues[i] = unquote(elemValues[i].trim()).trim()
+                elemValues[i] = properCase(unquote(elemValues[i].trim()).trim())
                 setIdValue("elem"+(i+1),elemValues[i])
             }
         }
+        
+        else if (key == "m_range_"+moveNum) {
+            let rangeVals = value.split("-")
+            if(rangeVals.length == 1) {
+                setIdValue("m_rangeMin_"+moveNum,rangeVals[0])
+            }
+            if(rangeVals.length == 2) {
+                setIdValue("m_rangeMin_"+moveNum,rangeVals[0])
+                setIdValue("m_rangeMax_"+moveNum,rangeVals[1])
+            }
+        }
+        else if (key == "m_cooldown_"+moveNum) {
+            let coolVals = value.split("/")
+            if(coolVals.length == 1) {
+                setIdValue("m_cooldown_"+moveNum,coolVals[0])
+            }
+            if(coolVals.length == 2) {
+                setIdValue("m_cooldownStart_"+moveNum,coolVals[0])
+                setIdValue("m_cooldown_"+moveNum,coolVals[1])
+            }
+        }
+        else if (key == "m_tp_"+moveNum || key == "m_mp_"+moveNum) {
+            setIdValue(key,value.toLowerCase())
+            checkTpNone(moveNum)
+        }        
+        else if (key == "m_flags_"+moveNum) {
+            let flagValues = value.split(",")
+            for (var i = 0; i < flagValues.length; i++) {
+                addFlag(moveNum)
+            }
+            for (var i = 0; i < flagsAmts[moveNum-1]; i++) {
+                flagValues[i] = unquote(flagValues[i].trim()).trim()
+                setIdValue("flag"+(i+1)+"_"+moveNum,flagValues[i])
+            }
+        }        
+        else if (key == "m_effects_"+moveNum) {
+            let effValues = value.split(",")
+            for (var i = 0; i < effValues.length; i++) {
+                addEff(moveNum)
+            }
+            for (var i = 0; i < effectsAmts[moveNum-1]; i++) {
+                effValues[i] = unquote(effValues[i].trim()).trim()
+                setIdValue("effect"+(i+1)+"_"+moveNum,effValues[i])
+            }
+        }   
+        
+        
         else if (key == "abilities") {
-            abilValues = value.split(",")
+            let abilValues = value.split(",")
             for (var i = 0; i < abilValues.length; i++) {
                 addAbil()
             }
@@ -1075,6 +1128,9 @@
     function unbracket(value) {
         if(value[0] == "[" && value.slice(-1) == "]" ) value = value.slice(1,-1);
         return value
+    }
+    function properCase(string) {
+        return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
     }
     function initialSetUnit() {
         setIdValue("id","")
@@ -1122,7 +1178,18 @@
         catch(error) {
             console.error(id)
         }
+    }    
+    function readMoveData(moveData,moveNum) {
+        for (var i = 0; i < moveData.length; i++) {
+            let line = moveData[i].split("=")
+            if (line.length == 2) {
+                let key = "m_"+line[0].trim()+"_"+moveNum
+                let value = line[1].trim()
+                updKV(key,value,moveNum)
+            }
+        }
     }
+    
     
 
 
