@@ -141,7 +141,7 @@
 				</tr>
 				<tr>
 					<td>Name:</td>
-					<td><input type="text" id="name" name="name" maxlength=36 size=12 required></td>
+					<td><input type="text" id="name" name="name" maxlength=36 size=12></td>
 					<td><div class="tooltip">(?)<span class="tooltiptext">Displayed name of the unit.</span></div></td>
 				</tr>
 				<tr>
@@ -688,7 +688,6 @@
     function preCheck() {
         showAllMoves()
         validateValue("id")
-        validateValue("name")
     }
 
     function validateValue(id) {
@@ -826,7 +825,7 @@
             ft.push("[unit]")
 
             ft.push(t+`id = ${id}`)
-            ft.push(t+`name = ${name}`)
+            if(tSet(name)) ft.push(t+`name = ${name}`)
             if(tSet(gender)) ft.push(t+`gender = ${gender}`)
             if(tSet(unitName)) ft.push(t+`unitName = "${unitName}"`)
             if(tSet(image)) ft.push(t+`image = "${image}"`)
