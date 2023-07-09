@@ -176,10 +176,10 @@
 	function loadFile() {
 		const file = this.files[0]
 		file.text().then(function(result) {
-			fText = result.replace("\r\n","\n").trim()
-			splitStr = fText.split("\n")
-			newH = splitStr.length
-			newW = splitStr[0].length
+			let fText = result.replace("\r\n","\n").trim()
+			let splitStr = fText.split("\n")
+			let newH = splitStr.length
+			let newW = splitStr[0].length
 
 			if(newH > maxsize || newW > maxsize) return // too big
 						
@@ -195,7 +195,7 @@
 			}
 			
 			genTable()
-			name = file.name.split(".")[0]
+			let name = file.name.split(".")[0]
 			document.getElementById('name').value = name
 
 		});

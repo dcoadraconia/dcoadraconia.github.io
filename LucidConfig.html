@@ -248,7 +248,7 @@
 				<div class="tooltip" style="font-size:16px; margin-bottom:12px">(?)<span class="tooltiptext">Options that are not used by most units</span></div>
 				<br>
 				
-				<input type="submit" value="Export Unit Config File" onclick="showAllMoves()">
+				<input type="submit" value="Export Unit Config File" onclick="preCheck()">
 			</form>
             <br>
 		</div>
@@ -292,18 +292,18 @@
 	toggleHidden()
 	
 	let elemArray = ["None","Fire","Earth","Sky","Nature","Ice","Water","Poison","Dark","Metal","Light","Fae","Anti"]
-	var elems = 2
+	var elemsAmt = 2
 	var elemCap = 2 // limit of how many elements you can have
 	function addElem() {
-		if (elems < elemCap) { // can't go above cap
-			elems++
-			updateElemsDisplay(elems)
+		if (elemsAmt < elemCap) { // can't go above cap
+			elemsAmt++
+			updateElemsDisplay(elemsAmt)
 		}
 	}	
 	function remElem() {
-		if (elems > 1) {
-			elems--
-			updateElemsDisplay(-elems)
+		if (elemsAmt > 1) {
+			elemsAmt--
+			updateElemsDisplay(-elemsAmt)
 		}
 	}
 	function updateElemsDisplay(num) {
@@ -328,19 +328,21 @@
 	updateElemsDisplay(1)
 	updateElemsDisplay(2)
 
-	var moves = 0
+	var movesAmt = 0
     function addMove() {
-        if (moves < 99) {
-			moves++
-			updateMovesDisplay(moves)
+        if (movesAmt < 99) {
+			movesAmt++
+			updateMovesDisplay(movesAmt)
 		}
     }
     function remMove() {
-        if (moves > 0) {
-			conf = confirm("Are you sure you want to remove a move?\nIts info will be lost.");
+        if (movesAmt > 0) {
+            let mName = fetchValue("m_name_"+movesAmt)
+            if(mName == "") mName = "<unnamed>"
+			conf = confirm("Are you sure you want to remove move \""+mName+"\"?\nIts info will be lost.");
 			if(conf) {
-				moves--
-				updateMovesDisplay(-moves)
+				movesAmt--
+				updateMovesDisplay(-movesAmt)
 			}
 		}
     }
@@ -348,8 +350,8 @@
 		if (num > 0) {
 			// add move
 			showMoves.push(true)
-			flags.push(0)
-			effects.push(0)
+			flagsAmts.push(0)
+			effectsAmts.push(0)
             var move = document.createElement('div')
             move.id = "move"+num
             move.style.marginBottom="-12px"
@@ -426,13 +428,13 @@
            
            <table class="lineM">           
            <tr>
-                <td>Tp:</td>
-                <td><select name="m_tp_${num}" id="m_tp_${num}" onchange="checkTpNone(${num})"> <option value="0">None</option> <option value="1">Fire</option> <option value="2">Earth</option> <option value="3">Sky</option> <option value="4">Nature</option> <option value="5">Ice</option> <option value="6">Water</option> <option value="7">Poison</option> <option value="8">Dark</option> <option value="9">Metal</option> <option value="10">Light</option> <option value="11">Fae</option> <option value="12">Anti</option> </select></td>
+                <td style="width:29px">Tp:</td>
+                <td style="width:87px"><select name="m_tp_${num}" id="m_tp_${num}" onchange="checkTpNone(${num})"> <option value="None">None</option> <option value="Pierce">Pierce</option> <option value="Blade">Blade</option> <option value="Impact">Impact</option> <option value="Fire">Fire</option> <option value="Earth">Earth</option> <option value="Sky">Sky</option> <option value="Nature">Nature</option> <option value="Ice">Ice</option> <option value="Water">Water</option> <option value="Poison">Poison</option> <option value="Dark">Dark</option> <option value="Metal">Metal</option> <option value="Light">Light</option> <option value="Fae">Fae</option> <option value="Anti">Anti</option> </select></td>
                 <td><div class="tooltip">(?)<span class="tooltiptext">The move's elemental type</span></div></td>
            </tr>	
            <tr id="mpRow_${num}" style="display:none">
                 <td>Mp:</td>
-                <td><select name="m_mp_${num}" id="m_mp_${num}"> <option value="0">None</option> <option value="1">Very Low</option> <option value="2">Low</option> <option value="3">Medium</option> <option value="4">High</option> <option value="5">Very High</option> </select></td>
+                <td><select name="m_mp_${num}" id="m_mp_${num}"> <option value="None">None</option> <option value="Very Low">Very Low</option> <option value="Low">Low</option> <option value="Medium">Medium</option> <option value="High">High</option> <option value="Very High">Very High</option> </select></td>
                 <td><div class="tooltip">(?)<span class="tooltiptext">Magic purity of the move</span></div></td>
            </tr>
            </table>
@@ -483,25 +485,25 @@
 			var table = document.getElementById("move"+(-num+1))
             table.remove()
 			showMoves.pop()
-			flags.pop()
-			effects.pop()
+			flagsAmts.pop()
+			effectsAmts.pop()
 		}
         if (num == 0) document.getElementById("abilT").style.marginTop = ""
         else document.getElementById("abilT").style.marginTop = "12px"
     }
     
 	
-	var abils = 0
+	var abilsAmt = 0
 	function addAbil() {
-		if (abils < 99) {
-			abils++
-			updateAbilDisplay(abils)
+		if (abilsAmt < 99) {
+			abilsAmt++
+			updateAbilDisplay(abilsAmt)
 		}
 	}	
 	function remAbil() {
-		if (abils > 0) {
-			abils--
-			updateAbilDisplay(-abils)
+		if (abilsAmt > 0) {
+			abilsAmt--
+			updateAbilDisplay(-abilsAmt)
 		}
 	}
 	function updateAbilDisplay(num) {
@@ -544,9 +546,9 @@
 			let equipRow = document.getElementById("equipInfos")
 			let cell = equipRow.insertCell(num+2)
 			let selectList = document.createElement("select")
-			cell.id = "ei"+num
 			for (var i = 0; i < eiArray.length; i++) {
-				let option = new Option(eiArray[i],eiArray[i])
+				let option = new Option(eiArray[i],i-1)
+                selectList.id = "ei"+num
 				selectList.appendChild(option)
 			}
 			cell.appendChild(selectList)
@@ -568,24 +570,24 @@
 		document.getElementById("moveShow_"+num).style.display = showMoves[num-1] ? "" : "none"
 	}	
 	function showAllMoves() {
-		for (var i = 0; i <= showMoves.length; i++) {
+		for (var i = 0; i < showMoves.length; i++) {
 			if(!showMoves[i]) toggleShowMove(i+1)
 		}		
 	}
 	
-	var flags = []
+	var flagsAmts = []
 	function addFlag(num) {
-		index = num-1
-		if (flags[index] < 99) {
-			flags[index]++
-			updateFlagDisplay(flags[index],index)
+		let  index = num-1
+		if (flagsAmts[index] < 99) {
+			flagsAmts[index]++
+			updateFlagDisplay(flagsAmts[index],index)
 		}
 	}	
 	function remFlag(num) {
-		index = num-1
-		if (flags[index] > 0) {
-			flags[index]--
-			updateFlagDisplay(-flags[index],index)
+		let index = num-1
+		if (flagsAmts[index] > 0) {
+			flagsAmts[index]--
+			updateFlagDisplay(-flagsAmts[index],index)
 		}
 	}
 	function updateFlagDisplay(num,fIndex) {
@@ -607,19 +609,19 @@
 		}
 	}   	
 	
-	var effects = []
+	var effectsAmts = []
 	function addEff(num) {
-		index = num-1
-		if (effects[index] < 99) {
-			effects[index]++
-			updateEffDisplay(effects[index],index)
+		let index = num-1
+		if (effectsAmts[index] < 99) {
+			effectsAmts[index]++
+			updateEffDisplay(effectsAmts[index],index)
 		}
 	}	
 	function remEff(num) {
-		index = num-1
-		if (effects[index] > 0) {
-			effects[index]--
-			updateEffDisplay(-effects[index],index)
+		let index = num-1
+		if (effectsAmts[index] > 0) {
+			effectsAmts[index]--
+			updateEffDisplay(-effectsAmts[index],index)
 		}
 	}
 	function updateEffDisplay(num,eIndex) {
@@ -643,7 +645,7 @@
 
 
 	function checkOther(id) {
-		data = document.getElementById(id)
+		let data = document.getElementById(id)
 		var element = document.getElementById(id+"Input")
 		var cell = document.getElementById(id+"Cell")
 		if(data.value == "other") {
@@ -664,24 +666,241 @@
 	checkOther("equipInfo")
 	
 	function checkPhpRow() {
-		value = document.getElementById("hasPhp").value
+		let value = document.getElementById("hasPhp").value
 		document.getElementById("phpRow").style.display = (value == "True" && showHidden) ? "" : "none"
 		document.getElementById("mhpText").innerHTML = (value == "True") ? "If this is more than P.Hp, the unit will have missing P.Hp by default." : "If this is more than Hp, the unit will have missing Hp by default."
 	}
 
 
 	function checkTpNone(num) {
-		mpData = document.getElementById("mpRow_"+num)
-		val = parseInt(document.getElementById("m_tp_"+num).value)
-		console.log(val)
-		mpData.style.display = (val==0) ? "none" : ""
+		var mpData = document.getElementById("mpRow_"+num)
+		let val = document.getElementById("m_tp_"+num).value
+        let noneTypes = ["None","Pierce","Blade","Impact"]
+        console.log(val)
+		mpData.style.display = (noneTypes.includes(val)) ? "none" : ""
 	}
+    
+    function preCheck() {
+        showAllMoves()
+        validateValue("id")
+        validateValue("name")
+    }
 
-
-
-
+    function validateValue(id) {
+        if (typeof fetchValue(id) === 'string' || fetchValue(id) instanceof String) document.getElementById(id).value = fetchValue(id)
+    }
+    function fetchValue(id) {
+        if (document.getElementById(id) === null) return ""
+        var ret = document.getElementById(id).value
+        if (typeof ret === 'undefined') return ""
+        if (typeof id === 'string' || id instanceof String) ret = ret.trim()
+        ret = ret.replace(/[\\\n\r#]/g, "") // invalid characters
+        return ret
+    }
+    function tSet(text) {
+        // the text is set if it is not "" (empty)
+        if(typeof text === 'string' || text instanceof String)
+            return text != ""
+        if(Number.isInteger(text))
+            return true
+        return false
+    }
 	function saveConfig() {
-		console.log(1)
+        try {
+            // fetch data
+            var id = fetchValue("id")
+            let saveId = id.replace(/[^a-zA-Z0-9]/g, "_") // file name alphanumeric and underscores
+            if (!isNaN(parseInt(id))) id = '"'+id+'"'
+            var name = fetchValue("name")
+            if (!isNaN(parseInt(name))) name = '"'+name+'"'
+            var unitName = fetchValue("unitName")
+            var gender = fetchValue("gender")
+            if (gender == "other") gender = fetchValue("genderInput")
+            var image = fetchValue("image")
+            if (image == "") image = "units/"+saveId.toLowerCase()+".png" 
+            var hp = parseInt(fetchValue("hp"))
+            var php = parseInt(fetchValue("php"))
+            if (fetchValue("hasPhp") == "False") php = "None"
+            var mhp = parseInt(fetchValue("mhp"))
+            var bdef = parseInt(fetchValue("bdef"))
+            var bspd = parseInt(fetchValue("bspd"))
+            
+            var elems = []
+            for (var i = 0; i < elemsAmt; i++) {
+                v = fetchValue("elem"+(i+1))
+                if(v != "None") elems.push(v)
+            }
+            
+            var moves = []
+            for (var i = 1; i <= movesAmt; i++) {
+                var mName = fetchValue("m_name_"+i)
+                if (!isNaN(parseInt(mName))) mName = '"'+mName+'"'
+                var desc = fetchValue("m_desc_"+i)
+                var mImage = fetchValue("m_image_"+i)
+                if (mImage == "") mImage = "moves/"+mName.toLowerCase()+".png" 
+                var toHit = parseInt(fetchValue("m_toHit_"+i))
+                var dice = fetchValue("m_dice_"+i)
+                var rangeMin = parseInt(fetchValue("m_rangeMin_"+i))
+                var rangeMax = parseInt(fetchValue("m_rangeMax_"+i))
+                var range = rangeMin
+                if (rangeMax > rangeMin) range = range+"-"+rangeMax
+                if (range == "1") range = ""
+                var cooldown = parseInt(fetchValue("m_cooldown_"+i))
+                var cooldownStart = parseInt(fetchValue("m_cooldownStart_"+i))
+                if (cooldown > cooldownStart) cooldown = cooldownStart+"/"+cooldown
+                else cooldown = ""+cooldown
+                if (cooldown == "NaN") cooldown = ""
+                if (cooldown == "0") cooldown = ""
+                var tp = fetchValue("m_tp_"+i)
+                if(tp == "None") tp = ""
+                tp = tp.toLowerCase()
+                var mp = fetchValue("m_mp_"+i)
+                if(mp == "None") mp = ""
+                mp = mp.toLowerCase()
+                var target = fetchValue("m_target_"+i)
+                if(target == "enemy") target = ""
+                var rangeType = fetchValue("m_rangeType_"+i)
+                if(rangeType == "line") rangeType = ""
+                var flags = []
+                for (var j = 1; j <= flagsAmts[i-1]; j++) {
+                    v = fetchValue("flag"+j+"_"+i)
+                    if(v != "") flags.push(v)
+                }
+                var effects = []
+                for (var j = 1; j <= effectsAmts[i-1]; j++) {
+                    v = fetchValue("effect"+j+"_"+i)
+                    if(v != "") effects.push(v)
+                }
+                const move = {
+                    name: mName,
+                    desc: desc,
+                    image: mImage,
+                    toHit: toHit,
+                    dice: dice,
+                    range: range,
+                    cooldown: cooldown,
+                    tp: tp,
+                    mp: mp,
+                    target: target,
+                    rangeType: rangeType,
+                    flags: flags,
+                    effects: effects
+                }
+                console.log(move)  
+                moves.push(move)
+            }             
+
+            var abils = []
+            for (var i = 0; i < abilsAmt; i++) {
+                v = fetchValue("abil"+(i+1))
+                v = v.replace(",","") // no commas allowed in abils
+                if(v != "") abils.push(v)
+            }
+
+            var equipInfo = []
+            if(fetchValue("equipInfo") == "{EQUIP_DEFAULT}") equipInfo.push("{EQUIP_DEFAULT}") 
+            else if (fetchValue("equipInfo") == "None") {
+                for (var i = 0; i < equipInfos; i++) {
+                    v = fetchValue("ei"+(i+1))
+                    console.log(v)
+                    if(v != "-1") equipInfo.push(v)
+                }  
+            }            
+            
+            
+            var summoned = fetchValue("summoned")
+            var hasThe = fetchValue("hasThe")
+                        
+            
+            
+            
+            // create file
+            var ft = []
+            let t = "\t"
+            let tt = "\t\t"
+            
+            ft.push("# File generated using LucidConfig")
+            
+            ft.push("[unit]")
+
+            ft.push(t+`id = ${id}`)
+            ft.push(t+`name = ${name}`)
+            if(tSet(gender)) ft.push(t+`gender = "${gender}"`)
+            if(tSet(unitName)) ft.push(t+`unitName = "${unitName}"`)
+            if(tSet(image)) ft.push(t+`image = "${image}"`)
+            if(tSet(hp)) ft.push(t+`hp = ${hp}`)
+            if(tSet(php)) ft.push(t+`php = ${php}`)
+            if(tSet(mhp)) ft.push(t+`mhp = ${mhp}`)
+            if(tSet(bdef)) ft.push(t+`defense = ${bdef}`)
+            if(tSet(bspd)) ft.push(t+`speed = ${bspd}`)
+
+            
+            if (elems.length > 0)
+                ft.push(t+`elems = ${elems.join(", ")}`)
+                
+            // moves    
+            if (moves.length > 0) {
+                for (var i = 0; i < moves.length; i++) {
+                    move = moves[i]
+                    ft.push(t+"[move]")
+                    ft.push(tt+`name = ${move.name}`)
+                    if(tSet(move.desc)) ft.push(tt+`desc = "${move.desc}"`)
+                    if(tSet(move.image)) ft.push(tt+`image = "${move.image}"`)
+                    if(tSet(move.toHit)) ft.push(tt+`toHit = ${move.toHit}`)
+                    if(tSet(move.dice)) ft.push(tt+`dice = ${move.dice}`)
+                    if(tSet(move.range)) ft.push(tt+`range = ${move.range}`)
+                    if(tSet(move.cooldown)) ft.push(tt+`cooldown = ${move.cooldown}`)
+                    if(tSet(move.tp)) ft.push(tt+`tp = ${move.tp}`)
+                    if(tSet(move.mp)) ft.push(tt+`mp = ${move.mp}`)
+                    if(tSet(move.target)) ft.push(tt+`target = ${move.target}`)
+                    if(tSet(move.rangeType)) ft.push(tt+`rangeType = ${move.rangeType}`)
+                    
+                    
+                    if (move.flags.length > 0)
+                        ft.push(tt+`flags = ${move.flags.join(", ")}`)  
+                    if (move.effects.length > 0)
+                        ft.push(tt+`effects = ${move.effects.join(", ")}`)  
+                    
+                    
+                    ft.push(t+"[/move]")
+                }
+            }
+                
+            if (abils.length > 0)
+                ft.push(t+`abilities = ${abils.join(", ")}`)            
+            
+            if (equipInfo.length > 0)
+                if (equipInfo[0] == "{EQUIP_DEFAULT}") ft.push(t+`equipInfo = ${equipInfo[0]}`)
+                else ft.push(t+`equipInfo = [${equipInfo.join(",")}]`)            
+            
+
+            if(tSet(summoned) && summoned != "False") ft.push(t+`summoned = ${summoned}`)
+            if(tSet(hasThe) && hasThe != "False") ft.push(t+`hasThe = ${hasThe}`)
+
+            
+            ft.push("[/unit]")
+            
+            
+            
+            
+            
+            // save file
+            let fileText = ft.join("\n")
+            
+            
+            const link = document.createElement("a");
+            const file = new Blob([fileText], { type: 'text/plain' });
+            link.href = URL.createObjectURL(file);
+            link.download = saveId+".cfg";
+            link.click();
+            URL.revokeObjectURL(link.href);
+            
+            
+        } catch (error) {
+            console.error(error);
+            return false
+        }
+        
 	}
 	function loadConfig() {
 		document.getElementById('fileInput').click();
