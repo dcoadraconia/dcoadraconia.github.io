@@ -335,15 +335,21 @@
 			updateMovesDisplay(movesAmt)
 		}
     }
-    function remMove() {
+    function remMove(force=false) {
         if (movesAmt > 0) {
             let mName = fetchValue("m_name_"+movesAmt)
             if(mName == "") mName = "<unnamed>"
-			conf = confirm("Are you sure you want to remove move \""+mName+"\"?\nIts info will be lost.");
-			if(conf) {
-				movesAmt--
-				updateMovesDisplay(-movesAmt)
-			}
+			if(force) {
+                movesAmt--
+                updateMovesDisplay(-movesAmt)
+            }
+            else {
+                conf = confirm("Are you sure you want to remove move \""+mName+"\"?\nIts info will be lost.");
+                if(conf) {
+                    movesAmt--
+                    updateMovesDisplay(-movesAmt)
+                }
+            }
 		}
     }
     function updateMovesDisplay(num) {
@@ -676,7 +682,7 @@
 		var mpData = document.getElementById("mpRow_"+num)
 		let val = document.getElementById("m_tp_"+num).value
         let noneTypes = ["None","Pierce","Blade","Impact"]
-        console.log(val)
+        //console.log(val)
 		mpData.style.display = (noneTypes.includes(val)) ? "none" : ""
 	}
     
@@ -789,7 +795,7 @@
                     flags: flags,
                     effects: effects
                 }
-                console.log(move)  
+                //console.log(move)  
                 moves.push(move)
             }             
 
@@ -802,10 +808,10 @@
 
             var equipInfo = []
             if(fetchValue("equipInfo") == "{EQUIP_DEFAULT}") equipInfo.push("{EQUIP_DEFAULT}") 
-            else if (fetchValue("equipInfo") == "None") {
+            else if (fetchValue("equipInfo") == "other") {
                 for (var i = 0; i < equipInfos; i++) {
                     v = fetchValue("ei"+(i+1))
-                    console.log(v)
+                    //console.log(v)
                     if(v != "-1") equipInfo.push(v)
                 }  
             }            
@@ -922,12 +928,14 @@
             
             var type = "unknown"
             
-            fText = fText.split("\n")
-            if (fText[0] == "[unit]") {
-                let endInd = fText.indexOf("[/unit]")
-                if (endInd > 0) {
-                    type = "unit"
-                    fText = fText.slice(1,endInd).join("\n")
+            if(fExt == "cfg") {
+                fText = fText.split("\n")
+                if (fText[0] == "[unit]") {
+                    let endInd = fText.indexOf("[/unit]")
+                    if (endInd > 0) {
+                        type = "unit"
+                        fText = fText.slice(1,endInd).join("\n")
+                    }
                 }
             }
             if (type == "unit") {
@@ -940,13 +948,14 @@
                 }
                 else {
                     alert("File \""+fName+"\" could not be read (improper file format)")
-                    if(file.size < 10000) console.log(fText)
+                    //if(file.size < 10000) console.log(fText)
                 }
             }
 		});
 	}
     function readUnitData(unitData) {
-        console.log(unitData)
+        //console.log(unitData)
+        initialSetUnit()
         unitData = unitData.split("\n")
         for (var i = 0; i < unitData.length; i++) {
             let line = unitData[i].split("=")
@@ -959,7 +968,7 @@
                 let endInd = unitData.slice(i,-1).indexOf("[/move]")
                 if (endInd > 0) {
                     i += endInd
-                    console.log(i)
+                    //console.log(i)
                 }
                 else break // no [/move] tag, just give up
             }
@@ -986,63 +995,135 @@
         if (key == "defense" || key == "def" || key == "df") key="bdef"
         if (key == "speed" || key == "spd" || key == "sp") key = "bspd"
         if (key == "elements" || key == "element" || key == "elem") key = "elems"
+        if (key == "abil" || key == "abils" || key == "ability") key = "abilities"
         
         if (key == "image") {
             value = unquote(value)
-            document.getElementById(key).value = value
+            setIdValue(key,value)
             let baseName = "units/"+fetchValue("id").replace(/[^a-zA-Z0-9]/g, "_").toLowerCase()+".png"
-            if(value == baseName) document.getElementById(key).value = ""
+            if(value == baseName) setIdValue(key,"")
         }  
         else if (key == "gender") {
             value = unquote(value)
             if(!(["male","female","none"]).includes(value.toLowerCase())) {
-                document.getElementById("gender").value = "other"
-                document.getElementById("genderInput").value = value
+                setIdValue("gender","other")
+                setIdValue("genderInput",value)
             }
-            else document.getElementById("gender").value = value
+            else setIdValue("gender",value)
             checkOther('gender')
         }
         else if (key == "php") {
             if (value.toLowerCase() == "none") {
-                document.getElementById(key).value = ""
-                document.getElementById("hasPhp").value = "False"
-                
+                setIdValue(key,"")
+                setIdValue("hasPhp","False")
             }
             else {
-                document.getElementById(key).value = value
-                document.getElementById("hasPhp").value = "True"
+                setIdValue(key,value)
+                setIdValue("hasPhp","True")
             }
             checkPhpRow()
         }
         else if (key == "elems") {
+            remElem()
             elemValues = value.split(",")
-            for (var i = 0; i < elemsAmt-1; i++) {
-                remElem()
-            }
             for (var i = 0; i < elemValues.length-1; i++) {
                 addElem()
             }
             for (var i = 0; i < elemsAmt; i++) {
                 elemValues[i] = unquote(elemValues[i].trim()).trim()
-                document.getElementById("elem"+(i+1)).value = elemValues[i]
+                setIdValue("elem"+(i+1),elemValues[i])
             }
-
+        }
+        else if (key == "abilities") {
+            abilValues = value.split(",")
+            for (var i = 0; i < abilValues.length; i++) {
+                addAbil()
+            }
+            for (var i = 0; i < abilsAmt; i++) {
+                abilValues[i] = unquote(abilValues[i].trim()).trim()
+                setIdValue("abil"+(i+1),abilValues[i])
+            }
+        }
+        else if (key == "equipInfo") {
+            remEI()
+            value = unquote(value)
+            if (value == "None") setIdValue(key,value)
+            else if (value == "{EQUIP_DEFAULT}") setIdValue(key,value)
+            else {
+                setIdValue(key,"other")
+                value = unbracket(value)
+                eiValues = value.split(",")
+                for (var i = 0; i < eiValues.length; i++) {
+                    addEI()
+                }
+                for (var i = 0; i < equipInfos; i++) {
+                    eiValues[i] = eiValues[i].trim()
+                    setIdValue("ei"+(i+1),eiValues[i])
+                }
+            }
+            checkOther('equipInfo')
         }
         else {
-            try {
-                value = unquote(value)
-                document.getElementById(key).value = value
-            }
-            catch(error) {
-                console.error(key)
-            }
+            value = unquote(value)
+            setIdValue(key,value)
         }
     }
     function unquote(value) {
         if(value[0] == value.slice(-1) && (value[0] == '"' || value[0] == "'")) value = value.slice(1,-1);
         return value
     }
-
+    function unbracket(value) {
+        if(value[0] == "[" && value.slice(-1) == "]" ) value = value.slice(1,-1);
+        return value
+    }
+    function initialSetUnit() {
+        setIdValue("id","")
+        setIdValue("name","")
+        setIdValue("unitName","")
+        setIdValue("image","")
+        setIdValue("gender","other")
+        checkOther('gender')
+        setIdValue("genderInput","")
+        setIdValue("hp","")
+        setIdValue("hasPhp","True")
+        checkPhpRow()
+        setIdValue("php","")
+        setIdValue("mhp","")
+        setIdValue("bdef","")
+        setIdValue("bspd","")
+        setIdValue("elem1","None")
+        let elemsAmtOld = elemsAmt
+        for (var i = 0; i < elemsAmtOld-1; i++) {
+            remElem()
+        }
+        addElem()
+        let movesAmtOld = movesAmt
+        for (var i = 0; i < movesAmtOld; i++) {
+            remMove(true)
+        }
+        let abilsAmtOld = abilsAmt
+        for (var i = 0; i < abilsAmtOld; i++) {
+            remAbil()
+        }
+        let equipInfosOld = equipInfos
+        for (var i = 0; i < equipInfosOld; i++) {
+            remEI()
+        }       
+        addEI()
+        setIdValue("equipInfo","None")
+        checkOther('equipInfo')
+        setIdValue("summoned","False")
+        setIdValue("hasThe","False")
+    }
+    function setIdValue(id, value) {
+        try {
+            document.getElementById(id).value = value
+        }
+        catch(error) {
+            console.error(id)
+        }
+    }
+    
 
 
 	document.getElementById("unitBtn").style.color = "gray"
