@@ -262,7 +262,7 @@
 		
 		
 		</div>		
-		<input type="file" id="fileInput" style="display:none;"/>
+		<input type="file" accept=".cfg" id="fileInput" style="display:none;"/>
 	</body>
 		
 	
@@ -813,12 +813,8 @@
                 }  
             }            
             
-            
             var summoned = fetchValue("summoned")
             var hasThe = fetchValue("hasThe")
-                        
-            
-            
             
             // create file
             var ft = []
@@ -839,7 +835,6 @@
             if(tSet(mhp)) ft.push(t+`mhp = ${mhp}`)
             if(tSet(bdef)) ft.push(t+`defense = ${bdef}`)
             if(tSet(bspd)) ft.push(t+`speed = ${bspd}`)
-
             
             if (elems.length > 0)
                 ft.push(t+`elems = ${elems.join(", ")}`)
@@ -877,22 +872,15 @@
             
             if (equipInfo.length > 0)
                 if (equipInfo[0] == "{EQUIP_DEFAULT}") ft.push(t+`equipInfo = ${equipInfo[0]}`)
-                else ft.push(t+`equipInfo = [${equipInfo.join(",")}]`)            
-            
+                else ft.push(t+`equipInfo = [${equipInfo.join(",")}]`)
 
             if(tSet(summoned) && summoned != "False") ft.push(t+`summoned = ${summoned}`)
             if(tSet(hasThe) && hasThe != "False") ft.push(t+`hasThe = ${hasThe}`)
-
             
             ft.push("[/unit]")
             
-            
-            
-            
-            
             // save file
             let fileText = ft.join("\n")
-            
             
             const link = document.createElement("a");
             const file = new Blob([fileText], { type: 'text/plain' });
@@ -1189,9 +1177,6 @@
             }
         }
     }
-    
-    
-
 
 	document.getElementById("unitBtn").style.color = "gray"
 	document.getElementById("fieldBtn").style.color = "gray"
