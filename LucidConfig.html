@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 
 <html>
-	<title>LucidConfig v0.0.0</title>
+	<title>LucidConfig v0.1.0</title>
 	<link rel="icon" type="image/png" href="assets/images/light.png">
 	<head>
 		<style>
@@ -118,7 +118,7 @@
 	</head>	
 	<body bgcolor = "black">
 		<div style="margin-left: 20px; font-size:20px; color: white; font-family: 'Lucida Console';">
-            <strong><span style="font-size:40px">LucidConfig v0.0.0</span></strong>
+            <strong><span style="font-size:40px">LucidConfig v0.1.0</span></strong>
             <br>
             <span style="font-size:20px">DreamMagic Engine CFG File Editor</span>
         </div>
@@ -167,7 +167,7 @@
 				<table class="line">
 				<tr>
 					<td>Hp:</td>
-					<td><input type="number" id="hp" name="hp" size=6 min=0 max=999999 step=1 required></td>
+					<td><input type="number" id="hp" name="hp" size=6 min=0 max=999999 step=1></td>
 					<td><div class="tooltip">(?)<span class="tooltiptext">Hp measures how much damage the unit can take before being defeated.</span></div></td>
 				</tr>
 				<tr>
@@ -181,7 +181,7 @@
 				</tr>				
 				<tr class="hRow">
 					<td>M.Hp:</td>
-					<td><input type="number" id="mhp" name="mhp" size=6 min=0 max=99 step=1></td>
+					<td><input type="number" id="mhp" name="mhp" size=6 min=0 max=999999 step=1></td>
 					<td><div class="tooltip">(?)<span class="tooltiptext" id="mhpText"></span></div></td>
 				</tr>				
 				<tr>
@@ -694,7 +694,8 @@
         var ret = document.getElementById(id).value
         if (typeof ret === 'undefined') return ""
         if (typeof id === 'string' || id instanceof String) ret = ret.trim()
-        ret = ret.replace(/[\\\n\r#]/g, "") // invalid characters
+        ret = ret.replace(/[\\#=]/g, "") // invalid characters
+        ret = ret.replace(/[\r\n]/g, " ") // invalid characters
         return ret
     }
     function tSet(text) {
@@ -707,6 +708,8 @@
     }
 	function saveConfig() {
         try {
+            // UNIT cfg file type
+        
             // fetch data
             var id = fetchValue("id")
             let saveId = id.replace(/[^a-zA-Z0-9]/g, "_") // file name alphanumeric and underscores
@@ -728,7 +731,7 @@
             var elems = []
             for (var i = 0; i < elemsAmt; i++) {
                 v = fetchValue("elem"+(i+1))
-                if(v != "None") elems.push(v)
+                if(v != "None" && v != "") elems.push(v)
             }
             
             var moves = []
@@ -825,7 +828,7 @@
 
             ft.push(t+`id = ${id}`)
             ft.push(t+`name = ${name}`)
-            if(tSet(gender)) ft.push(t+`gender = "${gender}"`)
+            if(tSet(gender)) ft.push(t+`gender = ${gender}`)
             if(tSet(unitName)) ft.push(t+`unitName = "${unitName}"`)
             if(tSet(image)) ft.push(t+`image = "${image}"`)
             if(tSet(hp)) ft.push(t+`hp = ${hp}`)
@@ -907,13 +910,138 @@
 	}
 	function loadFile() {
 		const file = this.files[0]
+        let fName = file.name
+        if(file.size > 1000000) {
+            alert("File \""+fName+"\" is too big!!")
+            return false
+        }
+        let fExt = fName.split(".").slice(-1)[0].toLowerCase()
 		file.text().then(function(result) {
-			fText = result.replace("\r\n","\n").trim()
-			console.log(fText)
+			var fText = result.replace("\r\n","\n").trim()
+			fText = prepToRead(fText)
+            
+            var type = "unknown"
+            
+            fText = fText.split("\n")
+            if (fText[0] == "[unit]") {
+                let endInd = fText.indexOf("[/unit]")
+                if (endInd > 0) {
+                    type = "unit"
+                    fText = fText.slice(1,endInd).join("\n")
+                }
+            }
+            if (type == "unit") {
+                setCreate('unit')
+                readUnitData(fText)
+            }
+            else {
+                if(fExt != "cfg") {
+                    alert("File \""+fName+"\" could not be read (unknown file type)")
+                }
+                else {
+                    alert("File \""+fName+"\" could not be read (improper file format)")
+                    if(file.size < 10000) console.log(fText)
+                }
+            }
 		});
 	}
+    function readUnitData(unitData) {
+        console.log(unitData)
+        unitData = unitData.split("\n")
+        for (var i = 0; i < unitData.length; i++) {
+            let line = unitData[i].split("=")
+            if (line.length == 2) {
+                let key = line[0].trim()
+                let value = line[1].trim()
+                updKV(key,value)
+            }
+            if (line.length == 1 && line[0] == "[move]") {
+                let endInd = unitData.slice(i,-1).indexOf("[/move]")
+                if (endInd > 0) {
+                    i += endInd
+                    console.log(i)
+                }
+                else break // no [/move] tag, just give up
+            }
+            
+        }
+    
+    
+    
+    }
+    function prepToRead(text) {
+        var ret = text
+        ret = ret.split("\n")
+        for (var i = 0; i < ret.length; i++) {
+            ret[i] = ret[i].split("#")[0] // discard comment
+            ret[i] = ret[i].trim()
+        }
+        ret = ret.filter(line => line) // remove all ""
+        
+        ret = ret.join("\n")
+        
+        return ret
+    }
+    function updKV(key, value, inMove = false) {
+        if (key == "defense" || key == "def" || key == "df") key="bdef"
+        if (key == "speed" || key == "spd" || key == "sp") key = "bspd"
+        if (key == "elements" || key == "element" || key == "elem") key = "elems"
+        
+        if (key == "image") {
+            value = unquote(value)
+            document.getElementById(key).value = value
+            let baseName = "units/"+fetchValue("id").replace(/[^a-zA-Z0-9]/g, "_").toLowerCase()+".png"
+            if(value == baseName) document.getElementById(key).value = ""
+        }  
+        else if (key == "gender") {
+            value = unquote(value)
+            if(!(["male","female","none"]).includes(value.toLowerCase())) {
+                document.getElementById("gender").value = "other"
+                document.getElementById("genderInput").value = value
+            }
+            else document.getElementById("gender").value = value
+            checkOther('gender')
+        }
+        else if (key == "php") {
+            if (value.toLowerCase() == "none") {
+                document.getElementById(key).value = ""
+                document.getElementById("hasPhp").value = "False"
+                
+            }
+            else {
+                document.getElementById(key).value = value
+                document.getElementById("hasPhp").value = "True"
+            }
+            checkPhpRow()
+        }
+        else if (key == "elems") {
+            elemValues = value.split(",")
+            for (var i = 0; i < elemsAmt-1; i++) {
+                remElem()
+            }
+            for (var i = 0; i < elemValues.length-1; i++) {
+                addElem()
+            }
+            for (var i = 0; i < elemsAmt; i++) {
+                elemValues[i] = unquote(elemValues[i].trim()).trim()
+                document.getElementById("elem"+(i+1)).value = elemValues[i]
+            }
 
-
+        }
+        else {
+            try {
+                value = unquote(value)
+                document.getElementById(key).value = value
+            }
+            catch(error) {
+                console.error(key)
+            }
+        }
+    }
+    function unquote(value) {
+        if(value[0] == value.slice(-1) && (value[0] == '"' || value[0] == "'")) value = value.slice(1,-1);
+        return value
+    }
 
 
 
